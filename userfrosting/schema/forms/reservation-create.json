@@ -1,0 +1,111 @@
+{
+    "reservation_date" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_PASSWORD"
+            },
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+     "collected_fees" : {
+        "validators" : {
+            "numeric" : {
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+     "customer_type_of_payment" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+         "customer_type_of_id" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+         "customer_id" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+     "customer_name" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+     "customer_address" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+     "phone_number" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+    "mobile" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    }
+}

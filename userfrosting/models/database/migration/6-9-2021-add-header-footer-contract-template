@@ -1,0 +1,1 @@
+ALTER TABLE `contracts_templates` ADD `header` LONGTEXT NULL AFTER `templateName`, ADD `footer` LONGTEXT NULL AFTER `header`;

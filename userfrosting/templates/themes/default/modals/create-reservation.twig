@@ -1,0 +1,694 @@
+<div class="modal fade reservation-modal-lg reservation-res" data-backdrop="static" data-keyboard="true"
+     tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" >
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            {# Header #}
+            <div class="flex-parent">
+                <button type="button" id="modalcanclereservation" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="row" dir="{{ user.locale == 'en_US' ? 'ltr' : 'rtl' }}">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <form class="form-horizontal reservation-modal" id="customerDetailsForm" role="form">
+                        <fieldset>
+                            <div id="reservationEmailContent" hidden="" class="col-xs-12">
+
+                            </div>
+                            <!-- Form Name -->
+                            <div id="customerDetails" hidden="">
+                                <h2 class="text-center">{{ translate('customer_info') }}</h2>
+                                <div class="">
+                                    <div class="col-xs-12">
+                                        <div class="form-group" style="display: block;">
+                                            <div class="col-xs-12 col-md-3 ">
+                                                <label for="leadID"> {{ translate('leadID') }} *</label>
+                                            </div>
+                                            <div class="form-group col-xs-12 col-md-9">
+                                                <input type="text" id="leadID" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group" style="display: block;">
+                                            <div class="col-xs-12 col-md-3 ">
+                                                <label for="customerName">{{ translate('customer_name') }}*</label>
+                                            </div>
+                                            <div class="form-group col-xs-12 col-md-9">
+                                                <input type="text" placeholder="{{ translate('customer_name') }}" id="customerName"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    {# 1 #}
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-3 ">
+                                                <label for="typeOfId">{{ translate('identification_type') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-9 ">
+                                                <!--input type="text" placeholder="مثلا.جواز سفر" id="typeOfId" class="form-control">-->
+                                                <select id="typeOfId" class="form-control" required>
+                                                    {% for i in documentTypes %}
+                                                        {% if(i == "") %}
+                                                            <option value="">-----------</option>
+                                                        {% else %}
+                                                            <option value="{{ i }}">{{ i }}</option>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# 3 #}
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-3 ">
+                                                <label for="Issuedby">{{ translate('place_of_issue') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-9">
+                                                <input type="text"  id="Issuedby"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# 4 #}
+
+                                    <div class="col-xs-12 col-md-6 " style="display: none">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-3 ">
+                                                <label for="address">{{ translate('address') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-9 ">
+                                                <input type="text"  id="address"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {# 2 #}
+                                    <div class="col-xs-12">
+                                        <div class="form-group" style="display: block;">
+                                            <div class="col-xs-12 col-md-3 ">
+                                                <label for="idNumber">{{ translate('id_number') }}*</label>
+                                            </div>
+                                            <div class="form-group col-xs-12 col-md-9">
+                                                <input type="text" placeholder="1122334455" id="idNumber"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- add more information in reservation. By Ahmad Tome -->
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="idNumber">{{ translate('country') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" placeholder="palestine" id="country"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="idNumber">{{ translate('city') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" placeholder="Rawabi" id="city" class="form-control"
+                                                       required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="idNumber">{{ translate('region') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" id="region" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="idNumber">{{ translate('street') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" id="street" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="idNumber">{{ translate('mail_box') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" id="Mailbox" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="idNumber">{{ translate('postal_code') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" id="postalcode" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="idNumber">{{ translate('email') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" id="email" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="idNumber">{{ translate('work_phone') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" id="workphone" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# 5 #}
+                                    <div class="col-xs-12 col-md-6  clr">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="phoneNum">{{ translate('telephone_number') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" id="phoneNum"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# 6 #}
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="Mobile">{{ translate('phone_number') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <input type="text" placeholder="رقم الجوال" id="Mobile"
+                                                       class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# 7 #}
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="collectedFees"> {{ translate('collected_fees') }}*</label>
+                                            </div>
+
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <select class="form-control" id="collectedFees_select">
+                                                    <option>-- {{ translate('select_collected_fees') }} --</option>
+                                                </select>
+                                            </div>
+
+                                            <!--
+                                            <div class="col-xs-12 col-md-9 ">
+                                                <i class="fa fa-usd" aria-hidden="true"></i>
+                                                {% if user.primary_group_id == 1 %}
+                                                    <input type="text" min=0  value="{{ site.collected_fees =='' ? '850' : site.collected_fees }}" id="collectedFees" class="form-control"required disabled="disabled">
+                                                {% else %}
+                                                    <input type="text" min=0  value="{{ site.collected_fees =='' ? '850' : site.collected_fees }}" id="collectedFees" class="form-control" required   >
+                                                {% endif %}
+                                                <input type="hidden" id="fixed_collected_fees" value="{{ site.collected_fees =='' ? '850' : site.collected_fees }}" >
+                                            </div>
+                                            -->
+
+                                        </div>
+                                    </div>
+                                    {# 8 #}
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="dateOfRes">{{ translate('reservation_date') }}*</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <div class='input-group date ' id='reservationDate'>
+                                                    <input type='date' class="form-control" id="dateOfRes" required/>
+                                                    <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar" ></span>
+                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    {# 9 #}
+                                </div> {#This is the end of that row#}
+                            </div><!-- end of customerDetails div -->
+
+                            <!-- **************Added by maysam for discount dialog********************** -->
+
+                            <div id="priceDetails">
+                                <h2 class="text-center">{{ translate('price_details') }}</h2>
+
+                                <div class="form-group" id="selectPriceInfo" >
+                                    <label class="col-xs-2 col-sm-2 " for="additionDetails">{{ translate('select') }}</label>
+                                    <div class="col-xs-8 col-sm-8 ">
+                                        &nbsp <input type="checkbox" id="isAddition">&nbsp {{ translate('addition') }} &nbsp &nbsp
+                                        <input type="checkbox" id="isDicount">
+                                        &nbsp &nbsp {{ translate('discount') }}
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" id="additions">
+                                    <label class="col-xs-2 col-sm-2 " for="additionDetails">{{ translate('addition') }}</label>
+                                    <div class="col-xs-8 col-sm-6 ">
+                                        <select id="additionDetails" class="form-control additionsList" disabled>
+                                            <option value="0" selected="selected">{{ translate('no_addition') }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-xs-1 col-sm-1 "><i id=""
+                                                                                 class="fa fa-plus fa-2x fa-flip-horizontal"
+                                                                                 onClick="AddAddition()"
+                                                                                 aria-hidden="true"></i></div>
+
+                                    <div class="col-xs-1 col-sm-1 "><i id=""
+                                                                                 class="fa fa-question-circle fa-2x fa-flip-horizontal"
+                                                                                 onClick="getAdditionInfo()"
+                                                                                 aria-hidden="true"></i></div>
+
+
+                                </div>
+
+
+                                <div class="form-group" id="">
+                                    <label class="col-xs-2 col-sm-2 "></label>
+                                    <div id="additionalTemp" class="text-center col-sm-8 ">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+
+                                <!--
+                                                                <div class="form-group">
+
+                                                                   <label class="col-xs-2 col-sm-2 " for="selectDiscount">ميزات</label>
+                                                                   <div class="col-xs-8 col-sm-8 ">
+                                                                       <form>
+                                                                           <div class="multiselect_add">
+                                                                               <div class="selectBox" onclick="showCheckboxes()">
+                                                                                   <select disabled>
+                                                                                       <option value="0">لا يوجد ميزات</option>
+                                                                                   </select>
+                                                                                   <div class="overSelect"></div>
+                                                                               </div>
+                                                                               <div id="checkboxes" class="additionList">
+
+
+                                                                               </div>
+                                                                           </div>
+                                                                       </form>
+                                                                   </div>
+                                                                   <div class="col-xs-2 col-sm-2 "><i
+                                                                               class="fa fa-question-circle fa-2x fa-flip-horizontal"
+                                                                               aria-hidden="true" onClick="getDicsountInfo()"></i></div>
+                                                               </div>
+                                                               <button onclick="calculateDiscount()">Go</button>
+                                                               -->
+
+
+                                <div class="form-group" id="additiontDiv" style="display:none">
+                                    <label class="col-xs-2 col-sm-2 " for="additionDetails">{{ translate('clarification') }}</label>
+                                    <p id="additionDescr" class="col-xs-8 col-sm-8 "></p>
+                                </div>
+                                <!--
+                                                                <div class="form-group">
+                                                                    <label class="col-xs-2 col-sm-2 " for="selectDiscount">الخصم</label>
+                                                                    <div class="col-xs-8 col-sm-8 ">
+                                                                        <form>
+                                                                            <div class="multiselect">
+                                                                                <div class="selectBox" onclick="showCheckboxes()">
+                                                                                    <select disabled>
+                                                                                        <option value="25">بدون خصم</option>
+                                                                                    </select>
+                                                                                    <div class="overSelect"></div>
+                                                                                </div>
+                                                                                <div id="checkboxes" class="discountList">
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="col-xs-2 col-sm-2 "><i
+                                                                                class="fa fa-question-circle fa-2x fa-flip-horizontal"
+                                                                                aria-hidden="true" onClick="getDicsountInfo()"></i></div>
+                                                                </div>
+
+                                                               <button onclick="calculateDiscount()">Go</button>
+                                                               =====================================================
+                                                                -->
+                               <div class="form-group">
+                                   <label class="col-xs-2 col-sm-2 " for="selectDiscount">{{ translate('discount') }}</label>
+                                   <div class="col-xs-8 col-sm-6 ">
+                                       <select id="selectDiscount" class="form-control discountList" disabled>
+                                           <option value="25" selected="selected">{{ translate('no_discount') }}
+                                           </option>
+                                       </select>
+                                   </div>
+                                   <div class="col-xs-1 col-sm-1 "><i id=""
+                                                                                class="fa fa-plus fa-2x fa-flip-horizontal"
+                                                                                onClick="AddDiscount()"
+                                                                                aria-hidden="true"></i></div>
+                                   <div class="col-xs-1 col-sm-1 "><i class="fa fa-question-circle fa-2x fa-flip-horizontal" aria-hidden="true" onClick="getDicsountInfo()"></i></div>
+                               </div>
+
+                                <div class="form-group" id="">
+                                    <label class="col-xs-2 col-sm-2 "></label>
+                                    <div id="DiscountTemp" class="text-center col-sm-8 ">
+                                        <ul>
+
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group" id="discountDiv" style="display:none">
+                                    <label class="col-xs-2 col-sm-2 " for="discountDescr">{{ translate('clarification') }}</label>
+                                    <p id="discountDescr" class="col-xs-8 col-sm-8 "></p>
+
+                                </div>
+                                <div class="form-group" id="discountPass1">
+                                    <label class="col-xs-2 col-sm-2 " for="discountPass"> {{ translate('discount_password') }} </label>
+                                    <div class="col-xs-8 col-sm-8 ">
+
+                                        <input type="password" id="discountPass" class="form-control"
+                                               disabled="disabled">
+                                        <div id="password-alerts" style="color:red"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="login_pass">
+                                    <label class="col-xs-2 col-sm-2 " for="user_pass">{{ translate('user_password') }}</label>
+                                    <div class="col-xs-8 col-sm-8 ">
+                                        <input type="password" id="user_pass" class="form-control" required>
+                                    </div>
+                                </div>
+
+                            </div><!--end of priceDetails-->
+                            <div class="row more-option hide">
+                                <div class="col-xs-12">
+                                    <div class="form-group hide" id="pricewithoutDiscount1">
+                                        <div class="col-xs-12 col-md-1 ">
+                                            <label for="price">{{ translate('unit_total_price') }}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-11">
+                                            <input type="text" id="price" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="form-group" id="totalPriceDiv">
+                                        <div class="col-xs-12 col-md-3 ">
+                                            <label for="totalPrice">{{ translate('price_without_discount') }}</label>
+                                        </div>
+
+                                        <div class="form-group col-xs-12 col-md-3" >
+                                            <select id="currencies" class="form-control">
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-xs-12 col-md-3" style="margin: 0 0 5px 5px;">
+                                            <input placeholder="Enter Exchange Rate" type="text" id="exchange_rate" class="form-control" disabled>
+                                        </div>
+
+                                        <div class="form-group col-xs-12 col-md-3" >
+                                            <input type="text" id="totalPrice" class="form-control" disabled>
+                                            <div id="priceError" style="color:red"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" >
+                                        <div class="col-xs-12 col-md-3 " style="visibility: hidden">
+                                            <label for="finalPrice">final price</label>
+                                        </div>
+
+                                        <div class="form-group col-xs-12 col-md-3" style="visibility: hidden">
+                                            <input  id="finalPrice" class="form-control" readonly/>
+
+                                        </div>
+{#                                        <div class="col-xs-12 col-md-3 ">#}
+{#                                            <label>added value</label>#}
+{#                                        </div>#}
+
+{#                                        <div class="form-group col-xs-12 col-md-3" >#}
+{#                                            <input type="text" id="discount_addition" class="form-control" >#}
+{#                                            <div id="priceError" style="color:red"></div>#}
+{#                                        </div>#}
+                                    </div>
+
+                                    <div class="col-xs-12 col-md-6 ">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="collectedFees"> {{ translate('payment_method') }}*</label>
+                                            </div>
+
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <select class="form-control" id="PaymentMethod_select">
+                                                    <option>-- {{ translate('select_payment_method') }} --</option>
+                                                    <option value="Rent To Buy">{{ translate('rent_to_buy') }}</option>
+                                                    <option value="Cash">{{ translate('cash') }}</option>
+                                                    <option value="Finance">{{ translate('finance') }}</option>
+                                                    <option value="Direct Installment">{{ translate('direct_installment') }}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {# 8 #}
+                                    <div class="col-xs-12 col-md-6 hide">
+                                        <div class="form-group">
+                                            <div class="col-xs-12 col-md-4 ">
+                                                <label for="dateOfRes">{{ translate('added_value') }}</label>
+                                            </div>
+                                            <div class="col-xs-12 col-md-8 ">
+                                                <div class='input-group date ' id='reservationDate'>
+                                                    <input type='number' class="form-control" id="directInstallmentAdded" disabled="disabled"/>
+                                                    <span class="input-group-addon" id="addValueCurrency">
+                                                        ILS
+                                                     </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row form-group" id="reservationEmailNoteDiv">
+                                        <div class="col-md-12 ">
+                                            <label for="reservationEmailNote">{{ translate('notes') }}</label>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <textarea id="reservationEmailNote" class="form-control"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- *********************End added by maysam***********************-->
+
+                        </fieldset>
+                    </form>
+                    <div class="row lead">
+                        <div class="col-xs-12">
+                            <div dir="{{ user.locale == 'en_US' ? 'rtl' : 'ltr' }}">
+                                <button class="btn btn-primary save-btn" id="openCustomerDetailsBtn"
+                                        onclick="openCustomerDetailsModal()">{{ translate('next') }}
+                                </button>
+                                <button class="btn btn-danger" id="cancelReservationBtn"
+                                        onclick="cancelReservationModal()">{{ translate('cancel') }}
+                                </button>
+                                <button class="btn btn-default hide" id="reservePrePage">{{ translate('previous') }}</button>
+                                <button class="btn btn-light hide" id="tempSave">{{ translate('save_temporary') }}</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div><!-- /.col-lg-12 -->
+            </div><!-- /.row -->
+
+        </div>
+    </div>
+</div>
+<style>
+
+
+    .selectBox {
+        position: relative;
+    }
+
+    .selectBox select {
+        width: 100%;
+    }
+
+    .overSelect {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    #checkboxes {
+        display: none;
+        border: 1px #dadada solid;
+    }
+
+    #checkboxes label {
+        display: block;
+    }
+
+
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+
+    function AddAddition(){
+        if($("#additionDetails").val() == 0)return false;
+        $("#additionalTemp>ul").append('<div class="addelement"><li class="" data-id="'+  $("#additionDetails").val() +'"> <button  type="button" class="close pull-left" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>  '+ $( "#additionDetails option:selected" ).text() +' &nbsp;  &nbsp;  </li> </br></div>')
+        $(".close").on("click",function () {
+            $(this).closest('.addelement').remove();
+        });
+    }
+
+    function AddDiscount(){
+        if($("#selectDiscount").val() == 25)return false;
+        $("#DiscountTemp>ul").append('<div class="addelement"><li class="" data-id="'+  $("#selectDiscount").val() +'"> <button  type="button" class="close pull-left" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>  '+ $( "#selectDiscount option:selected" ).text() +' &nbsp;  &nbsp;  </li> </br></div>')
+        $(".close").on("click",function () {
+            $(this).closest('.addelement').remove();
+        });
+    }
+
+    $(document).ready(function () {
+
+
+        var fees = 0;
+        $.ajax({
+            url: site['uri']['public'] + '/collectedfees/',
+            type: "get",
+            async: false,
+        }).done(function (data) {
+            data = JSON.parse(data);
+            fees = data.value;
+        }).fail(failureCallback);
+
+        $.ajax({
+            url: site['uri']['public'] + '/currencies/',
+            type: "get",
+        }).done(function (data) {
+            data = JSON.parse(data);
+            $('#currencies').empty();
+
+            for (var i=0; i<data.length; i++) {
+                $('#currencies').append('<option value="'+ data[i].symbol +'">'+ data[i].name +'</option>');
+            }
+
+
+        })
+
+
+        var res = fees.split(",");
+        for (var i = 0; i < res.length; i++) {
+            $("#collectedFees_select").append('<option value="' + res[i] + '">' + res[i] + '</option>')
+        }
+
+        $("#country, #city").on("keyup", function () {
+            $("#address").empty();
+            $("#address").val($("#country").val() + "/ " + $("#city").val())
+        })
+
+        var flag = true;
+        var totalprice = 0;
+        $("#PaymentMethod_select").on("change",function () {
+            flag = true;
+            if(flag){
+                flag = false;
+                totalprice = $("#totalPrice").val();
+            }
+            var val = $(this).val();
+            if(val == "Direct Installment"){
+                $("#directInstallmentAdded").removeAttr('disabled');
+            }else{
+                $("#directInstallmentAdded").val("0");
+                $("#totalPrice").val(parseInt(totalprice) + parseInt($("#directInstallmentAdded").val()));
+                $("#directInstallmentAdded").attr('disabled','disabled')
+            }
+        })
+
+
+        $("#directInstallmentAdded").on("keyup",function () {
+            var directInstallmentAdded = parseInt($(this).val()) || 0;
+            $("#totalPrice").val(parseInt(totalprice) + directInstallmentAdded);
+
+        });
+
+        var price_for_addition_discount_added = 0;
+        var price_for_addition_discount_addedFlag = false;
+
+        $("#discount_addition").on("keyup",function () {
+            if(!price_for_addition_discount_addedFlag) {
+                price_for_addition_discount_added = parseInt($("#totalPrice").val());
+                price_for_addition_discount_addedFlag = true;
+            }
+
+
+            var discount_addition = parseInt($(this).val()) || 0;
+            $("#totalPrice").val(price_for_addition_discount_added + discount_addition);
+            totalprice = $("#totalPrice").val();
+        })
+
+
+    });
+    var expanded = false;
+
+    function showCheckboxes() {
+        var checkboxes = document.getElementById("checkboxes");
+        if (!expanded) {
+            checkboxes.style.display = "block";
+            expanded = true;
+        } else {
+            checkboxes.style.display = "none";
+            expanded = false;
+        }
+    }
+
+
+</script>

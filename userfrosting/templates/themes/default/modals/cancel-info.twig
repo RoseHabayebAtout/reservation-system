@@ -1,0 +1,45 @@
+<div class="modal fade" id="cancelinfo" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+
+
+            <h4 style="font-size: 23px;" class="modal-title custom_align" id="Heading">{{ translate('cancellation_info') }} </h4>
+
+        </div>
+        <div class="modal-body">
+
+            <div style="font-size: 20px;" class="alert" id="cancelInfo"></div>
+            <div style="font-size: 20px;">{{ translate('cancellation_reason') }} :</div>
+            <br>
+            <div class="form-group">
+
+                <textarea class="form-control " id="cancelInfo2"
+                          style="background-color: rgba(0, 0, 0, 0);width:450px; margin-left:10px; height: 130px; font-size: 18px;"
+                          disabled required></textarea>
+            </div>
+
+
+            <div class="alert" id="id" hidden="true"></div>
+            <div class="alert" id="building" hidden="true"></div>
+            <div class="alert" id="neighborhood" hidden="true"></div>
+            <div class="alert" id="cancelId" hidden="true"></div>
+            <div class="alert" id="available" hidden="true"></div>
+
+
+        </div>
+
+        <div class="modal-footer ">
+
+
+            <button style=' margin : 0 5px 0 0 ; width : 95px; background-color: #5cb85c;border-color: #5cb85c;'
+                    class='btn btn-warning margin-right-5px btn-width-2 approve' onclick='setFlag(this)'> {{ translate('approve') }} <i
+                        class='fa fa-thumbs-up' aria-hidden='true'></i></button>
+            <button style=' background-color:red; width : 95px; margin : 0 5px 0 0;'
+                    class='btn btn-warning margin-right-5px btn-width-2 reject' onclick='rejectPending(this)'> {{ translate('reject') }} <i
+                        class='fa fa-thumbs-down' aria-hidden='true'></i></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+        </div>
+    </div>
+</div>

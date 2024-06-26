@@ -1,0 +1,9 @@
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'price_without_first_payment', 'Price Without First Payment', 'purchase_contract', 'text')
+
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'price_without_first_payment_in_word', 'Price Without First Payment In Word', 'purchase_contract', 'text');
+
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'first_payment_in_word', 'First Payment In Word', 'purchase_contract', 'text')
+
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'damage_cost', 'Damage Cost', 'purchase_contract', 'text')
+
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'damage_cost_in_word', 'Damage Cost In Word', 'purchase_contract', 'text')

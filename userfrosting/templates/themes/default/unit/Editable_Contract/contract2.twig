@@ -1,0 +1,1819 @@
+{% extends "layouts/layout-dashboard.twig" %}
+
+
+{% block content %}
+    <style>
+
+        .header, .header-space,
+        .footer, .footer-space {
+            height: 100px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+        }
+
+        div.content {
+            margin-center: 30px;
+            margin-right: 15px;
+            display: none;
+        }
+
+
+    </style>
+   <!-- <button id="print">Print</button> -->
+
+    <div id="pr">
+
+        <div class="" id="firstpage" style="height: 80%;margin-right: 40px;margin-top: 140px;">
+            <img src="{{ site.uri.public }}/images/contract2_cover1.png" width="100%" height="60%" >
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <img src="{{ site.uri.public }}/images/contract1_cover2.png"   >
+        </div>
+
+        <table dir="rtl">
+            <thead>
+            <tr>
+                <td>
+                    <div class="header-space row col-xs-12 " style="text-align: center">&nbsp;
+                        <p dir="RTL"
+                           style="margin: 0in 0in 0.0001pt -22.5pt; text-align: right; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span class="header-title"
+                                  style=" margin-top: 70px;font-size: 12.0pt; font-family: 'GE SS Two Light', serif; color: #44546a;opacity: 0.5;filter: alpha(opacity=50);">عقد إيجار منتهي بخيار الشراء</span><strong><span
+                                        style="font-family: 'GE SS Two Bold', serif; color: #44546a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                    dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                        style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;</span></strong><span
+                                    dir="LTR"
+                                    style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                        style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                    dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                        style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                    dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                        style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                    dir="LTR" style="color: #44546a;">
+                                     <img
+                                             src="\reservation-system\public\images\new_rawabi_logo.png"
+                                             alt="تنزيل.png" width="56" height="56" style="opacity: 0.5;filter: alpha(opacity=50);"/>
+                               </span></p>
+                        <p dir="RTL"
+                           style="margin: 0in 0in 0.0001pt -0.25in; text-align: justify; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span style="font-family: 'Times New Roman', serif; color: #92d050;opacity: 0.5;filter: alpha(opacity=70);">___________________________________________________________________________________________________</span>
+                        </p>
+                        <p dir="LTR"
+                           style="text-align: justify; direction: rtl; unicode-bidi: embed; margin: 0in 0in 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span style="font-family: 'Times New Roman', serif; color: #44546a;">&nbsp;</span></p>
+                    </div>
+
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td>
+                    <div class="content" id="personal_info">
+
+                        {{ content.personal_info | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="introduction">
+                        {{ content.introduction | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="defention_intro">
+                        {{ content.defention_intro | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="contract_subject">
+                        {{ content.contract_subject | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="payment_mechanism">
+                        {{ content.payment_mechanism | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="Commitments_team_1">
+                        {{ content.Commitments_team_1 | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="Commitments_team_2">
+                        {{ content.Commitments_team_2 | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="contract_period">
+                        {{ content.contract_period | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="differences">
+                        {{ content.differences | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="constraint">
+                        {{ content.constraint | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="enroll_unit">
+                        {{ content.enroll_unit | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="referal">
+                        {{ content.referal | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="infraction">
+                        {{ content.infraction | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>
+                    <div class="content" id="public_rules">
+                        {{ content.public_rules | raw }}
+
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <div class="content" id="contract_edit">
+                        {{ content.contract_edit | raw }}
+
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <!-- <tr>
+                <td>
+                    <div class="footer-space">
+                        <p class="MsoFooter">
+                            <span dir="RTL" lang="AR-SA"
+                                  style="font-size: 7.0pt; font-family: GE SS Two Light,serif; mso-ascii-font-family: Yakout Linotype Light; mso-hansi-font-family: Yakout Linotype Light; color: #44546a;">التوقيع<span
+                                        style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>.......................................................................................................................................................<span
+                                        style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>صفحة رقم<span
+                                        style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span
+                                    dir="RTL" lang="AR-SA"
+                                    style="font-size: 7.0pt; font-family: GE SS Two Light,serif; mso-ascii-font-family: Yakout Linotype Light; mso-hansi-font-family: Yakout Linotype Light; color: #92d050;">.............................</span>
+                        </p>
+                        <p dir="RTL"
+                           style="margin: 0in 0in 36.3pt -0.85pt; text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span style="font-size: 11pt;"><span
+                                        style="font-family: Yakout Linotype Light, sans-serif; color: #92d050;">&nbsp;</span></span>
+                        </p>
+                    </div>
+                </td>
+            </tr> -->
+            </tfoot>
+        </table>
+
+
+                    <div class="content" id="annex1">
+                        <div class="header-space row col-xs-12 " style="text-align: center">&nbsp;
+                            <p dir="RTL"
+                               style="margin: 0in 0in 0.0001pt -22.5pt; text-align: right; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span class="header-title"
+                                  style=" margin-top: 70px;font-size: 12.0pt; font-family: 'GE SS Two Light', serif; color: #44546a;opacity: 0.5;filter: alpha(opacity=50);">عقد إيجار منتهي بخيار الشراء</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR"
+                                        style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">
+                                     <img
+                                             src="\reservation-system\public\images\new_rawabi_logo.png"
+                                             alt="تنزيل.png" width="56" height="56" style="opacity: 0.5;filter: alpha(opacity=50);"/>
+                               </span></p>
+                            <p dir="RTL"
+                               style="margin: 0in 0in 0.0001pt -0.25in; text-align: justify; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                                <span style="font-family: 'Times New Roman', serif; color: #92d050;opacity: 0.5;filter: alpha(opacity=70);">___________________________________________________________________________________________________</span>
+                            </p>
+                            <p dir="LTR"
+                               style="text-align: justify; direction: rtl; unicode-bidi: embed; margin: 0in 0in 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                                <span style="font-family: 'Times New Roman', serif; color: #44546a;">&nbsp;</span></p>
+                        </div>
+                        {{ content.annex1 | raw }}
+
+                    </div>
+
+
+
+                    <div class="content page" id="annex2">
+                        <div class="header-space row col-xs-12 " style="text-align: center">&nbsp;
+                            <p dir="RTL"
+                               style="margin: 0in 0in 0.0001pt -22.5pt; text-align: right; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span class="header-title"
+                                  style=" margin-top: 70px;font-size: 12.0pt; font-family: 'GE SS Two Light', serif; color: #44546a;opacity: 0.5;filter: alpha(opacity=50);">عقد إيجار منتهي بخيار الشراء</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR"
+                                        style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">
+                                     <img
+                                             src="\reservation-system\public\images\new_rawabi_logo.png"
+                                             alt="تنزيل.png" width="56" height="56" style="opacity: 0.5;filter: alpha(opacity=50);"/>
+                               </span></p>
+                            <p dir="RTL"
+                               style="margin: 0in 0in 0.0001pt -0.25in; text-align: justify; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                                <span style="font-family: 'Times New Roman', serif; color: #92d050;opacity: 0.5;filter: alpha(opacity=70);">___________________________________________________________________________________________________</span>
+                            </p>
+                            <p dir="LTR"
+                               style="text-align: justify; direction: rtl; unicode-bidi: embed; margin: 0in 0in 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                                <span style="font-family: 'Times New Roman', serif; color: #44546a;">&nbsp;</span></p>
+                        </div>
+                        {{ content.annex2 | raw }}
+
+                    </div>
+
+
+
+                    <div class="content" id="annex3">
+                        <div class="header-space row col-xs-12 " style="text-align: center">&nbsp;
+                            <p dir="RTL"
+                               style="margin: 0in 0in 0.0001pt -22.5pt; text-align: right; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span class="header-title"
+                                  style=" margin-top: 70px;font-size: 12.0pt; font-family: 'GE SS Two Light', serif; color: #44546a;opacity: 0.5;filter: alpha(opacity=50);">عقد إيجار منتهي بخيار الشراء</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR"
+                                        style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">
+                                     <img
+                                             src="\reservation-system\public\images\new_rawabi_logo.png"
+                                             alt="تنزيل.png" width="56" height="56" style="opacity: 0.5;filter: alpha(opacity=50);"/>
+                               </span></p>
+                            <p dir="RTL"
+                               style="margin: 0in 0in 0.0001pt -0.25in; text-align: justify; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                                <span style="font-family: 'Times New Roman', serif; color: #92d050;opacity: 0.5;filter: alpha(opacity=70);">___________________________________________________________________________________________________</span>
+                            </p>
+                            <p dir="LTR"
+                               style="text-align: justify; direction: rtl; unicode-bidi: embed; margin: 0in 0in 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                                <span style="font-family: 'Times New Roman', serif; color: #44546a;">&nbsp;</span></p>
+                        </div>
+                        {{ content.annex3 | raw }}
+
+                    </div>
+
+
+
+        <!-- storage page -->
+        <div class="content " id="storagepage" style="display:none;">
+            <div class="pageBreak">
+                <div class="header-space row col-xs-12 " style="text-align: center">&nbsp;
+                    <p dir="RTL"
+                       style="margin: 0in 0in 0.0001pt -22.5pt; text-align: right; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span class="header-title"
+                                  style=" margin-top: 70px;font-size: 12.0pt; font-family: 'GE SS Two Light', serif; color: #44546a;opacity: 0.5;filter: alpha(opacity=50);">اتّفاقيّة تعهد بيع وشراء وحدة سكنية</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR"
+                                style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">
+                                     <img
+                                             src="\reservation-system\public\images\new_rawabi_logo.png"
+                                             alt="تنزيل.png" width="56" height="56"
+                                             style="opacity: 0.5;filter: alpha(opacity=50);"/>
+                               </span></p>
+                    <p dir="RTL"
+                       style="margin: 0in 0in 0.0001pt -0.25in; text-align: justify; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                        <span style="font-family: 'Times New Roman', serif; color: #92d050;opacity: 0.5;filter: alpha(opacity=70);">___________________________________________________________________________________________________</span>
+                    </p>
+                    <p dir="LTR"
+                       style="text-align: justify; direction: rtl; unicode-bidi: embed; margin: 0in 0in 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                        <span style="font-family: 'Times New Roman', serif; color: #44546a;">&nbsp;</span></p>
+
+
+
+
+
+                </div>
+                <section style="display: block;">
+                    <p class="MsoNormal" dir="RTL"
+                       style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed;">
+                        <strong><span lang="AR-JO"
+                                      style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;">ملحق رقم (</span></strong><strong><span
+                                    dir="LTR"
+                                    style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;" id="storageannexnumber"></span></strong><strong><span
+                                    lang="AR-JO"
+                                    style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;">)</span></strong>
+                    </p>
+                    <p class="MsoNormal" dir="RTL"
+                       style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed;">
+                            <span lang="AR-JO"
+                                  style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #92d050;">وصف المبيع</span>
+                        <span lang="AR-JO"
+                              style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #92d050;">&nbsp;</span>
+                    </p>
+
+                    <p class="MsoListParagraphCxSpFirst" dir="RTL"
+                       style="margin: 0in 0.25in 8pt 0in; text-align: justify; text-indent: -0.25in; direction: rtl; unicode-bidi: embed;">
+                            <span dir="RTL" style="font-family: Yakout Linotype Light, sans-serif; color: #44546a;">
+                            اﺗﻔﻖ اﻟﻔﺮﻳﻘﺎن ﺑﻤﻮﺟﺐ اﻟﻌﻘﺪ اﻟﻤﻮﻗﻊ ﺑﻴﻨﻬﻤﺎ ﺑﺘﺎرﻳﺦ xxxxx ﻋﲆ ﺗﻌﺪﻳﻞ وﺻﻒ اﻟﻤﺒﻴﻊ اﻟﻤﺒﻴﻦ في اﻟﺒﻨﺪ ﺛﺎﻟﺜﺎ من الاتفاقية, ليشمل المبيع مخزن رﻗﻢ xxxxx اﻟﻮاﻗﻊ في اﻟﻄﺎﺑﻖ رﻗﻢ xxxxx ﻣﻦ اﻟﺒﻨﺎء رﻗﻢ xxxxx اﻟﻤﻘﺎم ﻋﲆ ﻗﻄﻌﺔ اﻷرض رﻗﻢ xxxxx ﻣﻦ ﺣﻮض رﻗﻢ xxxxx ﻣﻦ ﻣﺪﻳﻨﺔ رواﺑﻲ. والبالغ مساحته xxxxx متراً مربعا, ووصفه xxxxx واﻟﺒﺎﻟﻎ ﺛﻤﻨﻪ  (xxxxx$) xxxxx دولار أﻣﺮﻳﻜﻲ
+                            </span>
+                    </p>
+
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+
+                    <p class="MsoListParagraphCxSpFirst" dir="RTL"
+                       style="margin: 0in 0.25in 8pt 0in; text-align: justify; text-indent: -0.25in; direction: rtl; unicode-bidi: embed;">
+                            <span dir="RTL" style="font-family: Yakout Linotype Light, sans-serif; color: #44546a;">
+                            وايذاناً من الفريقين على موافقتهما على كل ما ورد في هذا الملحق، فقد قاما بتوقيع نسختيهما دون ضغط أو إكراه من أحد, ودون أن يشوب ارادتهما أي عيب من عيوب الرضا أو الارادة, في مدينة روابي بتاريخ xxxxx من شهر xxxxx لعام xxxxx .
+                            </span>
+                    </p>
+
+
+                </section>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <section style="display: block;">
+                    <p dir="RTL"
+                       style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed; margin: 0in 0in 8pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span dir="RTL" lang="AR-JO"
+                                  style="font-size: 11pt; line-height: 15.6933px; font-family: Yakout Linotype Light, sans-serif; color: #44546a;"><br/><br/><br/></span></span>
+                        <strong><span lang="AR-SA"
+                                      style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;الفريق الأول</span></strong><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&nbsp;الفريق الثاني<br/><br/></strong></span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">شركة بيتي للاستثمار العقاري المساهمة الخصوصية المحدودة&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;الاسم الرباعي xxxxx<br/><br/></span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">التوقيع </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">---------------------------------------- </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;التوقيع </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">----------------------------------------<br/></span><strong><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;"><br/>شاهد</span></strong><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>شاهد<br/><br/></strong></span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">الاسم الرباعي </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">----------------------------------- </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;الاسم الرباعي </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">-----------------------------------<br/><br/></span><span
+                                dir="RTL" lang="AR-SA"
+                                style="color: #44546a; font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%;">التوقيع </span><span
+                                dir="RTL" lang="AR-SA"
+                                style="font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%; color: #92d050;">---------------------------------------- </span><span
+                                dir="RTL" lang="AR-SA"
+                                style="color: #44546a; font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;التوقيع </span><span
+                                dir="RTL" lang="AR-SA"
+                                style="font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%; color: #92d050;">----------------------------------------<br/><br/>
+
+                                    <br/>
+                                    <br/>
+                                <span class="pull-left"
+                                      style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">
+                                    <span style="font-size: 9.33333px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>التوقيع
+                                </span>
+                                <span class="pull-left" style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="pull-left"
+                                      style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">...............................................................................................................</span><span
+                                    style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+                                    style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">صفحة رقم</span><span
+                                    class="pagenum"
+                                    style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br/></span>
+                    </p>
+                </section>
+            </div>
+        </div>
+        <!-- end storage page -->
+
+
+
+
+
+        <!-- parking page -->
+
+
+        <div class="content " id="parkingpage"  style="display:none;">
+            <div class="pageBreak">
+                <div class="header-space row col-xs-12 " style="text-align: center">&nbsp;
+                    <p dir="RTL"
+                       style="margin: 0in 0in 0.0001pt -22.5pt; text-align: right; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span class="header-title"
+                                  style=" margin-top: 70px;font-size: 12.0pt; font-family: 'GE SS Two Light', serif; color: #44546a;opacity: 0.5;filter: alpha(opacity=50);">اتّفاقيّة تعهد بيع وشراء وحدة سكنية</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR"
+                                style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">
+                                     <img
+                                             src="\reservation-system\public\images\new_rawabi_logo.png"
+                                             alt="تنزيل.png" width="56" height="56"
+                                             style="opacity: 0.5;filter: alpha(opacity=50);"/>
+                               </span></p>
+                    <p dir="RTL"
+                       style="margin: 0in 0in 0.0001pt -0.25in; text-align: justify; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                        <span style="font-family: 'Times New Roman', serif; color: #92d050;opacity: 0.5;filter: alpha(opacity=70);">___________________________________________________________________________________________________</span>
+                    </p>
+                    <p dir="LTR"
+                       style="text-align: justify; direction: rtl; unicode-bidi: embed; margin: 0in 0in 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                        <span style="font-family: 'Times New Roman', serif; color: #44546a;">&nbsp;</span></p>
+
+
+
+
+
+
+                </div>
+
+                <section style="display: block;">
+                    <p class="MsoNormal" dir="RTL"
+                       style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed;">
+                        <strong><span lang="AR-JO"
+                                      style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;">ملحق رقم (</span></strong><strong><span
+                                    dir="LTR"
+                                    style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;" id="annexParkingnum"></span></strong><strong><span
+                                    lang="AR-JO"
+                                    style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;">)</span></strong>
+                    </p>
+                    <p class="MsoNormal" dir="RTL"
+                       style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed;">
+                            <span lang="AR-JO"
+                                  style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #92d050;">وصف المبيع</span>
+                        <span lang="AR-JO"
+                              style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #92d050;">&nbsp;</span>
+                    </p>
+
+                    <p class="MsoListParagraphCxSpFirst" dir="RTL"
+                       style="margin: 0in 0.25in 8pt 0in; text-align: justify; text-indent: -0.25in; direction: rtl; unicode-bidi: embed;">
+                            <span dir="RTL" style="font-family: Yakout Linotype Light, sans-serif; color: #44546a;">
+                            اﺗﻔﻖ اﻟﻔﺮﻳﻘﺎن ﺑﻤﻮﺟﺐ اﻟﻌﻘﺪ اﻟﻤﻮﻗﻊ ﺑﻴﻨﻬﻤﺎ ﺑﺘﺎرﻳﺦ xxxxx ﻋﲆ ﺗﻌﺪﻳﻞ وﺻﻒ اﻟﻤﺒﻴﻊ اﻟﻤﺒﻴﻦ في اﻟﺒﻨﺪ ﺛﺎﻟﺜﺎ من الاتفاقية, ليشمل المبيع ﻣﻮﻗﻒ رﻗﻢ xxxxx اﻟﻮاﻗﻊ في اﻟﻄﺎﺑﻖ رﻗﻢ xxxxx ﻣﻦ اﻟﺒﻨﺎء رﻗﻢ xxxxx اﻟﻤﻘﺎم ﻋﲆ ﻗﻄﻌﺔ اﻷرض رﻗﻢ xxxxx ﻣﻦ ﺣﻮض رﻗﻢ xxxxx ﻣﻦ ﻣﺪﻳﻨﺔ رواﺑﻲ.  اﻟﺒﺎﻟﻎ ﺛﻤﻨﻪ  (xxxxx$) xxxxx دولار أﻣﺮﻳﻜﻲ
+                            </span>
+                    </p>
+
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <p class="MsoListParagraphCxSpFirst" dir="RTL"
+                       style="margin: 0in 0.25in 8pt 0in; text-align: justify; text-indent: -0.25in; direction: rtl; unicode-bidi: embed;">
+                            <span dir="RTL" style="font-family: Yakout Linotype Light, sans-serif; color: #44546a;">
+                            وايذاناً من الفريقين على موافقتهما على كل ما ورد في هذا الملحق، فقد قاما بتوقيع نسختيهما دون ضغط أو إكراه من أحد، ودون أن يشوب ارادتهما أي عيب من عيوب الرضا أو الارادة, في مدينة روابي بتاريخ xxxxx من شهر xxxxx لعام xxxxx .
+                            </span>
+                    </p>
+
+
+                </section>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
+                <section style="display: block;">
+                    <p dir="RTL"
+                       style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed; margin: 0in 0in 8pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span dir="RTL" lang="AR-JO"
+                                  style="font-size: 11pt; line-height: 15.6933px; font-family: Yakout Linotype Light, sans-serif; color: #44546a;"><br/><br/><br/></span></span>
+                        <strong><span lang="AR-SA"
+                                      style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;الفريق الأول</span></strong><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&nbsp;الفريق الثاني<br/><br/></strong></span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">شركة بيتي للاستثمار العقاري المساهمة الخصوصية المحدودة&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;الاسم الرباعي xxxxx<br/><br/></span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">التوقيع </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">---------------------------------------- </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;التوقيع </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">----------------------------------------<br/></span><strong><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;"><br/>شاهد</span></strong><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>شاهد<br/><br/></strong></span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">الاسم الرباعي </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">----------------------------------- </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;الاسم الرباعي </span><span
+                                lang="AR-SA"
+                                style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">-----------------------------------<br/><br/></span><span
+                                dir="RTL" lang="AR-SA"
+                                style="color: #44546a; font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%;">التوقيع </span><span
+                                dir="RTL" lang="AR-SA"
+                                style="font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%; color: #92d050;">---------------------------------------- </span><span
+                                dir="RTL" lang="AR-SA"
+                                style="color: #44546a; font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;التوقيع </span><span
+                                dir="RTL" lang="AR-SA"
+                                style="font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%; color: #92d050;">----------------------------------------<br/><br/>
+
+<br/>
+<br/>
+                                <span class="pull-left"
+                                      style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">
+                                    <span style="font-size: 9.33333px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>التوقيع
+                                </span>
+                                <span class="pull-left" style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="pull-left"
+                                      style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">..............................................................................................................</span><span
+                                    style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+                                    style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">صفحة رقم</span><span
+                                    class="pagenum"
+                                    style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br/></span>
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <!-- end parking page -->
+
+
+
+
+
+
+
+        <div class="content" id="pledge1">
+                        <div class="header-space row col-xs-12 " style="text-align: center">&nbsp;
+                            <p dir="RTL"
+                               style="margin: 0in 0in 0.0001pt -22.5pt; text-align: right; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span class="header-title"
+                                  style=" margin-top: 70px;font-size: 12.0pt; font-family: 'GE SS Two Light', serif; color: #44546a;opacity: 0.5;filter: alpha(opacity=50);">عقد إيجار منتهي بخيار الشراء</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR"
+                                        style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                            style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                        dir="LTR" style="color: #44546a;">
+                                     <img
+                                             src="\reservation-system\public\images\new_rawabi_logo.png"
+                                             alt="تنزيل.png" width="56" height="56" style="opacity: 0.5;filter: alpha(opacity=50);"/>
+                               </span></p>
+                            <p dir="RTL"
+                               style="margin: 0in 0in 0.0001pt -0.25in; text-align: justify; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                                <span style="font-family: 'Times New Roman', serif; color: #92d050;opacity: 0.5;filter: alpha(opacity=70);">___________________________________________________________________________________________________</span>
+                            </p>
+                            <p dir="LTR"
+                               style="text-align: justify; direction: rtl; unicode-bidi: embed; margin: 0in 0in 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                                <span style="font-family: 'Times New Roman', serif; color: #44546a;">&nbsp;</span></p>
+                        </div>
+                        {{ content.pledge1 | raw }}
+
+                    </div>
+
+
+
+
+
+
+
+
+    </div>
+
+{% endblock %}
+
+{% block page_scripts %}
+    <script src="{{ site.uri.js }}/printThis.js"></script>
+    <script src="{{ site.uri.js }}/NumToWord.js"></script>
+
+    <script>
+        getContent()
+
+
+
+        function printDiv() {
+
+            var divToPrint = document.getElementById('pr');
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+            newWin.document.write(
+                '<html><head> <meta http-equiv="content-type" content="text/html;charset=UTF-8" />' +
+                '<style media="print">' +
+                '#annex1,#annex2,#annex3,#pledge1{page-break-before: always;}' +
+                '#firstpage{page-break-after: always;}' +
+                '.pagenum::after {counter-increment: page; content: counter(page);min-width: 80px;display: inline-block;text-align:center; border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif; color:#445760;}' +
+                'div.page' +
+                '      {' +
+                '        page-break-after: always;' +
+                '        page-break-inside: avoid;' +
+                '      }' +
+                'div.content{margin-left: 25px; margin-right: 10px;} .hide-print {display: none;} ' +
+                '.footer-space{margin-bottom: -80px;}'+
+                ' div.header-space{margin-right: 5px;  position: relative;} ' +
+                '@page{size: A4;margin-right: 9mm; margin-left: 9mm;margin-top: 5mm;margin-bottom: 5mm;}' +
+                'img{float: left;margin-left: 30px;}' +
+
+                ' span.header-title{  position: absolute;bottom: 25;right: 0;}' +
+                '</style> </head><body style="counter-reset: page;" onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+            newWin.document.close();
+
+            setTimeout(function () {
+                newWin.close();
+            }, 10);
+
+        }
+
+        function getContent() {
+
+            var url = window.location.href;
+            var res = url.split("/");
+            var unitId = res[res.length - 1];
+           // alert(unitId);
+
+            var contractDate = "";
+            var landNum = "";
+            var hawdNum = "";
+            var customer_name = "";
+
+            $.ajax({
+                url: site['uri']['public'] + '/contract2/' + unitId,
+                type: "get"
+            }).done(function (data) {
+                data = JSON.parse(data);
+                console.log(data)
+
+                if ((data.renter2).replace(/\s/g, '') == "" || data.renter2 == undefined) {
+                    data.renter = data.renter1;
+                    data.r_idNum = data.r_idNum1
+                }
+                else {
+                    data.renter = data.renter1 + "  و  " + data.renter2;
+                    if ((data.r_idNum2).replace(/\s/g, '') != "" && data.r_idNum2 != undefined) {
+                        data.r_idNum = data.r_idNum1 + "  و  " + data.r_idNum2;
+                    }
+                    else {
+                        data.r_idNum = data.r_idNum1;
+                    }
+                }
+                $.each(data, function (i, item) {
+                    if (item == null || item == "" || item == "NaN" || item == "NaN/NaN/NaN" || item == "0000-00-00") {
+                        data[i] = "لا يوجد";
+                    }
+                });
+
+
+                contractDate = checkDate(data.contract2Date);
+                customer_name = data.renter1;
+                landNum = data.r_landNum;
+                hawdNum = data.r_hawdNum;
+                var arr1 = {
+                    contract2Date: checkDate(data.contract2Date),
+                    contract2year: getYear(data.contract2Date),
+                    contract2month: getMonth(data.contract2Date),
+                    contract2day: getDay(data.contract2Date),
+                    baytiCompanyNumber: data.baytiCompanyNumber,
+                    systemUser2: data.systemUser2,
+                    renter1: data.renter1,
+                    renter: data.renter,
+                    r_idNum: data.r_idNum,
+                    r_idType1: data.r_idType1,
+                    r_idNum1: data.r_idNum1,
+                    r_idProDate1: checkDate(data.r_idProDate1),
+                    r_idPlace1: data.r_idPlace1,
+                    r_passportNo1: data.r_passportNo1,
+                    r_idExpDate1: checkDate(data.r_idExpDate1),
+                    r_country1: data.r_country1,
+                    r_city1: data.r_city1,
+                    r_streetName1: data.r_streetName1,
+                    r_regionName1: data.r_regionName1,
+                    r_workPhone1: data.r_workPhone1,
+                    r_homePhone1: data.r_homePhone1,
+                    r_mobileNum1: data.r_mobileNum1,
+                    r_faxNum1: data.r_faxNum1,
+                    r_mailBox1: data.r_mailBox1,
+                    r_eMail1: data.r_eMail1,
+                    r_postalCode1: data.r_postalCode1,
+                    renter2: data.renter2,
+                    r_idType2: data.r_idType2,
+                    r_idNum2: data.r_idNum2,
+                    r_idProDate2: checkDate(data.r_idProDate2),
+                    r_idPlace2: data.r_idPlace2,
+                    r_passportNo2: data.r_passportNo2,
+                    r_idExpDate2: checkDate(data.r_idExpDate2),
+                    r_country2: data.r_country2,
+                    r_city2: data.r_city2,
+                    r_streetName2: data.r_streetName2,
+                    r_regionName2: data.r_regionName2,
+                    r_workPhone2: data.r_workPhone2,
+                    r_homePhone2: data.r_homePhone2,
+                    r_mobileNum2: data.r_mobileNum2,
+                    r_faxNum2: data.r_faxNum2,
+                    r_mailBox2: data.r_mailBox2,
+                    r_eMail2: data.r_eMail2,
+                    r_postalCode2: data.r_postalCode2,
+                    r_unitArea: data.r_unitArea,
+                    r_haiName: data.r_haiName,
+                    r_unitNum: data.r_unitNum,
+                    r_floorNum: data.r_floorNum,
+                    r_landNum: data.r_landNum,
+                    r_buildingNum: data.r_buildingNum,
+                    r_hawdNum: data.r_hawdNum,
+                    r_hawdName: data.r_hawdName,
+                    r_buildingsNum: data.r_buildingsNum,
+                    r_unitDesc: data.r_unitDesc,
+                    rentPeriod: inWordsArabic(data.rentPeriod, $, "ar"),
+                    releasePeriod: inWordsArabic(data.releasePeriod, $, "ar"),
+                    startRentDate: checkDate(data.startRentDate),
+                    endRentDate: checkDate(data.endRentDate),
+                    r_totalPrice_w: inWordsArabic(data.r_totalPrice, $, "ar"),
+                    additions: data.additions,
+                    yy: formatCurrencySign(addCommas(data.yy)),
+                    yy_w: inWordsArabic(data.yy, $, "ar"),
+                    paymentAPeriod: inWordsArabic(data.paymentAPeriod, $, "ar"),
+                    paymentA: formatCurrencySign(addCommas(data.paymentA)),
+                    paymentA_w: inWordsArabic(data.paymentA, $, "ar"),
+                    fromDateA: checkDate(data.fromDateA),
+                    toDateA: checkDate(data.toDateA),
+                    paymentBPeriod: inWordsArabic(data.paymentBPeriod, $, "ar"),
+                    paymentB: formatCurrencySign(addCommas(data.paymentB)),
+                    paymentB_w: inWordsArabic(data.paymentB, $, "ar"),
+                    fromDateB: checkDate(data.fromDateB),
+                    toDateB: checkDate(data.toDateB),
+                    paymentCPeriod: inWordsArabic(data.paymentCPeriod, $, "ar"),
+                    paymentC: formatCurrencySign(addCommas(data.paymentC)),
+                    paymentC_w: inWordsArabic(data.paymentC, $, "ar"),
+                    fromDateC: checkDate(data.fromDateC),
+                    toDateC: checkDate(data.toDateC),
+                    checksNum: data.checksNum,
+                    contract2Day: data.contract2Day,
+                    r_companyFor: data.r_companyFor,
+                    r_companyName: data.r_companyName,
+                    r_companyNum: data.r_companyNum,
+                    contract2_addPartB: data.contract2_addPartB,
+                    r_checksNum: data.r_checksNum,
+                    r_HAO_date: checkDate(data.r_HAO_date),
+                    //Edited By Ahmad
+                    r_totalPrice: formatCurrencySign(data.r_totalPrice),
+                    r_HAO_num: data.r_HAO_num,
+                    sponsorName: data.sponsorName,
+                    sponsorIdNum: data.sponsorIdNum,
+                    sponsorAddress: data.sponsorAddress,
+                    sponsorMobile: data.sponsorMobile,
+                    r_haiArea: data.r_haiArea,
+                    rentPrice: formatCurrencySign(addCommas(data.rentPrice)),
+                    estContrNum: data.estContrNum,
+                    estContrNum2: data.estContrNum2,
+                    estContrDate: checkDate(data.estContrDate),
+                    estContrDate2: checkDate(data.estContrDate2),
+                    rentPrice_w: inWordsArabic(data.rentPrice, $, "ar")
+                };
+                arr1['r_uuid'] = Number(JSON.parse(localStorage.getItem('uiddd')));
+                // This is used for checksNumber -> rentPeriod + 1
+                // called totalChecks
+                arr1['totalChecks'] = inWordsArabic((Number(data.checksNum)), $, "ar");
+                // This used for determine number in years ->
+                arr1['totalYears'] = (Number(data.rentPeriod) / 12);
+                arr1['totalYears'] -= ((Number(data.rentPeriod) % 12) / 12);
+                arr1['totalMonths'] = ((Number(data.rentPeriod) % 12));
+                arr1['contract2Day'] = getDayW(arr1.contract2Date);
+
+                var date = new Date(arr1['endRentDate'].toString());
+                date.setDate(date.getDate() + 1);
+                date = date.toString().substring(3, 15);
+                arr1['endDate'] = date;
+                d = "31 1 1996";
+                arr1['endDate'] = formatDateToYYYYMMDD(arr1['endDate']);
+                arr1['totalYears'] = monthsWord(arr1['totalYears'], arr1['totalMonths']);
+
+
+
+
+
+                // section 1
+                var personal_info = $("#personal_info").html();
+                while (personal_info.indexOf("xxxxx") > 0) {
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.contract2day + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.contract2month + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.contract2year + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.baytiCompanyNumber + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.systemUser2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.renter1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idType1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idNum1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idPlace1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idProDate1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idExpDate1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_country1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_city1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_regionName1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_streetName1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_homePhone1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_workPhone1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_mobileNum1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_faxNum1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_eMail1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_mailBox1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_postalCode1 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.renter2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idType2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idNum2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idPlace2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idProDate2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idExpDate2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_country2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_city2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_regionName2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_streetName2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_homePhone2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_workPhone2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_mobileNum2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_faxNum2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_eMail2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_mailBox2 + '</span>')
+                    personal_info = personal_info.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_postalCode2 + '</span>')
+
+
+                }
+                $("#personal_info").html(personal_info);
+                $("#personal_info").show();
+                console.log("personal_info ", personal_info);
+
+
+
+                // section 2
+                var introduction = $("#introduction").html();
+                while (introduction.indexOf("xxxxx") > 0) {
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_unitNum + '</span>')
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_floorNum + '</span>')
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_unitArea + '</span>')
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiName + '</span>')
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 100%;display: inline-block;text-align:right;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif;color: #445760;">' + arr1.r_unitDesc + '</span>')
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_buildingNum + '</span>')
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_landNum + '</span>')
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_hawdName + '</span>')
+                    introduction = introduction.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_hawdNum + '</span>')
+                    }
+                $("#introduction").html(introduction);
+                $("#introduction").show();
+                console.log("introduction ", introduction);
+
+
+                // section 3
+                var defention_intro = $("#defention_intro").html();
+                while (defention_intro.indexOf("xxxxx") > 0) {
+                    defention_intro = defention_intro.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_buildingNum + '</span>')
+                    defention_intro = defention_intro.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiName + '</span>')
+                    defention_intro = defention_intro.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiName + '</span>')
+                    defention_intro = defention_intro.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_buildingsNum + '</span>')
+                   }
+                $("#defention_intro").html(defention_intro);
+                $("#defention_intro").show();
+                console.log("defention_intro ", defention_intro);
+
+
+                // section 4
+                var contract_subject = $("#contract_subject").html();
+                while (contract_subject.indexOf("xxxxx") > 0) {
+                    contract_subject = contract_subject.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    contract_subject = contract_subject.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.releasePeriod + '</span>')
+                    contract_subject = contract_subject.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.startRentDate + '</span>')
+                    contract_subject = contract_subject.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.endRentDate + '</span>')
+                    contract_subject = contract_subject.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    contract_subject = contract_subject.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    contract_subject = contract_subject.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    contract_subject = contract_subject.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+
+                     }
+                $("#contract_subject").html(contract_subject);
+                $("#contract_subject").show();
+                console.log("contract_subject ", contract_subject);
+
+
+
+                // section 5
+                var payment_mechanism = $("#payment_mechanism").html();
+                while (payment_mechanism.indexOf("xxxxx") > 0) {
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_totalPrice + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_totalPrice_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPrice + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPrice_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentA + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentA_w + '</span>')
+
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentAPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentA + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentA_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.fromDateA + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.toDateA + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentBPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentB + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentB_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.fromDateB + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.toDateB + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentCPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentC + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.paymentC_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.fromDateC + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.toDateC + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.totalChecks + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.totalChecks + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.yy_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 140px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.totalYears + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.endDate + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPrice + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 240px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPrice_w + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    payment_mechanism = payment_mechanism.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+
+
+                     }
+                $("#payment_mechanism").html(payment_mechanism);
+                $("#payment_mechanism").show();
+                console.log("payment_mechanism ", payment_mechanism);
+
+                // section 6
+                var Commitments_team_1 = $("#Commitments_team_1").html();
+                while (Commitments_team_1.indexOf("xxxxx") > 0) {
+                    Commitments_team_1 = Commitments_team_1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.releasePeriod + '</span>')
+                    Commitments_team_1 = Commitments_team_1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                }
+                $("#Commitments_team_1").html(Commitments_team_1);
+                $("#Commitments_team_1").show();
+                console.log("Commitments_team_1 ", Commitments_team_1);
+
+
+                // section 7
+                var Commitments_team_2 = $("#Commitments_team_2").html();
+                while (Commitments_team_2.indexOf("xxxxx") > 0) {
+                    Commitments_team_2 = Commitments_team_2.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    Commitments_team_2 = Commitments_team_2.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                }
+                $("#Commitments_team_2").html(Commitments_team_2);
+                $("#Commitments_team_2").show();
+                console.log("Commitments_team_2 ", Commitments_team_2);
+
+
+                // section 8
+                var contract_period = $("#contract_period").html();
+                while (contract_period.indexOf("xxxxx") > 0) {
+                    contract_period = contract_period.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                    contract_period = contract_period.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                }
+                $("#contract_period").html(contract_period);
+                $("#contract_period").show();
+                console.log("contract_period ", contract_period);
+
+                // section 9
+                $("#differences").show();
+
+
+                // section 10
+                $("#constraint").show();
+
+                // section 11
+                var enroll_unit = $("#enroll_unit").html();
+                while (enroll_unit.indexOf("xxxxx") > 0) {
+                    enroll_unit = enroll_unit.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.rentPeriod + '</span>')
+                }
+                $("#enroll_unit").html(enroll_unit);
+                $("#enroll_unit").show();
+                console.log("enroll_unit ", enroll_unit);
+
+
+                // section 12
+                $("#referal").show();
+
+                // section 13
+                $("#infraction").show();
+
+                // section 14
+                $("#public_rules").show();
+
+
+                // section 15
+                var contract_edit = $("#contract_edit").html();
+                while (contract_edit.indexOf("xxxxx") > 0) {
+                    contract_edit = contract_edit.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.contract2Day + '</span>')
+                    contract_edit = contract_edit.replace("xxxxx", '<span style="min-width: 120px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.contract2Date + '</span>')
+                    contract_edit = contract_edit.replace("xxxxx", '<span style="min-width: 230px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.renter + '</span>')
+                }
+                $("#contract_edit").html(contract_edit);
+                $("#contract_edit").show();
+                console.log("contract_edit ", contract_edit);
+
+
+                // section 16
+                $("#annex1").show();
+
+
+                // section 17
+                var annex2 = $("#annex2").html();
+                while (annex2.indexOf("xxxxx") > 0) {
+                    annex2 = annex2.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiName + '</span>')
+                    annex2 = annex2.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_landNum + '</span>')
+                    annex2 = annex2.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_hawdNum + '</span>')
+
+                }
+                $("#annex2").html(annex2);
+                $("#annex2").show();
+                console.log("annex2 ", annex2);
+
+                // section 18
+                var annex3 = $("#annex3").html();
+                while (annex3.indexOf("xxxxx") > 0) {
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.renter + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idNum + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_companyName + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_companyNum + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_companyFor + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_unitNum + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_floorNum + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_unitArea + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_buildingNum + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiName + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.estContrNum + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.estContrDate + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiName + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiArea + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.estContrNum2 + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.estContrDate2 + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.totalChecks + '</span>')
+                    annex3 = annex3.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.contract2Date + '</span>')
+
+                }
+                $("#annex3").html(annex3);
+                $("#annex3").show();
+                console.log("annex3 ", annex3);
+
+                // section 19
+                var pledge1 = $("#pledge1").html();
+                while (pledge1.indexOf("xxxxx") > 0) {
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 150px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.renter + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 100px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_idNum + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_companyName + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_companyNum + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_companyFor + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_unitNum + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_floorNum + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_unitArea + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_buildingNum + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiName + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.estContrNum + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.estContrDate + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiName + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.r_haiArea + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.estContrNum2 + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.estContrDate2 + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.totalChecks + '</span>')
+                    pledge1 = pledge1.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + arr1.contract2Date + '</span>')
+
+                }
+                $("#pledge1").html(pledge1);
+                $("#pledge1").show();
+                console.log("pledge1 ", pledge1);
+
+
+
+
+
+
+                $.ajax({
+                    url: site['uri']['public'] + '/getReservations/unit/' + unitId ,
+                    type: "get",
+                    async: false,
+                    data: {
+                        unitId: unitId
+                    }
+                }).done(function (data) {
+                    if(data != ""){
+                        data = JSON.parse(data);
+                        if(data.length == 1){
+                            var annex_type = data[0].type;
+                            if(annex_type == "storage"){
+
+                                var reservation_date = "";
+                                var day = "";
+                                var month = "";
+                                var year = "";
+                                var storageNum = "";
+                                var floor = "";
+                                var building = "";
+                                var totalPricecommas = "";
+                                var totalPriceArabic = "";
+                                var tabu_description = "";
+                                var area = "";
+                                var storageId = data[0].parking_storage_id;
+
+                                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                                var url = site['uri']['public'] + "/getStorageInfo/";
+                                var params = {id: storageId, csrf_token: encodeURIComponent(csrf_token)};
+                                $.ajax({
+                                    type: "get",
+                                    url: url,
+                                    data: params,
+                                    async: false
+                                }).done(function (data) {
+                                    if (data.length > 0) {
+                                        data = JSON.parse(data);
+
+                                        totalPricecommas = addCommas(data[0]['price']);
+                                        totalPriceArabic = inWordsArabic(data[0]['price'], "$", "ar");
+                                        storageNum = data[0]['storage_number'];
+                                        floor = data[0]['floor'];
+                                        building = data[0]['building'];
+                                        tabu_description = data[0]['tabu_description'];
+                                        area = data[0]['area'];
+                                    }
+
+
+                                    $.ajax({
+                                        url: site['uri']['public'] + '/getReservation/unit/' + unitId + '/parking/' + storageId,
+                                        type: "get",
+                                        async: false,
+                                        data: {
+                                            unitId: unitId,
+                                            parkingStorageId: storageId,
+                                            csrf_token: encodeURIComponent(csrf_token)
+                                        }
+                                    }).success(function (data) {
+                                        data = JSON.parse(data);
+                                        var today = new Date();
+                                        var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+                                        reservation_date = checkDate(date);
+                                        var d = new Date(reservation_date);
+                                        if (d != "Invalid Date") {
+                                            day = d.getDate();
+                                            month = d.getMonth() + 1;
+                                            year = d.getFullYear();
+                                        }
+
+                                    });
+
+
+                                    var storagepagecontent = $("#storagepage").html();
+                                    while (storagepagecontent.indexOf("xxxxx") > 0) {
+
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + contractDate + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + storageNum + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + floor + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + building + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + landNum + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + hawdNum + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + area + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + tabu_description + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPricecommas + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPriceArabic + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + day + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + month + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + year + '</span>')
+                                        storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + customer_name + '</span>')
+
+                                    }
+
+                                    $("#storagepage").html(storagepagecontent);
+                                    $("#storageannexnumber").text(5)
+                                    $("#storagepage").show();
+                                });
+
+
+                            }else if (annex_type == "parking"){
+
+
+                                var reservation_date = "";
+                                var day = "";
+                                var month = "";
+                                var year = "";
+                                var parkingNum = "";
+                                var floor = "";
+                                var building = "";
+                                var totalPricecommas = "";
+                                var totalPriceArabic = "";
+
+                                var parkingId = data[0].parking_storage_id;;
+                                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                                var url = site['uri']['public'] + "/getParkingInfo/";
+                                var params = {id: parkingId, csrf_token: encodeURIComponent(csrf_token)};
+                                $.ajax({
+                                    type: "get",
+                                    url: url,
+                                    data: params,
+                                    async: false
+                                }).done(function (data) {
+                                    if (data.length > 0) {
+                                        data = JSON.parse(data);
+
+                                        totalPricecommas = addCommas(data[0]['price']);
+                                        totalPriceArabic = inWordsArabic(data[0]['price'], "$", "ar");
+                                        parkingNum = data[0]['parking_number'];
+                                        floor = data[0]['floor'];
+                                        building = data[0]['building'];
+                                    }
+
+
+                                    $.ajax({
+                                        url: site['uri']['public'] + '/getReservation/unit/' + unitId + '/parking/' + parkingId,
+                                        type: "get",
+                                        async: false,
+                                        data: {
+                                            unitId: unitId,
+                                            parkingStorageId: parkingId,
+                                            csrf_token: encodeURIComponent(csrf_token)
+                                        }
+                                    }).success(function (data) {
+
+                                        data = JSON.parse(data);
+                                        var today = new Date();
+                                        var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+                                        reservation_date = checkDate(date);
+                                        var d = new Date(reservation_date);
+                                        if (d != "Invalid Date") {
+                                            day = d.getDate();
+                                            month = d.getMonth() + 1;
+                                            year = d.getFullYear();
+                                        }
+                                    });
+
+
+
+                                    var parkingpage = $("#parkingpage").html();
+                                    while (parkingpage.indexOf("xxxxx") > 0) {
+
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + contractDate + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + parkingNum + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + floor + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + building + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + landNum + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + hawdNum + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPricecommas + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPriceArabic + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + day + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + month + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + year + '</span>')
+                                        parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + customer_name + '</span>')
+
+                                    }
+
+
+
+                                    $("#parkingpage").html(parkingpage);
+                                    $("#annexParkingnum").text(5);
+                                    $("#parkingpage").show();
+
+
+
+                                });
+
+
+
+
+                            }
+                        }else if(data.length == 2){
+
+
+
+                            var reservation_date = "";
+                            var day = "";
+                            var month = "";
+                            var year = "";
+                            var storageNum = "";
+                            var floor = "";
+                            var building = "";
+                            var totalPricecommas = "";
+                            var totalPriceArabic = "";
+                            var tabu_description = "";
+                            var area = "";
+                            var storageId = "";
+                            if(data[0].type == "storage"){
+                                storageId = data[0].parking_storage_id;
+                            }else{
+                                storageId = data[1].parking_storage_id;
+                            }
+
+                            var csrf_token = $("meta[name=csrf_token]").attr("content");
+                            var url = site['uri']['public'] + "/getStorageInfo/";
+                            var params = {id: storageId, csrf_token: encodeURIComponent(csrf_token)};
+                            $.ajax({
+                                type: "get",
+                                url: url,
+                                data: params,
+                                async: false
+                            }).done(function (data) {
+                                if (data.length > 0) {
+                                    data = JSON.parse(data);
+
+                                    totalPricecommas = addCommas(data[0]['price']);
+                                    totalPriceArabic = inWordsArabic(data[0]['price'], "$", "ar");
+                                    storageNum = data[0]['storage_number'];
+                                    floor = data[0]['floor'];
+                                    building = data[0]['building'];
+                                    tabu_description = data[0]['tabu_description'];
+                                    area = data[0]['area'];
+                                }
+
+
+                                $.ajax({
+                                    url: site['uri']['public'] + '/getReservation/unit/' + unitId + '/parking/' + storageId,
+                                    type: "get",
+                                    async: false,
+                                    data: {
+                                        unitId: unitId,
+                                        parkingStorageId: storageId,
+                                        csrf_token: encodeURIComponent(csrf_token)
+                                    }
+                                }).success(function (data) {
+                                    data = JSON.parse(data);
+                                    var today = new Date();
+                                    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+                                    reservation_date = checkDate(date);
+                                    var d = new Date(reservation_date);
+                                    if (d != "Invalid Date") {
+                                        day = d.getDate();
+                                        month = d.getMonth() + 1;
+                                        year = d.getFullYear();
+                                    }
+
+                                });
+
+
+                                var storagepagecontent = $("#storagepage").html();
+                                while (storagepagecontent.indexOf("xxxxx") > 0) {
+
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + contractDate + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + storageNum + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + floor + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + building + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + landNum + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + hawdNum + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + area + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + tabu_description + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPricecommas + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPriceArabic + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + day + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + month + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + year + '</span>')
+                                    storagepagecontent = storagepagecontent.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + customer_name + '</span>')
+
+                                }
+
+                                $("#storagepage").html(storagepagecontent);
+                                $("#storageannexnumber").text(5)
+                                $("#storagepage").show();
+                            });
+
+
+
+
+
+
+
+
+
+
+                            var reservation_date = "";
+                            var day = "";
+                            var month = "";
+                            var year = "";
+                            var parkingNum = "";
+                            var floor = "";
+                            var building = "";
+                            var totalPricecommas = "";
+                            var totalPriceArabic = "";
+
+                            var parkingId = "";
+                            if(data[0].type == "parking"){
+                                parkingId = data[0].parking_storage_id;
+                            }else{
+                                parkingId = data[1].parking_storage_id;
+                            }
+
+                            var csrf_token = $("meta[name=csrf_token]").attr("content");
+                            var url = site['uri']['public'] + "/getParkingInfo/";
+                            var params = {id: parkingId, csrf_token: encodeURIComponent(csrf_token)};
+                            $.ajax({
+                                type: "get",
+                                url: url,
+                                data: params,
+                                async: false
+                            }).done(function (data) {
+                                if (data.length > 0) {
+                                    data = JSON.parse(data);
+
+                                    totalPricecommas = addCommas(data[0]['price']);
+                                    totalPriceArabic = inWordsArabic(data[0]['price'], "$", "ar");
+                                    parkingNum = data[0]['parking_number'];
+                                    floor = data[0]['floor'];
+                                    building = data[0]['building'];
+                                }
+
+
+                                $.ajax({
+                                    url: site['uri']['public'] + '/getReservation/unit/' + unitId + '/parking/' + parkingId,
+                                    type: "get",
+                                    async: false,
+                                    data: {
+                                        unitId: unitId,
+                                        parkingStorageId: parkingId,
+                                        csrf_token: encodeURIComponent(csrf_token)
+                                    }
+                                }).success(function (data) {
+
+                                    data = JSON.parse(data);
+                                    var today = new Date();
+                                    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+                                    reservation_date = checkDate(date);
+                                    var d = new Date(reservation_date);
+                                    if (d != "Invalid Date") {
+                                        day = d.getDate();
+                                        month = d.getMonth() + 1;
+                                        year = d.getFullYear();
+                                    }
+                                });
+
+
+
+                                var parkingpage = $("#parkingpage").html();
+                                while (parkingpage.indexOf("xxxxx") > 0) {
+
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + contractDate + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + parkingNum + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + floor + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + building + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + landNum + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + hawdNum + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPricecommas + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPriceArabic + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + day + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + month + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + year + '</span>')
+                                    parkingpage = parkingpage.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + customer_name + '</span>')
+
+                                }
+
+
+
+                                $("#parkingpage").html(parkingpage);
+                                $("#annexParkingnum").text(6);
+                                $("#parkingpage").show();
+
+
+
+                            });
+
+
+                        }
+                    }
+
+
+
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                printDiv()
+            });
+
+        }
+
+
+        $(document).ready(function () {
+            window.location.href = site['uri']['public']+ '/unit';
+
+            $("#print").click(function () {
+                printDiv();
+            })
+        });
+
+        function checkDate(date) {
+            if (date == "0000-00-00") {
+                date = "";
+            } else if (date != "لا يوجد") {
+                date = formatDate(date);
+            }
+            return date;
+        }
+
+        function formatDate(date) {
+            var date = new Date(date),
+                month = '' + (date.getMonth() + 1),
+                day = '' + date.getDate(),
+                year = date.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('/');
+        }
+
+        function stringifyNumber(n) {
+            var special = ['صفر', 'الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة',
+                'السادسة', 'السابعة', 'الثامنة', 'التاسعة', 'العاشرة', 'الحادية عشر',
+                'الثانية عشر', 'الثالثة عشر', 'الرابعة عشر', 'الخامسة عشر', 'السادسة عشر', 'السابعة عشر', 'الثامنة عشر', 'التاسعة عشر'];
+            var deca = ['العشرون', 'الثلاثون', 'الأربعون', 'الخمسون', 'الستون',
+                'السبعون', 'الثمانون', 'التسعون'];
+            if ((n == 21) || (n == 31) || (n == 41) || (n == 51)) {
+                special[1] = "الحادية";
+            }
+            if (n < 20) {
+                return special[n];
+            }
+            if (n % 10 === 0) {
+                return deca[Math.floor(n / 10) - 2];
+            }
+            return (special[n % 10] + 'و' + deca[Math.floor(n / 10) - 2]);
+        }
+
+        function getDayW(date) {
+            // Hint : you can check the full fromat without any need to use first 4 parameters
+            // Split the full fromat then comapre day in english
+
+            var dat = "Wed Feb 3 1996 09:56:24 GMT+0100 (W. Europe Standard Time)";
+            var d2 = dat.substring(4, 14);
+            var date2 = dat.replace(d2, date);
+            var full = new Date(date2).toString();
+
+            var dayE = ["Fri", "Sat", "Sun", "Mon", "Tue", "Wed", "Thu"];
+            var dayA = ["الجمعة", "السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس"];
+            var x = full.toString();
+            var y = x.substring(0, 3);
+
+            var day_words;
+            for (var i = 0; i < 7; i++) {
+                if (!y.localeCompare(dayE[i])) {
+                    day_words = dayA[i].toString();
+                    break;
+                }
+            }
+            return day_words;
+        }
+        function formatDateToYYYYMMDD(date) {
+            /*
+             date has two form either string like 11/06/2016 11:38 AM or date  like 1478425080000.
+             this function format both
+             */
+
+            if (!date instanceof Date) {
+
+                var dateWithoutTime = date.split(" ")[0];
+                date = new Date(dateWithoutTime);
+            } else {
+                date = new Date(date);
+            }
+            //return moment(date).format("MM-DD-YYYY");
+            return moment(date).format("YYYY-MM-DD");
+        }
+
+        function monthsWord(year, month) {
+            var result = "";
+            var yearw = year;
+            switch (year) {
+                case 0:
+                    result += " ";
+                    break;
+                case 1:
+                    result += "سنة واحدة";
+                    break;
+                case 2:
+                    result += " سنتين ";
+                    break;
+                default:
+                    result += inWordsArabic(year, $, "ar") + " " + " سنوات ";
+                    break;
+            }
+
+            switch (month) {
+                case 0:
+                    result += "فقط";
+                    break;
+                case 1:
+                    result += "وشهر واحد";
+                    break;
+                case 2:
+                    result += "وشهرين";
+                    break;
+                default:
+                    result += "و" + inWordsArabic(month, $, "ar") + " أشهر ";
+                    break;
+            }
+            return result;
+        }
+
+
+    </script>
+{% endblock %}

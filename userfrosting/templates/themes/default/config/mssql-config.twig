@@ -1,0 +1,105 @@
+{% block subject %}
+    {{site.site_title}} - MSSQL DB Configuration
+    {% set page_group = "user" %}
+{% endblock %}
+
+{% extends "layouts/layout-dashboard.twig" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "MSSQL Configuration",
+        "description" : "MSSQL Database Configuration desc"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-database'></i> {{ translate('mssql_configuration') }}</h3>
+                </div>
+                <div class='panel-body'>
+                    <div id="settings-alerts">
+                        <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="input_server" class="col-xs-12 col-sm-3 col-lg-1  control-label">{{ translate('server') }}</label>
+                        <div class="col-xs-12 col-sm-9 col-lg-11 margin-bottom-15px">
+                            <input type='text' id="input_server" class="form-control" name="server" value={{server}}>
+                        </div>
+                        <label for="input_db" class="col-xs-12 col-sm-3 col-lg-1 control-label">{{ translate('database') }}</label>
+                        <div class="col-xs-12 col-sm-9 col-lg-11 margin-bottom-15px">
+                            <input type='text' id="input_db" class="form-control" name="msdb" value={{msdb}}>
+                        </div>
+                        <label for="input_username" class="col-xs-12 col-sm-3 col-lg-1 control-label">{{ translate('user_name') }}</label>
+                        <div class="col-xs-12 col-sm-9 col-lg-11 margin-bottom-15px">
+                            <input type='text' id="input_username" class="form-control" name="username" value={{username}}>
+                        </div>
+                        <label for="input_pass" class="col-xs-12 col-sm-3 col-lg-1 control-label">{{ translate('password') }}</label>
+                        <div class="col-xs-12 col-sm-9 col-lg-11 margin-bottom-15px">
+                            <input type='password'  name="pass" style="display:none;">
+                            <input type='password' id="input_pass" class="form-control" autocomplete="off" name="pass">
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="col-xs-2 col-xs-offset-5">
+            <button class="btn btn-primary text-center" id="mssqlSave">{{ translate('save') }}</button>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block page_scripts  %}
+<script type="text/javascript">
+    $(document).ready(function() {
+            var timer;
+            $('#input_pass').val("{{pass}}");
+            // Autosave text fields
+            $("#mssqlSave").click(function () {
+                clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                $("#settings-alerts").html("<div class='alert alert-warning'>"+ _translate('saving') +"</div>");
+                timer = setTimeout(function() { // assign timer a new timeout
+                    var csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var input_server=$('#input_server').val();
+                    var input_db=$('#input_db').val();
+                    var input_username=$('#input_username').val();
+                    var input_pass=$('#input_pass').val();
+                   if((input_server == "") || (input_db == "") || (input_username== "") || (input_pass == "")){
+                        $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('all_field_required') +"</div>");
+                    }
+                    else{
+                        var params={
+                            server:input_server,
+                            msdb:input_db,
+                            username:input_username,
+                            pass:input_pass,
+                            csrf_token:encodeURIComponent(csrf_token)
+                        };
+
+                        var url = site['uri']['public'] + "/mssqlConfig/";
+                        // Append page CSRF token
+                        $.ajax({
+                          type: "PUT",
+                          url: url,
+                          data: params ,
+
+                        }).done(function(data){
+                            $("#settings-alerts").html("<div class='alert alert-success'>"+ _translate('all_setting_saved') +"</div>");
+                        })
+                       .fail(function(err){
+                            $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('setting_unsaved') +"</div>");
+                       });
+                    }
+                }, 700);
+            });
+    });
+</script>
+{% endblock %}

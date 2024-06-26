@@ -1,0 +1,610 @@
+.label.label-format {
+    display: block;
+    font-size: 14px;
+    padding: 8px;
+    margin-right: 6px;
+}
+
+.margin-right-5px {
+    margin-right: 5px;
+}
+
+.btn-width {
+    width: 200px;
+}
+.btn-width-2 {
+    width: 98px;
+}
+
+.btn-width-120 {
+    width: 140px;
+}
+
+.available-filter-style {
+    display: inline;
+    float: right;
+}
+
+div.dataTables_wrapper div.dataTables_filter label {
+    float: left;
+    padding-bottom: 5px;
+}
+
+.filter-by {
+    display: inline;
+    width: inherit;
+    margin-left: 5px;
+    font-weight: 100;
+}
+
+.modal .no-padding {
+    padding: 0;
+}
+
+.form-control.required-input {
+    border: 2px solid red;
+}
+
+
+/*css styles for unit page modal*/
+
+.modal.fade.reservation-modal-lg.in {
+    width: 50%;
+    left: 45%;
+    top: 5%;
+}
+.modal.fade.contract-modal-lg.in {
+    width: 50%;
+}
+
+.modal-dialog.modal-lg {
+    width: 100%;
+    margin: 0;
+}
+
+.right-side-style {
+    float: right;
+    text-align: right;
+}
+
+.rtl-direction {
+    direction: rtl;
+    max-height: 200px;
+    min-height: 200px;
+    overflow-y: auto;
+}
+
+.display-none {
+    display: none;
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width:1024px) {
+    .modal.fade.contract-modal-lg.in {
+        width: 60%;
+        left: 50%;
+    }
+}
+
+@media only screen and (max-device-width: 768px) {
+    .modal.fade.contract-modal-lg.in {
+        width: 100%;
+        left: 10%;
+    }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width:1024px) {
+    .modal.fade.reservation-modal-lg.in {
+        width: 60%;
+        left: 50%;
+    }
+}
+
+@media only screen and (max-device-width: 768px) {
+    .modal.fade.reservation-modal-lg.in {
+        width: 100%;
+        left: 10%;
+    }
+    .reservation-res{
+        width: 90% !important;
+        left: 5% !important;
+        top: 1% !important;
+    }
+
+}
+
+
+/*
+  spinner overlay
+*/
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    /*dim the background*/
+}
+
+
+/*google chart style*/
+
+.chart {
+    width: 100%;
+    min-height: 450px;
+}
+
+.z-index-2 {
+    z-index: 2;
+}
+
+.padding-top-5px {
+    padding-top: 5px;
+}
+
+
+/*
+  datatable responsive styles (-webkit-min-device-pixel-ratio: 2)
+*/
+
+@media only screen and (max-device-width: 1024px) {
+    .available-filter-style {
+        width: 100%;
+        margin: 48px auto auto;
+        text-align: left;
+    }
+    #unitTable_filter.dataTables_filter label {
+        width: 100%;
+        text-align: left;
+        margin-top: 5px;
+    }
+    #unitTable li:last-child .dtr-title {
+        display: block;
+    }
+    /*panel dashboard*/
+    .panel-heading .huge {
+        font-size: 26px;
+    }
+    .form-control.width-12 {
+        width: 20%;
+        display: inline;
+    }
+    .available-filter {
+        text-align: left;
+    }
+}
+
+@media only screen and (min-device-width: 1024px) {
+    .form-control.width-12 {
+        width: 8.5%;
+    }
+}
+
+.panel-green-dashboard .panel-heading {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #5cb85c;
+}
+
+.panel-green-dashboard.panel {
+    border-color: #5cb85c;
+}
+
+.currency-text {
+    color: #c9302c;
+}
+
+
+/*bootstrap multiselect scroll*/
+
+.multiselect-container.dropdown-menu {
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.label-lg {
+    font-size: 14px;
+}
+
+.label-block {
+    height: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#contractsForm,
+#contractsForm h2 {
+    font-family: 'Signika Negative Regular', serif;
+}
+
+.clr {
+    clear: right;
+}
+
+.width-88 {
+    width: 88%;
+}
+
+@media screen and (max-width: 768px) {
+    .width-88 {
+        width: 100%;
+    }
+}
+
+.border-bottom {
+    border-bottom: 3px solid #dddddd;
+    margin-bottom: 1em;
+}
+
+/*Define a base for em units*/
+body {
+    font-size: 16px;
+}
+
+
+/*Getting red of margin-top which associated with contract-modal-lg*/
+
+#contract-lg-modal {
+    margin-top: 0 !important;
+}
+
+
+/*{#Giving some breath for inline elements#}*/
+
+.form-inline label {
+    line-height: 200%;
+}
+
+
+/*Modify textarea to appear sharp*/
+.cform-group{
+    overflow-y: auto;
+    overflow-x: hidden;
+    overflow: visible;
+    margin-bottom: 44px;
+}
+
+.form-group textarea {
+    resize: none;
+    min-height: 5em;
+}
+.class-margin{
+    margin-bottom: 10px;
+}
+
+/*{#Custom Classes#}*/
+
+.special-green {
+    color: #71BF45;
+}
+
+.contracts-form h2,
+.contracts-form h3 {
+    margin-bottom: 1em;
+}
+
+.contracts-select {
+    font-size: 1.25em;
+    height: auto;
+    padding: 0.5em 1em;
+}
+
+.margin-1 {
+    margin: 0.4em;
+}
+
+.margin-50 {
+    margin-bottom: 50px;
+}
+
+.width-15 {
+    display: inline-block;
+    width: 15% !important;
+}
+
+.dIcon {
+    display: inline-block;
+    position: relative;
+    width: 30%;
+    margin: 0 0.25em 0 0.4em;
+}
+
+.width-100 {
+    width: 100% !important;
+}
+
+.fa-usd {
+    position: absolute;
+    top: 30%;
+    left: 0;
+}
+
+.center-item {
+    margin: 0 auto;
+   /* display: block;*/
+   padding: 6px 10px;
+}
+
+@media screen and (max-width: 768px) {
+    .width-15 {
+        display: block;
+        width: 100% !important;
+    }
+    .contracts-select {
+        padding: 0.45em;
+    }
+    .dIcon {
+        width: 100%;
+    }
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 1em;
+    padding-top: 1em;
+}
+
+.row.is-flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.row.is-flex > [class*='col-'] {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.dIcon-specific {
+    width: 100%;
+}
+label, .form-inline label{
+    text-align: justify;
+}
+.text-start{
+    text-align: start;
+    display: inline-block;
+}
+.specific-icons {
+    list-style: none;
+    counter-reset: section;
+    margin: 0;
+    padding: 0;
+}
+.specific-icons .subItems{
+    padding: 0;
+    margin-right: -2.1em;
+    text-align: justify;
+    list-style: none;
+}
+
+.specific-icons li{
+    margin-right: 2em;
+}
+.specific-icons li[class *= 'counter-inc']::before {
+    counter-increment: section;
+    content: counters(section,'.');
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 5%;
+    right: 0;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0.1em;
+
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 25px;
+    background-color: #dfdddd;
+}
+.specific-icons > li[class *= 'counter-inc']::before{
+    top: 20%;
+}
+.relative{
+    position: relative;
+}
+.label-sepc{
+    width: 65%;
+}
+
+/*Fixing .specific-icons problems on small screen size*/
+@media screen and (max-width: 768px){
+    .specific-icons li{
+        margin-right: auto;
+    }
+    .specific-icons li> label{
+        margin-right: 2.5em;
+    }
+    .specific-icons li::before{
+        top: 3%;
+        right: 2%;
+    }
+    .label-sepc{
+        width: 100%;
+    }
+}
+.specific-PM {
+    padding-right: 1.8em;
+    margin-top: 1em;
+}
+/*.form-group .reqSpan{
+    color: #f00;
+    position: absolute;
+    top: -50%;
+    left: 4%;
+    font-size: 1.3em;
+}*/
+.form-inline .reqBorder, .form-group .reqBorder{
+    border-left-color: #a94442;
+}
+.rtl{
+    direction: rtl;
+}
+.ltr{
+    direction: ltr;
+}
+.flex-align{
+    display: flex;
+    justify-content: flex-end;
+}
+.flex-align button{
+    margin-right: 1em;
+}
+.edit-contract-modal fieldset{
+    display: none;
+}
+
+.edit-contract-modal fieldset.active{
+    display: block;
+}
+#releasePeriod{
+    border-color: #ccc !important;
+}
+/*This is used in modals of editing*/
+.flex-parent{
+    display: flex;
+    justify-content: space-between;
+    direction: ltr;
+    margin-top: 1em;
+}
+.flex-parent .close{
+    margin: 0 0 0 1em;
+    font-size: 2em;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    color: #000;
+    border-radius: 50%;
+    opacity: 0.6;
+    text-align: center;
+    transition: all 0.27s ease-in-out;
+}
+.flex-parent .close:hover{
+    background-color: #e4e4e4;
+    cursor: pointer;
+}
+.flex-parent h3{
+    margin: 0.5em 1em 0 0;
+    font-size: 1.45em;
+}
+#contract-modal-1{
+    top: 20%;
+}
+#contract-modal-2{
+   top: 20%;
+}
+.edit-contract-modal .col-xs-12{
+    transition: all 0.3s ease-in-out;
+}
+.mutedElement{
+    opacity: 0.65;
+}
+.control-btn{
+    margin-left: 0.5em;
+    width: 50px;
+}
+.dgroup, .group{
+    display: flex;
+    justify-content: flex-end;
+}
+.group {
+    border-top: 1px solid #ccc;
+    margin-top: 1em;
+    padding: 1em;
+}
+
+.form-group .addmargin{
+    margin-bottom:16px;
+
+}
+.fieldset-height{
+
+  height: 467px;
+}
+.btn-delete{
+    background-color: #c61010;
+    margin-top: 20px;
+    height: 40px;
+}
+.btn-available{
+    background-color: #10c610;
+    margin-top: 20px;
+    height: 40px;
+}
+
+
+.modal-height{
+height: 420px;
+
+}
+.modal-footer1 {
+    padding: 15px;
+    text-align: right;
+    margin-top: 200px;
+    border-top: 1px solid #e5e5e5;
+}
+
+/*Define a base for em units*/
+#reservationEmailContent{
+    direction: ltr;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background: #f3f3f3;
+}
+#reservationEmailContent #email_content_title{
+    display: none;
+}
+#reservationEmailContent *{
+    font-size: medium !important;
+    font-weight: normal;
+}
+#reservationEmailContent b{
+    font-weight: bold;
+}
+#reservationEmailContent div h3{
+    font-weight: bold;
+}
+#reservationEmailContent br{
+    display: none;
+}
+#reservationEmailContent h3 br{
+    display: block;
+}
+#reservationEmailContent pre{
+    font-family: inherit;
+    border: none;
+    padding-top: 0;
+    padding-left: 22px;
+}
+.btn-width.label-rented{
+    width: 204px;
+}
+.numOfPayments{
+    width: 80%;
+    display: inline-block;
+}
+
+.parent__scroallable {
+    direction: rtl;
+    height: 550px;
+    overflow-y: auto;
+}

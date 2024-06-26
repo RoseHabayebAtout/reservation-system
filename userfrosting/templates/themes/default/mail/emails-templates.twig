@@ -1,0 +1,238 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "user" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Users | " ~ target_user.user_name,
+        "description" : "User information page for " ~ target_user.user_name
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <style>
+        #function-select {
+            font-family: 'FontAwesome', 'Second Font name'
+        }
+    </style>
+    <h1 class="text-center" style="color: #92d050">{{ translate('prepare_the_email_template') }}</h1>
+
+    <div class="row form-group">
+        <span class="col-sm-4">
+            <select class="form-control col-sm-6" id="email-template-select">
+                <option disabled selected value="0">-- {{ translate('select_email_template') }} --</option>
+                {% for template in emailsTemplates %}
+                        <option value="{{template.id}}">{{template.name}}</option>
+                {% endfor %}
+            </select>
+        </span>
+    </div>
+    <div class="row form-group">
+
+        <span class="col-sm-3">
+            <input type="text" placeholder="Type The Email Subject" id="emailTemplateSubject" class="form-control">
+        </span>
+
+         <span class="col-sm-3">
+            <select class="form-control col-sm-3" id="attribute-email-select">
+                <option disabled selected value="0">-- {{ translate('select_attribute') }} --</option>
+                {% for column in columns %}
+                    {% if column.columnComment != '' %}
+                        <option value="{{column.columnName}}">{{column.columnComment}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </span>
+
+        <span class="button-tooltip-container">
+            <button class="btn btn-default" onclick="copyToClipboard('attribute-select', 'attribute-type-select')">{{ translate('copy') }}</button>
+            <span id="custom-tooltip" style="display: none">{{ translate('copied') }}!</span>
+        </span>
+
+        <span class="col-sm-2 pull-right">
+
+            <select class="form-control col-sm-3" id="function-select">
+                <option disabled selected value="0"> &#xf013; {{ translate('select_function') }}</option>
+
+                <option value="number_to_alpha"> &#xf0c5; {{ translate('number_to_alpha') }}</option>
+                <option value="current_date"> &#xf0c5; {{ translate('current_date') }}</option>
+                <option value="selected_currency"> &#xf0c5; {{ translate('selected_currency') }}</option>
+                <option value="selected_currency_symbol"> &#xf0c5; {{ translate('selected_currency_symbol') }}</option>
+                <option value="cal"> &#xf0c5; {{ translate('cal') }}</option>
+            </select>
+            <br/>
+            <label id="custom-tooltip-func" style="visibility: hidden">
+                {{ translate('copied') }}!
+            </label>
+
+        </span>
+    </div>
+
+    <div class="row" >
+        <div class="col-lg-12">
+
+
+            <textarea id="email_template_content" style="height: 600px; ">
+
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row " >
+            <button class="btn btn-primary pull-right" id="save" style="margin: 25px;">{{ translate('save') }}</button>
+        </div>
+    </div>
+
+    <!-- /.row -->
+{% endblock %}
+
+{% block page_scripts %}
+    <style>
+        #custom-tooltip {
+            padding: 5px 12px;
+            background-color: #000000df;
+            border-radius: 4px;
+            color: #fff;
+        }
+    </style>
+
+    <script src="https://cdn.tiny.cloud/1/8rz0j0l1scuawjl0oxjw7ci75u1uf6p49q096jd261btm913/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script src="{{site.uri.fonts}}/Yakout-Linotype-Light.ttf"></script>
+    <script>
+
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'pagebreak',
+            toolbar: 'pagebreak',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+        });
+
+
+        var csrf_token = $("meta[name=csrf_token]").attr("content");
+
+        function copyToClipboard() {
+
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val('!sys_var_'+$( "#attribute-email-select" ).val()+'!').select();
+            document.execCommand("copy");
+            $temp.remove();
+            document.getElementById("custom-tooltip").style.display = "inline";
+            setTimeout( function() {
+                document.getElementById("custom-tooltip").style.display = "none";
+            }, 1000);
+        }
+
+        $(document).ready(function(){
+
+            $(document).on('change', '#email-template-select', function () {
+                var params = {
+                    id: $('#email-template-select').val(),
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+                var url = site['uri']['public'] + "/emails/templates/" + params.id;
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    if (data) {
+                        data = JSON.parse(data);
+                        $('#emailTemplateSubject').val(data[0]['subject'])
+                        tinyMCE.get('email_template_content').setContent(data[0]['content'])
+                    }
+                    //alert("Template Created Successfully");
+                }).fail(function (err) {
+                    console.log("error", err);
+                });
+            });
+
+            $('#function-select').on('change', function () {
+                var func = $(this).val();
+
+                if ( func === null || func === 0) {
+                    alert(_translate('choose_fun_msg'));
+                    return;
+                }
+
+
+                var $temp = $("<input>");
+                $("body").append($temp);
+                if ($("#function-select").val().trim() == "selected_currency" || $("#function-select").val().trim() == "selected_currency_symbol") {
+                    $temp.val('sys_func_'+ $("#function-select").val().trim() + '(sys_var_reservation_currency_type_text )!').select();
+                } else {
+                    $temp.val('sys_func_'+ $("#function-select").val().trim() + '()!').select();
+                }
+                document.execCommand("copy");
+                $temp.remove();
+                document.getElementById("custom-tooltip-func").style.visibility = "visible";
+                setTimeout( function() {
+                    document.getElementById("custom-tooltip-func").style.visibility = "hidden";
+                }, 1000);
+            });
+
+
+            $("#save").on("click",function(e){
+
+                var content = tinymce.get('email_template_content').getContent();
+                var emailTemplateSubject = $('#emailTemplateSubject').val();
+                var name = $("#email-template-select option:selected").text();
+
+                while(content.search("'Yakout Linotype Light'") > 0){
+                    content = content.replace("'Yakout Linotype Light'","Yakout Linotype Light");
+                }
+                while(content.search("'Times New Roman'") > 0){
+                    content = content.replace("'Times New Roman'","Yakout Linotype Light");
+                }
+
+                while(content.search("'Calibri Light'") > 0){
+                    content = content.replace("'Calibri Light'","Calibri Light");
+                }
+
+                while(content.search("'Yakout Linotype'") > 0){
+                    content = content.replace("'Yakout Linotype'","Yakout Linotype");
+                }
+
+                while(content.search("'GE SS Two Light'") > 0){
+                    content = content.replace("'GE SS Two Light'","GE SS Two Light");
+                }
+
+                while(content.search("'Courier New'") > 0){
+                    content = content.replace("'Courier New'","Courier New");
+                }
+
+
+
+
+                var params = {
+                    id: $('#email-template-select').val(),
+                    content:content,
+                    emailTemplateSubject:emailTemplateSubject,
+                    name:name,
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+
+                var url = site['uri']['public'] + "/emails/templates/" + params.id;
+                $.ajax({
+                    type: "PUT",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    alert( _translate('template_updated') );
+                    location.reload();
+                }).fail(function (err) {
+                    console.log("error", err);
+                });
+            });
+
+
+        });
+
+    </script>
+{% endblock %}

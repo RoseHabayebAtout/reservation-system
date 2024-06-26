@@ -1,0 +1,24 @@
+{
+    "unit_id" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_USERNAME"
+            },
+            
+             "numeric" : {
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        }
+    },
+    
+    "img_id" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_PASSWORD"
+            },
+            "numeric" : {
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        }
+    }   
+}

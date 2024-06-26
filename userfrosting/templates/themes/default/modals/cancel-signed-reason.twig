@@ -1,0 +1,23 @@
+<div class="modal fade" id="cancelSignedreas" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            <h4 class="modal-title custom_align" id="Heading" style="font-size: 22px;">{{ translate('cancel_signed_reason_modal_title') }} </h4>
+        </div>
+        <div class="modal-body">
+
+            <h4 style='font-size: 21px; padding: 5px;' class="alert">{{ translate('cancel_signed_reason_modal_text') }}</h4>
+
+        </div>
+        <div class="form-group">
+
+            <textarea class="form-control cancelSignedReason reqBorder" id="cancelSignedReason"
+                      style="width:450px; margin-left:20px; height: 130px;" required></textarea>
+        </div>
+        <div class="modal-footer ">
+            <button type="button" class="btn btn-danger" id="sendSignedReason" disabled="disabled">{{ translate('confirm') }}</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+        </div>
+    </div>
+</div>

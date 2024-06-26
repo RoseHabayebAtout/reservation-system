@@ -1,0 +1,8 @@
+// Query 1
+ALTER TABLE `uf_unit` ADD `parking_number` VARCHAR(255) NULL AFTER `price_currency`, ADD `storage_number` VARCHAR(255) NULL AFTER `parking_number`;
+
+
+// Query 2
+
+INSERT INTO `contract_attributes` (`name`, `represent_name`, `type`, `data_type`) VALUES
+('unit_parking_number', 'Unit Parking Number', 'unit', 'text'), ('unit_storage_number', 'Unit Storage Number', 'unit', 'text')

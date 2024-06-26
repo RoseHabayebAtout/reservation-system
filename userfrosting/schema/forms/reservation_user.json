@@ -1,0 +1,19 @@
+{
+  
+
+    
+    "user_id" : {
+        "validators" : {
+            "integer" : {
+                "message" : "VALIDATE_INTEGER"
+            }
+        }
+    },    
+    "reservation_id" : {
+        "validators" : {
+            "integer" : {
+                "message" : "VALIDATE_ARRAY"
+            }
+        }
+    }
+}

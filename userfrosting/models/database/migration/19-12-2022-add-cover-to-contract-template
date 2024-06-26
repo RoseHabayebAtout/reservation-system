@@ -1,0 +1,1 @@
+ALTER TABLE `contracts_templates` ADD `cover` VARCHAR(255) NULL AFTER `footer`;

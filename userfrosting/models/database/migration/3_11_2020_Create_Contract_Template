@@ -1,0 +1,16 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+// contract template table 3/11/2020
+CREATE TABLE `contracts_templates` (
+ `id` int(10) NOT NULL AUTO_INCREMENT,
+ `content` text NOT NULL,
+ `user_id` int(10) unsigned NOT NULL,
+ `status` varchar(255) NOT NULL,
+ `created_at` date NOT NULL,
+ `templateName` varchar(255) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `user_contract_template_FK` (`user_id`),
+ CONSTRAINT `user_contract_template_FK` FOREIGN KEY (`user_id`) REFERENCES `uf_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8
+
+////////////////////////////////////////////////////////////////////////////////////////////////

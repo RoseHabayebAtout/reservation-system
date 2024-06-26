@@ -1,0 +1,5 @@
+ALTER TABLE `uf_reservation`
+ADD `reservation_email_note` TEXT NOT NULL COMMENT 'Reservation Note',
+ADD `user_did_action` TEXT NOT NULL COMMENT 'User Did Action',
+ADD `discount_details` TEXT NOT NULL COMMENT 'Discount Details',
+ADD `addition_details` TEXT NOT NULL COMMENT 'Addition Details';

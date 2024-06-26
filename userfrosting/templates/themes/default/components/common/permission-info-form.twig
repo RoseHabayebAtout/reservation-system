@@ -1,0 +1,68 @@
+<form name="group" method="post" action="{{form_action}}">
+    <div id="form-alerts">
+    </div>
+    <div class="row">
+        {% if 'code' not in fields.hidden %}
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Code</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-edit"></i></span>
+                        <input type="text" class="form-control" name="code" autocomplete="off" value="{{permission.code}}" placeholder="Please enter a code for the permission" {% if 'code' in fields.disabled %}disabled{% endif %}>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if 'name' not in fields.hidden %}
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Name</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+                        <input type="text" class="form-control" name="name" autocomplete="off" value="{{permission.name}}" placeholder="Please enter the name for the permission" {% if 'name' in fields.disabled %}disabled{% endif %}>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div><br>
+    <div class="row">
+        {% if "submit" not in buttons.hidden %}
+            <div class="col-xs-8 col-sm-4">
+                <div class="vert-pad">
+                    <button type="submit" class="btn btn-block btn-lg btn-success">
+                        {{submit_button}}
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        {% if "edit" not in buttons.hidden %}
+            <div class="col-xs-6 col-sm-3">
+                <div class="vert-pad">
+                    <button type="button" class="btn btn-block btn-md btn-primary js-group-edit" data-id="{{group.id}}" data-toggle="modal">
+                        <i class="fa fa-edit"></i> Edit
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        {% if "delete" not in buttons.hidden %}
+            <div class="col-xs-6 col-sm-3">
+                <div class="vert-pad">
+                    <button type="button" class="btn btn-block btn-md btn-danger js-group-delete" data-id="{{group.id}}" data-name="{{group.name}}" data-toggle="modal">
+                        <i class="fa fa-trash-o"></i> Delete
+                    </button>
+                </div>
+            </div>
+        {% endif %}
+        {% if "cancel" not in buttons.hidden %}
+            <div class="col-xs-4 col-sm-3 pull-right">
+                <div class="vert-pad">
+                    <button type="button" class="btn btn-block btn-lg btn-link" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</form>
+<script>
+    // Load the validator rules for this form
+    var validators = {{validators | raw}};
+</script>

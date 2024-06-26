@@ -1,0 +1,77 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% block content %}
+
+{% endblock %}
+{% block page_scripts %}
+
+
+    <script>
+
+        function printDiv() {
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+            newWin.document.write(
+                '<html>' +
+                '<head> <meta http-equiv="content-type" content="text/html;charset=UTF-8" />' +
+                '<style> ' +
+                '*{font-family: Yakout Linotype Light,sans-serif;\n' +
+                '    color: #44546a;}' +
+                'table.report-container {\n' +
+                '            page-break-after: always;\n' +
+                '        }\n' +
+                '\n' +
+                '        thead.report-header {\n' +
+                '            display: table-header-group;\n' +
+                '        }\n' +
+                '\n' +
+                '        tfoot.report-footer{\n' +
+                '            display: table-footer-group;\n' +
+                '        }' +
+                '@media print{ ' +
+                '.pagebreak{page-break-before: always;}' +
+                '}' +
+                '</style> </head>' +
+                '<body dir="rtl" style="counter-reset: page;" onload="window.print()"> <table class="report-container">\n' +
+                '    <thead class="report-header">\n' +
+                '        <tr>\n' +
+                '            <th class="report-header-cell">\n' +
+                '                <div class="header-info" >\n' +
+                {#'                    {{ header | raw }}' +#}
+                '                </div>\n' +
+                '            </th>\n' +
+                '        </tr>\n' +
+                '    </thead>\n' +
+                '\n' +
+                '    <tfoot class="report-footer">\n' +
+                '        <tr>\n' +
+                '            <td class="report-footer-cell">\n' +
+                '                <div class="footer-info">' +
+                {#'                                  {{ footer | raw }} ' +#}
+                '</div>\n' +
+                '            </td>\n' +
+                '        </tr>\n' +
+                '    </tfoot>\n' +
+                '\n' +
+                '    <tbody class="report-content">\n' +
+                '        <tr>\n' +
+                '            <td class="report-content-cell">\n' +
+                '                <div class="main">\n' +
+                '{{ data | raw }}'+
+                '                </div>\n' +
+                '            </td>\n' +
+                '        </tr>\n' +
+                '    </tbody>\n' +
+                '</table>\n </body></html>');
+            newWin.document.close();
+        }
+
+        $(document).ready(function () {
+
+            window.location.href = site['uri']['public']+ '/unit';
+            printDiv();
+        });
+
+    </script>
+{% endblock %}

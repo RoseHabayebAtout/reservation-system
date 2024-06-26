@@ -1,0 +1,1 @@
+ALTER TABLE `units_cash_receipts` ADD `customer_name` VARCHAR(255) NULL AFTER `note`, ADD `region` VARCHAR(255) NULL AFTER `customer_name`, ADD `phone_number` VARCHAR(255) NULL AFTER `region`, ADD `email_address` VARCHAR(255) NULL AFTER `phone_number`, ADD `customer_id` VARCHAR(255) NULL AFTER `email_address`;

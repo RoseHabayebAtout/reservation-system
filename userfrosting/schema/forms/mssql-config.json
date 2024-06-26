@@ -1,0 +1,30 @@
+{
+    "server" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_USERNAME"
+            }
+        }
+    },
+    "msdb" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_USERNAME"
+            }
+        }
+    },
+    "username" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_USERNAME"
+            }
+        }
+    },
+    "pass" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_PASSWORD"
+            }
+        }
+    }
+}

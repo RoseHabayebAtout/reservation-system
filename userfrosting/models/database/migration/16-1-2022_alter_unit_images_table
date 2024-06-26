@@ -1,0 +1,10 @@
+ALTER TABLE `uf_units_images`  ADD `filename` VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL  AFTER `img_id`,  ADD `filesize` INT(11) NULL  AFTER `filename`,  ADD `filepath` MEDIUMBLOB NULL  AFTER `filesize`;
+
+UPDATE uf_units_images unit
+INNER JOIN uf_uploadedfiles images
+ ON(unit.img_id = images.id)
+set unit.filename = images.filename,
+unit.filesize = images.filesize,
+unit.filepath = images.filepath
+
+ALTER TABLE `uf_units_images` CHANGE `filepath` `filepath` TEXT NULL DEFAULT NULL;

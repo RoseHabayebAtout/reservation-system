@@ -1,0 +1,817 @@
+<div class="modal fade modal-spc-wl edit-contract-modal rtl" id="contract-modal-1" data-backdrop="static"
+     data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header flex-parent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="myModalLabel">اتفاقيًة تعهد بيع وشراء وحدة سكنية</h3>
+            </div>
+            <div class="modal-body">
+                <form class="parent__scroallable">
+                    <input type="hidden" class="total-price">
+                    <input type="hidden" class="contract-date">
+                    <fieldset class="active">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cpurchaser1">والسيد/ة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <input type="text" name="cpurchaser1" id="cpurchaser1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/1#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidType1">نوع الوثيقة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <!--<input type="text" id="cidType1" class="form-control">-->
+                                    <select id="cidType1" class="form-control">
+                                        {% for i in documentTypes %}
+                                            {% if(i == "") %}
+                                                <option value="">-----------</option>
+                                            {% else %}
+                                                <option value="{{ i }}">{{ i }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        {#/2#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidNum1">رقم الوثيقة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" name="cidNum1" id="cidNum1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/3#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidProDate1">تاريخ الإصدار</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <div class='input-group date datepicker'>
+                                        <input type='text' class="form-control" id="cidProDate1"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {#/4#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidPlace1">مكان الإصدار</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cidPlace1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/5#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cregNo1">رقم تسجيل</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="number" id="cregNo1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/6#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidExpDate1">تاريخ الانتهاء</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <div class="input-group date datepicker">
+                                        <input type='text' class="form-control" id="cidExpDate1"/>
+                                        <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {#/7#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cregistered1">المسجلة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cregistered1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/8#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="ccity1">المدينة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="ccity1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/9#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="ccountry1">الدولة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="ccountry1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/10#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cregionName1">اسم المنطقة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cregionName1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/11#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cstreetName1">اسم الشارع</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cstreetName1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/12#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cworkPhone1">هاتف العمل</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cworkPhone1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/13#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="chomePhone1">هاتف المنزل</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="chomePhone1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/14#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cfaxNum1">فاكس</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="text" id="cfaxNum1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/15#}
+                        <div class="col-xs-12 col-md-6 pull-right clr">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cmobileNum1">الهاتف الخلوي</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="text" id="cmobileNum1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/16#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cmailBox1">صندوق البريد</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="text" id="cmailBox1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/17#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="ceMail1">بريد إلكتروني</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="email" id="ceMail1" class="form-control" >
+                                </div>
+                            </div>
+                        </div>
+                        {#/18#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cpostalCode1">الرمز البريدي</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="text" id="cpostalCode1" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/19#}
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    {#->>1<<-#}
+                    <fieldset>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cpurchaser22">والسيد/ة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <input type="text" id="cpurchaser22" value="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/1#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidType2">نوع الوثيقة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <!--<input type="text" id="cidType2" class="form-control">-->
+                                    <select id="cidType2" class="form-control">
+                                        {% for i in documentTypes %}
+                                            {% if(i == "") %}
+                                                <option value="">-----------</option>
+                                            {% else %}
+                                                <option value="{{ i }}">{{ i }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        {#/2#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidNum22">رقم الوثيقة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cidNum22" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/3#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidProDate22">تاريخ الإصدار</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <div class='input-group date datepicker'>
+                                        <input type='text' class="form-control" id="cidProDate22">
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {#/4#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidPlace22">مكان الإصدار</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cidPlace22" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/5#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cregNo2">رقم تسجيل</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="number" id="cregNo2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/6#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cidExpDate22">تاريخ الانتهاء</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <div class="input-group date datepicker">
+                                        <input type='text' class="form-control" id="cidExpDate22"/>
+                                        <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {#/7#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cregistered2">المسجلة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cregistered2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/8#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="ccity">المدينة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="ccity" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/10#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="ccountry">الدولة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="ccountry" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/11#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cregionName22">اسم المنطقة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cregionName22" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/12#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cstreetName22">اسم الشارع</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cstreetName22" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/13#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cworkPhone22">هاتف العمل</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="cworkPhone22" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/14#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="chomePhone22">هاتف المنزل</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pull-right">
+                                    <input type="text" id="chomePhone22" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/15#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cfaxNum">فاكس</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="text" id="cfaxNum" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/16#}
+                        <div class="col-xs-12 col-md-6 pull-right clr">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cmobileNum22">الهاتف الخلوي</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="text" id="cmobileNum22" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/17#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cmailBox22">صندوق البريد</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="text" id="cmailBox22" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/18#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="ceMail">بريد إلكتروني</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="email" id="ceMail" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {#/19#}
+                        <div class="col-xs-12 col-md-6 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-3 pull-right">
+                                    <label for="cpostalCode22">الرمز البريدي</label>
+                                </div>
+                                <div class="col-xs-12 col-md-9 pll-right">
+                                    <input type="text" id="cpostalCode22" class="form-control">
+                                </div>
+                            </div>
+                            {#/22#}
+                        </div>
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    {#->>2<<-#}
+                    <fieldset>
+                        <h3 class="text-center special-green">المقدمة</h3>
+                        <div class="col-xs-12">
+                            <div class="form-group cform-group">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cannexes">عدد الملاحق</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <input type="number" id="cannexes" value="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-center special-green">رابعاً: إقرارات وتعهدات والتزامات الفريق الأول</h3>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <label for="creleaseDate">يكون التاريخ المتوقع والموعد المقدر للانتهاء من بناء المبيع
+                                    و/أو تشييده و/أو تشطيبه، لتسليمه للفريق الثاني:
+                                </label>
+                                <div class='input-group width-100'>
+                                    <input type='text' class="form-control" id="creleaseDate"/>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="text-center special-green">خامساً: إقرارات وتعهدات والتزامات الفريق الثاني</h3>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="cdamageFine">يلتزم الفريق الثاني بفتح صفقة عقارية لدى دائرة الأراضي المختصة
+                                    وذلك خلال مدة أقصاها (15) يوم من قيام الفريق الأول بإبلاغه بأن الوحدة السكنية جاهزة
+                                    للاستلام وعند تسديد كامل ثمن الشقة، أما في حال عدم قيام الفريق الثاني بفتح صفقة خلال
+                                    تلك المدة، فيحق للفريق الأول حينها
+                                    <span class="text-start">إلغاء الاتفاقية وفرض غرامة عطل وضرر على الفريق الثاني تقدر بـ</span>
+                                    <div class="dIcon-specific">
+                                        <input type="text" id="cdamageFine" class="form-control margin-1"
+                                               data-currency="$">
+                                        <i class="fa fa-usd"></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    {#->>3<<-#}
+                    <fieldset>
+                        <div class="form-inline">
+                            <div class="col-xs-12">
+                                <label for="cdelayPeriod">
+                                    من المتفق عليه بين الفريقين بأنه وفي حال اخلال الفريق الثاني بأي من التزاماته
+                                    المقررة بموجب هذه الإتفاقية و/أو تخلفه عن سداد أية دفعة أو قسط من دفعات أو أقساط
+                                    المبيع لمدة تزيد عن
+                                    <input type="text" id="cdelayPeriod" class="form-control margin-1 width-15"> من
+                                    تاريخ استحقاقها، فمن حق الفريق الأول فسخ هذه الإتفاقية واعتبار نفسه في حل من
+                                    التزاماته بموجبها وذلك دون الحاجة الى اشعار و/أو انذار الفريق الثاني، مع حق الفريق
+                                    الأول بالحتفاظ بالدفعة الأولى )العَربون( التي دفعها الفريق الثاني له، والمطالبة بأية
+                                    مبالغ أخرى كتعويض عن العطل و/أو الضرر و/أو الخسارة و/أو فوات الربح و/أو المصاريف
+                                    التي تكبدها من أي نوع وتحملها بهذا الخصوص و/أو الزام الفريق الثاني بدفع مبلغ
+                                    <div>
+                                        <input type="text" id="cpenaltyClause" class="form-control margin-1 width-15"
+                                               data-currency="$">
+                                        <i class="fa fa-usd"></i>
+                                    </div>
+                                    دولار أمريكي فقط كشرط جزائي، ويعتبر توقيع الفريق الثاني على هذه الإتفاقية اقراراً
+                                    منه بذلك.
+                                </label>
+                            </div>
+                        </div>
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    {#->>4<<-#}
+                    <fieldset>
+                        <h3 class="text-center special-green">ملحق رقم (3): سند إقرار وتعهد</h3> {# اسم المستخدم #}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="cpurchaser11">أنا الموقع امضائي </label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="cpurchaser11" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        {# رقم الهوية #}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="csystemUserIDNo">رقم الهوية</label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="csystemUserIDNo" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        {# المفوض بالتوقيع #}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="ccompanyName">المفوض بالتوقيع عن شركة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="ccompanyName" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {# رقم تسجيل الشركة #}
+                        <div class="col-xs-12 ">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="ccompanyNum">رقم تسجيل</label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="ccompanyNum" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {# لدى #}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="ccompanyFor">لدى</label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="ccompanyFor" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 specific-PM">
+                            <div class="form-group">
+                                <label class="display-block">
+                                    اختر البند "ب" لطباعته في العقد:
+                                </label>
+                                <label><input type="radio" name="optradio" value="1" checked="checked">&nbsp;بأن التزم
+                                    بالامتثال لجميع الأحكام المنصوص عليها في النظام الداخلي الخاص باتحاد ملاك الوحدات
+                                    السكنية في حي<input type="text" id="chaiName"
+                                                        class="form-control margin-1 width-15">والبالغة مساحته<input
+                                            type="text" id="chaiArea" class="form-control margin-1 width-15">متراً
+                                    مربعاُ علم (”اتحاد الملاك“) والمرفق بهذا الإقرار/ التعهد وأية تعديلات تطرا عليه،
+                                    علماً بأنني اطلعت على أحكام عقد التأسيس والنظام الداخلي لاتحاد الملاك اطلاعاً كافياً
+                                    وتم إفهامي بما ورد فيهما.</label>
+                                <label><input type="radio" name="optradio" value="2">&nbsp;بأن التزم بالامتثال لجميع
+                                    الأحكام المنصوص عليها في النظام الداخلي الخاص باتحاد ملاك رقم<input type="text"
+                                                                                                        id="cownersUnionNum"
+                                                                                                        class="form-control margin-1 width-15">الصادر
+                                    عن كاتب عدل محكمة بلدية رام الله بتاريخ<input type="text" id="cownersUnionProDate"
+                                                                                  class="form-control margin-1 width-15">للوحدات
+                                    السكنية في حي <input type="text" id="chaiName2"
+                                                         class="form-control margin-1 width-15">والبالغة مساحته<input
+                                            type="text" id="chaiArea2" value="<%-haiArea%>"
+                                            class="form-control margin-1 width-15">متراً مربعاً.</label>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 specific-PM">
+                            <div class="form-group">
+                                <label for="cchecksNum">
+                                    أقر بأنني على علم تام بأن رسوم الاشتاك السنوي المفروضة من قبل اتحاد الملاك لادارة
+                                    الأجزاء المشتكة في العقار والمحافظة عليها، تدفع مقدما
+                                    عن كل سنة، وعليه فإنني أتعهد بتحرير شيك/شيكات عدد
+                                    <input type="text" id="cchecksNum" class="form-control margin-1 width-15">
+                                    بقيمة رسوم ا لاشتاك الشهري وبمواعيد استحقاقها وذلك عند استلامي للوحدة
+                                    السكنية، وفي حال كانت الرسوم غير مقرة بعد فإنني أتعهد بتحرير شيك/شيكات خالية من
+                                    القيمة وفي هذه الحالة أخول لجنة اتحاد الملاك
+                                    بتعبئة تلك القيمة بعد اقرار الرسوم السنوية، ومن المفهوم لدي بأنه لا يحق لي استلام
+                                    الوحدة السكنية دون تحرير الشيكات المذكورة وتقديمها
+                                    لصالح لجنة اتحاد الملاك
+                                </label>
+                            </div>
+                        </div>
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    {#->>5<<-#}
+                    <fieldset>
+                        <h3 class="text-center special-green">ملحق رقم (4): آلية دفع ثمن المبيع (بالدولار الأمريكي)</h3>
+                        <div class="form-inline">
+                            <div class="col-xs-12">
+                                <label for="carabon">
+                                    يدفع الفريق الثاني الدفعة الأولى )العربون( نقداً للفريق الأول عند توقيع هذه
+                                    الاتفاقية والبالغ قدرها
+                                    <div>
+                                        <input type="text" id="carabon" class="form-control margin-1 width-15"
+                                               data-currency="$">
+                                        <i class="fa fa-usd"></i>
+                                    </div>
+                                    فقط، وفي جميع الأحوال لا يجوز للفريق الثاني استرداد هذه الدفعة في حال عَدل عن الشراء
+                                    لأي سبب كان و/أو في حال فسخ الاتفاقية من قبل الفريق الأول وفقاً للبند الثاني عشر
+                                    الوارد في الاتفاقية.
+                                </label>
+                            </div>
+                        </div>
+                        {#/1#}
+                        <div class="form-inline">
+                            <div class="col-xs-12">
+                                <label for="cremainingAmountDelay">يدفع الفريق الثاني للفريق الأول المبلغ المتبقي من
+                                    الثمن، خلال
+                                    <input type="text" id="cremainingAmountDelay"
+                                           class="form-control margin-1 width-15">من تاريخ توقيع الاتفاقية ووفقاً للآلية
+                                    الواردة أدناه، وفي جميع الأحوال لا يجوز للفريق الثاني استرداد هذه المبالغ في حال
+                                    عَدل عن الشراء لأي سبب كان و/أو في حال فسخ الاتفاقية من قبل الفريق الأول وفقاً للبند
+                                    الثاني عشر الوارد في الاتفاقية.
+                                </label>
+                            </div>
+                        </div>
+                        {#/2#}
+                        <div class="form-group">
+                            <label class="col-xs-8 col-sm-9 pull-right">
+                                <input type="checkbox" id="caddPart6">&nbsp;&nbsp; إضافة بند رقم 6 من ملحق رقم (4)
+                                <br>
+                            </label>
+                        </div>
+                        {#/3#}
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-12 pull-right">
+                                <input type="checkbox" id="caddSafqa" onclick="caddSafqaClick()"/>&nbsp;&nbsp; اضافة
+                                صفقة للأتفاقية (تعتبر هذه الإتفاقية هي الإتفاقية السارية بين الفريقين والتي تحكم طبيعة
+                                العلاقة بينهم، بحيث تلغي الإتفاقية الموقعة سابقاً فيما بين الفريقين)
+                                <br>
+                            </label>
+                            <div class='input-group date datepicker contractsDate hidden' id="csafqasDate">
+                                <input type='text' class="form-control" id="csafqaDate"/>
+                                <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                          </span>
+                            </div>
+                        </div>
+                        <div class="form-inline display-none" id="cpenefit">
+                            <div class="col-xs-12">
+                                <label for="cpenefitCompensation">
+                                    في حال تم فسخ و/أو انهاء الاتفاقية لأي سبب من الأسباب الواردة فيها، فإن الدفعات التي
+                                    دفعها الفريق الثاني للفريق الأول طيلة ف ترة اشغاله للوحدة السكنية تعتبر كبدل إستغلال
+                                    و/أو إنتفاع للوحدة السكنية ولا تكون مستردة بطبيعة الحال وتحت أي ظرف من الظروف،
+                                    ويلتزم الفريق الثاني بإعادة الوحدة السكنية خالية من الشواغل والشاغلين وبالحالة التي
+                                    استلمها بها، وذلك خلال أسبوع كحد أقصى من طلب الفريق الأول ذلك، وفي حال عدم إعادة
+                                    الفريق الثاني للوحدة السكنية وتسليمها خالية من الشواغل والشاغلين وبالحالة التي
+                                    استلمها فإنه والحالة تلك يلتزم بتسديد مبلغ وقدره
+                                    <input type="text" id="cpenefitCompensation" class="form-control margin-1 width-15">
+                                    دولار أمريكي وذلك بدل إستغلال و/أو إنتفاع عن كل شهر يقضيه في الوحدة السكنية وحتى
+                                    تاريخ تسليم الوحدة السكنية للفريق الأول، إضافة الى المطالبة بأية تعويضات عن أي ضرر
+                                    أو خراب أو عطل للوحدة السكنية، ودون الاجحاف بحق الفريق الأول بالمطالبة بالشروط
+                                    الجزائية الواردة في ا لاتفاقية خاصة أحكام البند الثاني عشر الوارد في الاتفاقية.
+                                </label>
+                            </div>
+                        </div>
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    {#->>6<<-#}
+                    <fieldset>
+                        <div class="col-xs-12 min-height-400">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-md-2 pull-right">
+                                        <label for="cnumOfPayments">عدد الدفعات </label>
+                                    </div>
+                                    <div class="col-xs-12 col-md-10 pull-right">
+                                        <input type="number" min="1" max="32" id="cnumOfPayments"
+                                               class="form-control numOfPayments" name="numOfPayments">
+                                        <button type="button" class="generate btn btn-primary edit"
+                                                onclick="generate('edit');">انشاء
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <table id="cpaymentTable" class="table display table-striped table-bordered" cellspacing="0"
+                                   width="100%">
+                                <thead class="btn-primary">
+                                <tr>
+                                    <th>
+                                        <h4 class="text-center">الدفعة</h4>
+                                    </th>
+                                    <th>
+                                        <h4 class="text-center">مبلغ الدفعة</h4>
+                                    </th>
+                                    <th>
+                                        <h4 class="text-center">تاريخ الدفعة</h4>
+                                    </th>
+                                    <th>
+                                        <h4 class="text-center">خيارات</h4>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {# <tr>
+                                  <td>
+                                    <input type="text"  id="cpayment" class="form-control" readonly="" />
+                                  </td>
+                                  <td>
+                                    <input type="number" id="cpaymentAmount" class="form-control" />
+                                  </td>
+                                  <td>
+                                    <div class='input-group date datepicker'>
+                                      <input type='text' class="form-control" id="cpaymentDate" />
+                                      <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <button type="button" class="btn btn-primary" id="c1heckNewRow" onclick="addRowEditModal()" ><strong>إضافة دفعة</strong></button>
+                                  </td>
+                                </tr> #}
+                                </tbody>
+                            </table>
+                            <span id="cerror_msg" style="color:red;"></span>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="group" role="group"></div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

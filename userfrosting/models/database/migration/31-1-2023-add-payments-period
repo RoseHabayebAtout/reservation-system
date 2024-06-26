@@ -1,0 +1,4 @@
+CREATE TABLE `unit_payment_period` ( `id` INT NOT NULL AUTO_INCREMENT , `unit_id` INT(10) NOT NULL , `period` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+ALTER TABLE `unit_payment_period` ADD CONSTRAINT `unit_id_FK_payment_period` FOREIGN KEY (`unit_id`) REFERENCES `uf_unit`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

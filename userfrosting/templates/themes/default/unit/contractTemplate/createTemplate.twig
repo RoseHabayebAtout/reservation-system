@@ -1,0 +1,563 @@
+{% block page_scripts %}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <style>
+        #custom-tooltip {
+            padding: 5px 12px;
+            background-color: #000000df;
+            border-radius: 4px;
+            color: #fff;
+        }
+        #function-select {
+            font-family: 'FontAwesome', 'Second Font name'
+        }
+        h3 {
+            text-align: center;
+        }
+    </style>
+
+    <script src="https://cdn.tiny.cloud/1/8rz0j0l1scuawjl0oxjw7ci75u1uf6p49q096jd261btm913/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <script src="{{site.uri.fonts}}/Yakout-Linotype-Light.ttf"></script>
+    <script>
+
+
+        tinymce.init({
+            selector: 'textarea',
+            plugins: ' pagebreak, image code',
+            toolbar: ' pagebreak, image, undo redo | link image | code',
+            toolbar_mode: 'floating',
+            tinycomments_mode: 'embedded',
+            tinycomments_author: 'Author name',
+            /* enable title field in the Image dialog*/
+            image_title: true,
+            /* enable automatic uploads of images represented by blob or data URIs*/
+            automatic_uploads: true,
+            /*
+              URL of our upload handler (for more details check: https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_url)
+              images_upload_url: 'postAcceptor.php',
+              here we add custom filepicker only to Image dialog
+            */
+            file_picker_types: 'image',
+            /* and here's our custom image picker*/
+            file_picker_callback: function (cb, value, meta) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+
+                /*
+                  Note: In modern browsers input[type="file"] is functional without
+                  even adding it to the DOM, but that might not be the case in some older
+                  or quirky browsers like IE, so you might want to add it to the DOM
+                  just in case, and visually hide it. And do not forget do remove it
+                  once you do not need it anymore.
+                */
+
+                input.onchange = function () {
+                    var file = this.files[0];
+
+                    var reader = new FileReader();
+                    reader.onload = function () {
+                        /*
+                          Note: Now we need to register the blob in TinyMCEs image blob
+                          registry. In the next release this part hopefully won't be
+                          necessary, as we are looking to handle it internally.
+                        */
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                        var base64 = reader.result.split(',')[1];
+                        var blobInfo = blobCache.create(id, file, base64);
+                        blobCache.add(blobInfo);
+
+                        /* call the callback and populate the Title field with the file name */
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+                    reader.readAsDataURL(file);
+                };
+
+                input.click();
+            },
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        });
+
+
+        var csrf_token = $("meta[name=csrf_token]").attr("content");
+
+        function copyToClipboard(element) {
+            var attribute = $( "#"+ element).val();
+            var attributeType = $( "#"+ element +" option:selected" ).attr('data-type');
+
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val('sys_var_'+$( "#"+ element ).val().trim()+'_type_'+attributeType).select();
+            //$temp.St
+            document.execCommand("copy");
+            $temp.remove();
+            document.getElementById("custom-tooltip").style.display = "inline";
+            setTimeout( function() {
+                document.getElementById("custom-tooltip").style.display = "none";
+            }, 1000);
+        }
+
+
+        $('#function-select').on('change', function () {
+            var func = $(this).val();
+
+            if ( func === null || func === 0) {
+                alert(_translate('choose_fun_msg'));
+                return;
+            }
+
+
+            var $temp = $("<input>");
+            $("body").append($temp);
+            if ($("#function-select").val().trim() == "selected_currency" || $("#function-select").val().trim() == "selected_currency_symbol") {
+                $temp.val('sys_func_'+ $("#function-select").val().trim() + '(sys_var_reservation_currency_type_text )!').select();
+            } else {
+                $temp.val('sys_func_'+ $("#function-select").val().trim() + '()!').select();
+            }
+            document.execCommand("copy");
+            $temp.remove();
+            document.getElementById("custom-tooltip-func").style.visibility = "visible";
+            setTimeout( function() {
+                document.getElementById("custom-tooltip-func").style.visibility = "hidden";
+            }, 1000);
+        });
+
+
+        $(document).ready(function(){
+            loadAttribute();
+            $("#save").on("click",async function(e){
+
+                var header = tinymce.get('template_header').getContent();
+                var content = tinymce.get('template_content').getContent();
+                var footer = tinymce.get('template_footer').getContent();
+                var templateName = $('#templateName').val();
+                var cover = document.getElementById('file').files[0] || null;
+
+                if (templateName.trim() == "") {
+                    alert(_translate('template_name_empty'));
+                    return;
+                }
+
+                header = filtrationOfContent(header);
+                content = filtrationOfContent(content);
+                footer = filtrationOfContent(footer);
+
+                var coverName = null;
+                if (cover != null) {
+                    var name = document.getElementById("file").files[0].name;
+                    var ext = name.split('.').pop().toLowerCase();
+                    var f = document.getElementById("file").files[0];
+                    var fsize = f.size||f.fileSize;
+
+                    if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1 || fsize > 2000000)
+                    {
+                        alert('cant save cover')
+                        return false;
+                    }
+
+                    coverName = document.getElementById('file').files[0].name;
+
+                }
+
+                var params = new FormData();
+                params.append('csrf_token',encodeURIComponent(csrf_token));
+                params.append('header', header);
+                params.append('content', content);
+                params.append('footer', footer);
+                params.append('templateName', templateName);
+                params.append('coverName', coverName);
+                params.append('cover', cover);
+
+
+
+
+                var url = site['uri']['public'] + "/contract/create/";
+                $.ajax({
+                    url: url,
+                    async: true,
+                    method: 'post',
+                    data: params,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    enctype: 'multipart/form-data',
+                }).done(function (data) {
+                    alert("Template Created Successfully");
+                }).fail(function (err) {
+                    console.log("error", err);
+                });
+            });
+
+            $('#contract_type').on('change', function () {
+               var val = $(this).val();
+
+                switch (val) {
+                   case 'purchase_contract':
+
+                       $('#templateName').val('')
+                       $('#templateName').prop("readonly", false);
+                       break;
+
+                   case 'appendix_storage':
+
+                       $('#templateName').val('Appendix/Storage');
+                       $('#templateName').prop("readonly", true);
+                       break;
+
+                   case 'appendix_parking':
+
+                       $('#templateName').val('Appendix/Parking')
+                       $('#templateName').prop("readonly", true);
+                       break;
+
+                   case 'reservation_receipt':
+
+                       $('#templateName').val('Reservation Receipt')
+                       $('#templateName').prop("readonly", true);
+                       break;
+
+                   default:
+
+                       $('#templateName').val('')
+                       $('#templateName').prop("readonly", false);
+                       break;
+                }
+
+               if (val != "purchase_contract") {
+                   var templateName = $('#templateName').val();
+                   var url = site['uri']['public'] + "/contract/templates/list/";
+                   $.ajax({
+                       type: "get",
+                       url: url,
+                       data: {create: true},
+                       async: true
+                   }).done(function (data) {
+                        var data = JSON.parse(data);
+                        var flag = false;
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].templateName == templateName) {
+                                tinyMCE.get('template_content').setContent(data[i].content)
+                                tinyMCE.get('template_header').setContent(data[i].header || "")
+                                tinyMCE.get('template_footer').setContent(data[i].footer || "")
+                                flag = true;
+                            }
+                        }
+
+                        if (!flag) {
+                            tinyMCE.get('template_content').setContent('')
+                        }
+                   }).fail(function (err) {
+                       console.log("error", err);
+                   });
+               } else {
+                   tinyMCE.get('template_content').setContent('')
+               }
+
+               loadAttribute();
+            });
+        });
+
+        function loadAttribute() {
+            var contract_type = $('#contract_type').val();
+            var arr = [];
+            switch (contract_type) {
+                case 'purchase_contract':
+                    arr = ["purchase_contract", "reservation_receipt", "appendix_parking","appendix_storage", "unit", "Appendix/Payment"]
+                    break;
+
+                case 'appendix_storage':
+                    arr = ["appendix_storage", "reservation_receipt", "unit"]
+                    break;
+                case 'appendix_parking':
+                    arr = ["appendix_parking", "reservation_receipt", "unit"]
+                    break;
+                case 'reservation_receipt':
+                    arr = ["reservation_receipt", "unit"]
+                    break;
+
+                default:
+                    arr = []
+                    break;
+            }
+
+            $.ajax({
+                type: "get",
+                url: site['uri']['public'] + "/contract/templates/attributes/",
+                data: {contract_type : arr},
+            }).done(function (data) {
+                console.log(data)
+                $('#attribute-select').empty();
+                $('#attribute-select').append('<option disabled selected value="0"> -- {{ translate('select_attribute') }} -- </option>');
+                // common attribute
+                $('#attribute-select').append('<option data-type="number" value="contract_count"> Contract Count </option>');
+
+
+
+                var result = JSON.parse(data);
+                if (result.length > 0) {
+                    for (var i =0; i<result.length; i++) {
+                        $('#attribute-select').append('<option data-type="'+ result[i].data_type +'" value="'+ result[i].name +'">'+ result[i].represent_name +'</option>');
+                    }
+
+
+                }
+            }).fail(function (err) {
+                console.log("error", err);
+            });
+        }
+
+        function replaceAll(allString, replaceMatch, replaceWith) {
+            let index = allString.indexOf(replaceMatch);
+            while(index != -1) {
+                let newClassName = allString.substring(0, index);
+                newClassName += replaceWith;
+                newClassName += allString.substring(index + replaceMatch.length, allString.length);
+                allString = newClassName;
+                index = allString.indexOf(replaceMatch);
+            }
+
+            return allString;
+        }
+
+        function clearFunction(content) {
+            const regexp = new RegExp(/sys_func[^!]+/g);
+            const str = content;
+            let match = str.match(regexp);
+
+            for (var i=0; (match != null && i<match.length); i++) {
+                var oldMatch = match[i];
+                var newMatch = removeTags(oldMatch);
+
+                newMatch = splitOperation(newMatch);
+
+                content = content.replace(oldMatch, ' '+newMatch);
+            }
+
+            return content;
+        }
+
+        function removeTags(str) {
+            if ((str===null) || (str===''))
+                return false;
+            else
+                str = str.toString();
+
+            // Regular expression to identify HTML tags in
+            // the input string. Replacing the identified
+            // HTML tag with a null string.
+            return str.replace( /(<([^>]+)>)/ig, '');
+        }
+
+        function splitOperation(str) {
+            var res = "";
+            for(var i=0;i<str.length;i++) {
+                if(str.charAt(i) == "+") {
+                    res += " + "
+                } else if(str.charAt(i) == "-") {
+                    res += " - "
+                }
+                else if(str.charAt(i) == "*") {
+                    res += " * "
+                }
+                else if(str.charAt(i) == "/") {
+                    res += " / "
+                } else if(str.charAt(i) == ")") {
+                    res += " )"
+                // } else if(str.charAt(i) == "(") {
+                //     res += "( "
+                } else {
+                    res += str.charAt(i);
+                }
+            }
+
+            return res.replace(/\s\s+/g, ' ');
+        }
+
+        function filtrationOfContent(content) {
+
+            content =  replaceAll(content, "'", "");
+
+            while(content.search("]<") > 0){
+                content = content.replace("]<","] <");
+            }
+            while(content.search("]&") > 0){
+                content = content.replace("]&","] &");
+            }
+
+            while(content.search("type_text<") > 0){
+                content = content.replace("type_text<","type_text <");
+            }
+            while(content.search("type_text&") > 0){
+                content = content.replace("type_text&","type_text &");
+            }
+
+            while(content.search("type_number<") > 0){
+                content = content.replace("type_number<","type_number <");
+            }
+            while(content.search("type_number&") > 0){
+                content = content.replace("type_number&","type_number &");
+            }
+
+            while(content.search("type_date<") > 0){
+                content = content.replace("type_date<","type_date <");
+            }
+            while(content.search("type_date&") > 0){
+                content = content.replace("type_date&","type_date &");
+            }
+
+            while(content.search("type_textarea<") > 0){
+                content = content.replace("type_textarea<","type_textarea <");
+            }
+            while(content.search("type_textarea&") > 0){
+                content = content.replace("type_textarea&","type_textarea &");
+            }
+
+            while(content.search("<!-- pagebreak -->") > 0){
+                content = content.replace("<!-- pagebreak -->",'<p class="pagebreak"></p>');
+            }
+
+            content = clearFunction(content);
+
+
+            return content;
+        }
+
+        const toBase64 = file => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+
+
+    </script>
+{% endblock %}
+
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "user" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Users | " ~ target_user.user_name,
+        "description" : "User information page for " ~ target_user.user_name
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <h1 class="text-center" style="color: #92d050">{{ translate('prepare_the_template') }}</h1>
+    <div class="row form-group">
+        <span class="col-sm-4">
+            <label class="col-sm-8">{{ translate('template_type') }}:</label>
+            <select class="form-control" id="contract_type">
+                <option value="purchase_contract">{{ translate('purchase_contract') }}</option>
+                <option value="appendix_storage">{{ translate('appendix_storage') }}</option>
+                <option value="appendix_parking">{{ translate('appendix_parking') }}</option>
+                <option value="reservation_receipt">{{ translate('reservation_receipt') }}</option>
+            </select>
+        </span>
+
+        <span class="col-sm-4">
+            <label class="col-sm-8">{{ translate('template_name') }}:</label>
+            <input class="form-control" type="text" name="templateName" id="templateName" required>
+        </span>
+    </div>
+    <div class="row form-group">
+        <span class="col-sm-4">
+            <select class="form-control col-sm-6" id="attribute-select">
+                <option disabled selected value="0">-- {{ translate('select_attribute') }} --</option>
+                <!-- common attribute -->
+{#                <option value="contract_count"> Contract Count </option>#}
+{#                {% for column in columns %}#}
+{#                        <option value="{{column.name}}">{{column.represent_name}}</option>#}
+{#                {% endfor %}#}
+            </select>
+        </span>
+
+        <span class="button-tooltip-container">
+            <button class="btn btn-default" onclick="copyToClipboard('attribute-select')">{{ translate('copy') }}</button>
+            <span id="custom-tooltip" style="display: none">{{ translate('copied') }}!</span>
+        </span>
+
+        <span class="col-sm-2 pull-right">
+
+            <select class="form-control col-sm-3" id="function-select">
+                <option disabled selected value="0"> &#xf013; {{ translate('select_function') }}</option>
+
+                <option value="number_to_alpha"> &#xf0c5; {{ translate('number_to_alpha') }}</option>
+                <option value="current_date"> &#xf0c5; {{ translate('current_date') }}</option>
+                <option value="selected_currency"> &#xf0c5; {{ translate('selected_currency') }}</option>
+                <option value="selected_currency_symbol"> &#xf0c5; {{ translate('selected_currency_symbol') }}</option>
+                <option value="cal"> &#xf0c5; {{ translate('cal') }}</option>
+                <option value="payments"> &#xf0c5; {{ translate('payments') }}</option>
+                <option value="payments2"> Payments2</option>
+                <option value="parking_payment"> &#xf0c5; {{ translate('parking payment') }}</option>
+                <option value="storage_payment"> &#xf0c5; {{ translate('storage payment') }}</option>
+            </select>
+            <br/>
+            <label id="custom-tooltip-func" style="visibility: hidden">
+                {{ translate('copied') }}!
+            </label>
+
+        </span>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-3">
+            <label for="images">select cover page</label>
+            <input type="file"
+                   name="file"
+                   id="file" class="form-control"
+                   style="padding: 2px;"
+                   accept="image/*">
+        </div>
+
+    </div>
+
+    <div class="row" >
+        <h3>Header</h3>
+        <div class="col-lg-12">
+            <textarea id="template_header" style="height: 400px; overflow-y: auto">
+
+             </textarea>
+        </div>
+    </div>
+
+    <div class="row" >
+        <h3>Content</h3>
+
+        <div class="col-lg-12">
+            <textarea id="template_content" style="height: 400px; overflow-y: auto">
+
+             </textarea>
+        </div>
+    </div>
+
+    <div class="row" >
+        <h3>Footer</h3>
+
+        <div class="col-lg-12">
+            <textarea id="template_footer" style="height: 400px; overflow-y: auto">
+
+             </textarea>
+        </div>
+    </div>
+    <div>
+        <!-- /.col-lg-6 -->
+        <div class="row " >
+            <button class="btn btn-primary pull-right" id="save" style="margin: 25px;">{{ translate('save') }}</button>
+        </div>
+    </div>
+
+    <!-- /.row -->
+{% endblock %}
+
+

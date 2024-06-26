@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('fonts/glyphicons-halflings-regular.woff') format('woff'), url('fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+@font-face {
+    font-family: 'Yakout Linotype Light';
+    src: url('../fonts/yakout-linotype-light.ttf');
+    font-weight: 600;
+    font-size:50px;
+}
+
+@font-face {
+    font-family: 'GE SS Two Light';
+    src: url('../fonts/GE_SS_Two_Light.otf');
+    font-weight: 300;
+    font-size:36px;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'starcraft';
+    src:url('fonts/font-starcraft.eot?h9vi58');
+    src:url('fonts/font-starcraft.eot?#iefixh9vi58') format('embedded-opentype'),
+    url('fonts/font-starcraft.woff?h9vi58') format('woff'),
+    url('fonts/font-starcraft.ttf?h9vi58') format('truetype'),
+    url('fonts/font-starcraft.svg?h9vi58#starcraft') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Bree Serif';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Bree Serif'), local('BreeSerif-Regular'), url('../fonts/0daoUMW28nkWOnFz2G4AAiEAvth_LlrfE80CYdSH47w.woff2') format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+    font-family: 'Signika Negative Regular';
+    src: url('../fonts/Signika-Negative-Regular.ttf');
+    font-weight: 300;
+    font-size: 46px !important;
+    font-style: normal;
+}
+*{
+    font-family: 'Signika Negative Regular', serif;
+}

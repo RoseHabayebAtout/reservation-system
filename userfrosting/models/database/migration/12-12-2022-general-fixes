@@ -1,0 +1,1 @@
+UPDATE `contract_attributes` SET `data_type` = 'text' WHERE `contract_attributes`.`name` = 'releaseDate'

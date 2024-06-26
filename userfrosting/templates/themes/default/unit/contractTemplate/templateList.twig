@@ -1,0 +1,124 @@
+
+
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "user" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" type="text/css">
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Template " ~ target_user.user_name,
+        "description" : "Teplate List " ~ target_user.user_name
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="row is-flex">
+        <div class="col-xs-12 col-lg-12 text-center well">
+            <table id="templates" class="cell-border" >
+                <thead style="text-align: center">
+                    <th>{{ translate('template_name') }}</th>
+                    <th>{{ translate('status') }}</th>
+                    <th>{{ translate('created_at') }}</th>
+                    <th>{{ translate('action') }}</th>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div><!-- end of row -->
+
+
+
+    <!-- /.row -->
+{% endblock %}
+{% block page_scripts %}
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $('#templates').DataTable({
+                "bSort": true,
+                'ajax': {
+                    "type": "get",
+                    "url": site['uri']['public'] + '/contract/templates/list',
+                    "dataSrc": function (json) {
+                        return json;
+                    }
+                },
+                "columns": [
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<tr style="border-bottom: 1px solid lightgrey">' +
+                                '<td>' + row.templateName + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.status + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.created_at + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' +
+                                '<div style="text-align: center"> ' +
+                                '<button data-id="'+ row.id +'" '+
+                                'class="btn btn-info edit-template"> Edit'+
+                                '</button>'+
+                                ' '+
+                                '<button data-id="'+ row.id +'" class="btn btn-danger delete-template"> Delete'+
+                                '</button>' +
+                                '</div>'+
+                                '</td>'+
+                                '</tr>';
+                        }
+                    }
+                ]
+
+            });
+
+            $('#templates').on('click', 'tbody .delete-template', function () {
+                var row = table.row($(this).closest('tr'));
+                // var data_row = row.data();
+                var params = {
+                    id:  $(this).attr('data-id'),
+                    status:  'DELETED',
+                };
+
+                $.ajax({
+                    url: site['uri']['public'] + "/contract/template/"+ params.id +"/change/status",
+                    type:"get",
+                    data : params,
+                    success: function(result){
+                        row.remove().draw();
+                        alert( _translate('delete_template_msg') );
+
+                    }, error : function (err) {
+                        alert( _translate('error_msg') );
+                    }
+                });
+            });
+
+            $('#templates').on('click', 'tbody .edit-template', function () {
+                var params = {
+                    id:  $(this).attr('data-id'),
+                };
+                window.location = site['uri']['public'] + '/contract/get/' + params.id;
+            });
+        })
+    </script>
+
+{% endblock %}

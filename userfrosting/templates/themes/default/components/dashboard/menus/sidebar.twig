@@ -1,0 +1,219 @@
+
+<style>
+    .sidebar-nav.navbar-collapse{
+       font-size: 14px;
+   }
+</style>
+
+<div class="sidebar-nav navbar-collapse" >
+    <ul class="nav" id="side-menu" style="min-height: 850px; ;height: 60%;    width: 270px; overflow-y: auto">
+        <li class="sidebar-search">
+            <div class="input-group custom-search-form">
+                <!--  <input type="text" class="form-control" placeholder="Search...">
+                 <span class="input-group-btn">
+                 <button class="btn btn-default" type="button">
+                     <i class="fa fa-search"></i>
+                 </button>
+                 </span> -->
+            </div>
+        </li>
+
+        {% if checkAccess('uri_dashboard') %}
+            <li>
+                <a href="{{ site.uri.public }}/dashboard"><i class="fa fa-dashboard fa-fw"></i> {{ translate('dashboard') }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_unit') %}
+            <li>
+                <a href="{{ site.uri.public }}/unit"><i class="fa fa-university"></i> {{ translate('units') }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_cash_receipts') %}
+            <li>
+                <a href="{{ site.uri.public }}/cashReceipts"><i class="fa fa-money"></i> {{ translate('cash_receipts') }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_rented') %}
+            <li>
+                <a href="{{ site.uri.public }}/rented"><i
+                            class="fa fa fa-building-o fa-fw"></i> {{ translate("Rented_Units") }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_neighborhood') %}
+            <li>
+                <a href="{{ site.uri.public }}/neighborhoods"><i
+                            class="fa fa-building-o fa-fw"></i> {{ translate("NEIGHBORHOOD") }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_discount') %}
+            <li>
+                <a href="{{ site.uri.public }}/discount"><i
+                            class="fa fa fa-sort-numeric-asc fa-fw"></i> {{ translate("DISCOUNT") }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_addition') %}
+            <li>
+                <a href="{{ site.uri.public }}/addition"><i
+                            class="fa fa fa-sort-numeric-asc fa-fw"></i> {{ translate("Additions") }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_upload') %}
+        <li>
+            <a href="{{ site.uri.public }}/uploadunits"><i class="fa fa-upload" aria-hidden="true"></i>  {{ translate("Upload_Units") }}</a>
+        </li>
+        {% endif %}
+{#        {% if checkAccess('uri_upload') %}#}
+{#            <li>#}
+{#                <a href="{{ site.uri.public }}/upload"><i class="fa fa-upload" aria-hidden="true"></i>  {{ translate("Upload_images") }}</a>#}
+{#            </li>#}
+{#        {% endif %}#}
+        {% if checkAccess('uri_upload') %}
+            <li>
+                <a href="{{ site.uri.public }}/uploadPlan"><i class="fa fa-upload" aria-hidden="true"></i>  {{ translate("Upload_Plans") }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_upload') %}
+            <li>
+                <a href="{{ site.uri.public }}/uploadStorage"><i class="fa fa-upload" aria-hidden="true"></i>  {{ translate("Upload_Storage") }}</a>
+            </li>
+        {% endif %}
+        {% if checkAccess('uri_upload') %}
+            <li>
+                <a href="{{ site.uri.public }}/uploadParking"><i class="fa fa-upload" aria-hidden="true"></i>  {{ translate("Upload_Parking") }}</a>
+            </li>
+        {% endif %}
+
+        {% if checkAccess('uri_settings') %}
+            <li>
+                <a href="{{ site.uri.public }}/config/settings"><i class="fa fa-cog" aria-hidden="true"></i>  {{ translate("Site_Settings") }}</a>
+            </li>
+        {% endif %}
+
+
+        {% if checkAccess('contracts') or checkAccess('uri_email_management') %}
+            <li>
+                <a href="#"><i class="fa fa-file-pdf-o">&nbsp;</i>{{ translate("Templates") }}<span
+                            class="fa arrow"></span></a>
+                {% if checkAccess('contracts') %}
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#"><i class="fa fa-file-pdf-o">&nbsp;</i>{{ translate("Contract_Template") }}<span
+                                    class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{site.uri.public}}/template/create?action=create"><i class="fa fa-file fa-fw"></i> {{ translate("Create_Template") }} </a>
+                                </li>
+                                <li>
+                                    <a href="{{site.uri.public}}/template/list"><i class="fa fa-file fa-fw"></i> {{ translate("Templates_Transaction") }} </a>
+                                </li>
+                        </ul>
+                    </li>
+                </ul>
+                {% endif %}
+
+                {% if checkAccess('uri_email_management') %}
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#"><i class="fa fa-file-pdf-o">&nbsp;</i>{{ translate("Email_Template") }}<span
+                                    class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="{{site.uri.public}}/emails/templates/create/?action=create"><i class="fa fa-file fa-fw"></i> {{ translate("Create_Email_Template") }} </a>
+                                </li>
+                        </ul>
+                    </li>
+                </ul>
+
+                {% endif %}
+
+
+            </li>
+        {% endif %}
+
+        {% if checkAccess('contracts') %}
+
+            <li>
+                <a href="#"><i class="fa fa-file-pdf-o">&nbsp;</i>Reports<span
+                            class="fa arrow"></span></a>
+
+                {% if checkAccess('uri_email_management') %}
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ site.uri.public }}/Export-Contract1-Report"><i class="fa fa-file-excel-o"></i> Payment Report</a>
+
+
+                        </li>
+                    </ul>
+
+                {% endif %}
+
+
+            </li>
+
+
+        {% endif %}
+
+
+        {% if checkAccess('uri_users') or checkAccess('uri_groups') or checkAccess('uri_permission') or checkAccess('uri_settings') or checkAccess('uri_reservation_fees') %}
+
+        <li>
+                <a href="#"><i class="fa fa-wrench fa-fw"></i> {{ translate("MENU_CONFIGURATION") }}<span
+                            class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    {#{% if checkAccess('uri_site_settings') %}
+                    <li>
+                        <a href="{{site.uri.public}}/config/settings"><i class="fa fa-globe fa-fw"></i> {{ translate("MENU_SITE_SETTINGS") }}</a>
+                    </li>
+                    {% endif %}#}
+                    {% if checkAccess('uri_users') %}
+                        <li>
+                            <a href="{{ site.uri.public }}/users"><i
+                                        class="fa fa-users fa-fw"></i> {{ translate("MENU_USERS") }}</a>
+                        </li>
+                    {% endif %}
+
+                     {% if checkAccess('uri_groups') %}
+                    <li>
+                        <a href="{{site.uri.public}}/groups"><i class="fa fa-tags fa-fw"></i> {{ translate("MENU_GROUPS") }}</a>
+                    </li>
+                    {% endif %}
+
+                    {% if checkAccess('uri_permission') %}
+                        <li>
+                            <a href="{{site.uri.public}}/permissions"><i class="fa fa-tags fa-fw"></i> {{ translate("MENU_PERMISSIONS") }}</a>
+                        </li>
+                    {% endif %}
+
+                    {% if checkAccess('uri_settings') %}
+                        <li>
+                            <a href="{{ site.uri.public }}/smtpMailConfig"><i
+                                        class="fa fa-cogs fa-fw"></i> {{ translate("Mail_Configurations") }}</a>
+                        </li>
+                    {% endif %}
+                    {#                 {% if checkAccess('uri_mysql_config') %}
+                                    <li>
+                                        <a href="{{site.uri.public}}/mysqlConfig"><i class="fa fa-database fa-fw"></i> {{ translate("MYSQL_CONFIG") }}</a>
+                                    </li>
+                                    {% endif %} #}
+                    {% if checkAccess('uri_mssql_config') %}
+                        <!--
+                        <li>
+                            <a href="{{ site.uri.public }}/mssqlConfig"><i
+                                        class="fa fa-database fa-fw"></i> {{ translate("MSSQL_CONFIG") }}</a>
+                        </li>
+                        -->
+                    {% endif %}
+
+                    {% if checkAccess('uri_mssql_config') %}
+                        <li>
+                            <a href="{{ site.uri.public }}/reservation_fees"><i
+                                        class="fa fa-university fa-fw"></i> {{ "reservation setting" }}</a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+<!-- /.sidebar-collapse -->

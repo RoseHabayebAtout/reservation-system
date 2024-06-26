@@ -1,0 +1,341 @@
+{% block subject %}
+    {{ site.site_title }} - Mail Configurations
+    {% set page_group = "user" %}
+{% endblock %}
+
+
+{% extends "layouts/layout-dashboard.twig" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "SMTP Mail Configuration",
+        "description" : "SMTP mail Configuration desc"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-envelope'></i> {{ translate('mail_configurations') }}</h3>
+                </div>
+                <div class='panel-body'>
+                    <div id="settings-alerts">
+                        <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="input_host"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('host') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='text' id="input_host" class="form-control" name="host" value='{{ host }}'>
+                        </div>
+                        <label for="input_port"
+                               class="col-xs-11 col-sm-2 col-lg-1 control-label">{{ translate('port') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='text' id="input_port" class="form-control" name="port" value='{{ port }}'>
+                        </div>
+                        <label for="input_auth"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('auth') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='checkbox' id="input_auth" class="form-control bootstrapswitch" name="auth"
+                                   value="{{ auth }}" {% if (auth == 1) %}checked{% endif %}>
+                        </div>
+                        <label for="input_secure"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('secure') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='text' id="input_secure" class="form-control" name="secure"
+                                   value='{{ secure }}'>
+                        </div>
+                        <label for="input_username"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('input_username') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='text' name="username" style="display:none;">
+                            <input type='text' id="input_username" class="form-control" autocomplete="off"
+                                   name="username" value="{{ username_sender }}">
+                        </div>
+
+                        <label for="input_pass"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('password') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='password' name="pass" style="display:none;">
+                            <input type='password' id="input_pass" class="form-control" autocomplete="off" name="pass">
+                        </div>
+                        <label for="input_user"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('user') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='text' id="input_user" class="form-control" name="username"
+                                   value='{{ username }}'>
+                        </div>
+                        <label for="input_user"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('reservation_emails') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='email' name="email" style="display:none;">
+                            <input type='email' id="input_reservation_email" class="form-control reqBorder"
+                                   autocomplete="off" name="email" required="required" data-validity>
+                        </div>
+                        <label for="input_purchase_email"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('purchase_emails') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='email' name="email" style="display:none;">
+                            <input type='email' id="input_purchase_email" class="form-control reqBorder"
+                                   autocomplete="off" name="email" required="required" data-validity>
+                        </div>
+                        <label for="input_cancellation_email"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('cancellation_emails') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='email' name="email" style="display:none;">
+                            <input type='email' id="input_cancellation_email" class="form-control reqBorder"
+                                   autocomplete="off" name="email" required="required" data-validity>
+                        </div>
+
+                        <label for="input_cash_receipt_email"
+                               class="col-xs-12 col-sm-2 col-lg-1 control-label">{{ translate('cash_receipts') }}</label>
+                        <div class="col-xs-12 col-sm-10 col-lg-11 margin-bottom-15px">
+                            <input type='email' name="email" style="display:none;">
+                            <input type='email' id="input_cash_receipt_email" class="form-control reqBorder"
+                                   autocomplete="off" name="email" required="required" data-validity>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 col-xs-offset-5">
+                <button class="btn btn-primary text-center" id="smtpMailSave">{{ translate('save') }}</button>
+                <button class="btn btn-primary text-center" data-toggle="modal" data-target="#emailModal"
+                        id="emailModalBtn">{{ translate('Test Email') }}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade hint-modal-lg" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <h1>{{ translate('Test Email') }}!</h1>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 " style="margin-bottom: 20px">
+                        <input type="email" class="form-control email" name="email" placeholder="email@test.com"
+                               required>
+                    </div>
+                </div>
+                <div class="row lead">
+                    <div class="col-xs-offset-2 col-xs-9 ">
+                        <div class="pull-right">
+                            <button class="btn  btn-danger" id="cancelReservationBtn" onclick="hideHintModal()">Cancel
+                            </button>
+                            <button class="btn  btn-primary" id="cancelReservationBtn" onclick="send_email()">Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block page_scripts %}
+    <script type="text/javascript">
+        var csrf_token = $("meta[name=csrf_token]").attr("content");
+
+        function hideHintModal() {
+            $('.hint-modal-lg').modal("hide");
+            $('#upload').attr('disabled', false);
+        }
+
+
+        function send_email() {
+            $("#settings-alerts").html("<div class='alert alert-warning'>" + ' Send Email ' + "</div>");
+            let email = $('.email').val();
+            // console.log(email, email == '' || email == null);
+            if (email == '' || email == null) {
+                $("#settings-alerts").html("<div class='alert alert-danger'>" + 'Email field is required' + "</div>");
+                hideHintModal()
+                return;
+            }
+
+            let validateEmail_ = validateEmail(email);
+            console.log('validateEmail_', validateEmail_);
+            if (!validateEmail_) {
+                $("#settings-alerts").html("<div class='alert alert-danger'>" + 'Email field is not valid' + "</div>");
+                hideHintModal()
+                return;
+            }
+
+
+            var req1 = $.ajax({
+                url: site['uri']['public'] + '/send_email',
+                data: {
+                    email: $('.email').val(),
+                    csrf_token: encodeURIComponent(csrf_token)
+                },
+                type: "POST"
+            })
+                .done(function (data) {
+                    let res = JSON.parse(data);
+                    if (res) {
+                        if (res.success) {
+                            $("#settings-alerts").html("<div class='alert alert-success'>" + 'Email Sent Successfully' + "</div>");
+                        } else {
+                            let message = res.message;
+                            if (message.search("SMTP connect") > -1) {
+                                $("#settings-alerts").html("<div class='alert alert-danger'>" + 'Connection error please make sure you have the correct host and port fields' + "</div>");
+                            } else if (message.search("authenticate") > -1) {
+                                $("#settings-alerts").html("<div class='alert alert-danger'>" + 'Authentication error please make sure you have the correct Username and Password fields' + "</div>");
+                            } else if (message.search("data not accepted.") > -1) {
+                                $("#settings-alerts").html("<div class='alert alert-danger'>" + 'Please make sure you have the correct Sender email' + "</div>");
+                            } else {
+                                $("#settings-alerts").html("<div class='alert alert-danger'>" + res.message + "</div>");
+                                //     $("#settings-alerts").html("<div class='alert alert-danger'>" + 'There was an error when send an email' + "</div>");
+                            }
+
+                        }
+                    } else {
+                        $("#settings-alerts").html("<div class='alert alert-danger'>" + 'There was an error when send an email' + "</div>");
+                    }
+                    // console.log('res', res);
+                    $('.email').val('')
+                    hideHintModal()
+                })
+                .fail(function (err) {
+                    console.log('err', err);
+                    $("#settings-alerts").html("<div class='alert alert-danger'>" + 'There was an error when send an email' + "</div>");
+                });
+
+        }
+
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+        $(document).ready(function () {
+            $('#emailModalBtn').click(function () {
+                $('.hint-modal-lg').modal("show");
+            });
+            var timer;
+            //set value of password input
+            $('#input_pass').val("{{ pass }}")
+            getEmailList();
+
+
+            // Autosave text fields
+            $("#smtpMailSave").click(function () {
+                clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                $("#settings-alerts").html("<div class='alert alert-warning'>" + _translate('saving') + "</div>");
+                timer = setTimeout(function () { // assign timer a new timeout
+                    var csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var input_host = $('#input_host').val();
+                    var input_port = $('#input_port').val();
+                    var input_secure = $('#input_secure').val();
+                    var input_user = $('#input_user').val();
+                    var input_pass = $('#input_pass').val();
+                    var input_auth = $('#input_auth').is(':checked');
+                    var input_reservation_email = TrimEmailList($('#input_reservation_email').val());
+                    var input_purchase_email = TrimEmailList($("#input_purchase_email").val());
+                    var input_cancellation_email = TrimEmailList($("#input_cancellation_email").val());
+                    var input_cash_receipt_email = TrimEmailList($("#input_cash_receipt_email").val());
+                    var input_username = $("#input_username").val();
+                    if (input_reservation_email == "") {
+                        $('#input_reservation_email').attr("placeholder", _translate('email_required'));
+                    } else {
+                        var params = {
+                            input_host: input_host,
+                            input_port: input_port,
+                            input_secure: input_secure,
+                            input_user: input_user,
+                            input_pass: input_pass,
+                            input_auth: input_auth,
+                            input_username: input_username,
+                            input_reservation_email: input_reservation_email,
+                            input_purchase_email: input_purchase_email,
+                            input_cancellation_email: input_cancellation_email,
+                            input_cash_receipt_email: input_cash_receipt_email,
+                            csrf_token: encodeURIComponent(csrf_token)
+                        };
+                        var url = site['uri']['public'] + "/smtpMailConfig/";
+                        var csrf_token = $("meta[name=csrf_token]").attr("content");
+                        var params2 = {
+                            input_reservation_email: input_reservation_email,
+                            input_purchase_email: input_purchase_email,
+                            input_cancellation_email: input_cancellation_email,
+                            input_cash_receipt_email: input_cash_receipt_email,
+                            csrf_token: encodeURIComponent(csrf_token)
+                        };
+                        var configURL = site['uri']['public'] + '/smtpMailConfig/save/';
+                        // Append page CSRF token
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: params,
+
+                        }).done(function (data) {
+                            $("#settings-alerts").html("<div class='alert alert-success'>" + _translate('all_setting_saved') + "</div>");
+                            $.ajax({
+                                type: "POST",
+                                url: configURL,
+                                data: params2,
+
+                            }).done(function (data) {
+                                console.log("saveEmailList" + data);
+                            })
+                                .fail(function (err) {
+                                    console.log("saveEmailListError" + err);
+                                    $("#settings-alerts").html("<div class='alert alert-danger'>" + _translate('setting_unsaved') + "</div>");
+                                });
+
+                        })
+                            .fail(function (err) {
+                                $("#settings-alerts").html("<div class='alert alert-danger'>" + _translate('setting_unsaved') + "</div>");
+                            });
+                    }
+                }, 700);
+            });
+
+        });
+
+
+        function TrimEmailList(emailList) {
+            var emails = emailList.split(';');
+            var newEmailLists = "";
+            emails.forEach((email) => {
+                newEmailLists += email.trim() + ";"
+            });
+            newEmailLists = newEmailLists.substring(0, newEmailLists.length - 1);
+
+            return newEmailLists;
+        }
+
+
+        function getEmailList() {
+
+            //Ajax request to get the EmailList Value
+            $.ajax({
+                type: "GET",
+                url: site['uri']['public'] + '/smtpMailConfig/getEmailList/?'
+            }).done(function (data) {
+                console.log("getEmailList " + data);
+                var emailsList = JSON.parse(data);
+                $('#input_reservation_email').val(emailsList.reservationEmailList);
+                $('#input_purchase_email').val(emailsList.purchaseEmailList);
+                $('#input_cancellation_email').val(emailsList.cancellationEmailList);
+                $('#input_cash_receipt_email').val(emailsList.cashReceiptEmailList);
+            })
+                .fail(function (err) {
+                    console.log("saveEmailListError " + err);
+                    $("#settings-alerts").html("<div class='alert alert-danger'>" + _translate('setting_unsaved') + "</div>");
+                });
+
+
+        }
+
+    </script>
+{% endblock %}

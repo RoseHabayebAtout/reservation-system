@@ -1,0 +1,105 @@
+DROP TABLE IF EXISTS `uf_contract1`;
+
+CREATE TABLE `uf_contract1` (
+  `id` int(11) NOT NULL,
+  `contractDate` date NOT NULL COMMENT 'Contract Date',
+  `companyNum` varchar(150) NOT NULL COMMENT 'Company Number',
+  `systemUser` varchar(255) NOT NULL,
+  `purchaser1` varchar(255) NOT NULL COMMENT 'First Buyer',
+  `idType1` varchar(255) NOT NULL COMMENT 'Identification Type For First Buyer',
+  `idNum1` varchar(255) NOT NULL COMMENT 'Identification Number For First Buyer',
+  `idPlace1` varchar(255) NOT NULL COMMENT 'Place First Buyer',
+  `idProDate1` date NOT NULL COMMENT 'Release Date Of ID For First Buyer',
+  `idExpDate1` date NOT NULL COMMENT 'Expire Date Of ID For First Buyer',
+  `regNo1` varchar(255) NOT NULL COMMENT 'Register Number For First Buyer',
+  `registered1` varchar(255) NOT NULL COMMENT 'Registered For First Buyer',
+  `passportNo1` varchar(225) NOT NULL COMMENT 'Passport Number For First Buyer	',
+  `country1` varchar(255) NOT NULL COMMENT 'Country For First Buyer	',
+  `city1` varchar(255) NOT NULL COMMENT 'City For First Buyer	',
+  `regionName1` varchar(255) NOT NULL COMMENT 'Region Name For First Buyer	',
+  `streetName1` varchar(255) NOT NULL COMMENT 'Street Name For First Buyer	',
+  `homePhone1` varchar(255) NOT NULL COMMENT 'Home Phone For First Buyer	',
+  `workPhone1` varchar(255) NOT NULL COMMENT 'Work Phone For First Buyer	',
+  `mobileNum1` varchar(255) NOT NULL COMMENT 'Mobile Number For First Buyer	',
+  `faxNum1` varchar(255) NOT NULL COMMENT 'Fax Number For First Buyer	',
+  `mailBox1` varchar(255) NOT NULL COMMENT 'Mail Box For First Buyer	',
+  `postalCode1` varchar(255) NOT NULL COMMENT 'Postal Code For First Buyer	',
+  `eMail1` varchar(255) NOT NULL COMMENT 'Email For First Buyer	',
+  `purchaser2` varchar(255) NOT NULL COMMENT 'Second Buyer',
+  `idType2` varchar(255) NOT NULL COMMENT 'Identification Type Second Buyer',
+  `idNum2` varchar(255) NOT NULL COMMENT 'Identification Number For Second Buyer',
+  `idPlace2` varchar(255) NOT NULL COMMENT 'Place For Second Buyer	',
+  `idProDate2` date NOT NULL COMMENT 'Release Date Of ID For Second Buyer',
+  `idExpDate2` date NOT NULL COMMENT 'Expire Date Of ID For Second Buyer	',
+  `regNo2` varchar(255) NOT NULL COMMENT 'Register Number For Second Buyer',
+  `registered2` varchar(255) NOT NULL COMMENT 'Registered For Second Buyer	',
+  `passportNo2` varchar(255) NOT NULL COMMENT 'Passport Number For Second Buyer	 ',
+  `country2` varchar(255) NOT NULL COMMENT 'Country For Second Buyer	',
+  `city2` varchar(255) NOT NULL COMMENT 'City For Second Buyer	',
+  `regionName2` varchar(255) NOT NULL COMMENT 'Region Name For Second Buyer	',
+  `streetName2` varchar(255) NOT NULL COMMENT 'Street Name For Second Buyer	',
+  `homePhone2` varchar(255) NOT NULL COMMENT 'Home Phone For Second Buyer	',
+  `workPhone2` varchar(255) NOT NULL COMMENT 'Work Phone For Second Buyer	',
+  `mobileNum2` varchar(255) NOT NULL COMMENT 'Mobile Number For Second Buyer	',
+  `faxNum2` varchar(255) NOT NULL COMMENT 'Fax Number For Second Buyer	',
+  `mailBox2` varchar(255) NOT NULL COMMENT 'Mail Box For Second Buyer	',
+  `postalCode2` varchar(255) NOT NULL COMMENT 'Postal Code For Second Buyer	',
+  `eMail2` varchar(255) NOT NULL COMMENT 'Email For Second Buyer	',
+  `unitNum` varchar(150) NOT NULL COMMENT 'Unit Number',
+  `unitArea` varchar(150) NOT NULL COMMENT 'Unit Area',
+  `haiName` varchar(255) NOT NULL COMMENT 'Neighborhood Name',
+  `floorNum` varchar(255) NOT NULL COMMENT 'Floor Number',
+  `landNum` varchar(255) NOT NULL COMMENT 'Land Number',
+  `hawdNum` varchar(255) NOT NULL COMMENT 'Hawd Number',
+  `hawdName` varchar(255) NOT NULL COMMENT 'Hawd Name',
+  `buildingNum` varchar(150) NOT NULL COMMENT 'Building Number',
+  `buildingsNum` varchar(255) NOT NULL COMMENT 'Buildings Number',
+  `unitDesc` varchar(500) NOT NULL COMMENT 'Unit Description',
+  `damageFine` varchar(255) NOT NULL COMMENT 'Cancellation Fees',
+  `releaseDate` varchar(45) NOT NULL COMMENT 'Release Date Of Unit',
+  `priceTotal` varchar(255) NOT NULL COMMENT 'Price Total',
+  `pricePart1` varchar(255) NOT NULL COMMENT 'Land Price',
+  `pricePart2` varchar(255) NOT NULL COMMENT 'Unit Price',
+  `pricePart3` varchar(255) NOT NULL COMMENT 'Finishing Price',
+  `delayPeriod` varchar(255) NOT NULL COMMENT 'Delay Period',
+  `penaltyClause` varchar(255) NOT NULL COMMENT 'Penalty Clause',
+  `systemUserIDNo` varchar(255) NOT NULL,
+  `systemUserPassportNo` varchar(255) NOT NULL,
+  `companyName` varchar(255) NOT NULL COMMENT 'Company Name',
+  `companyNum_reg` varchar(255) NOT NULL COMMENT 'Company Registration Number',
+  `companyFor` varchar(255) NOT NULL,
+  `ownersUnionNum` varchar(255) NOT NULL COMMENT 'Owners Union Number',
+  `ownersUnionProDate` date NOT NULL COMMENT 'Owners Union Proceed Date',
+  `haiArea` varchar(255) NOT NULL COMMENT 'Neighborhood Area',
+  `checksNum` varchar(255) NOT NULL COMMENT 'Checks Number',
+  `arabon` varchar(255) NOT NULL COMMENT 'earnest/Arabon',
+  `remainingAmountDelay` varchar(255) NOT NULL COMMENT 'Remaining Amount Delay',
+  `penefitCompensation` varchar(255) NOT NULL COMMENT 'Benefit Compensation',
+  `addPart6` varchar(150) NOT NULL,
+  `addPartB` varchar(150) NOT NULL,
+  `addSafqa` int(11) NOT NULL,
+  `annexes` int(11) NOT NULL COMMENT 'Annexes Number',
+  `safqaDate` date NOT NULL,
+  `PaidWithDelivery` varchar(5) NOT NULL,
+  `CostPaidWithDelivery` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `uf_contract1`
+--
+ALTER TABLE `uf_contract1`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `uf_contract1`
+--
+ALTER TABLE `uf_contract1`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;

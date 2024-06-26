@@ -1,0 +1,16 @@
+{
+    "available" : {
+        "validators" : {
+            "integer" : {
+                "message" : "VALIDATE_INTEGER"
+            }
+        }
+    },
+    "uid" : {
+        "validators" : {
+            "integer" : {
+                "message" : "VALIDATE_INTEGER"
+            }
+        }
+    }
+}

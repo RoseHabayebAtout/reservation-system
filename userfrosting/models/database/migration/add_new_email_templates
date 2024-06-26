@@ -1,0 +1,4 @@
+INSERT INTO `emails_templates` (`subject`, `content`, `user_id`, `status`, `created_at`, `name`) VALUES
+('Change Unit From Signed To Available', 'This is to inform you that there is a request to change this unit xxx from Signed to available', 1, 'ACTIVE', '2021-01-11', 'Request To Change Unit From Signed To Available'),
+('Approval of Changing Unit From Signed To Available', 'I would like to inform you that the request of changing unit xxx from signed to available approved ', 1, 'ACTIVE', '2021-01-11', 'Approval of Changing Unit From Signed To Available'),
+('Rejection of Changing Unit From Signed To Available', 'I would like to inform you that the request of changing unit xxx from signed to available rejected ', 1, 'ACTIVE', '2021-01-11', 'Rejection of Changing Unit From Signed To Available');

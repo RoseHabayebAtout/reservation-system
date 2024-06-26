@@ -1,0 +1,25 @@
+{
+  "name" : {
+    "validators" : {
+      "length" : {
+        "min" : 1,
+        "max" : 150,
+        "message" : "GROUP_NAME_CHAR_LIMIT"
+      }
+    },
+    "sanitizers" : {
+      "raw" : ""
+    }
+  },
+  "code" : {
+    "validators" : {
+      "length" : {
+        "min" : 1,
+        "max" : 100
+      }
+    },
+    "sanitizers" : {
+      "raw" : ""
+    }
+  }
+}

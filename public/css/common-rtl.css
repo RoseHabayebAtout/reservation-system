@@ -1,0 +1,467 @@
+/*
+*  styles
+*/
+.rawabi-logo {
+    width: auto;
+    height: 55px;
+    display: block;
+}
+
+.padding-logo {
+    padding: 5px 15px;
+}
+
+/*
+*
+* pagination styles
+*
+*/
+/*reset style*/
+.pager li > a, .pager li > span {
+    padding: inherit;
+    background-color: inherit;
+    border: inherit;
+    border-radius: inherit;
+}
+
+.pager li i {
+    color: #337ab7;
+    border: none;
+}
+
+.pager li a:hover, .pager li a:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.full-width {
+    width: 100%;
+}
+
+li.pager-control {
+    border: none;
+}
+
+#table-users-pager .float-none, #table-groups-pager .float-none {
+    float: inherit;
+    border: none;
+}
+
+#table-users-pager .border-blue, #table-groups-pager .border-blue {
+    border: 1px solid #337ab7;
+}
+
+/*
+	style navbar
+*/
+.rawabi-skyline {
+    background-image: url(../images/skyline.png);
+    background-position: center center;
+    background-size: 128px 60px;
+    background-repeat: repeat-x;
+}
+
+/*fix header responsive in navbar*/
+.navbar-header {
+    width: 100%;
+}
+
+.margin-bottom-15px {
+    margin-bottom: 15px;
+}
+
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+.loader-modal-lg {
+    border: none;
+    text-align: center;
+    display: block;
+    margin-top: -100px;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.panel-primary .panel-theme-color {
+    background-color: #0e1a35;
+    border-color: #0e1a35;
+}
+
+.panel-theme-color {
+    background-color: #0e1a35;
+    border-color: #0e1a35;
+    color: white;
+}
+
+.display-inline {
+    display: inline
+}
+
+/*
+*
+*
+*footer styles
+*
+*
+*/
+.buttom-footer {
+    position: relative;
+    bottom: 0;
+    right: 250px;
+    width: 85%;
+    background-color: #0e1a35;
+    color: white;
+    padding: 1em 0;
+}
+
+.buttom-footer a {
+    color: white;
+}
+
+/* Responsive Portrait and Landscape */
+@media only screen
+and (min-width: 320px)
+and (max-width: 765px) {
+    .buttom-footer {
+        position: inherit;
+        text-align: center;
+    }
+
+    .text-right, .text-left {
+        text-align: center;
+    }
+
+    .buttom-footer.footer-width {
+        width: 105%;
+    }
+
+    .buttom-footer.width-87-per {
+        width: inherit;
+    }
+}
+
+/*social links design*/
+/*.social {
+    position: initial;
+    height: 100px;
+    left: 50%;
+}
+
+.social li {
+    display: block;
+    height: 4em;
+    line-height: 4em;
+    position: absolute;
+    -webkit-transition: -webkit-transform .7s;
+    -moz-transition: -moz-transform .7s;
+    -ms-transition: -ms-transform .7s;
+    -o-transition: -o-transform .7s;
+    transition: transform .7s;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    text-align: center;
+    width: 4em;
+
+}
+
+.social a {
+    color: #fffdf0;
+    display: block;
+    height: 4em;
+    line-height: 6em;
+    text-align: center;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    width: 4em;
+
+}
+
+.social li:hover {
+  -webkit-transform: scale(1.3,1.3) rotate(45deg);
+    -moz-transform: scale(1.3,1.3) rotate(45deg);
+  -ms-transform: scale(1.3,1.3) rotate(45deg);
+    -o-transform: scale(1.3,1.3) rotate(45deg);
+  transform: scale(1.3,1.3) rotate(45deg);
+}
+
+.facebook {
+    background: #155b9d;
+    top: 25%;
+    left: 15%;
+}
+
+.twitter {
+    background: #1a9ec4;
+    top: 25%;
+    left: 30%;
+}
+.pinterest {
+    background: #e11a30;
+    top: 25%;
+    left: 45%;
+}*/
+.footer-asal {
+    padding: 20px;
+    font-size: 24px;
+}
+
+.width-87-per {
+    width: 87%;
+}
+
+.footer-width {
+    width: calc(100% - 250px);
+}
+
+/*** overriding***/
+/*override bootstrap styles*/
+.btn-primary {
+    background-color: #0e1a35;
+    border-color: #2e6da4;
+}
+
+.label-primary {
+    background-color: #6eb9ec;
+}
+
+.label-rented {
+    background-color: #06080c;
+}
+
+.btn-rented.disabled {
+    background-color: #0e1a35;
+    border-color: #2e6da4;
+    color: #fff;
+}
+
+.btn-primary.disabled, .btn-primary[disabled] {
+    background-color: #0e1a35;
+    border-color: #2e6da4;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary.focus, .btn-primary:active {
+    background-color: #1e3872;
+}
+
+.panel-primary {
+    border-color: #0e1a35;
+}
+
+.panel-primary .panel-heading {
+    background-color: #0e1a35;
+    border-color: #2e6da4;
+}
+
+.has-switch span.switch-primary, .has-switch span.switch-left {
+    background: #0e1a35;
+}
+
+.pagination > .active > a {
+    background-color: #0e1a35;
+}
+
+.pagination > .active > a:hover {
+    background-color: #1e3872;
+}
+
+.panel.panel-green-dashboard a {
+    color: #0e1a35;
+}
+
+/*
+ common width form
+*/
+.form-control.width-50 {
+    width: 50%;
+    display: inline-block;
+}
+
+.form-control.width-30 {
+    width: 30%;
+    display: inline-block;
+}
+
+/*fadi*/
+.form-control.width-12 {
+    width: 12%;
+}
+
+.available-filter .form-group.margin-left-5 {
+    display: block
+}
+
+.form-control.width-25 {
+    width: 25%;
+    display: inline-block;
+}
+
+.form-control.width-60 {
+    width: 60%;
+    display: inline-block;
+}
+
+.width-25 {
+    width: 25%;
+}
+
+.modal.fade.reservation-modal-lg.in .form-control.width-45 {
+    width: 45%;
+    vertical-align: top;
+}
+
+.margin-right-20-per {
+    margin-left: 20%;
+}
+
+/*general css*/
+.display-none {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.full-height {
+    height: 100%;
+}
+
+/*fix disabled buttons*/
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn {
+    pointer-events: painted;
+}
+
+/*vertical align 30%*/
+.vertical-align-40-per {
+    position: relative;
+    top: 40%;
+    transform: translateY(-40%);
+}
+
+.special-green {
+    color: #71BF45;
+}
+
+#reservePrePage {
+    float: left;
+    margin-right: 10px;
+}
+
+button#cancelresv {
+    text-align: center;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.min-height-400 {
+    min-height: 400px;
+}
+
+@media only screen and (max-width: 768px) {
+    .fix-footer {
+        width: 100% !important;
+        right: auto !important;
+    }
+
+    table tr td ul {
+        width: 100%;
+    }
+
+    table tr td ul li {
+        border: 0 !important;
+    }
+
+    td.child {
+        padding-right: 0 !important;
+    }
+
+    table.dataTable > tbody > tr.child span.dtr-title {
+        display: initial !important;
+    }
+
+    .available-filter-style {
+        margin: 0 auto auto !important;
+    }
+
+    .available-filter label {
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .available-filter .form-control.width-12, .dataTables_filter input {
+        width: 65% !important;
+        float: left;
+    }
+
+    .available-filter-style {
+        text-align: center !important;
+        display: block;
+        margin: 15px 0 !important;
+    }
+
+    #unitTable .btn-danger {
+        width: 105px !important;
+    }
+
+    .btn-width {
+        width: 215px !important;
+    }
+
+    #unitTable .btn-primary {
+        width: 105px !important;
+    }
+
+    #unitTable .dropdown-menu {
+        margin: 2px 0px 10px 0 !important;
+    }
+
+    #page-wrapper {
+        padding: 75px 15px !important;
+    }
+
+    .dropdown-menu {
+        display: none !important;
+    }
+
+    .open > .dropdown-menu {
+        display: inline-block !important;
+    }
+
+    .unit-details {
+        padding: 0 35px;
+    }
+
+    .unit-details #deleteDiv, .unit-details #availableUnit {
+        padding-left: 20px;
+    }
+
+    #unitTable th:nth-child(10), #unitTable th:nth-child(11) {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .available-filter .form-control.width-12, .dataTables_filter input {
+        width: 60% !important;
+    }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.footer-padding{
+    padding: 0.35em 0;
+}

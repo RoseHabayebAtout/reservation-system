@@ -1,0 +1,36 @@
+Building,unit,floor,Neighborhood,size,Apartment code,Building Code,description,price,tabo code
+1,2,3,Dulaim,175 m,01-02,ballour,desc,10000,01-02
+7,8,1,Makmata,54123,02-08,lamar,desc,10000,02-08
+3,2,1,Makmata,175 m,03-02,lamar,desc,10000,03-02
+5,17,1,Suwan,215 m,17-04,zan,desc,10000,17-04
+15,15,1,Warwar,199 m,15-05,zan,desc,10000,15-05
+7,8,1,Makmata,54123,06-08,lamar,desc,10000,06-08
+8,1,1,Suwan,110,07-01,zan,desc,10000,07-01
+3,2,3,Dulaim,175 m,08-02,ballour,desc,10000,08-02
+15,15,1,Warwar,199 m,15-09,zan,desc,10000,15-09
+7,8,1,Makmata,54123,10-08,lamar,desc,10000,10-08
+8,1,1,Suwan,110,11-01,zan,desc,10000,11-01
+3,2,3,Dulaim,175 m,12-02,ballour,desc,10000,12-02
+3,2,1,Makmata,175 m,13-02,lamar,desc,10000,13-02
+7,8,1,Makmata,54123,14-08,lamar,desc,10000,14-08
+15,15,1,Warwar,199 m,15-15,zan,desc,10000,15-15
+7,8,1,Makmata,54123,16-08,lamar,desc,10000,16-08
+3,2,0,Dulaim,175 m,17-02,ballour,desc,10000,17-02
+5,17,1,Suwan,215 m,17-18,zan,desc,10000,17-18
+6,2,1,Dulaim,510m ,19-02,ballour,desc,10000,19-02
+5,17,1,Suwan,215 m,17-20,zan,desc,10000,17-20
+15,15,1,Warwar,199 m,15-21,zan,desc,10000,15-21
+6,2,1,Dulaim,510m ,22-02,ballour,desc,10000,22-02
+7,8,1,Makmata,54123,23-08,lamar,desc,10000,23-08
+5,17,1,Suwan,215 m,17-24,zan,desc,10000,17-24
+15,15,1,Warwar,199 m,15-25,zan,desc,10000,15-25
+6,2,1,Dulaim,510m ,26-02,ballour,desc,10000,26-02
+7,8,1,Makmata,54123,27-08,lamar,desc,10000,27-08
+8,1,1,Suwan,110,28-01,zan,desc,10000,28-01
+15,15,1,Warwar,199 m,15-29,zan,desc,10000,15-29
+6,2,1,Dulaim,510m ,01-02,ballour,desc,10000,01-02
+7,8,1,Makmata,54123,31-08,lamar,desc,10000,31-08
+5,17,1,Suwan,215 m,17-32,zan,desc,10000,17-32
+15,15,1,Warwar,199 m,15-33,zan,desc,10000,15-33
+3,2,1,Dulaim,175 m,01-02,ballour,desc,10000,01-02
+1,2,3,Dulaim,175 m,01-02,ballour,desc,10000,01-02

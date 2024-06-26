@@ -1,0 +1,1 @@
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`) VALUES (NULL, 'parking_reservation_date', 'Parking Reservation Date', 'appendix_parking'), (NULL, 'storage_reservation_date', 'Storage Reservation Date', 'appendix_storage')

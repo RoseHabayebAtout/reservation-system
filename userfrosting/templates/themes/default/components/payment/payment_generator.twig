@@ -1,0 +1,662 @@
+{% include 'utils/util-functions.twig' %}
+
+<style>
+    .bootstrap-datetimepicker-widget {
+        zoom: 70%;
+    }
+
+</style>
+<div id="contract1Part9" class="display-none">
+    <div class="col-xs-12">
+
+        <div class="form-group">
+
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group cform-group ">
+                    <div class="col-xs-12 col-md-4 ">
+                        <label value="" for="numOfPayments">  {{ translate('number_of_payment') }} </label>
+                    </div>
+                    <div class="col-xs-12 col-md-8 ">
+                        <input type="number" id="numOfPayments" class="form-control" required="">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group cform-group ">
+                    <div class="col-xs-12 col-md-4 ">
+                        <label value="" for="numOfPayments">  {{ translate('total_amount') }} </label>
+                    </div>
+
+
+                    <div class="col-xs-12 col-md-8 ">
+                        <div class='input-group'>
+
+                            <input type="number" id="r_totalPrice" class="form-control" value="<%-priceTotal%>"
+                                   readonly>
+                            <span class="input-group-addon" id="selected_currency">
+                                                        ILS
+                        </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            {#            <div class="col-xs-12 col-md-12">#}
+            {#                <div class="form-group cform-group ">#}
+            {#                    <div class="col-xs-12 col-md-4 ">#}
+            {#                        <label value="" for="numOfPayments">  {{ translate('first_payment') }} </label>#}
+            {#                    </div>#}
+            {#                    <div class="col-xs-12 col-md-3 ">#}
+            {#                        <input type="number" id="r_firstPayment" class="form-control" value=""  >#}
+            {#                    </div>#}
+            {#                    <div class="col-xs-12 col-md-1 ">#}
+            {#                        <label value="" for="r_firstPayment_date">  {{ translate('date') }} </label>#}
+            {#                    </div>#}
+            {#                    <div class="col-xs-12 col-md-4 ">#}
+            {#                        <input type="date" id="r_firstPayment_date" class="form-control" value=""  >#}
+            {#                    </div>#}
+
+            {#                </div>#}
+            {#            </div>#}
+
+        </div>
+
+        <div class="row form-group">
+
+            <div class="col-xs-12 col-md-6  mutedElement">
+                <div class="form-group cform-group class-margin">
+                    <div class="col-xs-12 col-md-5 ">
+                        <label for="paymentDuration"> {{ translate('period') }} </label>
+                    </div>
+                    <div class="col-xs-12 col-md-7 ">
+                        <input type="number" id="paymentDuration" class="form-control" required="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-6 ">
+                <div class="form-group cform-group class-margin">
+                    <div class="col-xs-12 col-md-5 ">
+                        <label for="paymentStartDate"> {{ translate('start_date') }}  </label>
+                    </div>
+                    <div class="col-xs-12 col-md-7 ">
+                        <div class="input-group date datepicker">
+                            <input type="text" class="form-control ltr" id="paymentStartDate" required="">
+                            <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                       </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <br/>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-6  mutedElement">
+                <div class="form-group cform-group class-margin">
+                    <div class="col-xs-12 col-md-5 ">
+                        <label for="paymentPeriod"> payments Period </label>
+                    </div>
+                    <div class="col-xs-12 col-md-7 ">
+                        <input type="text" id="paymentPeriod" class="form-control" required="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class=" form-group">
+
+                <div class="col-xs-12 col-md-12" style="text-align: right; margin-top: 10px; margin-bottom: 8px;">
+                    <button type="button" class="clear-payment btn btn-default "
+                            onclick="$('#paymentTable tbody tr:gt(0)').remove()">
+                        {{ translate('clear_payments') }}
+                    </button>
+
+                    <button type="button" class="generate btn btn-primary "
+                            onclick="generate('add');">
+                        {{ translate('generate') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-xs-12">
+        <form id="contractsForm" class="form-horizontal-payments" role="form">
+            <table id="paymentTable" class="table display table-striped table-bordered"
+                   cellspacing="0" width="100%">
+                <thead class="btn-primary">
+                <tr>
+                    <th>
+                        <h4 class="text-center">{{ translate('payment') }}</h4>
+                    </th>
+                    <th>
+                        <h4 class="text-center">{{ translate('payment_amount') }}</h4>
+                    </th>
+                    <th>
+                        <h4 class="text-center">{{ translate('payment_date') }}</h4>
+                    </th>
+                    <th>
+                        <h4 class="text-center">{{ translate('options') }}</h4>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <input type="text" id="payment" value=" " class="form-control" readonly/>
+                    </td>
+                    <td>
+                        <input type="number" id="paymentAmount" class="form-control"/>
+                    </td>
+                    <td>
+                        <div class='input-group date datepicker'>
+                            <input type='text' class="form-control" id="paymentDate"/>
+                            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+                        </div>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" id="checkNewRow" onclick="addRow()">
+                            <strong> {{ translate('add_payment') }} </strong></button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <span id="error_msg" style="color:red;"></span>
+        <div dir="ltr" id="payments_save_success" class="alert alert-success display-none" role="alert">
+            {{ translate('payment_saved') }}
+        </div>
+
+        <div dir="ltr" id="payments_save_error" class="alert alert-danger display-none" role="alert">
+            {{ translate('payment_unsaved') }}
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+    function getContractDate() {
+        let savedDateValue = localStorage.getItem('contract-date');
+        savedDateValue = "09/01/2020";
+        if (!savedDateValue) {
+            savedDateValue = $("#contractDate").val();
+        }
+        let contractDate = savedDateValue.split("/");
+        return new Date(contractDate[2], parseInt(contractDate[0]) - 1, contractDate[1]);
+    }
+
+    function getModalContractDate($date) {
+        let contractDate = $date.split("/");
+        return new Date(contractDate[2], parseInt(contractDate[0]) - 1, contractDate[1]);
+    }
+
+    function getTotalPrice() {
+        $totalPrice = $("#r_totalPrice").val();
+        localStorage.setItem('total-price', $totalPrice);
+        return localStorage.getItem('total-price');
+    }
+
+    function addCommaToTheNumber(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function replaceAll(str, find, to) {
+        return str.replace(new RegExp(find, 'g'), to);
+    }
+
+    function removeCommaFromNumber(x) {
+        return parseFloat(replaceAll(x + "", ',', ''));
+    }
+
+    function generate(type) {
+        let max_number_of_months = "{{ site.max_number_of_months }}";
+        if (type == "add") {
+            var paymentsDuration = parseInt($("#paymentDuration").val()) || 0;
+            var paymentsStartDate = getModalContractDate($("#paymentStartDate").val());
+            var numOfPayments = parseInt($("#numOfPayments").val()) || 0;
+
+            // var firstPayment = parseInt($('#r_firstPayment').val()) || 0;
+
+            $("#numOfPayments").parent().removeClass("has-error");
+            $("#paymentStartDate").parent().removeClass("has-error");
+            $("#paymentDuration").parent().removeClass("has-error");
+
+            $("#error_msg").empty();
+            if (isNaN(numOfPayments) || numOfPayments <= 0 || numOfPayments > 84) {
+                $("#numOfPayments").parent().addClass("has-error");
+                return;
+            }
+
+            if (isNaN(paymentsStartDate)) {
+                $("#paymentStartDate").parent().addClass("has-error");
+                return;
+            }
+
+
+            if (isNaN(paymentsDuration) || paymentsDuration < 1) {
+                $("#paymentDuration").parent().addClass("has-error");
+                return;
+            }
+            if ((paymentsDuration * numOfPayments) > max_number_of_months) {
+                alert("Please Make sure all of your payments must not exceed " + max_number_of_months + " months!!");
+                return;
+            }
+
+            const totalPrice = getTotalPrice();
+            // var totalPrice = parseInt($("#priceTotal").val()) || 0;
+
+            var tds = $('#paymentTable>tbody>tr>td');
+            var summationOfPreviousPayments = 0;
+            for (var i = 1; i < tds.length; i += 4) {
+                summationOfPreviousPayments += parseFloat(((tds[i]).querySelector('input').value).replaceAll(',', '')) || 0;
+            }
+            const arabon = summationOfPreviousPayments;
+            const payment = ((totalPrice - arabon) / numOfPayments).toFixed(2);
+            let contractDate = "";
+            let summation_Of_payment = arabon;
+
+            if (payment > 0) {
+                // Edited by Ahmad Tome
+                var sum = totalPrice;
+                contractDate = new Date(paymentsStartDate);
+                var lastIndex = 1;//$('#paymentTable>tbody>tr').length;
+                // let rowToAdd =
+                //     '<tr> <td> <input type="text" id="payment" value=" " class="form-control" readonly="" name="payment">' +
+                //     '</td> <td> <input type="number" id="paymentAmount" class="form-control" name="paymentAmount">' +
+                //     '</td> <td> <div class="input-group date datepicker">' +
+                //     '<input type="text" class="form-control rtl" id="paymentDate" name="paymentDate">' +
+                //     '<span class="input-group-addon"> <span class="glyphicon glyphicon-calendar"></span> </span>' +
+                //     '</div></td><td><button type="button" class="btn btn-primary" id="checkNewRow" onclick="addRow()"><strong> Add Payment </strong></button></td></tr>';
+                let rowToAdd = '';
+                // $("table#paymentTable").find("tr:gt(1)").remove();
+
+                for (var i = 1; i <= numOfPayments - 1; i++) {
+
+                    var nextMonth = contractDate.setMonth((contractDate.getMonth()) + (i == 1 ? 0 : paymentsDuration));
+                    nextMonth = formatDateToYYYYMMDD(nextMonth);
+
+                    rowToAdd = '<tr>' +
+                        '<td>' +
+                        '<input type="text" id="payment' + (lastIndex) + '" dir="auto" class="form-control" readonly="" value="' + (lastIndex) + '">' +
+                        '</td>' +
+                        '<td><input type="text" id="paymentAmount' + (lastIndex) + '" dir="auto" class="form-control" value="' + addCommaToTheNumber(Math.round(payment)) + '"></td>' +
+                        '<td><input type="text" id="paymentDate' + (lastIndex) + '" class="form-control" value="' + (nextMonth) + '"></td>' +
+                        '<td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger">Delete</button></td>' +
+                        '</tr>';
+                    $("#paymentTable").append(rowToAdd);
+                    sum -= (Math.round(payment));
+                    summation_Of_payment += (Math.round(payment));
+                    lastIndex++;
+                }
+
+                var nextMonth = contractDate.setMonth((contractDate.getMonth()) + paymentsDuration);
+                nextMonth = formatDateToYYYYMMDD(nextMonth);
+                let rowToAdd2 = '<tr><td><input type="text" id="payment' + (lastIndex) + '" dir="auto" class="form-control" readonly="" value="' + (lastIndex) + '"></td><td><input type="text" id="paymentAmount' + (lastIndex) + '" dir="auto" class="form-control" value="' + addCommaToTheNumber(Math.round(sum - arabon)) + '"></td><td><input type="text" id="paymentDate' + (lastIndex) + '" class="form-control" value="' + (nextMonth) + '"></td><td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger">Delete</button></td></tr>';
+                $("#paymentTable").append(rowToAdd2);
+                summation_Of_payment += (Math.round(sum - arabon));
+                console.log("summation_Of_payment")
+                console.log(summation_Of_payment);
+
+                $('#total-price').text(totalPrice);
+                $('#summation-payment').text(summation_Of_payment);
+
+            }
+        } else {
+
+            var numOfPayments = parseInt($("#cnumOfPayments").val()) || 0;
+            $("#cnumOfPayments").parent().removeClass("has-error");
+            $("#error_msg").empty();
+            if (isNaN(numOfPayments) || numOfPayments <= 0 || numOfPayments > 84) {
+                $("#cnumOfPayments").parent().addClass("has-error");
+                return;
+            }
+            var totalPrice = parseInt($("#contract-modal-1 .total-price").val()) || 0;
+            var arabon = parseInt($("#carabon").val()) || 0;
+            console.log("total price : ", totalPrice);
+            console.log("arabon : ", arabon);
+            var payment = ((totalPrice - arabon) / numOfPayments).toFixed(2);
+            var contractDate = "";
+            if (payment > 0) {
+                var sum = totalPrice;
+                contractDate = getModalContractDate();
+
+                $("#cpaymentTable tbody").empty();
+                for (var i = 1; i <= numOfPayments - 1; i++) {
+                    var nextMonth = contractDate.setMonth((contractDate.getMonth()) + i);
+                    nextMonth = formatDateToYYYYMMDD(nextMonth);
+                    var rowToAdd = '<tr class="new-apend"><td><input type="text" id="cpayment' + (i) + '" dir="auto" class="form-control" readonly="" value="' + (i) + '"></td><td><input type="text" id="cpaymentAmount' + (i) + '" dir="auto" class="form-control" value="' + (Math.round(payment)) + '"></td><td><input type="text" id="cpaymentDate' + (i) + '" class="form-control" value="' + (nextMonth) + '"></td><td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger">Delete</button></td></tr>';
+                    $("#cpaymentTable").append(rowToAdd);
+                    sum -= (Math.round(payment));
+                }
+                var nextMonth = contractDate.setMonth((contractDate.getMonth()) + i);
+                nextMonth = formatDateToYYYYMMDD(nextMonth);
+                var rowToAdd = '<tr class="new-apend"><td><input type="text" id="cpayment' + (i) + '" dir="auto" class="form-control" readonly="" value="' + (i) + '"></td><td><input type="text" id="cpaymentAmount' + (i) + '" dir="auto" class="form-control" value="' + (Math.round(sum - arabon)) + '"></td><td><input type="text" id="cpaymentDate' + (i) + '" class="form-control" value="' + (nextMonth) + '"></td><td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger">Delete</button></td></tr>';
+                $("#cpaymentTable").append(rowToAdd);
+
+            }
+        }
+    }
+
+    function monthDiff(dateFrom, dateTo) {
+        return (dateTo.getMonth() - dateFrom.getMonth() +
+            (12 * (dateTo.getFullYear() - dateFrom.getFullYear()))) + 1
+    }
+
+    function addRow() {
+        let firstInput = $('table#paymentTable tbody tr:nth-child(2) td:nth-child(3) input').val();
+        let lastInput = $('table#paymentTable tbody tr:last td:nth-child(3) input').val();
+        let lastDate = '';
+        var paymentDate = formatDateToYYYYMMDD($("#paymentDate").val());
+        if (firstInput) {
+            if (new Date(paymentDate) > new Date(lastInput)) lastDate = paymentDate; else lastDate = lastDate;
+            // debugger
+            let diff = monthDiff(new Date(firstInput), new Date(lastDate));
+            let max_number_of_months = "{{ site.max_number_of_months }}";
+            if (parseInt(max_number_of_months) < diff) {
+                alert("Please Make sure all of your payments must not exceed " + max_number_of_months + " months!!");
+                return;
+            }
+        }
+
+        // // debugger
+        // if ($('table#paymentTable tbody tr').length - 1 > 0 && new Date($("#paymentDate").val()) < new Date(lastInput)) {
+        //     alert('You must add date after ' + lastInput);
+        //     return;
+        // }
+
+        var paymentAmount = $("#paymentAmount").val();
+        var lastIndex = $('#paymentTable>tbody>tr').length;
+
+        if (
+            ("" != paymentAmount)
+            &&
+            ("" != paymentDate)
+        ) {
+            $('#paymentTable')
+                .append(
+                    '<tr>' +
+                    '<td><input type="text" id="payment' + lastIndex + '" dir="auto" class="form-control" readonly value="' + lastIndex + '"></td>' +
+                    '<td><input type="text" id="paymentAmount' + lastIndex + '" dir="auto" class="form-control" value="' + addCommaToTheNumber(paymentAmount) + '"></td>' +
+                    '<td><input type="text" id="paymentDate' + lastIndex + '" class="form-control" value="' + paymentDate + '"></td>' +
+                    '<td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger">Delete</button></td>' +
+                    '</tr>');
+            lastIndex++;
+            $("#payment").val(lastIndex);
+            $("#paymentAmount").val("").removeClass(' -input');
+            $("#paymentDate").val("").removeClass(' -input');
+        } else {
+            if ((paymentAmount == "") || (paymentAmount <= 0)) {
+                $("#paymentAmount").addClass(' -input');
+            }
+            if (paymentDate == "") {
+                $("#paymentDate").addClass(' -input');
+            }
+
+        }
+    }
+
+    function removeRow(self) {
+        console.log("Deleted");
+    }
+
+    function addOldPayments() {
+
+        const unitId = $('.contract-modal-lg').data("Uid");
+
+        $.ajax({
+            url: site['uri']['public'] + '/currency/UnitByReservation/' + unitId,
+            type: "GET",
+        }).done(function (data) {
+            $('#selected_currency').text(data);
+        }).fail(function (err) {
+            console.log(err)
+        });
+
+
+        var url = site['uri']['public'] + "/payments/" + unitId;
+        var req3 = $.ajax({
+            type: "GET",
+            url: url
+        }).done(function (data) {
+
+            var $payments = $.parseJSON(data);
+
+            if ($payments.length == 0) {
+                return;
+            }
+
+            $payments.forEach(function ($payment, index) {
+                // if ( $payment['payment_number'] == 1) {
+                //     $('#r_firstPayment').val($payment['amount'])
+                //     $('#r_firstPayment_date').val($payment['payment_date'])
+                // } else {
+                var rowToAdd = '<tr><td><input type="text" id="payment' + $payment['id'] + '" dir="auto" class="form-control" readonly="" value="' + (parseInt(index) + 1) + '"></td><td><input type="text" id="paymentAmount' + $payment['id'] + '" dir="auto" class="form-control" value="' + addCommaToTheNumber($payment['amount']) + '"></td><td><input type="text" id="paymentDate' + $payment['id'] + '" class="form-control" value="' + $payment['payment_date'] + '"></td><td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger">Delete</button></td></tr>';
+                $("#paymentTable").append(rowToAdd);
+                // }
+
+
+            });
+
+        }).fail(function (err) {
+            return;
+        });
+    }
+
+    function addRowEditModal() {
+        const paymentAmount = $("#cpaymentAmount").val();
+        const paymentDate = $("#cpaymentDate").val();
+        var lastIndex = $('#paymentTable>tbody>tr').length + 1;
+
+        paymentIndex = $("#cpaymentTable #cpayment").val();
+        if (("" != paymentAmount) && (paymentAmount > 0) && ("" != paymentDate)
+        ) {
+            $('#cpaymentTable')
+                .append(
+                    '<tr class="new-apend">' +
+                    '<td><input type="text" id="cpayment' + lastIndex + '" dir="auto" class="form-control" readonly value="' + lastIndex + '"></td>' +
+                    '<td><input type="text" id="cpaymentAmount' + lastIndex + '" dir="auto" class="form-control" value="' + paymentAmount + '"></td>' +
+                    '<td><input type="text" id="cpaymentDate' + lastIndex + '" class="form-control" value="' + paymentDate + '"></td>' +
+                    '<td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger">Delete</button></td>' +
+                    '</tr>');
+            lastIndex++;
+            $("#cpayment").val(lastIndex);
+            $("#cpaymentAmount").val("").removeClass(' -input');
+            $("#cpaymentDate").val("").removeClass(' -input');
+        } else {
+            if ((paymentAmount == "") || (paymentAmount <= 0)) {
+                $("#cpaymentAmount").addClass(' -input');
+            }
+            if (paymentDate == "") {
+                $("#cpaymentDate").addClass(' -input');
+            }
+
+        }
+    }
+
+    /**
+     * Saves the generated payments values.
+     */
+    function preSavePaymentsGenerated() {
+        let firstInput = $('table#paymentTable tbody tr:nth-child(2) td:nth-child(3) input').val();
+        let lastDate = $('table#paymentTable tbody tr:last td:nth-child(3) input').val();
+        if (firstInput) {
+            let diff = monthDiff(new Date(firstInput), new Date(lastDate));
+            let max_number_of_months = "{{ site.max_number_of_months }}";
+            if (parseInt(max_number_of_months) < diff) {
+                alert("Please Make sure all of your payments must not exceed " + max_number_of_months + " months!!");
+                return;
+            }
+        }
+
+
+        const unitId = $('.contract-modal-lg').data("Uid");
+
+        $("#payments_save_error").addClass("display-none");
+        $("#payments_save_success").addClass("display-none");
+
+        var url = site['uri']['public'] + "/payments/" + unitId;
+        var req3 = $.ajax({
+            type: "GET",
+            url: url,
+        }).done(function (data) {
+
+            var res = $.parseJSON(data);
+
+            if (res.length <= 0) {
+
+                savePaymentsGenerated();
+
+            } else {
+
+                if (confirm("You already has payments, override them!")) {
+
+                    const csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var urlEdit = site['uri']['public'] + "/payments1Edit/";
+                    var paymentsEdit = {
+                        uid: unitId,
+                        csrf_token: encodeURIComponent(csrf_token)
+                    };
+                    var req3 = $.ajax({
+                        type: "POST",
+                        url: urlEdit,
+                        data: paymentsEdit
+                    }).done(function (data) {
+
+                        savePaymentsGenerated();
+
+                    }).fail(function (err) {
+                        console.log("error delete payments 1" + err)
+                    });
+                }
+
+            }
+
+
+        }).fail(function (err) {
+            return
+            console.log("error get payments 1")
+        });
+
+    }
+
+    function savePaymentsGenerated() {
+        $totalPrice = parseInt($("#r_totalPrice").val());
+
+        var paymentObj = [];
+        var paymentTable = $('#paymentTable>tbody>tr');
+        for (var i = 1; i < paymentTable.length; i++) {
+            paymentObj.push({
+                payment: (paymentTable[i].querySelectorAll('td>input')[0]).value,
+                paymentAmount: removeCommaFromNumber((paymentTable[i].querySelectorAll('td>input')[1]).value),
+                paymentDate: (paymentTable[i].querySelectorAll('td>input')[2]).value,
+            });
+        }
+
+        //  $payments = this.collectPayments();
+        $totalPayments = paymentObj.reduce(function (accumulator, currentValue) {
+            return accumulator + (parseFloat(currentValue.paymentAmount) || 0);
+        }, 0.0);
+
+        var msg = "The Total Price is " + (parseInt($totalPrice)) + " \n The Total payments Price is " + (parseInt($totalPayments));
+        if (confirm(msg)) {
+            console.log("$totalPayments = " + $totalPayments);
+            console.log("$totalPrice = " + $totalPrice);
+
+            var paymentsRowInsertedNumber = $('#paymentTable tbody tr').length;
+            console.log("paymentsRowInsertedNumber " + paymentsRowInsertedNumber)
+            if (paymentsRowInsertedNumber > 0) {
+                $("#paymentAmount").removeClass(" -input");
+                $("#paymentDate").removeClass(" -input");
+                $("#error_msg").html("");
+                $("#prePage").addClass("display-none");
+                $('.loader-modal-lg').modal('show');
+                const uid = $('.contract-modal-lg').data("Uid");
+                const csrf_token = $("meta[name=csrf_token]").attr("content");
+
+                $.ajax({
+                    type: "POST",
+                    url: site['uri']['public'] + "/payments",
+                    data: {
+                        payments_array: paymentObj,
+                        csrf_token: encodeURIComponent(csrf_token),
+                        uid: uid,
+                        paymentPeriod: $("#paymentPeriod").val(),
+                    }
+                }).done(function (data) {
+
+                    $("#payments_save_success").removeClass("display-none");
+                    console.log("success payment 1")
+                    console.log(data)
+                }).fail(function (err) {
+
+                    console.log("error payment 1")
+                });
+
+                $('.loader-modal-lg').modal('hide');
+                $('#unitTable').DataTable().ajax.reload(null, false);
+
+            }
+        }
+    }
+
+    /**
+     * This will reutrn a list of all of the payments created.
+     * @returns {[]}
+     */
+    function collectPayments() {
+        var paymentsRowInsertedNumber = $('#paymentTable tbody tr').length;
+        console.log("paymentsRowInsertedNumber " + paymentsRowInsertedNumber);
+        const paymentsToReturn = [];
+        if (paymentsRowInsertedNumber > 0) {
+
+            $('.paymentTable tr').each(function (i, row) {
+
+                console.log("values : ");
+
+                console.log(i)
+                console.log(row)
+
+            });
+
+            const values = getValuesFromContract('.form-horizontal-payments');
+            const uid = $('.contract-modal-lg').data("Uid");
+            const csrf_token = $("meta[name=csrf_token]").attr("content");
+
+            for (let i = 1; i <= paymentsRowInsertedNumber; i++) {
+                if (values['payment' + i] > 0 || values['paymentAmount' + i] > 0 || values['paymentDate' + i]) {
+                    const paymentsInfo = {
+                        payment: values['payment' + i],
+                        paymentAmount: values['paymentAmount' + i],
+                        paymentDate: formatDateToYYYYMMDD(Date.parse(values['paymentDate' + i])),
+                        uid: uid,
+                        csrf_token: encodeURIComponent(csrf_token)
+                    };
+                    console.log("paymentsInfo  " + i + " : " + paymentsInfo.paymentAmount);
+                    paymentsToReturn.push(paymentsInfo);
+                }
+            }
+
+
+        }
+
+        console.log("Payments : ");
+        console.log(JSON.stringify(paymentsToReturn));
+        return paymentsToReturn;
+    }
+</script>

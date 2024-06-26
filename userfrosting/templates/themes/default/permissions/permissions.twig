@@ -1,0 +1,125 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group= "permission" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Permissions",
+        "description" : "Permission management, authorization rules, add/remove permissions, etc."
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class='panel panel-primary'>
+                <div class='panel-heading panel-heading-buttons clearfix'>
+                    <h3 class='panel-title pull-left'><i class='fa fa-users'></i> Permissions</h3>
+                    <div class='pull-right'>
+                        {% if checkAccess('create_permission') %}
+                            <button type="button" class="btn btn-success js-permission-create" data-toggle="modal" data-target="#dialog-permission-create">
+                                <i class="fa fa-plus-square"></i>  Create New Permissions
+                            </button>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class='panel-body'>
+                    <div class="table-responsive">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control permissions-search-button search" data-column="all" id="permissions-search-field"   placeholder="Search...">
+                            <span class="input-group-btn">
+                        <button class="btn btn-default permissions-search-button" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        </span>
+                        </div>
+                        <table id="table-permissions" class="tablesorter table table-bordered table-hover table-striped tablesorter-bootstrap" data-sortlist="[[0, 0]]">
+                            <thead>
+                            <tr>
+                                <th class="sorter-metatext" data-column-name="permission_code">Permission Code <i class="fa fa-sort"></i></th>
+                                <th class="sorter-metatext" data-column-name="permission_name">Permission Name <i class="fa fa-sort"></i></th>
+                                <th class="sorter-metatext" data-column-name="permission_status">Status<i class="fa fa-sort"></i></th>
+                                <!-- <th class="sorter-metatext" data-column-name="theme">Theme <i class="fa fa-sort"></i></th> -->
+                                <th data-column-name="flag_can_delete">Actions <i class="fa fa-sort"></i></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for permission in permissions %}
+                                <tr>
+                                    <td>
+                                        {{permission.code}}
+                                    </td>
+                                    <td>
+                                        {{permission.name}}
+                                    </td>
+                                    <td>
+                                        {{permission.status}}
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                                Actions
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                {% if checkAccess('update_permission') %}
+                                                    <li>
+                                                        <a href="#" data-id="{{permission.id}}" class="js-permission-edit" data-target="#dialog-permission-edit" data-toggle="modal">
+                                                            <i class="fa fa-edit"></i> Edit permission
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                                {% if checkAccess('delete_permission') %}
+                                                <li>
+                                                    <a href="#" data-id="{{permission.id}}" class="js-permission-delete" data-name="{{permission.name}}" data-target="#dialog-permission-delete" data-toggle="modal">
+                                                        <i class="fa fa-trash-o"></i> Delete permission
+                                                    </a>
+                                                </li>
+                                                {% endif %}
+
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% include 'components/common/table-tablesorter-default.twig' with {'pager_id' : 'table-permissions-pager'} %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block page_scripts %}
+    <script>
+        $(document).ready(function() {
+            ufTable('table-permissions');
+            $.tablesorter.filter.bindSearch( $('#table-permissions'), $('.search'), false );
+
+            // hide search fields for table
+            $('#table-permissions').find('tr').eq(1).hide();
+            // $('.groups-search-button').on('click',function(){
+            //     var input=$('#groups-search-field').val();
+            //       $('#table-groups').trigger('search', [ [inpdut] ]);
+
+            // });
+            var numOfPages=$('.gotoPage').children('option').length;
+            var paginationOptions='';
+            for(var i=1,length=numOfPages;i<=length;i++){
+                paginationOptions+='  <li class="pager-control border-blue"><a href="#" class="paginationListner float-none">'+i+'</a></li>';
+                if(i==length){
+                    $('.pagedisplay').replaceWith(paginationOptions);
+                }
+            }
+            $('.paginationListner').on('click',function(e){
+                e.preventDefault();
+                $('#table-users').trigger('pageSet', $(this).html());
+            })
+        });
+    </script>
+{% endblock %}
+

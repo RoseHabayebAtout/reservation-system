@@ -1,0 +1,78 @@
+<ul class="nav navbar-top-links navbar-right " >
+     <!-- /.dropdown -->
+    <li class="dropdown ">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="{{user.icon}} fa-fw"></i> <span id="usernameinfo">{{user.user_name}}</span> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user">
+            <li>
+                <a href="{{site.uri.public}}/account/settings"><i class="fa fa-gear fa-fw"></i> {{ translate('settings') }} </a>
+            </li>
+            <li class="divider"></li>
+            <li>
+                <a href="{{site.uri.public}}/account/logout"><i class="fa fa-sign-out fa-fw"></i> {{ translate('logout') }} </a>
+            </li>
+            <li class="divider"></li>
+            <li style="cursor: pointer">
+                <a id="lang" onclick="changeLanguage()"><i class="fa fa fa-language fa-fw"></i> {{ translate('switch_language') }} </a>
+            </li>
+        </ul>
+        <!-- /.dropdown-user -->
+    </li>
+    <!-- /.dropdown -->
+</ul>
+<!-- /.navbar-top-links -->
+{% block page_scripts %}
+    <script>
+
+    function changeLanguage() {
+
+        if ($('#lang').text() ==  " Change To English ") {
+            localStorage.setItem("local", 'en_US');
+        } else {
+            localStorage.setItem("local", 'ar');
+        }
+
+        var path = window.location.href;
+        window.location.href = '{{ site.uri.public }}/language/switch?redirect='+path
+    }
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+
+    function detectMove(){
+        window.onmousemove = resetTimer; // catches mouse movements
+        window.onclick = resetTimer;     // catches mouse clicks
+        window.onscroll = resetTimer;    // catches scrolling
+        window.onkeypress = resetTimer;  //catches keyboard actions
+    }
+    function resetTimer(){
+        document.cookie = "timeout="+Math.floor(Date.now()/1000)+';path=/;';
+    }
+
+    detectMove();
+    setInterval(function(){
+        // $.get(site['uri']['public'] + '/account/loggedOut/', function(data)
+        // {
+        // if(data==0)  window.location.replace(site['uri']['public']+'/account/logout');
+        // console.log("flag"+data);
+        // });
+
+        $inActive = 1800;//seconds
+        $session_life = Math.floor(Date.now()/1000) - parseInt(getCookie('timeout'));
+        if($session_life >= $inActive){
+            //console.log($session_life,"you have to logout sweety");
+            $(".dropdown-user li").eq(2).find("a")[0].click();
+
+        }
+    },60*1000);
+
+    </script>
+{% endblock %}

@@ -1,0 +1,1 @@
+ALTER TABLE `parking_storage_reservation` ADD `currency` TEXT NOT NULL DEFAULT '$' AFTER `reservation_date`, ADD `exchange_rate` DOUBLE NOT NULL DEFAULT '1' AFTER `currency`;

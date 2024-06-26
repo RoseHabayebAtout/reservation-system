@@ -1,0 +1,1 @@
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'annex_count', 'Annex Count', 'unit', 'text')

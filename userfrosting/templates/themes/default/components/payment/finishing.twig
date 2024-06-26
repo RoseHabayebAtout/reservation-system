@@ -1,0 +1,59 @@
+<div id="finishingContent" class="display-none">
+    <div class="col-xs-12">
+
+        <div class="form-group">
+            <div class="col-xs-12 col-md-12">
+                <div class="form-group cform-group ">
+                    <div class="col-xs-12 col-md-4 ">
+                        <label for="numOfPayments"> finishing value </label>
+                    </div>
+                    <div class="col-xs-12 col-md-8 ">
+                        <input type="number" id="finishingValue" class="form-control" required="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function setFinishingPrice() {
+        const unitId = $('.contract-modal-lg').data("Uid");
+
+        $.ajax({
+            url: site['uri']['public'] + '/unit/'+ unitId +'/finishing/' ,
+            type: "GET",
+        }).done(function (data) {
+            if(!data) {
+                data = 0;
+            }
+            $('#finishingValue').val(data);
+        }).fail(function (err) {
+            console.log(err)
+        });
+    }
+
+    function saveFinishingPrice() {
+        const unitId = $('.contract-modal-lg').data("Uid");
+        const finishingValue = $('#finishingValue').val();
+
+
+        $.ajax({
+            url: site['uri']['public'] + '/unit/'+ unitId +'/finishing/' ,
+            data: {
+                finishing_Price: finishingValue
+            },
+            type: "patch",
+        }).done(function (data) {
+            if (data){
+                alert('تم تسجيل قيمة التشطيب بنجاح')
+            } else {
+                alert('لم يتم تسجيل قيمة التشطيب')
+            }
+
+        }).fail(function (err) {
+            console.log(err)
+        });
+    }
+</script>

@@ -1,0 +1,480 @@
+{% block page_scripts %}
+     <script src="{{site.uri.js}}/tiny.js"></script>
+
+    <!--
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/wdadk6j7pixwjyyrmfn3j44lfjwg4gzjnnxkt04hzp26jcat/tinymce/5/tinymce.min.js"></script>
+    -->
+    <script src="{{site.uri.fonts}}/Yakout-Linotype-Light.ttf"></script>
+    <script>tinymce.init({
+            selector: 'textarea',
+            plugins: 'preview',
+            toolbar: 'code',
+            toolbar_drawer: 'floating',
+            tinycomments_mode: 'embedded',
+            directionality : 'rtl'
+        });
+
+
+        var csrf_token = $("meta[name=csrf_token]").attr("content");
+
+  $(document).ready(function(){
+     var htmltext = '';
+    $(".save").on("click",function(e){
+
+        var id = $(this).attr('data-id')
+        //alert(id)
+
+      var content = tinymce.get(id).getContent();
+     // console.log("content ",content);
+
+
+        while(content.search("'Yakout Linotype Light'") > 0){
+            content = content.replace("'Yakout Linotype Light'","Yakout Linotype Light");
+        }
+        while(content.search("'Times New Roman'") > 0){
+            content = content.replace("'Times New Roman'","Yakout Linotype Light");
+        }
+
+        while(content.search("'Calibri Light'") > 0){
+            content = content.replace("'Calibri Light'","Calibri Light");
+        }
+
+        while(content.search("'Yakout Linotype'") > 0){
+            content = content.replace("'Yakout Linotype'","Yakout Linotype");
+        }
+
+        while(content.search("'GE SS Two Light'") > 0){
+            content = content.replace("'GE SS Two Light'","GE SS Two Light");
+        }
+
+
+        /*
+        while(content.search("<strong>") > 0){
+            content = content.replace("<strong>","");
+        }
+
+        while(content.search("</strong>") > 0){
+            content = content.replace("</strong>","");
+        }
+        */
+
+        console.log("content ",content);
+
+        var params = {
+            id: id,
+            content:content,
+            csrf_token: encodeURIComponent(csrf_token)
+        };
+        var url = site['uri']['public'] + "/contract1/editcontent/";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params
+        }).done(function (data) {
+            console.log(data)
+            alert("تم الحفظ بنجاح");
+            location.reload();
+
+        }).fail(function (err) {
+            console.log("error", err);
+        });
+
+
+    });
+
+
+  });
+
+    </script>
+{% endblock %}
+
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "user" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Users | " ~ target_user.user_name,
+        "description" : "User information page for " ~ target_user.user_name
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">معلومات شخصية</h1>
+            <textarea id="personal_info" style="height: 400px; ">
+                {{contractsections.personal_info}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="personal_info">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">المقدمة</h1>
+            <textarea id="introduction" style="height: 400px; ">
+                {{contractsections.introduction}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="introduction">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">التعريفات والمقدمة </h1>
+            <textarea id="defention_intro" style="height: 400px; ">
+                {{contractsections.defention_intro}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="defention_intro">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> مدة الاتفاقية </h1>
+            <textarea id="agreement_period" style="height: 400px; ">
+                {{contractsections.agreement_period}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="agreement_period">Save</button>
+        </div>
+    </div>
+
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> وصف المبيع </h1>
+            <textarea id="sell_description" style="height: 400px; ">
+                {{contractsections.sell_description}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="sell_description">Save</button>
+        </div>
+    </div>
+
+
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> إقرارات وتعهدات والتزامات الفريق الأول </h1>
+            <textarea id="Commitments_team_1" style="height: 400px; ">
+                {{contractsections.Commitments_team_1}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="Commitments_team_1">Save</button>
+        </div>
+    </div>
+
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> إقرارات وتعهدات والتزامات الفريق الثاني </h1>
+            <textarea id="Commitments_team_2" style="height: 400px; ">
+                {{contractsections.Commitments_team_2}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="Commitments_team_2">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> القيود على المظهر الخارجي </h1>
+            <textarea id="constraint_style" style="height: 400px; ">
+                {{contractsections.constraint_style}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="constraint_style">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> الثمن </h1>
+            <textarea id="cost" style="height: 400px; ">
+                {{contractsections.cost}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="cost">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> الاضافات والتعديلات على المبيع </h1>
+            <textarea id="additions" style="height: 400px; ">
+                {{contractsections.additions}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="additions">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> الاختلاف في المواصفات </h1>
+            <textarea id="differences" style="height: 400px; ">
+                {{contractsections.differences}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="differences">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> تسجيل المبيع وحقوق الملكية </h1>
+            <textarea id="Ownership_rights" style="height: 400px; ">
+                {{contractsections.Ownership_rights}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="Ownership_rights">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> الإحالة </h1>
+            <textarea id="referal" style="height: 400px; ">
+                {{contractsections.referal}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="referal">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> التخلف والإخلال </h1>
+            <textarea id="not_paid" style="height: 400px; ">
+                {{contractsections.not_paid}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="not_paid">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> أحكام عامة </h1>
+            <textarea id="public_rules" style="height: 400px; ">
+                {{contractsections.public_rules}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="public_rules">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> القانون المطبق وحل النزاعات </h1>
+            <textarea id="applied_law" style="height: 400px; ">
+                {{contractsections.applied_law}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="applied_law">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> ( هذه الإتفاقية  ( الصفقة </h1>
+            <textarea id="Deal" style="height: 400px; ">
+                {{contractsections.Deal}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="Deal">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> النسخ والبنود والصفحات </h1>
+            <textarea id="copied_pages" style="height: 400px; ">
+                {{contractsections.copied_pages}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="copied_pages">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> (ملحق رقم (1 </h1>
+            <textarea id="annex1" style="height: 400px; ">
+                {{contractsections.annex1}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="annex1">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050"> (ملحق رقم (2 </h1>
+            <textarea id="annex2" style="height: 400px; ">
+                {{contractsections.annex2}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="annex2">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">ملحق رقم (3) للاحياء الجاهزة </h1>
+            <textarea id="annex3_ReadyHai" style="height: 400px; ">
+                {{contractsections.annex3_ReadyHai}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="annex3_ReadyHai">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">ملحق رقم (3) للاحياء غير الجاهزة </h1>
+            <textarea id="annex3_NotReadyHai" style="height: 400px; ">
+                {{contractsections.annex3_NotReadyHai}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="annex3_NotReadyHai">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">سند إقرار وتعهد للاحياء الجاهزة </h1>
+            <textarea id="pledge1" style="height: 400px; ">
+                {{contractsections.pledge1}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="pledge1">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">سند إقرار وتعهد للاحياء غير الجاهزة </h1>
+            <textarea id="pledge2" style="height: 400px; ">
+                {{contractsections.pledge2}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="pledge2">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">ملحق آلية دفع الثمن مع التسليم </h1>
+            <textarea id="Payment_mechanism1" style="height: 400px; ">
+                {{contractsections.Payment_mechanism1}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="Payment_mechanism1">Save</button>
+        </div>
+    </div>
+
+
+    <div class="row" >
+        <div class="col-lg-12">
+            <h1 class="text-center" style="color: #92d050">ملحق آلية دفع الثمن </h1>
+            <textarea id="Payment_mechanism2" style="height: 400px; ">
+                {{contractsections.Payment_mechanism2}}
+             </textarea>
+        </div>
+        <!-- /.col-lg-6 -->
+        <div class="row col-lg-2" style="margin-top: 5px;">
+            <button class="btn btn-primary pull-left save" data-id="Payment_mechanism2">Save</button>
+        </div>
+    </div>
+
+
+
+
+    <!-- /.row -->
+{% endblock %}

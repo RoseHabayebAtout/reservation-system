@@ -1,0 +1,85 @@
+{% extends "layouts/layout-jumbotron.twig" %}
+{% set page_group = "home" %}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+
+    {% set page = page | merge({
+        "title"       : "A secure, modern user management system for PHP.",
+        "description" : "Main landing page for public access to this website.",
+        "active_page" : ""
+    }) %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{{site.uri.css}}/bootstrap-3.3.2.css" type="text/css" >
+
+    <!-- Page stylesheets -->
+    {% if user.locale == 'en_US'%}
+        <link rel="stylesheet" href="{{site.uri.css}}/homepage.css" type="text/css" >
+    {% else %}
+        <link rel="stylesheet" href="{{site.uri.css}}/homepage-rtl.css" type="text/css" >
+    {% endif %}
+
+    <!-- {% include 'components/common/alerts.twig' %}   -->
+    <div style=" margin-left: -50px;width: 120%;">
+        <div class="rawabi-home-title text-center">
+            <h2 class="site-title ">{{site.site_title}}</h2>
+            <h2 class="site-subtitle">Live Work Grow.</h2>
+            <!-- login -->
+             <div class="login-area  homepage-login">
+                <div class="bg-image ">
+                    <div class="login-signup ">
+                        <div class="tab-content ">
+                            <div class="login-inner">
+                                <div class="login-form">
+                                    <form name="login" method="post" action="{{site.uri.public}}/account/login" class="form-horizontal">
+                                        <div id="Login-alerts">
+
+                                         </div>
+                                        <div class="form-details">
+                                            <label class="user">
+                                                <input type="text"  name="user_name" autocomplete="off" value="" placeholder="{{ (site.email_login == 1) ? 'Username or Email' : 'Username' }}" class="text-center">
+                                            </label>
+                                            <label class="pass">
+                                                <input type="password" name="password" autocomplete="off" value="" placeholder="Password" class="text-center">
+                                            </label>
+                                        </div>
+                                    <button type="submit" class="form-btn" onsubmit="">Log In <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                                    </form>
+                                    {% include 'components/jumbotron/jumbotron-links.twig' %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- end of login -->
+       <!-- <img src="./images/rawabi.jpg" alt="rawabi Welcome Page" class="rawabi-home-img"> -->
+        <img src="{{site.uri.public}}/uploads/{{site.site_background_image}}" alt="rawabi Welcome Page" class="rawabi-home-img">
+    </div>
+    <!-- {% include 'components/jumbotron/jumbotron-links.twig' %}	 -->
+{% endblock %}
+
+{% block page_scripts %}
+    <script>
+        $(document).ready(function() {
+            // Process form
+            ufFormSubmit(
+                $("form[name='login']"),
+                "",
+                $("#userfrosting-alerts"),
+                function(data, statusText, jqXHR) {
+                    // Forward to home page on success
+                    window.location.replace(site['uri']['public']);
+                },
+                function() {
+                    $("#Login-alerts").html("<div class='alert alert-danger'>Invalid Username Or Password</div>");
+                }
+            );
+        });
+    </script>
+{% endblock %}

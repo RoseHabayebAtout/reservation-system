@@ -1,0 +1,24 @@
+
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+
+.form-control.required-input{
+    border: 2px solid red;
+}
+
+@media only screen 
+and (max-width : 480px){
+ table.dataTable thead{
+     display:none;
+  }
+}
+@media only screen 
+and (max-width : 320px){
+	#actions{
+		width:58px;
+	}
+
+}

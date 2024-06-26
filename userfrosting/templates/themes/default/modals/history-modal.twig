@@ -1,0 +1,67 @@
+<div class="modal fade modal-history-wl modal-history-wl show-history-modal-lg ltr" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header rtl flex-parent ">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h1 class="historyHeader" id="unitTitle" >{{ translate('unit_history') }}</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-xs-12 unit-details">
+                    <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                        <table id="historyTable" class="table display " cellspacing="0" width="100%">
+                            <thead class="btn-primary">
+                            <tr>
+                                <th>{{ translate('action') }}</th>
+                                <th>{{ translate('done_by') }}</th>
+                                <th>{{ translate('date') }}</th>
+                                <th>{{ translate('customer_name') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                        <div>
+                            <div class="row" id="deleteDiv">
+                                <div class="col-lg-6 col-xs-6">
+                                    <h2>{{ translate('asking_to_delete_unit') }}</h2>
+                                </div>
+                                <div class="col-lg-6 col-xs-6" >
+                                    <span id="unitID"></span>
+                                    <button class="col-xs-offset-5 btn btn-danger btn-width btn-delete" onclick="$('.unitDeletion-modal-lg').modal('show');">{{ translate('delete_unit') }} &nbsp<i class="fa fa-hand-o-up" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                            <div class="row" id="availableUnit">
+                                <div class="col-lg-6 col-xs-6">
+                                    <h2>{{ translate('asking_to_change_unit_to_available') }}</h2>
+                                </div>
+                                <div class="col-lg-6 col-xs-6" >
+                                    <span id="unitID"></span>
+                                    <button class="col-xs-offset-5 btn btn-primary btn-width btn-available" id="changeStatus">{{ translate('change_to_available') }} &nbsp<i class="fa fa-hand-o-up" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="row" id="signedUnit">
+                                <div class="col-lg-6 col-xs-6">
+                                    <h2> {{ translate('asking_to_change_unit_to_signed') }}</h2>
+                                </div>
+                                <div class="col-lg-6 col-xs-6" >
+                                    <span id="unitID"></span>
+                                    <button class="btn btn-primary pull-right btn-width btn-available" style="background-color: black; color: white;" id="changeToSigned" >{{ translate('change_to_signed') }} &nbsp<i class="fa fa-hand-o-up" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row lead">
+                <div class="col-xs-offset-2 col-xs-9 ">
+                    <!-- <div class="pull-right">
+                       <button class="btn btn-default" id="history" onclick="$('.show-history-modal-lg').modal('hide')">Go Back</button>
+                   </div>!-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

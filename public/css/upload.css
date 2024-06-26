@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css?family=Cairo:300,400,600,700&subset=arabic,latin-ext');
+
+*{
+    font-family: 'Cairo', sans-serif;
+}
+input[type="file"]{
+    border: 1px solid #ccc;
+    width: 100%;
+    height: auto;
+}
+.images-container {
+    list-style: none;
+    margin: 2em 0 0;
+    padding: 0;
+}
+.images-container li {
+    background: #f0f0f0;
+    margin: 1.25em 0;
+    overflow: auto;
+    box-shadow: 0 1px 5px 0 transparent;
+    border-radius: 3px;
+    transition: box-shadow 0.28s ease-out;
+}
+.images-container li:hover{
+    box-shadow: 0 1px 15px 0 #646464;
+}
+.images-container li img {
+    width: 100%;
+    vertical-align: middle;
+    background-color: #000;
+    transition: all 0.35s ease-out;
+    position: relative;
+}
+.fa-search{
+    position: absolute;
+    top: calc(50% - 20px);
+    left: calc(50% - 15px);
+    color: #000;
+    font-size: 2.5em;
+    opacity: 0;
+    transition: all 0.27s ease-in-out;
+}
+.images-container li:hover img,
+.images-container li:hover .fa-search{
+    cursor: pointer;
+}
+.images-container li:hover img{
+    opacity:0.5;
+}
+.images-container li:hover .fa-search{
+    opacity: 1;
+}
+.margin-t1{
+    margin-top: 1em;
+}
+.custom-file-input::-webkit-file-upload-button {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+span.tag{
+    display: inline-block;
+    background: #00aced;
+    padding: 0.5em;
+    border-radius: 2em;
+    color: #fff;
+    font-size: 1.05em;
+}
+.flex-parent-preview{
+    display: flex;
+    text-align: center;
+    justify-content: flex-start;
+    align-items: baseline;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.flex-parent-preview .attachedSpan{
+    margin: 0.5em 0;
+}
+.no-padding{
+    padding: 0;
+}
+.refresh{
+    transition: all 0.2s ease-in;
+}
+.fa-refresh{
+    display: inline-block;
+    margin-left: 1em;
+}
+
+.uploadBtn{
+width: 80px;
+margin-right: 20px;
+margin-bottom: 8px;
+}
+.top-margin{
+margin-top: 100px;
+}
+.select-option{
+    border: 2px solid #0e1a35;
+    width: 180px;
+    font-size: larger;
+    box-sizing: border-box;
+     overflow: auto;
+}
+.btn-upload{
+   width: 188px;
+    height: 45px;
+    margin-top: 20px;
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;  
+}
+.filter-option{
+    width: 80%;
+    border: 2px solid #0e1a35;
+    display: block;
+}
+.close-icon{
+  margin-left: 83.33333333%;
+ margin-top: 10px;
+}
+SELECT, INPUT[type="text"] {
+    width: 160px;
+    box-sizing: border-box;
+}
+SECTION {
+    padding: 8px;
+    background-color: #f0f0f0;
+    overflow: auto;
+}
+SECTION > DIV {
+    float: left;
+    padding: 4px;
+}
+SECTION > DIV + DIV {
+    width: 40px;
+    text-align: center;
+}

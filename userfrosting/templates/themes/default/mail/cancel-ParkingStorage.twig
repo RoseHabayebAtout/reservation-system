@@ -1,0 +1,41 @@
+{% block subject %}
+    The {{ type }} Cancelled Reservation by - {{ user.display_name }}
+{% endblock %}
+
+{% block body %}
+    <br>
+    <div style="font-size:medium; float: left" dir="ltr">
+        The {{ type }} of rawabi_code {{ rawabi_code }} has been Cancelled Reservation by {{ user.display_name }}.
+
+        <h3>The Client details:</h3>
+        <ul style="font-size: medium;">
+            <li>Client name :{{ reservedUnit.customer_name }}</li>
+            <li>Client mobile number : {{ reservedUnit.mobile }}</li>
+            <li>Client address : {{ reservedUnit.customer_address }}</li>
+        </ul>
+        <h3>The {{ type }} details:</h3>
+        <ul  style="font-size: medium;">
+            <li>Apartment Code : {{ info.rawabi_code }}</li>
+            <li>Neighborhood : {{ info.neighporhood }}</li>
+            {% if type == "Parking" %}
+                <li>{{ type }} Number : {{ info.parking_number }}</li>
+                <li> Description : {{ info.description }}</li>
+            {% else %}
+                <li>{{ type }} Number : {{ info.storage_number }}</li>
+                <li>Tabu Code  : {{ info.tabu_code }}</li>
+                <li> Description : {{ info.tabu_description }}</li>
+                <li> Area : {{ info.area }}</li>
+            {% endif %}
+            <li>Building : {{ info.building }}</li>
+            <li>Floor : {{ info.floor }}</li>
+            <li>Price : {{ info.price }}</li>
+        </ul>
+
+
+        <h3>
+            Regards,<br>
+            {{site.site_title}} Team
+        </h3>
+    </div>
+
+{% endblock %}

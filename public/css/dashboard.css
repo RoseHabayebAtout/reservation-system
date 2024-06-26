@@ -1,0 +1,16 @@
+/*these styles are needed for datepicker to always show month and year*/
+/*.bootstrap-datetimepicker-widget .datepicker .datepicker-days{
+	display: none !important;
+}
+.bootstrap-datetimepicker-widget .datepicker .datepicker-months{
+	display: block !important;
+}
+.bootstrap-datetimepicker-widget .datepicker .datepicker-months .table-condensed,
+.bootstrap-datetimepicker-widget .datepicker .datepicker-months .table-condensed thead,
+.bootstrap-datetimepicker-widget .datepicker .datepicker-months .table-condensed tbody,
+.bootstrap-datetimepicker-widget .datepicker .datepicker-months .table-condensed tr,
+.bootstrap-datetimepicker-widget .datepicker .datepicker-months .table-condensed td
+{
+	display: block !important;
+	width: 100% !important;
+}*/

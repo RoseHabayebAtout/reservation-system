@@ -1,0 +1,100 @@
+{% block subject %}
+    {{site.site_title}} - your password reset request
+{% endblock %}
+
+{% extends "layouts/layout-dashboard.twig" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}    
+    {% set page = page | merge({
+        "title"       : "email management",
+        "description" : "email management desc"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+        <div class="col-xs-12">
+	        <div class='panel panel-primary'>
+		        <div class='panel-heading'>
+		            <h3 class='panel-title'><i class='fa fa-globe'></i> Email Settings</h3>
+		        </div>
+		        <div class='panel-body'>
+		            <div id="settings-alerts">
+		                <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+		            </div>
+		            <label> Reservation Email Title:-</label>
+             			<input type="text" class="form-control" id="reserveEmailTitle" value="{{reservation_title}}">
+               		<label>Reservation Email Content:</label>
+				  	<textarea class="form-control" rows="5" id="reserveEmail" name="reservation">{{reservation_template}} </textarea>
+		            
+		            <label> Cancellation Email Title:-</label>
+           			<input type="text" class="form-control" id="cancelEmailTitle" value="{{cancellation_title}}">
+               		<label>Cancellation Email Content:</label>
+				  	<textarea class="form-control" rows="5" id="cancellEmail" name="cancellation">{{cancellation_template}}</textarea>
+
+					<label> purchase Email Title:-</label>
+	                <input type="text" class="form-control" id="purchaseEmailTitle" value="{{purchase_title}}">
+	                <label>Purchase Email Content:</label>
+	            	<textarea class="form-control" rows="5" id="purchaseEmail" name="purchase">{{purchase_template}} </textarea>
+
+		        </div>
+	        </div>
+        </div>
+		<div class="col-xs-2 col-xs-offset-5">
+			<button class="btn btn-primary text-center" id="saveEmailForm">Save</button>
+		</div>
+	</div>			
+
+{% endblock %}
+{% block page_scripts  %}
+<script type="text/javascript">
+	$(document).ready(function() {
+            var timer;
+            
+            // Autosave text fields
+            $("#saveEmailForm").click(function () {
+                clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                $("#settings-alerts").html("<div class='alert alert-warning'>Saving...</div>");
+                timer = setTimeout(function() { // assign timer a new timeout 
+				 	var csrf_token = $("meta[name=csrf_token]").attr("content");
+				 	var reserveEmailTitle=$('#reserveEmailTitle').val();
+				 	var reserveEmail=$('#reserveEmail').val();
+				 	
+				 	var cancelEmailTitle=$('#cancelEmailTitle').val();
+				 	var cancelEmail=$('#cancellEmail').val();
+					
+					var purchaseEmailTitle=$('#purchaseEmailTitle').val();
+				 	var purchaseEmail=$('#purchaseEmail').val();
+
+		            var params={reservationTemplate:reserveEmail,
+		            	reservationTitle:reserveEmailTitle,
+		            	cancellationTitle:cancelEmailTitle,
+		            	cancellationTemplate:cancelEmail,
+
+		            	purchaseTitle:purchaseEmailTitle,
+		            	purchaseTemplate:purchaseEmail,
+
+
+		            	csrf_token:encodeURIComponent(csrf_token)};
+		            var url = site['uri']['public'] + "/emailsManagement/";
+		            // Append page CSRF token
+		            $.ajax({  
+		              type: "put",  
+		              url: url,
+		              data: params ,
+
+		            }).done(function(data){
+		            	$("#settings-alerts").html("<div class='alert alert-success'>All settings have been saved</div>");
+		            })
+		           .fail(function(err){
+						$("#settings-alerts").html("<div class='alert alert-danger'>Could not save settings.</div>");
+		           });
+                }, 700);
+            });           
+	});
+</script>
+{% endblock %}

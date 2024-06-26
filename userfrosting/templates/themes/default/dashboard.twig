@@ -1,0 +1,888 @@
+
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "dashboard" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" type="text/css">
+    <link rel="stylesheet" href="pace-theme-center-radar.css" />
+    <script src="pace.min.js"></script>
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Dashboard",
+        "description" : "Your user dashboard."
+    }) %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+
+    <div class="container-fluid">
+
+        <!-- panel dashboard -->
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading panel-theme-color">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <i class="fa fa fa-users fa-5x"></i>
+                            </div>
+                            <div class="col-xs-10 text-right">
+                                <div class="huge" id="salesmanPanel"></div>
+                                <div>{{ translate('registered') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="./users">
+                        <div class="panel-footer">
+                            <span class="pull-left">{{ translate('view_details') }}</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <div class="panel  panel-green-dashboard ">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <i class="fa fa-building fa-5x"></i>
+                            </div>
+                            <div class="col-xs-10 text-right">
+                                <div class="huge" id="unitPanel"></div>
+                                <div>{{ translate('units') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="./unit/#Available">
+                        <div class="panel-footer">
+                            <span class="pull-left">{{ translate('view_details') }}</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <div class="panel  panel-primary">
+                    <div class="panel-heading panel-theme-color">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <i class="fa fa-shopping-cart fa-5x"></i>
+                            </div>
+                            <div class="col-xs-10 text-right">
+                                <div class="huge" id="reservationPanel"></div>
+                                <div>{{ translate('units') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="./unit/#Reserved">
+                        <div class="panel-footer">
+                            <span class="pull-left">{{ translate('view_details') }}</span>
+                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <div class="panel  panel-green-dashboard">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <i class="fa fa-gamepad fa-5x"></i>
+                            </div>
+                            <div class="col-xs-10 text-right">
+                                <div class="huge" id="purchasedPanel"></div>
+                                <div>{{ translate('units') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="./unit/#Purchased">
+                        <div class="panel-footer">
+                            <span class="pull-left">{{ translate('view_details') }}</span>
+                            <span class="pull-right" ><i class="fa fa-arrow-circle-right"></i></span>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- end of panel dashboard -->
+
+        </div>
+        <!-- end of panel dashboard -->
+
+        <div class="row is-flex">
+            <div class="col-xs-12 col-lg-6 text-center well">
+                <div class="form-group z-index-2">
+                    <label for="totalAptsSelect">{{ translate('neighborhood') }}:</label>
+                    <select class="form-control width-25 all-neighborhood-select" id="totalAptsSelect">
+                        <option value="all">{{ translate('all') }}</option>
+                    </select>
+                </div>
+                <div id="total_apts_pieChart" class="chart"></div>
+            </div>
+
+            <div class="col-xs-12 col-lg-6 well">
+                <div class=" text-center z-index-2">
+                    <div class="form-group">
+                        <label for="totalAptsSelect">{{ translate('neighborhood') }}:</label>
+                        <select id="multiSelectApartments" class="all-neighborhood-select" multiple="multiple">
+
+                        </select>
+                    </div>
+                </div>
+                <div id="barchart2_values" class="chart"></div>
+            </div>
+            <!--  <div class="col-xs-12 col-lg-6 well">
+                 <div class="row margin-bottom-15px">
+                     <div class="col-md-6 col-sm-6 col-xs-12 z-index-2">
+                         <div class="col-xs-5 col-sm-7 col-md-5 padding-top-5px">
+                             <label for="totalAptsSelect"> Neighborhood:</label>
+                         </div>
+                         <div class="col-xs-7 col-sm-5 col-md-7">
+                             <select class="form-control all-neighborhood-select" id="reservationFeesCollected">
+                                 <option>all</option>
+                             </select>
+                         </div>
+                         <div class="flex-container">
+
+                             <input type="radio" name="type-of-fees" id ="res-type" checked> Reservations  </input>
+                             <label for="res-type"></label>
+
+                             <input type="radio"  name="type-of-fees" id ="pur-type">Purchases</input>
+                            <label for="pur-type"> </label>
+                         </div>
+                     </div>
+                     <div class="col-md-6 col-sm-6 col-xs-12 z-index-2">
+                         <div id="reservation-fees">
+                             <label class="col-xs-5 col-sm-3 padding-top-5px" for="totalAptsSelect"> Date: </label>
+                             <div class="col-xs-7 col-sm-9">
+                               <div class='input-group date '  id='dateCollectedFeesFilter'>
+                                   <input type='text' class="form-control " data-date-view-mode="months" />
+                                   <span class="input-group-addon">
+                                       <span class="glyphicon glyphicon-calendar"></span>
+                                   </span>
+                               </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div id="areachart_values" class="chart"></div>
+             </div> -->
+            <!--   <div class="col-xs-12 col-sm-8 col-sm-offset-2 well">
+                  <div class=" text-center z-index-2">
+                      <div class="form-group">
+                        <label for="totalAptsSelect">Neighborhood:</label>
+                        <select id="multiSelectApartments" class="all-neighborhood-select" multiple="multiple">
+
+                      </select>
+                      </div>
+                  </div>
+                  <div id="barchart2_values" class="chart"></div>
+              </div> -->
+        </div><!-- end of row -->
+
+        <!--  -->
+        <div class="row is-flex">
+            <div class="col-xs-12 col-lg-12 text-center well">
+                <div class="">
+                    <button onclick="window.location ='./unit/#Reserved'" class="btn btn-info pull-right">{{ translate('view_more_details') }}</button>
+                    <div class="huge text-center">{{ translate('recent_not_signed_reservations') }}</div>
+                </div>
+
+                <table id="pending-reservation-table" class="cell-border" >
+                    <thead>
+                    <th>{{ translate('neighborhood') }}</th>
+                    <th>{{ translate('company_code') }}</th>
+                    <th>{{ translate('building_type') }}</th>
+                    <th>{{ translate('customer_name') }}</th>
+                    <th>{{ translate('reservation_date') }}</th>
+                    <th>{{ translate('reservation_user') }}</th>
+                    <th>{{ translate('last_modified_user') }}</th>
+
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div><!-- end of row -->
+
+        <!-- -->
+        <div class="row is-flex">
+            <div class="col-xs-12 col-lg-12 text-center well">
+                <div class="row">
+                    <button onclick="window.location ='./unit/#SomethingElse'" class="btn btn-info pull-right">View more Details</button>
+                    <div class="text-center" style="font-size: 31px;">{{ translate('upcomming_payments') }}</div>
+                </div>
+                <div class="row" style="margin-bottom: 20px;" >
+                    <div class="col-md-6 col-sm-6 col-xs-12 z-index-2">
+                        <div id="reservation-fees">
+                            <label class="col-xs-5 col-sm-1 padding-top-5px" for="totalAptsSelect"> {{ translate('from') }}: </label>
+                            <div class="col-xs-7 col-sm-5 pull-left">
+                                <div class='input-group date '  id='upcommingPaymentsFromDate'>
+                                    <input type='text' class="form-control " data-date-view-mode="months" />
+                                    <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 z-index-2">
+                        <div id="reservation-fees" >
+                            <div class="col-xs-7 col-sm-5" style="float: right;">
+                                <div class='input-group date '  id='upcommingPaymentsToDate'>
+                                    <input type='text' class="form-control " data-date-view-mode="months" />
+                                    <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                </div>
+                            </div>
+                            <label class="col-xs-5 col-sm-1 padding-top-5px" for="totalAptsSelect" style="float: right;"> {{ translate('to') }}: </label>
+
+                        </div>
+                    </div>
+                </div>
+                <table id="upcomming-payments" class="cell-border" >
+                    <thead>
+                    <th>{{ translate('payment_number') }}</th>
+                    <th>{{ translate('payment_date') }}</th>
+                    <th>{{ translate('customer_name') }}</th>
+                    <th>{{ translate('payment_amount') }}</th>
+                    <th>{{ translate('unit') }}</th>
+                    <th>{{ translate('contrcat type') }}</th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div><!-- end of row -->
+
+    </div><!-- end of container-fluid -->
+
+{% endblock %}
+
+{% block page_scripts %}
+    <!-- added by fadi -->
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.ajax({
+                beforeSend: function(){
+                    // Handle the beforeSend event
+                    Pace.start();
+                },
+                complete: function(){
+                    // Handle the complete event
+                    Pace.stop();
+                }
+            });
+
+            var table = $('#pending-reservation-table').DataTable({
+                "bSort": true,
+                'ajax': {
+                    "type": "get",
+                    "url": site['uri']['public'] + '/unit/reserved?dashboard=true',
+                    "dataSrc": function (json) {
+                        return json;
+                    }
+                },
+                "columns": [
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<tr style="border-bottom: 1px solid lightgrey">' +
+                                '<td>' + row.neighborhood + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.company_code + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.building_type + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.customer_name + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.reservation_date + '</td> </tr>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.reservation_user + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.last_modified_user + '</td> </tr>'
+                        }
+                    }
+                ]
+
+            });
+
+            // Initialize the attributes as a function so that we do the update.
+            var paramsAndData = function(d){
+                d.fromDate = getCalenderPaymentsFromDate();
+                d.toDate = getCalenderPaymentsToDate();
+            };
+
+            var table1 = $('#upcomming-payments').DataTable({
+                'ajax': {
+                    "type": "get",
+                    "url": site['uri']['public'] + '/payment/upcoming/',
+                    "data": paramsAndData,
+                    "dataSrc": function (json) {
+                        return json;
+                    }
+                },
+                "columns": [
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<tr style="border-bottom: 1px solid lightgrey">' +
+                                '<td>' + row.payment_number + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.payment_date + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.customer_name + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' +  row.currency + ' ' + addCommaToTheNumber(row.amount)  + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td>' + row.unit.neighborhood + ' ' + row.unit.rawabi_code + '</td>'
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+
+                            return '<td>' + row.contract_type + '</td>'
+                        }
+                    }
+                ]
+
+            });
+
+        })
+
+
+        function addCommaToTheNumber(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function replaceAll(str, find, to) {
+            return str.replace(new RegExp(find, 'g'), to);
+        }
+
+        function removeCommaFromNumber(x) {
+            return parseFloat(replaceAll(x+"",',',''));
+        }
+
+
+        function drawPurchases(params) {
+            var url = site['uri']['public'] + "/get-all-purchases/";
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: params
+            }).done(function(response) {
+                response = JSON.parse(response);
+                console.log(response['message']);
+
+                barArr = [
+                    {month: response['output'][2].month, purchases: response['output'][2].purchases},
+                    {month: response['output'][1].month, purchases: response['output'][1].purchases},
+                    {month: response['output'][0].month, purchases: response['output'][0].purchases}
+                ];
+                var barOptions={
+                    xkey: 'month',
+                    ykeys: ['purchases'],
+                    labels: ['Purchases'],
+                    parseTime: false,
+                    pointFillColors: ['#ffffff'],
+                    pointStrokeColors: ['black'],
+                    lineColors: ['#0e1a35', '#5cb85c'],
+                }
+                drawChart(barArr, barOptions, 'area', 'areachart_values');
+            })
+        }
+
+        // initialize datetime filter
+        $('#dateCollectedFeesFilter').datetimepicker({
+            debug:true,
+            defaultDate: new Date(),
+            dayViewHeaderFormat: 'MMMM YYYY',
+            format: 'MM/YYYY',
+            viewMode:'months',
+        });
+
+        var previousMonthDate = new Date();
+        previousMonthDate.setMonth(previousMonthDate.getMonth() - 1);
+
+        $('#upcommingPaymentsFromDate').datetimepicker({
+            debug:true,
+            defaultDate: previousMonthDate,
+            dayViewHeaderFormat: 'MMMM YYYY',
+            format: 'MM/YYYY',
+            viewMode:'months',
+        });
+
+        $('#upcommingPaymentsToDate').datetimepicker({
+            debug:true,
+            defaultDate: new Date(),
+            dayViewHeaderFormat: 'MMMM YYYY',
+            format: 'MM/YYYY',
+            viewMode:'months',
+        });
+
+        $('#upcommingPaymentsToDate').on('dp.change', function(e){changeDataTable(); })
+        $('#upcommingPaymentsFromDate').on('dp.change', function(e){ changeDataTable(); })
+
+        function changeDataTable() {
+            jsonUrl = site['uri']['public'] + '/payment/upcoming/';
+            $('#upcomming-payments').DataTable().ajax.url(jsonUrl).load();
+        }
+
+        // jsonUrl = site['uri']['public'] + '/unit/getAvailableUnits/';
+        // $('#rentedTable').DataTable().ajax.url(jsonUrl).load();
+
+        $('#upcommingPaymentsToDate,#res-type, #pur-type').on('change dp.change',
+            function(self){
+                var selection=$('#upcommingPaymentsToDate').val();
+                // var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var pickedDate=getCalenderPaymentsToDate();
+                var params={neighborhood: selection, from_date: pickedDate,
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: params
+                }).done(function(data){
+                    data=JSON.parse(data);
+                })
+                    .fail(function(err){
+                        console.log("err",err)
+                    });
+            })
+
+        // initialize multiselect element
+        $('#multiSelectApartments').multiselect({
+            onChange: function(element, checked) {
+                var appartments = $('#multiSelectApartments option:selected');
+                // get selected options
+                var selected = [];
+                $(appartments).each(function(index, brand){
+                    var val=$(this).val();
+                    selected.push(val);
+                });
+                /*if all options is selected show all and exit*/
+                if(selected.length==0)
+                {
+                    drawAppartmentPerNeighborhood();
+                    return;
+                }
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var params={csrf_token:encodeURIComponent(csrf_token)};
+                var url = site['uri']['public'] + "/charts/total-appartments-per-neighborhood/";
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: params ,
+                }).done(function(data){
+                    data = JSON.parse(data);
+                    console.log("totalAppartmentsPerNeighborhood "+data[0].name,data[0].appartments.available,data[0].appartments.available,data[0].appartments.reserved);
+                    var barOptions={
+                        xkey: 'neighborhood',
+                        ykeys: ['available', 'reserved', 'purchased','rented','signed'],
+                        labels: ['available', 'reserved', 'purchased','rented','signed'],
+                        barColors: ['#d9534f', '#F89406', '#5cb85c',"#0e1a35","#000000"]
+                    }
+                    var barArr=[];
+                    for(var i=0,length=data.length;i<length;i++){
+                        for(var j=0,jlength=selected.length;j<jlength;j++){
+                            if(data[i].name === selected[j]){
+                                barArr.push({ neighborhood: data[i].name, available: data[i].appartments.available,
+                                    reserved: data[i].appartments.reserved,pending: data[i].appartments.pending,
+                                    purchased: data[i].appartments.purchased, rented: data[i].appartments.rented,
+                                    signed: data[i].appartments.signed
+                                });
+                            }
+                        }
+                        if(i === length - 1){
+                            drawChart(barArr,barOptions,'column','barchart2_values');
+                        }
+                    }
+                })
+                    .fail(function(err){
+                        console.log("err",err)
+                    });
+            }
+        });
+        /*
+            * get all salesman to initialize panel of salesman
+        */
+        var csrf_token = $("meta[name=csrf_token]").attr("content");
+        var params={csrf_token:encodeURIComponent(csrf_token)};
+        var url = site['uri']['public'] + "/getTotalUsers/";
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: params ,
+
+        }).done(function(totalSalesman){
+            /*
+                 * initialize unit panel
+            */
+            $('#salesmanPanel').html(totalSalesman +"<br><br>" + _translate('officers'));
+        })
+            .fail(function(err){
+                console.log("err",err)
+            });
+        /*
+        *
+        * get all options for select from api
+        *
+        */
+        var csrf_token = $("meta[name=csrf_token]").attr("content");
+        var params={neighborhood:'Anfield',csrf_token:encodeURIComponent(csrf_token)};
+        var url = site['uri']['public'] + "/charts/get-neighborhoods/";
+        var req1= $.ajax({
+            type: "GET",
+            url: url,
+            data: params ,
+
+        }).done(function(data){
+            data=JSON.parse(data);
+
+            var i=0,propertyArr=[];
+            for(var propertyName in data) {
+                $(".all-neighborhood-select").append(new Option(propertyName, propertyName));
+                $('#multiSelectApartments').multiselect('rebuild');
+                // default value show 6 choices only
+                if(i<6){
+                    propertyArr.push(propertyName);
+                    i++;
+                    if(i==6){
+                        $('#multiSelectApartments').multiselect('select',propertyArr,true)
+                    }
+                }
+            }
+        })
+            .fail(function(err){
+                console.log("err",err)
+            });
+
+        $('#reservationFeesCollected, #dateCollectedFeesFilter,\n\
+            #res-type, #pur-type').on('change dp.change',
+            function(self){
+                var selection=$('#reservationFeesCollected').val();
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var pickedDate=getCalenderDate();
+                var params={neighborhood: selection, from_date: pickedDate,
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+
+                if ($('#pur-type').prop('checked')) {
+                    drawPurchases (params);
+                    return;
+                }
+
+                if(selection === "all"){
+                    var url = site['uri']['public'] + "/charts/get-fees-last-three-month/";
+                    params={from_date:pickedDate,csrf_token:encodeURIComponent(csrf_token)};
+                }
+                else{
+                    var url = site['uri']['public'] + "/charts/get-fees-last-three-month-per-neighborhood/";
+                }
+
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    data: params
+                }).done(function(data){
+                    data=JSON.parse(data);
+                    var barArr=[
+                        {month:data[2].month, collected_fees:+data[2]['collected_fees']},
+                        {month:data[1].month, collected_fees:+data[1]['collected_fees']},
+                        {month:data[0].month, collected_fees:+data[0]['collected_fees']},
+                    ];
+                    var barOptions={
+                        xkey: 'month',
+                        ykeys: ['collected_fees'],
+                        labels: ['fees collected'],
+                        parseTime: false,
+                        pointFillColors: ['#ffffff'],
+                        pointStrokeColors: ['black'],
+                        lineColors: ['#0e1a35', '#5cb85c'],
+                    }
+
+                    if(selection!=="all"){
+                        barOptions.title=selection;
+                    }
+                    drawChart(barArr,barOptions,'area','areachart_values');
+                })
+                    .fail(function(err){
+                        console.log("err",err)
+                    });
+            })
+
+        /*
+        *
+        * onchange for filter send request depending on selection flag if all neighborhood or specific one
+        *
+        */
+        $('#totalAptsSelect').change(function(self){
+
+            var selection=$('#totalAptsSelect').val();
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var params={neighborhood:selection,csrf_token:encodeURIComponent(csrf_token)};
+            if(selection=="all"){
+                var url = site['uri']['public'] + "/charts/total-appartments/";
+            }
+            else{
+                var url = site['uri']['public'] + "/charts/appartments-per-neighborhood/";
+            }
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: params ,
+
+            }).done(function(data){
+                //console.log("data"+data);
+
+                data=JSON.parse(data);
+
+                console.log("returned dataFor draw"+data.available);
+                console.log("returned dataFor draw"+data);
+                console.log("UsedURL: "+url);
+                if(selection=="all"){
+                    /*
+                        * initialize unit panel
+                    */
+                    $('#unitPanel').html( data.available + "<br><br>" + _translate('available'));
+                    $('#reservationPanel').html(data.reserved + "<br><br>"+ _translate('reserved'));
+                    $('#purchasedPanel').html(data.purchased + "<br><br>"+ _translate('purchased'));
+                }
+
+                opts={
+                    colors: ['#F89406', '#d9534f', '#5cb85c','#0e1a35','#000000'],
+                }
+                var data=[{
+                    label: _translate('reserved'),
+                    value: data.reserved
+                }, {
+                    label: _translate('available'),
+                    value: data.available
+                },{
+                    label: _translate('purchased'),
+                    value: data.purchased
+                },{
+                    label: _translate('rented'),
+                    value: data.rented
+                },{
+                    label: _translate('signed'),
+                    value: data.signed
+                }
+                ];
+                drawChart(data,opts,'pie','total_apts_pieChart')
+            })
+                .fail(function(err){
+                    console.log("err",err)
+                });
+        })
+        // simulate press for all value of neighborhood selection
+        $('#totalAptsSelect').val("all").change();
+
+        /*
+        *
+        * get fee for last three month per neighborhood or all neighborhoods api
+        * it fires when neighborhood filter or date filter for reservation fees collected gets fire
+        *
+        */
+
+
+        // simulate press for all value of fees for last three months for all neighborhoods
+        $('#reservationFeesCollected').val("all").change();
+        drawAppartmentPerNeighborhood();
+
+
+        $(window).resize(function(){
+            // simulate press for all value of neighborhood selection
+            $('#totalAptsSelect').val("all").change();
+            // simulate press for all value of fees for last three months for all neighborhoods
+            $('#reservationFeesCollected').val("all").change();
+            if(!(navigator.userAgent.match(/iPhone/i))){
+                drawAppartmentPerNeighborhood();
+            }
+        });
+        function getCalenderDate(){
+            var date =$('#dateCollectedFeesFilter').data("DateTimePicker").date().toDate(),
+                month = date.getMonth() + 1,
+                year =  date.getFullYear(),
+                // get last day of month using next month as reference -1 day
+                d = new Date(year, month, 0),
+                day  = d.getDate();
+            return year+'-' +month + '-' + day;
+        }
+
+        function getCalenderPaymentsToDate(){
+            var date =$('#upcommingPaymentsToDate').data("DateTimePicker").date().toDate(),
+                month = date.getMonth() + 1,
+                year =  date.getFullYear(),
+                // get last day of month using next month as reference -1 day
+                d = new Date(year, month, 0),
+                day  = d.getDate();
+            return year+'-' +month + '-' + day;
+        }
+
+        function getCalenderPaymentsFromDate(){
+            var date =$('#upcommingPaymentsFromDate').data("DateTimePicker").date().toDate(),
+                month = date.getMonth() + 1,
+                year =  date.getFullYear(),
+                // get last day of month using next month as reference -1 day
+                d = new Date(year, month, 0),
+                day  = d.getDate();
+            return year+'-' +month + '-' + day;
+        }
+
+        /*
+        *
+        * draw chart
+        *
+        *$dataArray -->array data to display
+        *$newOptions --> options of grapgh
+        *$type--> pie ->piechart or bar -->barChart
+        *$id_of_targer -> id of selector div
+        *
+        */
+        function drawChart(dataArray,newOptions,type,id_of_target){
+
+            // Set chart options
+            var defaultOptions = {
+                xkey: 'period',
+                ykeys: ['iphone', 'ipad', 'itouch','tablet'],
+                labels: ['iPhone', 'iPad','itouch','iPod Touch'],
+                pointSize: 2,
+                hideHover: 'auto',
+                resize: false,
+                color:['#0e1a35','#5cb85c','#F89406','#0e1a35']
+            };
+            var options= $.extend( {},defaultOptions, newOptions );
+
+            // Instantiate and draw our chart, passing in some options.
+
+            console.log("Id_Of_Target: "+id_of_target);
+
+            // remove previous drawing
+            $('#'+id_of_target+', #'+id_of_target+'_legend').html("")
+            if(type=="pie"){
+                // draw dont chart
+
+                var browsersChart=Morris.Donut({
+                    element: id_of_target,
+                    data: dataArray,
+                    colors: options.colors
+                });
+                // add label for donut
+                // browsersChart.options.data.forEach(function(label, i) {
+                //   var legendItem = $('<span></span>').text( label['label'] + " ( " +label['value'] + " )" ).prepend('<br><span>&nbsp;</span>');
+                //   legendItem.find('span')
+                //     .css('backgroundColor', browsersChart.options.colors[i])
+                //     .css('width', '20px')
+                //     .css('display', 'inline-block')
+                //     .css('margin', '5px');
+                //   $('#'+id_of_target).append(legendItem)
+                // });
+            }
+            else if(type=="column"){
+                Morris.Bar({
+                    element: id_of_target,
+                    data: dataArray,
+                    xkey: options.xkey,
+                    ykeys: options.ykeys,
+                    labels: options.labels,
+                    xLabelAngle: 90,
+                    barColors: options.barColors,
+
+                });
+            }
+            else if(type=="area"){
+                Morris.Area({
+                    element: id_of_target,
+                    data: dataArray,
+                    xkey: options.xkey,
+                    ykeys: options.ykeys,
+                    labels: options.labels,
+                    pointFillColors: options.pointFillColors,
+                    pointStrokeColors: options.pointStrokeColors,
+                    lineColors: options.lineColors,
+                    parseTime:options.parseTime
+                });
+            }
+        }
+        function drawAppartmentPerNeighborhood(){
+
+            /*demo charts*/
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var params={csrf_token:encodeURIComponent(csrf_token)};
+            var url = site['uri']['public'] + "/charts/total-appartments-per-neighborhood/";
+            $.ajax({
+                type: "GET",
+                url: url,
+                data: params ,
+
+            }).done(function(data){
+                data=JSON.parse(data);
+                console.log("rented"+data[0].appartments.rented)
+                var barOptions={
+                    xkey: 'neighborhood',
+                    ykeys: ['available', 'reserved', 'purchased','rented','signed'],
+                    labels: [ _translate('available'), _translate('reserved'), _translate('purchased'), _translate('rented'), _translate('signed')],
+                    barColors: ['#d9534f', '#F89406', '#5cb85c','#0e1a35',"#000000"]
+                }
+                var barArr=[];
+                for(var i=0, length=data.length ; i<length ; i++) {
+                    barArr.push({ neighborhood: data[i].name, available: data[i].appartments.available,
+                        reserved: data[i].appartments.reserved, pending: data[i].appartments.pending,
+                        purchased: data[i].appartments.purchased,rented:data[i].appartments.rented,
+                        signed: data[i].appartments.signed
+                    });
+                }
+                drawChart(barArr,barOptions,'column','barchart2_values');
+            })
+                .fail(function(err){
+                    console.log("err",err)
+                });
+        }
+    </script>
+{% endblock %}

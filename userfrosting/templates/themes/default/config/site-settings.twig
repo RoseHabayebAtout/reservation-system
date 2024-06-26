@@ -1,0 +1,274 @@
+{% extends "layouts/layout-dashboard.twig" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Site Settings",
+        "description" : "Global settings for the site, including registration and activation settings, site title, admin emails, and default languages."
+    }) %}
+    {{ parent() }}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+        <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            <h3 class='panel-title'><i class='fa fa-globe'></i> Site Settings</h3>
+        </div>
+        <div class='panel-body'>
+
+            <div id="settings-alerts">
+                <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+            </div>
+            <form class='form-horizontal' role='form' name='settings' id='settings-form' action='{{site.uri.public}}/config/settings' method='post' enctype="multipart/form-data">
+
+                {% for plugin_name, plugin in settings %}
+
+                    {% for name, setting in plugin %}
+                        {% if (name == 'site_title' or name == 'site_location'
+                            or name == 'site_contact_info' or name == 'site_logo'
+                            or name == 'site_background_image'  or name == 'site_company_name')  %}
+                            <div class="form-group">
+                                <label for="input_{{name}}" class="col-xs-4 col-sm-3 col-lg-2 control-label">{{setting.label}}</label>
+                                <div class="col-xs-8 col-sm-9 col-lg-10">
+                                    {% if (setting.type == 'text')  or (setting.type == 'email')%}
+                                        <input type='{{setting.type}}' id="input_{{name}}" class="form-control custom-file-input" name="{{plugin_name}}[{{name}}]" value='{{setting.value}}'>
+                                    {% elseif (setting.type == 'file') %}
+
+                                        {% if (name == 'site_logo')%}
+                                            <input type="file"
+                                                   name="logoImage"
+                                                   id="logoImage" class="form-control custom-file-input">
+                                        {% elseif (setting.type == 'file') %}
+                                            <input type="file"
+                                                   name="backgroundImage"
+                                                   id="backgroundImage" class="form-control custom-file-input">
+                                        {% endif %}
+
+                                    {% elseif (setting.type == 'select') %}
+                                        <select id="input_{{name}}" class='form-control select2' name="{{plugin_name}}[{{name}}]">
+                                            {% for option, label in setting.options %}
+                                            <option value="{{option}}" {% if (option == setting.value) %}selected{% endif %}>{{label}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    {% elseif (setting.type == 'toggle') %}
+                                        <input type='checkbox' id="input_{{name}}" class="form-control bootstrapswitch" name="{{plugin_name}}[{{name}}]" value="{{setting.value}}" data-off-text="{{setting.options[0]}}" data-on-text="{{setting.options[1]}}" {% if (setting.value == 1) %}checked{% endif %}>
+                                    {% elseif (setting.type == 'readonly') %}
+                                        <input type='input' id="input_{{name}}" class="form-control bootstrap-switch" name="{{plugin_name}}[{{name}}]" value='{{setting.value}}' disabled>
+                                    {% endif %}
+                                    <p class="help-block">{{setting.description}}</p>
+
+                                </div>
+
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                <!--
+                <label class="col-xs-4 col-sm-3 col-lg-2 control-label">  Last draft Number</label>
+                                 <input id="draft" type="number" class="form-control bootstrap-switch" style="width:765px;">
+                            <p class="help-block" style="    width:765px;margin-left: auto;">An input for the last serial number in the last draft</p>
+                            -->
+            </form>
+
+           <!--  <label class="col-xs-4 col-sm-3 col-lg-2 control-label">  Last draft Number</label>
+            <input id="draft" type="number" class="form-control bootstrap-switch" style="width:765px;">
+            <p class="help-block" style="    width:765px;margin-left: auto;">An input for the last serial number in the last draft</p> -->
+        </div>
+        </div>
+        </div>
+        <div class="col-xs-2 col-xs-offset-5">
+            <button class="btn btn-primary text-center" id="saveSettings">Save</button>
+        </div>
+</div>
+        <!-- <div class="col-md-4">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-server'></i> System Information</h3>
+                </div>
+                <div class='panel-body'>
+                    {% for name, value in info %}
+                        <p class="h6">{{name}}</p>
+                            <pre><code>{{value}}</code></pre>
+                    {% endfor %}
+                </div>
+                <div class="panel-footer">
+                    <a class="btn btn-link" href="{{site.uri.public}}/phpinfo">View phpinfo</a>
+                    <a class="btn btn-link" href="{{site.uri.public}}/sliminfo">View Slim Info</a>
+                </div>
+            </div>
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-wrench'></i> Admin Tools</h3>
+                </div>
+                <div class='panel-body'>
+                    <p>
+                        Rebuild minified CSS and JS: <a class="btn btn-primary" href="{{site.uri.public}}/config/build">Rebuild</a>
+                    </p>
+                    <p class="help-block">This may take some time, please be patient and wait for the page to refresh.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-warning'></i> Error Log</h3>
+                </div>
+                <div class='panel-body'>
+                    <div class="well well-sm"><strong>{{error_log.path}}</strong></div>
+                    {% for msg in error_log.messages %}
+                        <code>{{msg}}</code><br>
+                    {% endfor %}
+                </div>
+                <div class="panel-footer">
+                    <a class="btn btn-link" href="{{site.uri.public}}/errorlog">View complete error log</a>
+                </div>
+            </div>
+        </div>
+    </div> -->
+{% endblock %}
+{% block page_scripts %}
+
+    <script>
+        $(document).ready(function() {
+            var timer;
+
+             // Autosave text fields
+            $("#saveSettings").click(function () {
+                 clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                $("#settings-alerts").html("<div class='alert alert-warning'>"+ _translate('saving') +"</div>");
+                timer = setTimeout(function() { // assign timer a new timeout
+
+                    var csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var url = site['uri']['public'] + "/config/settings/";
+                    var params = new FormData();
+                    params.append('csrf_token',encodeURIComponent(csrf_token));
+                    params.append('userfrosting[site_company_name]', $('#input_site_company_name').val());
+                    params.append('userfrosting[site_title]', $('#input_site_title').val());
+                    params.append('userfrosting[site_location]', $('#input_site_location').val());
+                    params.append('userfrosting[site_contact_info]', $('#input_site_contact_info').val());
+                    if (document.getElementById('logoImage').files.length) {
+
+                        var name = document.getElementById("logoImage").files[0].name;
+                        var ext = name.split('.').pop().toLowerCase();
+                        var f = document.getElementById("logoImage").files[0];
+                        var fsize = f.size||f.fileSize;
+
+                        if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1 || fsize > 2000000)
+                        {
+                            $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('logo_cant_saving_msg') +"</div>");
+                            return false;
+                        }
+
+                        params.append('userfrosting[site_logo]', document.getElementById('logoImage').files[0].name);
+                        params.append('site_logo', document.getElementById('logoImage').files[0]);
+                    }
+                    if (document.getElementById('backgroundImage').files.length) {
+
+                        var name = document.getElementById("backgroundImage").files[0].name;
+                        var ext = name.split('.').pop().toLowerCase();
+                        var f = document.getElementById("backgroundImage").files[0];
+                        var fsize = f.size||f.fileSize;
+
+                        if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1 || fsize > 2000000)
+                        {
+                            $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('background_cant_saving_msg') +"</div>");
+                            return false;
+                        }
+
+                        params.append('userfrosting[site_background_image]', document.getElementById('backgroundImage').files[0].name);
+                        params.append('site_background_image', document.getElementById('backgroundImage').files[0]);
+                    }
+
+                    $.ajax({
+                        url: url,
+                        method: 'post',
+                        data: params,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        enctype: 'multipart/form-data',
+                    }).done(function (data) {
+                        $("#settings-alerts").html("<div class='alert alert-success'>"+ _translate('all_setting_saved') +"</div>");
+                    }).fail(function(err) {
+                        $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('setting_unsaved') +"</div>");
+                    });
+
+
+                }, 700);
+            });
+
+            // Autosave switches and selects
+           /* $("form[name='settings'] input[type=checkbox]").on("change", function () {
+                $("#settings-alerts").html("<div class='alert alert-warning'>Saving...</div>");
+                $("form[name='settings']").submit();
+            });
+
+            $("form[name='settings'] select").on("change", function () {
+                $("#settings-alerts").html("<div class='alert alert-warning'>Saving...</div>");
+                $("form[name='settings']").submit();
+            }); */
+
+            // Process form
+           /*
+            ufFormSubmit(
+                $("form[name='settings']"),
+                { "" : "" },
+                $("#userfrosting-alerts"),
+                function(data, statusText, jqXHR) {
+                    // Display messages on success
+                    $('#userfrosting-alerts').flashAlerts().done(function() {
+                        $("#settings-alerts").html("<div class='alert alert-success'>All settings have been saved</div>");
+                    });
+                },
+                function() {
+                    $("#settings-alerts").html("<div class='alert alert-danger'>Could not save settings.</div>");
+                }
+            );
+*/
+            /*
+                   $(document).on('change', '#images', function () {
+                       const name = this.files[0]['name'];
+                       $(this).attr('type','text')
+                       $(this).attr('name','userfrosting[site_logo]')
+                       $(this).val(name)
+                   })
+
+
+                   $(document).on('change', '#logoImage', function () {
+                       console.log('logo image')
+
+                       var formData = new FormData();
+                       formData.append('file', document.getElementById('logoImage').files[0]);
+                       var url = site['uri']['public'] + "/config/settings/upload/img/";
+
+                       $.ajax({
+                           url: url,
+                           data: formData,
+                           type: 'POST',
+                           contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                           processData: false, // NEEDED, DON'T OMIT THIS
+                           success:function(data)
+                           {
+                               console.log('sucess');
+                           }
+                       });
+
+                   })
+
+                    $(document).on('change', '#backgroundImage', function () {
+                        const name = this.files[0]['name'];
+                        $(this).attr('type','text')
+                        $(this).attr('name','userfrosting[site_background_image]')
+                        $(this).val(name)
+                    })
+            */
+
+        });
+
+    </script>
+{% endblock %}

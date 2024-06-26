@@ -1,0 +1,539 @@
+<canvas id="drafts" class="drafts" width="1240" height="1754" style="display:none;"></canvas>
+<iframe id="draftsPage1"  style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/invoiceReceipt.css">
+    <div id="invoice" class="container">
+        <div class="row" style="margin-top:5px;">
+            <div id="container">
+                <br>
+                <img src="KpYjntne.png" class="rawabi-img"
+                     style="position: absolute;   top: 25%; left: 50%; margin-left: -250px;  filter: gray; -webkit-filter: grayscale(1);">
+
+                <div>
+                    <b><h4>
+                            <label style="text-align:right;position: absolute;top:0%;right: 5%;width:178px;margin-top :85px; font-size : 130%;"
+                                   for="date">
+                                : التاريخ
+                            </label></h4></b>
+
+                    <h4 style="margin-left: 5%;"><input
+                                style="border-style:hidden;font-size :125%;position: absolute;margin-left:73%;margin-top :50px; width: 109px;"
+                                type="text" name="field0" required="true" value="<%- receiptDate %>"/></h4>
+                </div>
+
+                <div id="invoice" class="container">
+                    <div class="row">
+                        <div class="col-xs-12 ">
+
+                            <div class="text-center width-inherit head">
+                    {# <span class="span1">  <h3 
+                                style="margin-top:8px;color:rgba(255, 0, 0, 0.7);position: absolute;margin-left: 25%;"
+                                class="invoice-number">
+                    
+                            </small></h3> </span> #}
+                                <h1><span class="registration-id">No M<%=RegistrationId %></span> طلب حجز وحدة سكنية </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><br><br>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <form class="form-style-4" action="" method="post">
+
+
+                                <h3 class="text-right margin-30"><input id="Name" type="text" name="field1" required="true"
+                                           class="width-70 text-center" value="<%- customerName %>"/>
+                                    <b> <span class="span2" class="pull-right">  مقدم الطلب </span></h3></b>
+                                <br>
+                                <h3 class="text-right"><input id="Adrress" type="text" name="field2" required="true"
+                                           class="width-80 text-center" value="<%- customerAddress %>"/>
+                                    <b> <span class="span3"> العنوان </span></h3> </b>
+                                <br> 
+                                <h4>
+                                    <div id="Phone" style="float:right; direction: rtl; font-size: 140%; ">
+                                        <label for="Phone">الهاتف </label>
+                                        <input style="font-size:90%;" id="Phone" name="Phone" size="30" type="text"
+                                               required="true" class="width-80 text-center" value="<%- phoneNumber %>"/>
+                                    </div>
+                                    <div style="float:right; direction: rtl; font-size: 140%;">
+                                        <label for="mobile">المحمول</label>
+                                        <input style="font-size:90%;" id="mobile" name="mobile" size="45" type="text"
+                                               required="true" class="width-80 text-center" value="<%- mobile %>"/>
+                                </h4>
+                                <br>
+                                <br>
+                                <br>
+                                <h4>
+                                    <div class="div3" style="direction: rtl;">
+                    <span class="div4">
+                        <label for="document"> وثيقة اثبات شخصية </label>
+                         <input id="document" name="document" size=" 50 " type="text" value="<%- customer_type_of_id %>"
+                                required="true" class="width-80 text-center"/>
+                   </span>
+                                        <span class="span4">
+                       <label for="Number"> صادر من </label>
+                      <input id="Number" name="Number" type="text" required="true" class="width-80 text-center"
+                             value="<%-issued_by%>"/>
+                    </span>
+                                        <span class="span5">
+                   <label for="num2"> رقم </label>
+                     <input id="num2" name="num2" type="text" size="30" value="<%-customer_id %>" required="true"
+                            class="width-80 text-center"/>
+                                    </div>
+                                    <br>
+                                    <br> <br>
+                                    <div class="div3" style="direction: rtl;">
+                                        <h3>
+                                            <div style="float:right; ">
+                                                <label for="Nounit"> رقم الوحدة السكنية </label>
+                                                <input style="font-size: 95%;" id="Nounit" name="No. housing unit"
+                                                       size="45" type="text" required="true" value="<%- receiptUnit %>"
+                                                       class="width-70 text-center"/>
+                                            </div>
+                                        </h3>
+                                        <h3>
+                                            <div style="float:right;">
+                                                <label for="Hai"> حي </label>
+                                                <input style="font-size: 95%;" id="Hai" name="Hi" size="25" type="text"
+                                                       required="true" value=" <%-receiptNeighborhood %>"
+                                                       class="width-70 text-center"/>
+                                        </h3>
+                                    </div>
+                                    <br>
+                                    <br> <br>
+                                    <h3>
+                                        <div class="div5">
+                                            <label for="Number">ثمن الشقة </label> <b>
+                                                ( <input style="width:10%; font-size :100%;" id="unitprice"
+                                                         name="No.Money" size="2" type="text" required="true"
+                                                         value="<%-totalPricecommas%>" class="width-70 text-center"> $)
+                                            </b>
+
+                                            <input style="width: 58%;font-size:95%;" id="Number" name="Number"
+                                                   type="text" size="60" required="true" value="<%-totalPriceArabic%>"
+                                                   class="width-70 text-center"/>
+
+                                        </div>
+
+                                        <b> <span class="span6"
+                                                  style="font-size: 102%;position :absolute; margin-left : 90px;"> .دولار امريكي غير شامل التشطيبات الاختيارية </span>
+                                </h4>
+                                </b> <br><br><br>
+
+                                <div style=" line-height: 200%;" class="div3">
+                                    <div class="p1">
+                                        <h3 style="line-height: 150%;" class="contentp1"><p><b>
+                                                    تم دفع مبلغ قدره (<input style="width:10%;" id="NoMoney"
+                                                                             name="No.Money" size="2" type="text"
+                                                                             required="true" value="<%-receiptPricecommas
+             %>" class="width-80 text-center"> $) <input style="width:600px; font-size :85%;" id="Nomoney"
+                                                         name="No.Money"
+                                                         size="2" type="text" required="true"
+                                                         value="  <%-receiptPriceArabic %>"/> دولار امريكي فقط لا غير
+                                                    لتغطية رسوم ومصاريف طلب حجز الوحدة السكنية المشار اليها أعلاه. وعليه
+                                                    ستتوقف الشركة عن عن عرض الوحدة السكنية للغير لحين توقيع تعهد بيع
+                                                    وشراء الوحدة السكنية ودفع المستحقات المالية المترتبة على مقدم الطلب
+                                                    خلال 15 يوم من تاريخ اشعار شركة بيتي بالدفع.
+                                                </b></p>
+                                        </h3>
+                                        <br>
+
+                                        <div class="div4">
+                                            <h3 style="width: 1070px;line-height: 150%;" class="contentp2"><p><b>
+                                                        المبلغ المدفوع غير مسترد ولا يعتبر جزء من ثمن الوحدة السكنية
+                                                        المطلوب حجزها. وبدون اجحاف بما ورد سابقاً وبحقوق المتقدم بالطلب
+                                                        , يحق لشركة بيتي عدم المضي بصفقة بيع الوحدة السكنية لاية اسباب
+                                                        تراها مناسبة ووفقاً لسلطتها التقديرية, على ان تقوم بأعادة المبلغ
+                                                        المذكور أعلاه لمقدم الطلب.
+                                                    </b></p></h3>
+                                            <br>
+                                            <h3>
+                                                <div style="margin-bottom:5%;">
+                                                    <div class="Signature"
+                                                         style="float:right;margin-top :80px;margin-right:150px;font-size: 120%; ">
+                                                        <label for="Signature">توقيع مقدم الطلب </label>
+                                                        <input id="Signature" name="Signature" size="13" type="text"
+                                                               required="true"/>
+                                                    </div>
+                                            </h3>
+                                            <h3>
+                                                <div id="Signature2"
+                                                     style="float:left;margin-top :80px; margin-left:-22px;font-size: 120%;  ">
+                                                    <label for="Signature">توقيع الشركة</label>
+                                                    <input id="Signature" name="Signature" type="text" size="20"
+                                                           required="true"/>
+                                                </div>
+                                        </div>
+                                        </h3>
+                                        <br>
+                                        <br>
+                                        <br>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="div1" id="footer">
+                        <h3><b style="font-size: 110%;"> نسخة مقدم الطلب </b></h3>
+                    </div>
+                </div>
+</iframe>
+<canvas id="drafts" class="drafts" width="1240" height="1754" style="display:none;"></canvas>
+<iframe id="draftsPage2" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/invoiceReceipt.css">
+    <div id="invoice" class="container">
+        <div class="row" style="margin-top:5px;">
+            <div id="container">
+                <br>
+                <img src="KpYjntne.png" class="rawabi-img"
+                     style="position: absolute;   top: 25%; left: 50%; margin-left: -250px;  filter: gray; -webkit-filter: grayscale(1);">
+
+                <div>
+                    <b><h4>
+                            <label style="text-align:right;position: absolute;top:0%;right: 5%;width:178px;margin-top :85px; font-size : 130%;"
+                                   for="date">
+                                : التاريخ
+                            </label></h4></b>
+
+                    <h4 style="margin-left: 5%;"><input
+                                style="border-style:hidden;font-size :125%;position: absolute;margin-left:73%;margin-top :50px; width: 109px;"
+                                type="text" name="field0" required="true" value="<%- receiptDate %>"/></h4>
+                </div>
+
+                <div id="invoice" class="container">
+                    <div class="row">
+                        <div class="col-xs-12 ">
+
+                            <div class="text-center width-inherit head">   {# <span class="span1">  <h3
+                                style="margin-top:8px;color:rgba(255, 0, 0, 0.7);position: absolute;margin-left: 25%;"
+                                class="invoice-number">
+                    No M<%=RegistrationId %>
+                            </small></h3> </span> #}
+                                <h1><span class="registration-id">No M<%=RegistrationId %></span> طلب حجز وحدة سكنية </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><br><br>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <form class="form-style-4" action="" method="post">
+
+
+                                <h3 class="text-right margin-30"class="text-right"><input id="Name" type="text" name="field1" required="true"
+                                           class="width-70 text-center" value="<%- customerName %>"/>
+                                    <b> <span class="span2" class="pull-right">  مقدم الطلب </span></h3></b>
+                                <br> 
+                                <h3 class="text-right"><input id="Adrress" type="text" name="field2" required="true"
+                                           class="width-80 text-center" value="<%- customerAddress %>"/>
+                                    <b> <span class="span3"> العنوان </span></h3> </b>
+                                <br> 
+                                <h4>
+                                    <div id="Phone" style="float:right; direction: rtl; font-size: 140%; ">
+                                        <label for="Phone">الهاتف </label>
+                                        <input style="font-size:90%;" id="Phone" name="Phone" size="30" type="text"
+                                               required="true" class="width-80 text-center" value="<%- phoneNumber %>"/>
+                                    </div>
+                                    <div style="float:right; direction: rtl; font-size: 140%;">
+                                        <label for="mobile">المحمول</label>
+                                        <input style="font-size:90%;" id="mobile" name="mobile" size="45" type="text"
+                                               required="true" class="width-80 text-center" value="<%- mobile %>"/>
+                                </h4>
+                                <br>
+                                <br>
+                                <br>
+                                <h4>
+                                    <div class="div3" style="direction: rtl;">
+                    <span class="div4">
+                        <label for="document"> وثيقة اثبات شخصية </label>
+                         <input id="document" name="document" size=" 50 " type="text" value="<%- customer_type_of_id %>"
+                                required="true" class="width-80 text-center"/>
+                   </span>
+                                        <span class="span4">
+                       <label for="Number"> صادر من </label>
+                      <input id="Number" name="Number" type="text" required="true" class="width-80 text-center"
+                             value="<%-issued_by%>"/>
+                    </span>
+                                        <span class="span5">
+                   <label for="num2"> رقم </label>
+                     <input id="num2" name="num2" type="text" size="30" value="<%-customer_id %>" required="true"
+                            class="width-80 text-center"/>
+                                    </div>
+                                    <br>
+                                    <br> <br>
+                                    <div class="div3" style="direction: rtl;">
+                                        <h3>
+                                            <div style="float:right; ">
+                                                <label for="Nounit"> رقم الوحدة السكنية </label>
+                                                <input style="font-size: 95%;" id="Nounit" name="No. housing unit"
+                                                       size="45" type="text" required="true" value=" <%- receiptUnit %>"
+                                                       class="width-70 text-center"/>
+                                            </div>
+                                        </h3>
+                                        <h3>
+                                            <div style="float:right;">
+                                                <label for="Hai"> حي </label>
+                                                <input style="font-size: 95%;" id="Hai" name="Hi" size="25" type="text"
+                                                       required="true" value=" <%-receiptNeighborhood %>"
+                                                       class="width-70 text-center"/>
+                                        </h3>
+                                    </div>
+                                    <br>
+                                    <br> <br>
+                                    <h3>
+                                        <div class="div5">
+                                            <label for="Number">ثمن الشقة </label> <b>
+                                                ( <input style="width:10%; font-size :100%;" id="unitprice"
+                                                         name="No.Money" size="2" type="text" required="true"
+                                                         value="<%-totalPricecommas%>" class="width-70 text-center"> $)
+                                            </b>
+
+                                            <input style="width: 58%;font-size:95%;" id="Number" name="Number"
+                                                   type="text" size="60" required="true" value="<%-totalPriceArabic%>"
+                                                   class="width-70 text-center"/>
+
+                                        </div>
+
+                                        <b> <span class="span6"
+                                                  style="font-size: 102%;position :absolute; margin-left : 90px;"> .دولار امريكي غير شامل التشطيبات الاختيارية </span>
+                                </h4>
+                                </b> <br><br><br>
+
+                                <div style=" line-height: 200%;" class="div3">
+                                    <div class="p1">
+                                        <h3 style="line-height: 150%;" class="contentp1"><p><b>
+                                                    تم دفع مبلغ قدره (<input style="width:10%;" id="NoMoney"
+                                                                             name="No.Money" size="2" type="text"
+                                                                             required="true" value="<%-receiptPricecommas
+             %>" class="width-80 text-center"> $) <input style="width:600px; font-size :85%;" id="Nomoney"
+                                                         name="No.Money"
+                                                         size="2" type="text" required="true"
+                                                         value="  <%-receiptPriceArabic %>"/> دولار امريكي فقط لا غير
+                                                    لتغطية رسوم ومصاريف طلب حجز الوحدة السكنية المشار اليها أعلاه. وعليه
+                                                    ستتوقف الشركة عن عن عرض الوحدة السكنية للغير لحين توقيع تعهد بيع
+                                                    وشراء الوحدة السكنية ودفع المستحقات المالية المترتبة على مقدم الطلب
+                                                    خلال 15 يوم من تاريخ اشعار شركة بيتي بالدفع.
+                                                </b></p>
+                                        </h3>
+                                        <br>
+
+                                        <div class="div4">
+                                            <h3 style="width: 1070px;line-height: 150%;" class="contentp2"><p><b>
+                                                        المبلغ المدفوع غير مسترد ولا يعتبر جزء من ثمن الوحدة السكنية
+                                                        المطلوب حجزها. وبدون اجحاف بما ورد سابقاً وبحقوق المتقدم بالطلب
+                                                        , يحق لشركة بيتي عدم المضي بصفقة بيع الوحدة السكنية لاية اسباب
+                                                        تراها مناسبة ووفقاً لسلطتها التقديرية, على ان تقوم بأعادة المبلغ
+                                                        المذكور أعلاه لمقدم الطلب.
+                                                    </b></p></h3>
+                                            <br>
+                                            <h3>
+                                                <div style="margin-bottom:5%;">
+                                                    <div class="Signature"
+                                                         style="float:right;margin-top :80px;margin-right:150px;font-size: 120%; ">
+                                                        <label for="Signature">توقيع مقدم الطلب </label>
+                                                        <input id="Signature" name="Signature" size="13" type="text"
+                                                               required="true"/>
+                                                    </div>
+                                            </h3>
+                                            <h3>
+                                                <div id="Signature2"
+                                                     style="float:left;margin-top :80px; margin-left:-22px;font-size: 120%;  ">
+                                                    <label for="Signature">توقيع الشركة</label>
+                                                    <input id="Signature" name="Signature" type="text" size="20"
+                                                           required="true"/>
+                                                </div>
+                                        </div>
+                                        </h3>
+                                        <br>
+                                        <br>
+                                        <br>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="div1" id="footer">
+                        <h3><b style="font-size: 110%;"> نسخة الدائرة المالية</b></h3>
+                    </div>
+                </div>
+</iframe>
+<canvas id="drafts" class="drafts" width="1240" height="1754" style="display:none;"></canvas>
+<iframe id="draftsPage3" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/invoiceReceipt.css">
+    <div id="invoice" class="container">
+        <div class="row" style="margin-top:5px;">
+            <div id="container">
+                <br>
+                <img src="KpYjntne.png" class="rawabi-img"
+                     style="position: absolute;   top: 25%; left: 50%; margin-left: -250px;  filter: gray; -webkit-filter: grayscale(1);">
+
+                <div>
+                    <b><h4>
+                            <label style="text-align:right;position: absolute;top:0%;right: 5%;width:178px;margin-top :85px; font-size : 130%;"
+                                   for="date">
+                                : التاريخ
+                            </label></h4></b>
+
+                    <h4 style="margin-left: 5%;"><input
+                                style="border-style:hidden;font-size :125%;position: absolute;margin-left:73%;margin-top :50px; width: 109px;"
+                                type="text" name="field0" required="true" value="<%- receiptDate %>"/></h4>
+                </div>
+
+                <div id="invoice" class="container">
+                    <div class="row">
+                        <div class="col-xs-12 ">
+
+                            <div class="text-center width-inherit head">
+                    {# <span class="span1">  <h3
+                                style="margin-top:8px;color:rgba(255, 0, 0, 0.7);position: absolute;margin-left: 25%;"
+                                class="invoice-number">
+                    No M<%=RegistrationId %>
+                            </small></h3> </span> #}
+                                <h1><span class="registration-id">No M<%=RegistrationId %></span> طلب حجز وحدة سكنية </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br><br><br>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <form class="form-style-4" action="" method="post">
+
+
+                                <h3 class="text-right margin-30"><input id="Name" type="text" name="field1" required="true"
+                                           class="width-70 text-center" value="<%- customerName %>"/>
+                                    <b> <span class="span2" class="pull-right">  مقدم الطلب </span></h3></b>
+                                <br> 
+                                <h3 class="text-right"><input id="Adrress" type="text" name="field2" required="true"
+                                           class="width-80 text-center" value="<%- customerAddress %>"/>
+                                    <b> <span class="span3"> العنوان </span></h3> </b>
+                                <br>
+                                <h4>
+                                    <div id="Phone" style="float:right; direction: rtl; font-size: 140%; ">
+                                        <label for="Phone">الهاتف </label>
+                                        <input style="font-size:90%;" id="Phone" name="Phone" size="30" type="text"
+                                               required="true" class="width-80 text-center" value="<%- phoneNumber %>"/>
+                                    </div>
+                                    <div style="float:right; direction: rtl; font-size: 140%;">
+                                        <label for="mobile">المحمول</label>
+                                        <input style="font-size:90%;" id="mobile" name="mobile" size="45" type="text"
+                                               required="true" class="width-80 text-center" value="<%- mobile %>"/>
+                                </h4>
+                                <br>
+                                <br>
+                                <br>
+                                <h4>
+                                    <div class="div3" style="direction: rtl;">
+                    <span class="div4">
+                        <label for="document"> وثيقة اثبات شخصية </label>
+                         <input id="document" name="document" size=" 50 " type="text" value="<%- customer_type_of_id %>"
+                                required="true" class="width-80 text-center"/>
+                   </span>
+                                        <span class="span4">
+                       <label for="Number"> صادر من </label>
+                      <input id="Number" name="Number" type="text" required="true" class="width-80 text-center"
+                             value="<%-issued_by%>"/>
+                    </span>
+                                        <span class="span5">
+                   <label for="num2"> رقم </label>
+                     <input id="num2" name="num2" type="text" size="30" value="<%-customer_id %>" required="true"
+                            class="width-80 text-center"/>
+                                    </div>
+                                    <br>
+                                    <br> <br>
+                                    <div class="div3" style="direction: rtl;">
+                                        <h3>
+                                            <div style="float:right; ">
+                                                <label for="Nounit"> رقم الوحدة السكنية </label>
+                                                <input style="font-size: 95%;" id="Nounit" name="No. housing unit"
+                                                       size="45" type="text" required="true" value=" <%- receiptUnit %>"
+                                                       class="width-70 text-center"/>
+                                            </div>
+                                        </h3>
+                                        <h3>
+                                            <div style="float:right;">
+                                                <label for="Hai"> حي </label>
+                                                <input style="font-size: 95%;" id="Hai" name="Hi" size="25" type="text"
+                                                       required="true" value=" <%-receiptNeighborhood %>"
+                                                       class="width-70 text-center"/>
+                                        </h3>
+                                    </div>
+                                    <br>
+                                    <br> <br>
+                                    <h3>
+                                        <div class="div5">
+                                            <label for="Number">ثمن الشقة </label> <b>
+                                                ( <input style="width:10%; font-size :100%;" id="unitprice"
+                                                         name="No.Money" size="2" type="text" required="true"
+                                                         value="<%-totalPricecommas%>" class="width-70 text-center"> $)
+                                            </b>
+
+                                            <input style="width: 58%;font-size:95%;" id="Number" name="Number"
+                                                   type="text" size="60" required="true" value="<%-totalPriceArabic%>"
+                                                   class="width-70 text-center"/>
+
+                                        </div>
+
+                                        <b> <span class="span6"
+                                                  style="font-size: 102%;position :absolute; margin-left : 90px;"> .دولار امريكي غير شامل التشطيبات الاختيارية </span>
+                                </h4>
+                                </b> <br><br><br>
+
+                                <div style=" line-height: 200%;" class="div3">
+                                    <div class="p1">
+                                        <h3 style="line-height: 150%;" class="contentp1"><p><b>
+                                                    تم دفع مبلغ قدره (<input style="width:10%;" id="NoMoney"
+                                                                             name="No.Money" size="2" type="text"
+                                                                             required="true" value="<%-receiptPricecommas
+             %>" class="width-80 text-center"> $) <input style="width:600px; font-size :85%;" id="Nomoney"
+                                                         name="No.Money"
+                                                         size="2" type="text" required="true"
+                                                         value="  <%-receiptPriceArabic %>"/> دولار امريكي فقط لا غير
+                                                    لتغطية رسوم ومصاريف طلب حجز الوحدة السكنية المشار اليها أعلاه. وعليه
+                                                    ستتوقف الشركة عن عن عرض الوحدة السكنية للغير لحين توقيع تعهد بيع
+                                                    وشراء الوحدة السكنية ودفع المستحقات المالية المترتبة على مقدم الطلب
+                                                    خلال 15 يوم من تاريخ اشعار شركة بيتي بالدفع.
+                                                </b></p>
+                                        </h3>
+                                        <br>
+
+                                        <div class="div4">
+                                            <h3 style="width: 1070px;line-height: 150%;" class="contentp2"><p><b>
+                                                        المبلغ المدفوع غير مسترد ولا يعتبر جزء من ثمن الوحدة السكنية
+                                                        المطلوب حجزها. وبدون اجحاف بما ورد سابقاً وبحقوق المتقدم بالطلب
+                                                        , يحق لشركة بيتي عدم المضي بصفقة بيع الوحدة السكنية لاية اسباب
+                                                        تراها مناسبة ووفقاً لسلطتها التقديرية, على ان تقوم بأعادة المبلغ
+                                                        المذكور أعلاه لمقدم الطلب.
+                                                    </b></p></h3>
+                                            <br>
+                                            <h3>
+                                                <div style="margin-bottom:5%;">
+                                                    <div class="Signature"
+                                                         style="float:right;margin-top :80px;margin-right:150px;font-size: 120%; ">
+                                                        <label for="Signature">توقيع مقدم الطلب </label>
+                                                        <input id="Signature" name="Signature" size="13" type="text"
+                                                               required="true"/>
+                                                    </div>
+                                            </h3>
+                                            <h3>
+                                                <div id="Signature2"
+                                                     style="float:left;margin-top :80px; margin-left:-22px;font-size: 120%;  ">
+                                                    <label for="Signature">توقيع الشركة</label>
+                                                    <input id="Signature" name="Signature" type="text" size="20"
+                                                           required="true"/>
+                                                </div>
+                                        </div>
+                                        </h3>
+                                        <br>
+                                        <br>
+                                        <br>
+                            </form>
+
+                        </div>
+                    </div>
+                    <div class="div1" id="footer">
+                        <h3><b style="font-size: 110%;"> نسخة دائرة المبيعات </b></h3>
+                    </div>
+                </div>
+</iframe>

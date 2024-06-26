@@ -1,0 +1,97 @@
+<script>
+    function formatDateToYYYYMMDD(date) {
+        /*
+         date has two form either string like 11/06/2016 11:38 AM or date  like 1478425080000.
+         this function format both
+         */
+
+        if (!date instanceof Date) {
+
+            var dateWithoutTime = date.split(" ")[0];
+            date = new Date(dateWithoutTime);
+        } else {
+            date = new Date(date);
+        }
+        //return moment(date).format("MM-DD-YYYY");
+        return moment(date).format("YYYY-MM-DD");
+    }
+
+    // to convert dateformat from 2015-06-17 to 2015/06/17
+    function formatDate(date) {
+        var date = new Date(date),
+            month = '' + (date.getMonth() + 1),
+            day = '' + date.getDate(),
+            year = date.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('/');
+    }
+
+    function formatDateToDDMMYYYY(date) {
+        /*
+       date has two form either string like 11/06/2016 11:38 AM or date  like 1478425080000.
+       this function format both
+       */
+
+        if (!date instanceof Date) {
+
+            var dateWithoutTime = date.split(" ")[0];
+            date = new Date(dateWithoutTime);
+        } else {
+            date = new Date(date);
+        }
+        return moment(date).format("DD-MM-YYYY");
+    }
+
+    function getYear(date) {
+
+        var date = new Date(date);
+        var year;
+        if (date == "Invalid Date") {
+            year = " ";
+        } else {
+            year = date.getFullYear();
+        }
+        return year
+    }
+
+    function getMonth(date) {
+        var date = new Date(date);
+        var month;
+        if (date == "Invalid Date") {
+            month = " ";
+        } else {
+            month = '' + (date.getMonth() + 1);
+            if (month.length < 2) month = '0' + month;
+        }
+
+        return month;
+    }
+
+    function getDay(date) {
+        var date = new Date(date);
+        var day;
+        if (date == "Invalid Date") {
+            day = " ";
+        } else {
+            day = '' + date.getDate();
+            if (day.length < 2) day = '0' + day;
+        }
+        return day;
+    }
+
+    // to add commas after thousand to receiptPrice and receiptPrice
+    function addCommas(managed_string) {
+        managed_string += '';
+        x = managed_string.split('.');
+        x1 = x[0];
+        x2 = x.length > 1 ? '.' + x[1] : '';
+        var rgx = /(\d+)(\d{3})/;
+        while (rgx.test(x1)) {
+            x1 = x1.replace(rgx, '$1' + ',' + '$2');
+        }
+        return x1 + x2;
+    }
+</script>

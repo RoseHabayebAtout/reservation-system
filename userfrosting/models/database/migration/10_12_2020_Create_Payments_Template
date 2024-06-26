@@ -1,0 +1,12 @@
+CREATE TABLE `payments` (
+`id` int(10) NOT NULL AUTO_INCREMENT,
+`unit_id` int(11) NOT NULL,
+`amount` double NOT NULL,
+`payment_date` date NOT NULL,
+`payment_number` int(10) UNSIGNED NOT NULL,
+PRIMARY KEY (`id`),
+KEY `unitID_FK` (`unit_id`),
+CONSTRAINT `unitID_FK` FOREIGN KEY (`unit_id`) REFERENCES `uf_unit` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8
+
+    "payment_number",

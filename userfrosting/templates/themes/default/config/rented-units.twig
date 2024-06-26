@@ -1,0 +1,429 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "rented-units" %}
+{# Set page properties (page.*) here. #}
+{% block page %}
+
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+    "title"       : "RentedUnits",
+    "description" : "RentedUnits details."
+    }) %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <div class="col-lg-12 col-xs-12">
+            <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <table id="rentedTable" class="table display" cellspacing="0" width="100%">
+                    <thead class="btn-primary">
+                    <tr>
+                        <th><input type="checkbox" name="select_all" value="1" id="select-all"></th>
+                        <th>{{ translate('neighborhood') }}</th>
+                        <th>{{ translate('cancellation_modal_message')['tabu_code'] }}</th>
+                        <th>{{ translate('company_code') }}</th>
+                        <th>{{ translate('area') }}</th>
+                        <th>{{ translate('status') }}</th>
+                        <th>{{ translate('building_type') }}</th>
+                    </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-------add HintModal------->
+
+    <div class="modal fade hint-modal-lg" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <h1>{{ translate('hint') }}!</h1>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <p>{{ translate('select_one') }}
+                        </p>
+                    </div>
+                </div>
+                <div class="row lead">
+                    <div class="col-xs-offset-2 col-xs-9 ">
+                        <div class="pull-right">
+                            <button class="btn  btn-danger" id="cancelReservationBtn" onclick="hideHintModal()">OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Information selection modal -->
+    <div class="modal fade selection-modal-lg in" id="selection-modal-lg" data-backdrop="static" data-keyboard="true"
+         tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <h2>{{ translate('info_about_changed_unit') }}</h2>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <h4 id="selectionInfo">
+                            {{ translate('cancellation_modal_message')['unit'] }} <%=unitId %>
+                            {{ translate('cancellation_modal_message')['building'] }} <%=building %>
+                            {{ translate('cancellation_modal_message')['at'] }} <%=neighborhood %>
+                        </h4>
+
+                    </div>
+                </div>
+
+
+                <div class="row lead">
+                    <div class="col-xs-offset-2 col-xs-9 ">
+                        <div class="pull-right">
+                            <button class="btn btn-danger" id="cancelReservationBtn" onclick="hideSlectionModal()">OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block page_scripts %}
+    <script type="text/javascript">
+        var jsonUrl = site['uri']['public'] + '/unit/getAvailableUnits/';
+        var rows_selected = [];
+
+        $(document).ready(function () {
+             /****Table Handling Procedure******/
+
+                var rentedTable = $('#rentedTable').DataTable({
+                    "bPaginate": true,
+                    "paging": true,
+                    "ordering": true,
+                    "responsive": true,
+                    pageLength: 14,
+                    dom: '<"available-filter-style">f <"available-filter">rtip',
+                    'ajax': {
+                        "type": "Get",
+                        "url": jsonUrl,
+                        "dataSrc": function (dataJson) {
+                            return dataJson;
+                        }
+                    },
+
+                    "initComplete": function (settings, json) {
+                        $("div.available-filter").html('<div class="form-group margin-left-5">\
+                  \ <div class="pull-right users-btn-panel"> \
+                      <button id="changeTypeBtn" class="btn btn-success margin-right-5px btn-width reserve-now" style="background-color:#10c610" onclick="doChangeBuildingType();">'+ _translate('change_to_rented') +'</button>\
+                       </div>\
+                      <label for="availableFilter" class="filter-by"> '+ _translate('filter_by') +':</label>\
+                      <select class="form-control width-12 input-sm" id="availableFilter">\
+                        <option value="1">'+ _translate('available') +'</option>\
+                        <option value="4">'+ _translate('rented') +'</option>\
+                      </select>\
+                      <label for="neighborhoodFilter" class="filter-by neighborhood-by"> '+ _translate('neighborhood') +':</label>\
+                      <select class="form-control width-12 input-sm" id="neighborhoodFilter">\
+                        <option value="">'+ _translate('all') +'</option>\
+                      </select>\
+                     <label for="buildingTypeFilter" class="filter-by buildingType-by"> '+ _translate('building_type') +':</label>\
+                      <select class="form-control width-12 input-sm" id="buildingTypeFilter">\
+                        <option value="">'+ _translate('all') +'</option>\
+                      </select>\
+                      </div>');
+
+                        getneighborhoodFilterOptions();
+                        getbuildingTypeFilterOptions();
+                        addFilterFunctionalities();
+                    },
+                    "columns": [
+                        {"data": ""},
+                        {"data": "neighborhood"},
+                        {"data": "tapu_code"},
+                        {"data": "rawabi_code"},
+                        {"data": "size"},
+                        {
+                            "data": function (row, type, val, meta) {
+
+                                // return row.available.toString();
+                                var status, labelClass;
+                                if (row.available == 1) {
+                                    status = _translate('available');
+                                    labelClass = "label-success";
+                                }
+                                else if (row.available == 4) {
+                                    status = _translate('rented');
+                                    labelClass = "label-rented";
+                                }
+
+                                return '<span class="label label-sm ' + labelClass + '">' + status + '</span>';
+                            }, "className": "myclass"
+                        },
+                        {
+                            "data": "building_type"
+                        }
+
+                    ],
+                    "searching": true,
+                    'columnDefs': [{
+                        'targets': 0,
+                        'searchable': true,
+                        'orderable': false,
+                        'className': 'dt-body-center',
+                        'render': function (data, type, full, meta) {
+                            return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+                        }
+                    }],
+                    'order': [[1, 'asc']]
+
+                });
+                // Handle click on checkbox
+                $('#rentedTable tbody').on('click', 'input[type="checkbox"]', function (e) {
+
+                    var $row = $(this).closest('tr');
+                    var data = rentedTable.row($row).data();
+
+                    // Get row ID
+                    var index = $.inArray(data.id, rows_selected);
+                    if (this.checked && index === -1) {
+                        rows_selected.push(data.id);
+                    } else if (!this.checked && index !== -1) {
+                        rows_selected.splice(index, 1);
+                    }
+
+                    if (this.checked) {
+                        $row.addClass('selected');
+                    } else {
+                        $row.removeClass('selected');
+                        rows_selected.splice(index, 1);
+                    }
+                    updateDataTableSelectAllCtrl(rentedTable);
+                    e.stopPropagation();
+                });
+
+                $('#rentedTable').on('click', 'tbody td, thead th:first-child', function (e) {
+                    $(this).parent().find('input[type="checkbox"]').trigger('click');
+                });
+
+                // Handle click on "Select all" control
+                $('thead input[name="select_all"]', rentedTable.table().container()).on('click', function (e) {
+                    if (this.checked) {
+                        $('#rentedTable tbody input[type="checkbox"]:not(:checked)').trigger('click');
+                    } else {
+                        $('#rentedTable tbody input[type="checkbox"]:checked').trigger('click');
+                    }
+                    e.stopPropagation();
+                });
+                rentedTable.on('draw', function () {
+                    // Update state of "Select all" control
+                    updateDataTableSelectAllCtrl(rentedTable);
+                });
+
+
+            }
+        );
+
+        function addFilterFunctionalities() {
+
+            $('#availableFilter').on('change', function () {
+                if (parseInt($(this).val()) == 1) {
+                    jsonUrl = site['uri']['public'] + '/unit/getAvailableUnits/';
+                    $('#rentedTable').DataTable().ajax.url(jsonUrl).load();
+                    $('#changeTypeBtn').html( _translate('change_to_rented') );
+                }
+                else if (parseInt($(this).val()) == 4) {
+                    jsonUrl = site['uri']['public'] + '/unit/getRentedUnits/';
+                    //$('#rentedTable').ajax.url(jsonUrl).load();
+                    $('#rentedTable').DataTable().ajax.url(jsonUrl).load();
+                    $('#changeTypeBtn').html(_translate('change_to_available'));
+                }
+            });
+            $('#neighborhoodFilter').on('change', function () {
+                var searchQuery = "^" + this.value + "$";
+
+                if (!this.value) {
+                    searchQuery = "";
+                }
+                $('#rentedTable')
+                    .DataTable().columns(1)
+                    .search(searchQuery, true, false, true)
+                    .draw();
+            });
+
+            $('#buildingTypeFilter').on('change', function () {
+                var searchQuery = "^" + this.value + "$";
+
+                if (!this.value) {
+                    searchQuery = "";
+                }
+                $('#rentedTable')
+                    .DataTable().columns(6)
+                    .search(searchQuery, true, false, true)
+                    .draw();
+            });
+
+
+        }
+
+        function getneighborhoodFilterOptions() {
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var params = {csrf_token: encodeURIComponent(csrf_token)};
+            var url = site['uri']['public'] + "/charts/get-neighborhoods/";
+            var req1 = $.ajax({
+                type: "GET",
+                url: url,
+                data: params
+
+            }).done(function (data) {
+                data = JSON.parse(data);
+                for (var propertyName in data) {
+                    $("#neighborhoodFilter").append(new Option(propertyName, propertyName));
+                }
+            }).fail(function (err) {
+                console.log("err", err)
+            });
+        }
+
+        function getbuildingTypeFilterOptions() {
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var params = {csrf_token: encodeURIComponent(csrf_token)};
+            var url = site['uri']['public'] + "/charts/get-buildingTypes/";
+            var req1 = $.ajax({
+                type: "GET",
+                url: url,
+                data: params
+
+            }).done(function (data) {
+                data = JSON.parse(data);
+                for (var propertyName in data) {
+                    $("#buildingTypeFilter").append(new Option(propertyName, propertyName));
+                }
+            }).fail(function (err) {
+                console.log("err", err)
+            });
+        }
+
+        /*  function getRented(){
+                 var csrf_token = $("meta[name=csrf_token]").attr("content");
+                 var params={csrf_token:encodeURIComponent(csrf_token)};
+                 var url = site['uri']['public'] + "/unit/getRentedUnits/";
+
+                 // Append page CSRF token
+                 var req1= $.ajax({
+                     type: "GET",
+                     url: url,
+                     data: params ,
+                 })
+                 .fail(function(error){
+                     console.log("Error")
+                 });
+
+
+
+             }*/
+
+        //function to change the type of unit from rented to available and viceversa
+        function doChangeBuildingType() {
+            var buildingType = 1;
+            var jsonUrl;
+
+            //check for the pressed Button to decide the type of changing
+            var btnText = $('#changeTypeBtn').html();
+            if (btnText == "Change to Rented") {
+                buildingType = 4;
+                jsonUrl = site['uri']['public'] + '/unit/getAvailableUnits/';
+
+            }
+
+            else if (btnText == "Change to Available") {
+                buildingType = 1;
+                jsonUrl = site['uri']['public'] + '/unit/getRentedUnits/';
+            }
+
+            //check the number of selected rows
+            if (rows_selected.length == 0) {
+                $('.hint-modal-lg').modal("show");
+            }
+
+            else {
+                $('.hint-modal-lg').modal("hide");
+                var unitNo = 0;
+                var responseTxt;
+                $.each(rows_selected, function (index, rowId) {
+                    unitNo++;
+                    var csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var params = {uid: rowId, type: buildingType, csrf_token: encodeURIComponent(csrf_token)};
+                    //Ajax request for every unit to change it's type
+                    var req = $.ajax({
+                        url: site['uri']['public'] + '/unit/changeBuildingType/',
+                        type: "POST",
+                        data: params
+
+                    }).done(function (data) {
+                        $('#rentedTable').DataTable().ajax.url(jsonUrl).load();
+                        $('#selection-modal-lg').modal('show');
+                        if (data == '14')
+                            responseTxt = "Available to Rented";
+                        else
+                            responseTxt = "Rented to Available";
+
+                        $('#selectionInfo').html( _translate('you_have_changed') + " " + unitNo + "  "+ _translate('units_from_status') +" " + responseTxt);
+                        rows_selected = [];
+
+
+                    });
+                });
+            }
+        }
+
+        function updateDataTableSelectAllCtrl(table) {
+            var $table = table.table().node();
+            var $chkbox_all = $('tbody input[type="checkbox"]', $table);
+            var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $table);
+            var chkbox_select_all = $('thead input[name="select_all"]', $table).get(0);
+
+            // If none of the checkboxes are checked
+            if ($chkbox_checked.length === 0) {
+                chkbox_select_all.checked = false;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = false;
+                }
+
+                // If all of the checkboxes are checked
+            } else if ($chkbox_checked.length === $chkbox_all.length) {
+                chkbox_select_all.checked = true;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = false;
+                }
+
+                // If some of the checkboxes are checked
+            } else {
+                chkbox_select_all.checked = true;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = true;
+                }
+            }
+        }
+
+        function hideHintModal() {
+            $('.hint-modal-lg').modal("hide");
+        }
+
+        function hideSlectionModal() {
+            $('.selection-modal-lg').modal("hide");
+        }
+    </script>
+
+{% endblock %}

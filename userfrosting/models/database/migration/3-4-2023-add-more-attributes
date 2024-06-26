@@ -1,0 +1,9 @@
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'total_price_in_word', 'Total Price IN Word', 'purchase_contract', 'text')
+
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'total_price_land', 'Land Price From Total Price', 'purchase_contract', 'text')
+
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'total_price_land_in_word', 'Land Price From Total Price In Word', 'purchase_contract', 'text')
+
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'total_price_apartment', 'Apartment Price From Total Price', 'purchase_contract', 'text')
+
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'total_price_apartment_in_word', 'Apartment Price From Total Price IN Word', 'purchase_contract', 'text')

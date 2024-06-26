@@ -1,0 +1,18 @@
+{% block subject %}
+    Pending Rejected to cancel Reservation {{unit.id}}
+{% endblock %}
+
+{% block body %}
+<p>Greetings ,
+</p>
+<p>
+You are receiving this email because your request to cancel reservation for {{unit.rawabi_code}} {{unit.building}} {{unit.unit}} {{unit.floor}} has been rejected .
+</p>
+<p>
+<a href="{{site.uri.public}}/unit#Reserved">{{site.uri.public}}/unit#Reserved</a>
+</p>
+<p>
+With regards,<br>
+The {{site.site_title}} Team
+</p>
+{% endblock %}

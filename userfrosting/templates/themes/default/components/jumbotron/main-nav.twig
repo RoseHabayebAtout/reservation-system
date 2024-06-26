@@ -1,0 +1,38 @@
+{% set navigation_bar = [['', 'Home'], ['account/login', 'Login']] %}
+{% set can_register = site.can_register|default(false) %}
+{% if can_register %}
+    {% set navigation_bar = navigation_bar|merge([['account/register', 'Register']])  %}
+{% endif%}
+{% set active_page = page.active_page|default('') %}
+{% block navigation %}
+<div class="header" style="position: absolute; width: 100%; top: 0; left: 0; right: 0">
+<!--     <ul class="nav navbar-nav nav-pills pull-right" id="navigation">
+    {% for item in navigation_bar %}
+    <li{% if item[0] == active_page %} class="active"{% endif%}>
+        <a role="menuitem" href="{{site.uri.public}}/{{item[0]}}">{{item[1]}}</a>
+    </li>
+    {% endfor %}
+    </ul>
+    <h3 class="text-muted">{{site.site_title}}</h3> -->
+        <div class="login-header">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="login-logo">
+                        <img src="{{site.uri.public}}/uploads/{{site.site_logo}}" alt="rawabi_logo" class="img-responsive">
+                    </div>
+                </div>
+<!--                 <div class="col-md-6 col-sm-6 col-xs-12">
+                    <div class="login-details">
+                        <ul class="nav nav-tabs navbar-right" d="navigation">
+                           {% for item in navigation_bar %}
+						    <li{% if item[0] == active_page %} class="active"{% endif%}>
+						        <a role="menuitem" href="{{site.uri.public}}/{{item[0]}}">{{item[1]}}</a>
+						    </li>
+						    {% endfor %}
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+</div>
+{% endblock %}

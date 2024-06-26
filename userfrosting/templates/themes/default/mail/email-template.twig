@@ -1,0 +1,94 @@
+<div id="email_content_title">
+    <!-- Edited by Ahmad Tome -->
+    <!-- Unit {{ unit.rawabi_code }}, Neighborhood {{ unit.neighborhood }} Purchasing - {{ user.display_name }} -->
+    {% block subject %}
+        {{ unit.neighborhood }} {{ unit.rawabi_code }} - Reserved by {{ user.display_name }}
+    {% endblock %}
+</div>
+
+{% block body %}
+    <br>
+    <div style="font-size:medium; float: left" dir="ltr" >
+        The unit <b>{{ unit.rawabi_code }}</b> has been reserved by {{ user.display_name }} in
+        <span>{{ reservedUnit.reservation_date }} </span>
+        <!--  ,which is  located  in {{ unit.neighborhood }} neighborhood, in  building NO.  {{ unit.building }} of type  {{ unit.building_type }} and floorNO  {{ unit.floor }}. -->
+        <h3>Client details :</h3>
+        <ul style="font-size: medium;">
+            <li>Client Name : {{ reservedUnit.customer_name }}</li>
+            <li>Client ID : {{ reservedUnit.customer_id }}</li>
+            <li>Client ID type : {{ reservedUnit.customer_type_of_id }}</li>
+            <li>Issued By : {{ reservedUnit.issued_by }}</li>
+            <li>Client Phone Number : {{ reservedUnit.phone_number }}</li>
+            <li>Client Mobile Number : {{ reservedUnit.mobile }}</li>
+            <li>Client Address : {{ reservedUnit.customer_address }}</li>
+            <li>LeadID : {{ reservedUnit.leadID }}</li>
+        </ul>
+        <h3>Reserved apartment details :</h3>
+        <ul style="font-size: medium;">
+            <li>Tabo Code : {{ unit.tapu_code }}</li>
+            <li>Neighborhood : {{ unit.neighborhood }}</li>
+            <li>Building : {{ unit.building_type }}</li>
+            <li>Net Area : {{ unit.size }} m</li>
+            <li>Tabo Area : {{ unit.tabo_area }} m</li>
+            <li>Apartment Description : <label dir="rtl">{{ unit.description }}</label></li>
+            <li>Collected Fees : {{ reservedUnit.collected_fees }}</li>
+
+            {% if reservedUnit.PaymentMethod_select != "-- اختار طريقة الدفع --" %}
+                <li id="PaymentMethod_select">Payment Method : {{ reservedUnit.PaymentMethod_select }}</li>
+            {% endif %}
+
+
+            {% if reservedUnit.directInstallmentAdded != "0" %}
+                {% if reservedUnit.directInstallmentAdded != "" %}
+                    <li id="directInstallmentAdded">Direct Installment Added : {{ reservedUnit.directInstallmentAdded }} {{ reservedUnit.currency }}</li>
+                {% endif %}
+            {% endif %}
+
+
+
+            <li>Total Price : {{ reservedUnit.total_price }} {{ reservedUnit.currency }}</li>
+            {% if discount != '' %}
+                <li id="discount_details">Discount Name : {{ discount }}</li>
+            {% else %}
+                <li id="discount_details">Discount Name : no discount chosen.</li>
+            {% endif %}
+
+            <!--
+            {% if discount.value != 0 %}
+                {% if discount.type == 0 %}
+                    <li>Discount Name : {{ discount.name }}</li>
+                {% elseif discount.type == 1 %}
+                    <li>Discount Name : {{ discount.name }}</li>
+                {% endif %}
+            {% else %}
+                <li>Discount Name : no discount chosen.</li>
+            {% endif %}
+            -->
+            {% if additionHint != 0 %}
+                {% if addition.addition_type == 0 %}
+                    <li id="addition_details">Addition Name : {{ addition }}</li>
+                {% elseif addition.addition_type == 1 %}
+                    <li id="addition_details">Addition Name : {{ addition }}</li>
+                {% endif %}
+                <!-- {% if addition.addition_type == 0 %}
+                    <li>Addition Name : {{ addition.addition_name }}</li>
+                {% elseif addition.addition_type == 1 %}
+                    <li>Addition Name : {{ addition.addition_name }}</li>
+                {% endif %} -->
+            {% else %}
+                <li id="addition_details">Addition Name : no addition chosen.</li>
+            {% endif %}
+        </ul>
+        {% if reservedUnit.reservation_email_note != "" %}
+            <h3>Notes :</h3>
+            <pre style="font-size: medium; padding-left:40px; font-family:serif; font-weight: normal">{{ reservedUnit.reservation_email_note }}</pre>
+        {% endif %}
+
+        <br>
+        <h3>
+            Regards ,<br>
+            {{ site.site_title }} Team
+        </h3>
+    </div>
+
+{% endblock %}

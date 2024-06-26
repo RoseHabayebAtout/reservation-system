@@ -1,0 +1,12 @@
+// add currency for unit
+ALTER TABLE `uf_unit` ADD `price_currency` VARCHAR(255) NOT NULL DEFAULT '$' AFTER `tabo_area`;
+
+// add change rate column to the reservation table
+ALTER TABLE `uf_reservation` ADD `exchange_rate` FLOAT(10) NOT NULL DEFAULT '1' AFTER `currency`;
+
+// create currency table
+CREATE TABLE `currencies` ( `id` INT NOT NULL AUTO_INCREMENT , `name` VARCHAR(255) NOT NULL , `symbol` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+// fill currency table
+INSERT INTO `currencies` (`id`, `name`, `symbol`) VALUES (NULL, 'Dollar', '$');
+INSERT INTO `currencies` (`id`, `name`, `symbol`) VALUES (NULL, 'Shekel', 'Nis');

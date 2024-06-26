@@ -1,0 +1,325 @@
+{% extends "layouts/layout-dashboard.twig" %}
+
+
+{% block content %}
+<style>
+
+    .header, .header-space,
+    .footer, .footer-space {
+        height: 100px;
+    }
+
+    .header {
+        position: fixed;
+        top: 0;
+    }
+
+    .footer {
+        position: fixed;
+        bottom: 0;
+    }
+
+    div.content {
+        margin-left: 30px;
+        margin-right: 15px;
+        display: none;
+    }
+
+</style>
+<!-- <button id="print">Print</button> -->
+
+
+    <div id="pr">
+        <div class="content " id="content">
+            <div class="pageBreak">
+                {{ content.content | raw }}
+            </div>
+        </div>
+
+        <div class="content " id="content2">
+            <div class="pageBreak">
+                {{ content.content | raw }}
+            </div>
+        </div>
+
+        <div class="content " id="content3">
+            <div class="pageBreak">
+                {{ content.content | raw }}
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock %}
+{% block page_scripts %}
+    <script src="{{ site.uri.js }}/printThis.js"></script>
+    <script src="{{ site.uri.js }}/NumToWord.js"></script>
+
+    <script>
+        getContent()
+
+
+        function printDiv() {
+            var divToPrint = document.getElementById('pr');
+            // $("#contract1form").submit();
+            //return ;
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+
+            newWin.document.write(
+                '<html><head> <meta http-equiv="content-type" content="text/html;charset=UTF-8" />' +
+                '<style> ' +
+                 '#content,#content2,#content3{page-break-before: always;}' +
+                '@media print{ ' +
+                //'#btmpage{position: fixed;bottom: 0}' +
+                '.pageBreak{page-break-before: always;}' +
+                '' +
+                '' +
+                '' +
+                '' +
+                '' +
+                '' +
+                'div.content{margin-left: 25px; margin-right: 10px;} .hide-print {display: none;} ' +
+                '@page{size: A4;margin-right: 9mm; margin-left: 9mm;margin-top: 5mm;margin-bottom: 5mm;}' +
+
+                '</style> </head><body style="counter-reset: page;" onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+            newWin.document.close();
+
+            setTimeout(function () {
+
+                newWin.close();
+            }, 10);
+
+        }
+
+        function getContent() {
+
+            var url = window.location.href;
+            var res = url.split("/");
+            var unitId = res[res.length - 1];
+            console.log(unitId);
+
+            $('.loader-modal-lg').modal('show');
+            $.ajax({
+                url: site['uri']['public'] + '/getInfo/' + unitId,
+                type: "get",
+                async:false
+            }).done(function (data) {
+                // console.log(data);
+                data = JSON.parse(data);
+
+                neighborhood = data.neighborhood;
+                console.log("data", data);
+
+                var receiptUnit = "روابي كود (## ".replace("##", "\u200E" + (data.rawabi_code.replace("(", ""))) + " / " + "طابو كود ## ".replace("##", "\u200E" + data.tapu_code);
+                var receiptBuilding = data.building;
+                var ar_neighborhood = data.neighborhood;
+                if (ar_neighborhood == "") {
+                    ar_neighborhood = data.neighborhood;
+                }
+                var receiptNeighborhood = neighborhood;
+                var receiptSize = data.size;
+                var receiptFloor = data.floor;
+                var receiptAvailable = data.available;
+                var unitId = data.id;
+                var taboCode = data.tapu_code;
+                var rawabi_code = data.rawabi_code;
+                var unitnum = data.unit;
+
+
+                /*
+                 check if reserved then get data from reservation table also
+                 */
+                $.ajax({
+                    url: site['uri']['public'] + '/reservation/' + unitId,
+                    async:false
+                }).done(function (data) {
+
+
+                    data = JSON.parse(data);
+
+                    $.each(data, function (i, item) {
+                        if (item == null || item == "" || item == "NaN" || item == "NaN/NaN/NaN" || item == "0000-00-00") {
+                            data[i] = "لا يوجد";
+                        }
+                    });
+
+
+                    console.log(data)
+                    if (data) {
+                        var customer_name = data.customer_name;
+                        var customer_type_of_id = data.customer_type_of_id;
+                        var customer_id = data.customer_id;
+                        var customer_type_of_payment = data.customer_type_of_payment;
+                        var phoneNumber = data.phone_number;
+                        var receiptCurrency = data.currency;
+                        var receiptRid = data.id;
+                        var userName = data.reservationUser;
+                        var receiptDate = formatDate(data.reservation_date);
+                        var receiptPrice = data.collected_fees;
+                        var customer_address = data.customer_address;
+                        var mobile = data.mobile;
+                        var issued_by = data.issued_by;
+                        var totalPrice = data.total_price;
+
+                        var purchaser1 = data.customer_name;
+                        var idType1 = data.customer_type_of_id;
+                        var idNum1 = data.customer_id;
+                        var idPlace1 = data.issued_by;
+                        var country1 = data.country;
+                        var city1 = data.city;
+                        var regionName1 = data.region;
+                        var streetName1 = data.street;
+                        var mailBox1 = data.mailbox;
+                        var postalCode1 = data.postalcode;
+                        var homePhone1 = data.phone_number;
+                        var workPhone1 = data.workphone;
+                        var mobileNum1 = data.mobile;
+                        var eMail1 = data.email_address;
+
+                        var floorNum = data.floorNum;
+                        var buildingNum = data.buildingNum;
+                        var landNum = data.landNum;
+                        var hawdNum = "8";
+                        var hawdName = "شعب عامر الغربي";
+                        var haiName = data.haiName;
+                        var unitnum = data.unitnum;
+                        var totalPricecommas = addCommas(totalPrice);
+                        var totalPriceArabic = inWordsArabic(totalPrice, receiptCurrency, "ar");
+                        var receiptPricecommas = addCommas(receiptPrice);
+                        var receiptPriceArabic = inWordsArabic(receiptPrice, receiptCurrency, "ar");
+                        var RegistrationId = zeroPad(receiptRid);
+
+                        // Section 2
+                        var content = $("#content").html();
+                        while (content.indexOf("xxxxx") > 0) {
+                            content = content.replace("xxxxx", receiptDate)
+                            if(data.collected_fees == 0 || data.collected_fees == "0"){
+                                content = content.replace("No xxxxx", "")
+                            }else{
+                                content = content.replace("xxxxx", RegistrationId)
+                            }
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + customer_name + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + customer_type_of_id + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + customer_id + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + issued_by + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + country1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + city1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + regionName1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + streetName1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + mailBox1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + postalCode1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + homePhone1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + workPhone1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + mobileNum1 + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + eMail1 + '</span>')
+                            // content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + rawabi_code + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + unitnum + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + floorNum + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + buildingNum + '</span>')
+                            // content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + landNum + '</span>')
+                            // content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + hawdNum + '</span>')
+                            // content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + hawdName + '</span>')
+                            // content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + haiName + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + totalPricecommas + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + totalPriceArabic + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + receiptPricecommas + '</span>')
+                            content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #0a0a0a dashed;line-height: 11px;font-family: Yakout Linotype Light, sans-serif">' + receiptPriceArabic + '</span>')
+                            content = content.replace("xxxxx", 'نسخة مقدم الطلب')
+
+                        }
+
+                        console.log("content ", content);
+
+                        var content2 = content;
+                        var content3 = content;
+                        content2 = content2.replace('نسخة مقدم الطلب', 'نسخة الدائرة المالية')
+                        content3 = content3.replace('نسخة مقدم الطلب', 'نسخة دائرة التسويق')
+
+                        $("#content").html(content);
+                        $("#content").show();
+
+                        $("#content2").html(content2);
+                        $("#content2").show();
+
+                        $("#content3").html(content3);
+                        $("#content3").show();
+
+                    }
+                });
+
+
+            });
+            printDiv();
+        }
+
+
+        $(document).ready(function () {
+            window.location.href = site['uri']['public']+ '/unit';
+
+            $("#print").click(function () {
+                printDiv();
+            })
+        });
+
+        function checkDate(date) {
+            console.log('hi check date')
+            if (date == "0000-00-00") {
+                date = "";
+            } else if (date != "لا يوجد") {
+                date = formatDate(date);
+            }
+            return date;
+        }
+        function zeroPad(receiptRid) {
+            var places = 6;
+            var zero = places - receiptRid.toString().length + 1;
+            return Array(+(zero > 0 && zero)).join("0") + receiptRid;
+        }
+        function formatDate(date) {
+            var date = new Date(date),
+                month = '' + (date.getMonth() + 1),
+                day = '' + date.getDate(),
+                year = date.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('/');
+        }
+
+        function stringifyNumber(n) {
+            var special = ['صفر', 'الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة',
+                'السادسة', 'السابعة', 'الثامنة', 'التاسعة', 'العاشرة', 'الحادية عشر',
+                'الثانية عشر', 'الثالثة عشر', 'الرابعة عشر', 'الخامسة عشر', 'السادسة عشر', 'السابعة عشر', 'الثامنة عشر', 'التاسعة عشر'];
+            var deca = ['العشرون', 'الثلاثون', 'الأربعون', 'الخمسون', 'الستون',
+                'السبعون', 'الثمانون', 'التسعون'];
+            if ((n == 21) || (n == 31) || (n == 41) || (n == 51)) {
+                special[1] = "الحادية";
+            }
+            if (n < 20) {
+                return special[n];
+            }
+            if (n % 10 === 0) {
+                return deca[Math.floor(n / 10) - 2];
+            }
+            return (special[n % 10] + 'و' + deca[Math.floor(n / 10) - 2]);
+        }
+
+        function addCommas(price) {
+            price += '';
+            x = price.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,200 @@
+/* pages/login.css */
+
+*{
+	font: 9.5pt Arial, Tahoma, Helvetica, sans-serif;
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box;
+}
+
+html{
+    background-color: #EDF0F2;
+    height: 100%;
+    padding: 50px;
+    overflow: auto;
+}
+
+b{
+	font-weight: bold;	
+}
+
+.loginBody{
+    border:0px none;
+    overflow:auto;
+    text-align: center;
+}
+
+#formWrapper
+{
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    background: #F8F8F8;
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(128,128,128,0.75);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(128,128,128,0.75);
+    box-shadow: 0px 0px 15px 0px rgba(128,128,128,0.75);
+}
+
+table{margin: 20px;}
+
+table thead tr th
+{
+    font-size: 24px;
+    padding: 24px 0px 0px 0px;
+    font-weight: normal;
+}
+
+table tbody tr td
+{
+	padding: 5px;
+	/*margin-left: auto;
+    margin-right: auto;*/
+}
+
+#biglogo img{
+display:inline;
+top:0px
+}
+
+.roundyMcRounderson
+{
+    background: #E1E5E8;
+    border: 1px solid #E1E5E8;
+    border-radius: 5px;
+    height: 40px;
+    width: 350px;
+    text-align: left;
+    transition: all 0.25s ease;
+}
+
+.roundyMcRounderson:hover
+{
+    border-color: #ccc;
+}
+
+.roundyMcRounderson i
+{
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+    margin-left: 12px;
+    color: #fff;
+}
+
+.roundyMcRounderson input
+{
+    border: 0px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    height: 38px;
+    width: 311px;
+    padding: 10px;
+    font-size: 15px;
+    color: #606060;
+    float: right;
+}
+
+.loginButton{
+    cursor:default;
+    display:inline;
+    padding-left:5px;
+    padding-right:5px;
+    margin-left: 10px;
+    margin-top: 20px;
+    border: 0px none;
+    background-color:#2271a2;
+    color: #fff;
+    font-weight: bold;
+    font-size: 24px;
+    border-bottom: 4px solid #1D4572;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 220px;
+    height: 68px;
+    cursor: pointer;
+    transition: background .25s ease;
+}
+
+.loginButton:hover {
+    background-color:#146394;
+    border-bottom: 4px solid #0F3764;
+}
+
+.loginButton i{
+    position:relative;
+    bottom: 3px;
+    font-size: 14px;
+}
+
+.loginInput{
+    vertical-align:middle;
+    padding: 2px;
+    margin-left: 10px;
+}
+
+
+
+
+.loginInput{border:1px solid #34487E;}
+
+select
+{
+    margin-left: 10px;
+    border-radius: 3px;
+    border-color: #C5C5C5;
+    width: 150px;
+    margin-right: 10px;
+    padding: 3px;
+    height: 28px;
+    background-color: #FFF;
+    transition: all 0.25s ease;
+}
+
+select:hover
+{
+    border-color: #aaa;
+}
+
+.loginText
+{
+	width: 100%;
+}
+
+.loginText td
+{
+
+	color:#000;
+    padding: 5px;
+}
+
+.branding, .branding a, .branding *
+{
+	text-decoration: none; 
+	color: #000; 
+	cursor: text;
+	font-size: 12px;
+	font-weight: normal;
+}
+
+#statusMessage, #assistance
+{
+    color: #BC4D11;
+    width: 100%;
+    text-align: left;
+}
+
+#statusMessage p
+{
+    color: #BC4D11;
+}
+
+.tablet * input, .tablet * select, .tablet * #loginTable tbody tr td
+{
+    font-size: 1.15em;
+}
+
+#iconicHolder
+{
+    height: 46px;
+}

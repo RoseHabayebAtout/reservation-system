@@ -1,0 +1,31 @@
+{
+  "name" : {
+    "validators" : {
+      "required" : {
+        "message" : "ACCOUNT_SPECIFY_USERNAME"
+      }
+    }
+  },
+  "value" : {
+    "validators" : {
+      "numeric" : {
+        "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+      }
+    }
+  },
+  "plugin" : {
+    "validators" : {
+      "required" : {
+        "message" : "ACCOUNT_SPECIFY_PASSWORD"
+      }
+    }
+  }
+,
+  "description" : {
+    "validators" : {
+      "required" : {
+        "message" : "ACCOUNT_SPECIFY_PASSWORD"
+      }
+    }
+  }
+}

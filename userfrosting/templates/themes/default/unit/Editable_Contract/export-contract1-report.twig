@@ -1,0 +1,219 @@
+{% block subject %}
+    {{site.site_title}} - Export Payments From Contracts
+    {% set page_group = "user" %}
+{% endblock %}
+
+{% extends "layouts/layout-dashboard.twig" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Export Payments From Contracts",
+        "description" : "Export Payments From Contracts"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-file-excel-o'></i> Export Payments From Contracts </h3>
+                </div>
+                <div class='panel-body'>
+                    <div id="settings-alerts">
+                        <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+                    </div>
+                    <div class="form-group">
+
+                        <select class="form-control" id="reportType">
+                            <option value="0">-- select report --</option>
+                            <option value="contract">Contract</option>
+                            <option value="parking">Parking</option>
+                            <option value="storage">Storage</option>
+                        </select>
+
+
+                        <p style="margin: 20px;"> <button class="btn btn-primary text-center" id="export-data">Export</button></p>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="content" style="display: none">
+
+    </div>
+
+
+{% endblock %}
+{% block page_scripts %}
+<script type="text/javascript" src="{{site.uri.js}}/jquery-1.8.2.js" ></script>
+<script type="text/javascript" src="{{site.uri.js}}/FileSaver.js" ></script>
+<script type="text/javascript" src="{{site.uri.js}}/jszip-excel.js" ></script>
+<script type="text/javascript" src="{{site.uri.js}}/excel-gen.js" ></script>
+<script>
+    $('document').ready(function () {
+        $("#export-data").click(function () {
+
+            var reportVal = $('#reportType').val();
+            if (reportVal == 0) {
+                alert('Please select report');
+                return;
+            }
+
+
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var url = site['uri']['public'] + "/getPaymentsReport/";
+            var params = {
+                csrf_token: encodeURIComponent(csrf_token),
+                type: reportVal
+            };
+            $.ajax({
+                type: "get",
+                url: url,
+                data: params
+            }).done(function (data) {
+               if (data.length > 0) {
+                   data = JSON.parse(data);
+
+                   var currentYear = (new Date()).getFullYear();
+
+                   var table = '<table id="basic_table" style="text-align: center !important;">' +
+                           '<thead>' +
+                           '<tr>' +
+                           ' <th> Customer Name  </th>'+
+                           ' <th> Apartment Code </th>'+
+                           ' <th> Tabo Code </th>'+
+                           ' <th> Contract Type </th>'+
+                           ' <th> date of sign </th>'+
+                           ' <th> Total Price in contract </th>'+
+                           ' <th> paid amount </th>'+
+                           ' <th> last payment </th>'+
+                           ' <th> first payment </th>'+
+                           ' <th> Before 1 / '+ currentYear +' </th>';
+
+                   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                   var basedYear = currentYear;
+                   var monthIndex = 0;
+                   for (var i=0;i<500;i++) {
+                       if (monthIndex > 11) {
+                           monthIndex = 0;
+                           basedYear++;
+                       }
+                       table += ' <th> '+ months[monthIndex++] + ' ' + basedYear +' </th>';
+                   }
+
+                   table +=
+                           ' </tr>'+
+                           ' </thead>'+
+                           ' <tbody>'
+                   ;
+
+
+                   for (var i = 0 ; i< data.length ; i++) {
+
+                       if (reportVal == "contract") {
+                           // var date_of_signed = (((data[i]['date_of_signed'].date)+"").substring(0,10)) != 'undefined' ? (((data[i]['date_of_signed'].date)+"").substring(0,10)) : '';
+                           let date = new Date(data[i]['date_of_signed'].date);
+
+                           var date_of_signed = date.toLocaleDateString("en-US");
+
+                       } else {
+                           var date_of_signed = data[i]['date_of_signed'];
+                       }
+
+
+                       table += '<tr>';
+                       table +='<td><span>'+ data[i].customer_name +'</span></td>';
+                       table +='<td><span>'+ data[i].company_code +'</span></td>';
+                       table +='<td><span>'+ data[i].tapu_code +'</span></td>';
+                       table +='<td><span>'+ data[i].contract_type +'</span></td>';
+                       table +='<td><span>'+ date_of_signed +'</span></td>';
+                       table +='<td><span>'+ data[i].priceTotal +'</span></td>';
+                       table +='<td><span>'+ data[i].paid_amount +'</span></td>';
+                       table +='<td><span>'+ data[i].last_payment_date +'</span></td>';
+                       table +='<td><span>'+ data[i].first_payment_amount +'</span></td>';
+                       table +='<td><span>'+ data[i].paymentsBeforeCurrentYear +'</span></td>';
+
+
+                       var flag = true;
+                       var startIndex = -1;
+                       var numOfStep = 0;
+
+
+                       var payments = data[i]['payments'];
+                       payments.sort(function(a,b){
+                           return new Date(a.payment_date) - new Date(b.payment_date);
+                       });
+
+
+                       for (var j = 0 ; j < payments.length;j++) {
+
+                           var date = new Date(payments[j].payment_date);
+                           if (date.getFullYear() < currentYear ) {
+                               continue;
+                           } else if (date.getFullYear() >= currentYear) {
+                               var month = date.getMonth();
+                               var year = date.getFullYear() - currentYear ;
+                               numOfStep = month + (12 * year) - startIndex;
+                               startIndex = month + (12 * year) ;
+
+                               flag = false;
+                           }
+
+                           //  if (startIndex == 0 || j < startIndex) {
+                           for(var k=0;k<numOfStep-1;k++)
+                               table +='<td><span>'+ '' +'</span></td>';
+                           // startIndex = j;
+                           //  }
+
+                           if(payments[j+1]) {
+                               var date1 =  new Date( payments[j].payment_date);
+                               var date2 =   new Date( payments[j+1].payment_date);
+                               if ( (date1.getMonth() == date2.getMonth()) && (date1.getFullYear() == date2.getFullYear())) {
+                                   payments[j].amount = parseInt(payments[j].amount) + parseInt(payments[j+1].amount);
+                                   table +='<td><span>'+ payments[j].amount + '</span></td>';
+                                   j++;
+                               } else {
+                                   table +='<td><span>'+ payments[j].amount + '</span></td>';
+                               }
+                           } else {
+                               table +='<td><span>'+ payments[j].amount + '</span></td>';
+                           }
+                       }
+
+                       table += '</tr>';
+                   }
+                   table += ' </tr></tbody></table>';
+
+                   $('#content').html(table);
+                   excel = new ExcelGen({
+                       "src_id": "basic_table",
+                       "show_header": true,
+                       "type": "table",
+                       "file_name": "Payment Report.xlsx",
+                   });
+                   excel.generate();
+                }
+            })
+            .fail(function (err) {
+                alert("error")
+                console.log("err", err);
+            });
+
+
+        });
+    })
+</script>
+
+
+{% endblock %}
+

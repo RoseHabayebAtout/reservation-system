@@ -1,0 +1,24 @@
+INSERT INTO `contract_attributes`(`name`, `represent_name`, `type`, `data_type`) VALUES
+('arrival_period','Arrival Period','purchase_contract', 'text'),
+('rent_start_date', 'Rent Start Date', 'purchase_contract', 'date'),
+('rent_end_date', 'Rent End Date', 'purchase_contract', 'date'),
+('rest_rent_cost', 'Rest Rent Cost', 'purchase_contract', 'text'),
+('total_cost_during_rent', 'Total Cost During Rent', 'purchase_contract', 'text'),
+('first_period', 'First Period', 'purchase_contract', 'text'),
+('first_period_cost', 'First Period Cost', 'purchase_contract', 'text'),
+('first_period_date_from', 'First Period Date From', 'purchase_contract', 'date'),
+('first_period_date_to', 'First Period Date To', 'purchase_contract', 'date'),
+('second_period', 'Second Period', 'purchase_contract', 'text'),
+('second_period_cost', 'Second Period Cost', 'purchase_contract', 'text'),
+('second_period_date_from', 'Second Period Date From', 'purchase_contract', 'date'),
+('second_period_date_to', 'Second Period Date To', 'purchase_contract', 'date'),
+('third_period', 'Third Period', 'purchase_contract', 'text'),
+('third_period_cost', 'Third Period Cost', 'purchase_contract', 'text'),
+('third_period_date_from', 'Third Period Date From', 'purchase_contract', 'date'),
+('third_period_date_to', 'Third Period Date To', 'purchase_contract', 'date'),
+('rent_period', 'Rent Period', 'purchase_contract', 'text'),
+('pay_1250_start_date', 'Pay 1250 start date', 'purchase_contract', 'date'),
+('delivery_date', 'delivery date', 'purchase_contract', 'text')
+('day', 'Day', 'purchase_contract', 'text'),
+;
+

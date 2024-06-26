@@ -1,0 +1,45 @@
+{% block subject %}
+    Unit {{ unit.rawabi_code }}, Neighborhood {{ unit.neighborhood }} Purchasing - {{ user.display_name }}
+{% endblock %}
+
+{% block body %}
+    <br>
+    <div style="font-size:medium; float: left" dir="ltr">
+        The unit of rawabi_code <b>{{ unit.rawabi_code }}</b> has been purchased by {{ user.display_name }}
+        in {{ reservedUnit.reservation_date }}
+        <!-- ,which is  located  in {{ unit.neighborhood }} neighborhood,  {{ unit.building_type }} and floorNO.{{ unit.floor }}. -->
+        <h3>Client details:</h3>
+        <ul style="font-size: medium;">
+            <li>Client Name: {{ reservedUnit.customer_name }}</li>
+            <li>Client ID: {{ reservedUnit.customer_id }}</li>
+            <li>Client ID type: {{ reservedUnit.customer_type_of_id }}</li>
+            <li>Issued By: {{ reservedUnit.issued_by }}</li>
+            <li>Client Phone Number: {{ reservedUnit.phone_number }}</li>
+            <li>Client Mobile Number: {{ reservedUnit.mobile }}</li>
+            <li>Client Address: {{ reservedUnit.customer_address }}</li>
+            <li>LeadID: {{ reservedUnit.leadID }}</li>
+        </ul>
+        <h3>Purchased apartment details:</h3>
+        <ul style="font-size: medium;">
+            <li>Tabo Code: {{ unit.tapu_code }}</li>
+            <li>Neighborhood: {{ unit.neighborhood }}</li>
+            <li>Building: {{ unit.building_type }}</li>
+            <li>Net Area: {{ unit.size }} m</li>
+            <li>Tabo Area: {{ unit.tabo_area }} m</li>
+            <li>Floor NO: {{ unit.floor }}</li>
+            <li>Apartment Description: <label dir="rtl">{{ unit.description }}</label></li>
+            <li>Collected Fees: {{ reservedUnit.collected_fees }}$</li>
+            <li>Total Price: {{ reservedUnit.total_price }}$</li>
+        </ul>
+        {% if reservedUnit.email_note != "" %}
+            <h3>Notes:</h3>
+            <pre style="font-size: medium; padding-left:40px; font-family:serif; font-weight: normal">{{ reservedUnit.email_note }}</pre>
+        {% endif %}
+
+        <h3>
+            Regards,<br>
+            {{ site.site_title }} Team
+        </h3>
+    </div>
+
+{% endblock %}

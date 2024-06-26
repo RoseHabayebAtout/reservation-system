@@ -1,0 +1,1180 @@
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        const inputFields = [
+            "_annexes",
+            "_contractDate",
+            // "customer_name",
+            "_name",
+            // "customer_id",
+            "_id",
+            "_totalChecks",
+            "tabo_area",
+            "_arrival_period",
+            "_total_cost_during_rent",
+
+        ];
+
+// Handle all input fields with a single event
+        $(document).on('keyup change', 'input[name]', function () {
+            let val = $(this).val();
+            let fieldName = $(this).attr("name");
+
+
+
+            if (fieldName === "_contractDate") {
+                const arabicDay = getArabicDayFromDate(val);
+                $('input[name="_day"]').val(arabicDay);
+            }
+
+            if (fieldName === "customer_name" || fieldName === "_renter2"){
+                var customer1 = $('input[name="customer_name"]:first').val();
+                const customer2 = $('input[name="_renter2"]').val();
+
+                if (customer2 !== "" && customer2 !== null && customer2 !== 'لا يوجد') {
+                    $('input[name="customer_name"]:gt(0)').val(customer1 + " و " + customer2);
+
+                } else {
+                    if (fieldName === "customer_name") {
+                        $(`input[name="customer_name"]`).val(val);
+                    } else {
+                        $(`input[name="customer_name"]`).val(customer1);
+                    }
+                }
+
+            }
+
+            if (fieldName === "customer_id" || fieldName === "_r_idNum2"){
+                var customerID1 = $('input[name="customer_id"]:first').val();
+                const customerID2 = $('input[name="_r_idNum2"]').val();
+
+                if (customerID2 !== "" && customerID2 !== null && customerID2 !== 'لا يوجد') {
+                    $('input[name="customer_id"]:gt(0)').val(customerID1 + " و " + customerID2);
+
+                } else {
+                    if (fieldName === "customer_id") {
+                        $(`input[name="customer_id"]`).val(val);
+                    } else {
+                        $(`input[name="customer_id"]`).val(customerID1);
+                    }
+                }
+
+            }
+
+            if (inputFields.includes(fieldName)) {
+                // Handle other fields using a common logic
+                $(`input[name="${fieldName}"]`).val(val);
+            }
+        });
+
+
+
+        $('#include_payment').on('change', function () {
+            const checked = $('#include_payment').prop('checked');
+            const unitId = $('.contract-modal-lg').data("Uid");
+
+            if (checked) {
+                const csrf_token = $("meta[name=csrf_token]").attr("content");
+                const url = site['uri']['public'] + "/payments/"+unitId;
+                const params = {
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    data = JSON.parse(data)
+                    if (data.length > 0) {
+                        return true;
+                    } else {
+                        $('#include_payment').prop('checked', false);
+                        alert("This Unit does't have payments, please add payments to include them in the contract")
+                        return true;
+                    }
+                }).fail(function (err) {
+                    console.log("err", err);
+                });
+            }
+        });
+
+
+        document.getElementById("contract_templates_list").onchange = function () {
+            localStorage.setItem('contract_templates_list', $('#contract_templates_list').val())
+            $("#openSelectedContract").removeClass("display-none");
+        }
+
+        const csrf_token = $("meta[name=csrf_token]").attr("content");
+        const url = site['uri']['public'] + "/contract/templates/list/";
+        const params = {
+            csrf_token: encodeURIComponent(csrf_token)
+        };
+        $.ajax({
+            type: "get",
+            url: url,
+            data: params
+        }).done(function (data) {
+            if (data.length > 0) {
+                data = JSON.parse(data);
+                $("#contract_templates_list").html('');
+
+                const first_option = _translate('select_contract');
+                $("#contract_templates_list").append('<option value="0">' + first_option + '</option>');
+                for (var loop = 0; loop < data.length; ++loop) {
+                    const templateData = data[loop];
+                    if (templateData.templateName != "Appendix/Payment") {
+                        $("#contract_templates_list").append('<option value="' + templateData.id + '">' + templateData.templateName + '</option>');
+                    }
+                }
+            } else {
+                console.log("no data")
+            }
+        })
+            .fail(function (err) {
+                console.log("err", err);
+            });
+    });
+
+    function loadSelectedContract() {
+        const unitId = $('.contract-modal-lg').data("Uid");
+        const contract_templates_list = $('#contract_templates_list');
+        const url = site['uri']['public'] + "/getContractTemplate/" + contract_templates_list.val();
+        const csrf_token = $("meta[name=csrf_token]").attr("content");
+        const include_payment = $('#include_payment').prop('checked');
+        const params = {
+            csrf_token: encodeURIComponent(csrf_token),
+            unitID: unitId,
+            include_payment: include_payment
+
+        };
+
+        const selected_contract_name = $('#contract_templates_list option:selected').text();
+
+
+        if (selected_contract_name === "عقد إيجار منتهي بخيار الشراء") {
+
+            $("#contract-info-modal").modal('show');
+
+            // Add an event listener to a button in the modal to proceed with AJAX request
+            $("#proceed-button").on("click", function() {
+                // Hide the modal
+                $("#contract-info-modal").modal("hide");
+
+
+                const number_od_month_rent_period = $('#number_od_month_rent_period').val();
+
+                // Proceed with the AJAX request
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+
+                    if (data.length > 0) {
+                        $("#contract_templates").addClass("display-none begin");
+                        $("#contract_templates_payment").addClass("display-none begin");
+                        $("#contract-template-modal").removeClass("display-none");
+                        const element = $("#contract_template_contents");
+                        if (element) {
+                            element.html(data);
+
+
+                            $.ajax({
+                                type: "get",
+                                url: site['uri']['public'] + "/payments/"+unitId,
+                                data: {
+                                    csrf_token: encodeURIComponent(csrf_token),
+                                    id: unitId,
+                                }
+                            }).done(function (dataOfPayments) {
+                                dataOfPayments = JSON.parse(dataOfPayments);
+                                if (dataOfPayments.length > 0) {
+                                    var lastContent= "";
+                                    for (var i = 0; i<dataOfPayments.length; i++) {
+                                        lastContent =  lastContent + '</br>';
+                                        if (i == 0) {
+                                            lastContent =  lastContent + (i+1) +"- " + "يتم دفع مبلغ وقدره " + dataOfPayments[i]['amount'] + " ش.ج., في تاريخ " + dataOfPayments[i]['payment_date'] + ", حتى 7 أيام من تاريخ توقيع هذه الاتفاقية."
+                                            //document.getElementById('payment_details').innerHTML = msg;
+
+                                        } else if (i == dataOfPayments.length - 1) {
+                                            lastContent = lastContent + (i+1) +"- " +  "يتم دفع مبلغ وقدره " + dataOfPayments[i]['amount'] + " ش.ج., في تاريخ " + dataOfPayments[i]['payment_date'] + ", حتى 7 أيام قبل تاريخ التسليم المتفق المتوقع."
+                                            //document.getElementById('payment_details').innerHTML = msg;
+                                        } else {
+                                            lastContent = lastContent + (i+1) +"- " +  "يتم دفع مبلغ وقدره " + dataOfPayments[i]['amount'] + " ش.ج., في تاريخ " + dataOfPayments[i]['payment_date'] + ""
+                                            //document.getElementById('payment_details').innerHTML = msg;
+                                        }
+                                    }
+
+                                    $("#main_contract_container").html($("#main_contract_container").html().replace(/payments_here()!/g,lastContent));
+                                }
+
+                                $(`input[name="_total_cost_during_rent"]`).val(addCommas(number_od_month_rent_period * 1250));
+                                const total_cost_during_rent_input =$(`input[name="_total_cost_during_rent"]`);
+
+                                for (let i=0; i<total_cost_during_rent_input.length; i++) {
+                                    total_cost_during_rent_input[i].parentElement.setAttribute('name', total_cost_during_rent_input[i].name);
+                                    total_cost_during_rent_input[i].parentNode.innerHTML = '<span class="attrr" name ="' +  total_cost_during_rent_input[i].name + '">' + total_cost_during_rent_input[i].value + '</span>'
+                                }
+
+
+                                $(`input[name="_total_cost_during_rent_xxx_word"]`).val(inWordsArabic(number_od_month_rent_period * 1250));
+                                const total_cost_during_rent_input_in_word =$(`input[name="_total_cost_during_rent_xxx_word"]`);
+                                for (let i=0; i<total_cost_during_rent_input_in_word.length; i++) {
+                                    total_cost_during_rent_input_in_word[i].parentElement.setAttribute('name', total_cost_during_rent_input_in_word[i].name);
+                                    total_cost_during_rent_input_in_word[i].parentNode.innerHTML = '<span class="attrr" name ="' +  total_cost_during_rent_input_in_word[i].name + '">' + total_cost_during_rent_input_in_word[i].value + '</span>'
+                                }
+
+                                const arrival_period_input =$(`input[name="_arrival_period"]`);
+                                for (let i=0; i<arrival_period_input.length; i++) {
+                                    arrival_period_input[i].parentElement.setAttribute('name', arrival_period_input[i].name);
+                                    arrival_period_input[i].parentNode.innerHTML = '<span class="attrr" name ="' +  arrival_period_input[i].name + '">' + inWordsArabic(number_od_month_rent_period) + '</span>'
+                                }
+
+
+
+
+
+                                $(`input[name="_rent_end_date"]`).prop("readonly", true);
+
+
+                                $(document).on('change', `input[name="_rent_start_date"]`, function (){
+                                    const number_of_months = parseInt($('#number_od_month_rent_period').val());
+                                    const start_date_str = $(`input[name="_rent_start_date"]`).val();
+                                    const start_date = new Date(start_date_str);
+
+                                    // Add the number of months to the start date
+                                    start_date.setMonth(start_date.getMonth() + number_of_months);
+
+                                    // Format the resulting date as "YYYY-MM-DD"
+                                    const end_date_str = start_date.toISOString().slice(0, 10);
+
+                                    // Set the formatted end date as the value of the input field
+                                    $(`input[name="_rent_end_date"]`).val(end_date_str);
+
+                                });
+
+                                // let prices = $('.translatePrices');
+                                // for (let i=0; i<prices.length; i++ ) {
+                                //     let price = prices[i].getAttribute('data-attr');
+                                //     if (price) {
+                                //         price = replaceAll(price, ',', '');
+                                //         let word = inWordsArabic(parseFloat(price));
+                                //         prices[i].textContent = word;
+                                //     }
+                                // }
+                                //
+                                // let total_price = $('#main_contract_container')[0].querySelector('#total_price');
+                                // let first_payment = $('#main_contract_container')[0].querySelector('#first_payment');
+                                //
+                                // total_price = replaceAll(total_price.textContent, ',','');
+                                // first_payment = replaceAll(first_payment.textContent, ',','');
+                                //
+                                // if (isNumeric(total_price) && isNumeric(first_payment)) {
+                                //     let price = parseFloat(total_price) - parseFloat(first_payment);
+                                //     let word = inWordsArabic(parseFloat(price));
+                                //
+                                //     let price_before = $('.translatePrices.underline')[$('.translatePrices.underline').length-1].getAttribute('data-attr');
+                                //
+                                //     $("#main_contract_container").html($("#main_contract_container").html().replace(price_before,price))
+                                //     $("#main_contract_container").html($("#main_contract_container").html().replace(addCommas(price_before),price))
+                                //
+                                //
+                                //     $('.translatePrices.underline')[$('.translatePrices.underline').length-1].textContent = word;
+                                //
+                                // }
+
+
+                            })
+                                .fail(function (err) {
+                                    console.log("err where getting payments", err);
+                                });
+
+                        } else {
+                            console.log("err", "No element with contract_template_contents was found, you will not see anything !");
+                        }
+                    } else {
+                        console.log("no data")
+                    }
+                })
+                    .fail(function (err) {
+                        console.log("err", err);
+                    });
+
+                $("#openSelectedContract").addClass("display-none begin");
+                $("#openSelectedContract1").removeClass("display-none");
+                $("#main_contract_container").removeClass("display-none");
+                $("#contract_save_success").addClass("display-none");
+                $("#contract_save_success").addClass("display-none");
+            });
+
+            // Add an event listener to a button in the modal to cancel the request
+            $("#cancel-button").on("click", function() {
+                // Hide the modal
+                $("#contract-info-modal").modal("hide");
+
+                // Handle cancellation or take appropriate action
+            });
+        } else {
+            $.ajax({
+                type: "get",
+                url: url,
+                data: params
+            }).done(function (data) {
+
+                if (data.length > 0) {
+                    $("#contract_templates").addClass("display-none begin");
+                    $("#contract_templates_payment").addClass("display-none begin");
+                    $("#contract-template-modal").removeClass("display-none");
+                    const element = $("#contract_template_contents");
+                    if (element) {
+                        element.html(data);
+
+
+                        $.ajax({
+                            type: "get",
+                            url: site['uri']['public'] + "/payments/"+unitId,
+                            data: {
+                                csrf_token: encodeURIComponent(csrf_token),
+                                id: unitId,
+                            }
+                        }).done(function (dataOfPayments) {
+                            dataOfPayments = JSON.parse(dataOfPayments);
+                            if (dataOfPayments.length > 0) {
+                                var lastContent= "";
+                                for (var i = 0; i<dataOfPayments.length; i++) {
+                                    lastContent =  lastContent + '</br>';
+                                    if (i == 0) {
+                                        lastContent =  lastContent + (i+1) +"- " + "يتم دفع مبلغ وقدره " + dataOfPayments[i]['amount'] + " ش.ج., في تاريخ " + dataOfPayments[i]['payment_date'] + ", حتى 7 أيام من تاريخ توقيع هذه الاتفاقية."
+                                        //document.getElementById('payment_details').innerHTML = msg;
+
+                                    } else if (i == dataOfPayments.length - 1) {
+                                        lastContent = lastContent + (i+1) +"- " +  "يتم دفع مبلغ وقدره " + dataOfPayments[i]['amount'] + " ش.ج., في تاريخ " + dataOfPayments[i]['payment_date'] + ", حتى 7 أيام قبل تاريخ التسليم المتفق المتوقع."
+                                        //document.getElementById('payment_details').innerHTML = msg;
+                                    } else {
+                                        lastContent = lastContent + (i+1) +"- " +  "يتم دفع مبلغ وقدره " + dataOfPayments[i]['amount'] + " ش.ج., في تاريخ " + dataOfPayments[i]['payment_date'] + ""
+                                        //document.getElementById('payment_details').innerHTML = msg;
+                                    }
+                                }
+
+                                $("#main_contract_container").html($("#main_contract_container").html().replace(/payments_here()!/g,lastContent));
+                            }
+
+
+                            // let prices = $('.translatePrices');
+                            // for (let i=0; i<prices.length; i++ ) {
+                            //     let price = prices[i].getAttribute('data-attr');
+                            //     if (price) {
+                            //         price = replaceAll(price, ',', '');
+                            //         let word = inWordsArabic(parseFloat(price));
+                            //         prices[i].textContent = word;
+                            //     }
+                            // }
+                            //
+                            // let total_price = $('#main_contract_container')[0].querySelector('#total_price');
+                            // let first_payment = $('#main_contract_container')[0].querySelector('#first_payment');
+                            //
+                            // total_price = replaceAll(total_price.textContent, ',','');
+                            // first_payment = replaceAll(first_payment.textContent, ',','');
+                            //
+                            // if (isNumeric(total_price) && isNumeric(first_payment)) {
+                            //     let price = parseFloat(total_price) - parseFloat(first_payment);
+                            //     let word = inWordsArabic(parseFloat(price));
+                            //
+                            //     let price_before = $('.translatePrices.underline')[$('.translatePrices.underline').length-1].getAttribute('data-attr');
+                            //
+                            //     $("#main_contract_container").html($("#main_contract_container").html().replace(price_before,price))
+                            //     $("#main_contract_container").html($("#main_contract_container").html().replace(addCommas(price_before),price))
+                            //
+                            //
+                            //     $('.translatePrices.underline')[$('.translatePrices.underline').length-1].textContent = word;
+                            //
+                            // }
+
+
+                        })
+                            .fail(function (err) {
+                                console.log("err where getting payments", err);
+                            });
+
+                    } else {
+                        console.log("err", "No element with contract_template_contents was found, you will not see anything !");
+                    }
+                } else {
+                    console.log("no data")
+                }
+            })
+                .fail(function (err) {
+                    console.log("err", err);
+                });
+
+            $("#openSelectedContract").addClass("display-none begin");
+            $("#openSelectedContract1").removeClass("display-none");
+            $("#main_contract_container").removeClass("display-none");
+            $("#contract_save_success").addClass("display-none");
+            $("#contract_save_success").addClass("display-none");
+        }
+
+
+
+
+
+
+    }
+
+    function saveParsedContract() {
+
+        const contract_templates_list = $('#contract_templates_list');
+        var dataContents = document.getElementById('contract_template_contents');
+        const inputs = dataContents.getElementsByTagName('input');
+        const length = inputs.length;
+        for (let index = length - 1; index >= 0; index--) {
+            try {
+                inputs[index].parentNode.innerHTML = inputs[index].value;
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+
+        var attr = $('span[class="attrr"]');
+        var json = {};
+        for (var i = 0; i < attr.length; i++) {
+            var attr_name = attr[i].getAttribute('name');
+            var attr_value = attr[i].innerHTML;
+            json[attr_name] = attr_value;
+            attr[i].innerHTML = attr_value;
+        }
+
+        // var ele = $('.translatePrices');
+        // var keys = Object.keys(json);
+        // var filteredJson={};
+        // for (var i=0; i<keys.length; i++) {
+        //     filteredJson[(keys[i]).split(/[0-9]+_/i)[1]] = json[keys[i]];
+        // }
+        // dataContents = dataContents.outerHTML;
+        // for (var i=0; i< ele.length;i++) {
+        //     var span = ele[i].outerHTML;
+        //     var attrName = ele[i].getAttribute('data-attr');
+        //     var filteredAttr = (attrName.split('_type')[0]).substring(1);
+        //     if (filteredJson[filteredAttr]) {
+        //         dataContents = dataContents.replace(span, inWordsArabic(parseFloat(filteredJson[filteredAttr])));
+        //     } else {
+        //         dataContents = dataContents.replace(span, 'لا يوجد قيمة لاستبدالها بالحروف');
+        //     }
+        // }
+        //
+        // document.getElementById('contract_template_contents').innerHTML = dataContents;
+
+        // I really don't know about this one, TODO: Please check.
+        const uid = localStorage.getItem('uid');
+        const currentDate = new Date();
+        const refinedDate = currentDate.toISOString().slice(0, 10);
+        const url = site['uri']['public'] + "/parseAndSaveContractTemplate/";
+        const csrf_token = $("meta[name=csrf_token]").attr("content");
+        const params = {
+            csrf_token: encodeURIComponent(csrf_token),
+            parsedText: dataContents.innerHTML,
+            template_id: localStorage.getItem('contract_templates_list'),
+            dateOfPurchase: refinedDate,
+            unit_id: uid,
+            json: JSON.stringify(json)
+        };
+        $.ajax({
+            type: "post",
+            url: url,
+            data: params
+        }).done(function (data) {
+            // if (data.length > 0) {
+            //     console.log(data.length);
+            // } else {
+            //     console.log("no data")
+            // }
+            //
+             $("#contract_save_success").removeClass("display-none");
+
+        })
+            .fail(function (err) {
+                console.log("err", err);
+                $("#contract_save_error").removeClass("display-none");
+
+            });
+    }
+
+    function replaceAll(str, find, to) {
+        return str.replace(new RegExp(find, 'g'), to);
+    }
+
+
+    function colletContractDetails() {
+
+        $('span[data-sys-id]').each(function() {
+            // Get the data-sys-id value
+            var sysId = $(this).data('sys-id');
+
+            // Find the corresponding input element by name attribute
+            var inputValue = $('input[name="' + sysId + '"]').val();
+
+            // Replace the content of the span with the input value
+            $(this).text(inWordsArabic(inputValue));
+        });
+
+
+
+
+
+        let elem = $("#main_contract_container");
+        // put لا يوجد
+        let inputFields = elem[0].querySelectorAll('input');
+        for(let i=0; i<inputFields.length;i++) {
+            let type = inputFields[i].type;
+            let value = inputFields[i].value;
+            if (type == "text" && value == "") {
+                inputFields[i].value = "لا يوجد"
+            }
+        }
+
+
+
+
+
+
+        $("#saveParsedContract").removeClass("display-none");
+        const contract_templates_list = $('#contract_templates_list');
+        var dataContents = document.getElementById('contract_template_contents');
+
+        const inputs = dataContents.getElementsByTagName('input');
+        const length = inputs.length;
+        for (let index = length - 1; index >= 0; index--) {
+            try {
+                inputs[index].parentElement.setAttribute('name', inputs[index].name);
+                inputs[index].parentNode.innerHTML = '<span class="attrr" name ="' +  inputs[index].name + '">' + inputs[index].value + '</span>'
+                //inputs[index].value;
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        const selects = dataContents.getElementsByTagName('select');
+        const sel_length = selects.length;
+        for(let i=0; i< sel_length; i++) {
+            try {
+                selects[0].parentElement.setAttribute('name', i + selects[0].name);
+                selects[0].parentNode.innerHTML = '<span class="attrr" name ="' + i + selects[0].name + '">' + selects[0].value + '</span>'
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+
+
+        var attr = $('a .attr');
+        var json = {};
+        for (var i = 0; i < attr.length; i++) {
+            var attr_name = attr[i].getAttribute('name');
+            var attr_value = attr[i].innerHTML;
+            json[attr_name] = attr_value;
+            attr[i].parentNode.innerHTML = attr_value;
+        }
+
+        var keys = Object.keys(json);
+        var filteredJson = {};
+        for (var i = 0; i < keys.length; i++) {
+            var key = (keys[i]).split(/[0-9]+_/i)[1];
+            if (!filteredJson[key]) {
+                filteredJson[key] = [json[keys[i]]];
+            } else {
+                (filteredJson[key]).push(json[keys[i]]);
+            }
+        }
+
+
+
+        dataContents = dataContents.outerHTML;
+        var allAttr = {};
+        var ele = $('.translatePrices');
+
+        for (var i = 0; i < ele.length; i++) {
+            var span = ele[i];
+            var attrName = ele[i].getAttribute('data-attr');
+
+            attrName = replaceAll(attrName, ',', '');
+
+            if(parseFloat(attrName)) {
+                dataContents = dataContents.replace(span.innerHTML, inWordsArabic(parseFloat(attrName)));
+            } else {
+                var filteredAttr = (attrName.split('_type')[0]).substring(1);
+
+                if (!allAttr[filteredAttr]) {
+                    allAttr[filteredAttr] = [0];
+                } else {
+                    allAttr[filteredAttr].push(allAttr[filteredAttr].length)
+                }
+
+                if (filteredJson[filteredAttr]) {
+                    var index = allAttr[filteredAttr].length - 1;
+                    dataContents = dataContents.replace(span.innerHTML, inWordsArabic(parseFloat(filteredJson[filteredAttr][index])));
+                } else {
+                    dataContents = dataContents.replace(span.innerHTML, 'لا يوجد قيمة لاستبدالها بالحروف');
+                }
+            }
+
+
+        }
+
+
+
+        var calculationEle = $('.cal');
+        var flag = true;
+
+        for (var i = 0; i < calculationEle.length; i++) {
+            var span = calculationEle[i];
+            var expression = calculationEle[i].getAttribute('data-attr');
+            var splitUp = expression.split(/[+-/*]/i);
+            for (var k = 0; k < splitUp.length; k++) {
+                var filteredAttr = (splitUp[k].split('_type')[0]).trim().substring(1);
+                if (filteredJson[filteredAttr]) {
+                    expression = expression.replace(splitUp[k], filteredJson[filteredAttr])
+                } else {
+                    flag = false;
+                }
+            }
+
+            dataContents = dataContents.replace(span.innerHTML, eval(expression));
+            var splitUp = expression.split(/[+-/*]/i);
+            for (var k = 0; k < splitUp.length; k++) {
+                var filteredAttr = (splitUp[k].split('_type')[0]).trim().substring(1);
+                if (filteredJson[filteredAttr]) {
+                    expression = expression.replace(splitUp[k], filteredJson[filteredAttr])
+                } else {
+                    flag = false;
+                }
+            }
+
+            if (flag) {
+                dataContents = dataContents.replace(span.innerHTML, eval(expression));
+            } else {
+                dataContents = dataContents.replace(span.innerHTML, 'هناك قيم مستخدمه في المعادله ولم يتم ادخالها من قبل المستخدم');
+            }
+        }
+
+
+
+        document.getElementById('contract_template_contents').innerHTML = dataContents;
+
+
+
+
+
+
+
+        // I really don't know about this one, TODO: Please check.
+        const uid = localStorage.getItem('uid');
+        const currentDate = new Date();
+        const refinedDate = currentDate.toISOString().slice(0, 10);
+        const params = {
+            parsedText: dataContents.innerHTML,
+            template_id: localStorage.getItem('contract_templates_list'),
+            dateOfPurchase: refinedDate,
+            unit_id: uid
+        };
+
+        return params;
+    }
+
+    function saveParsedPayments() {
+        const contract_templates_list = $('#contract_templates_list');
+        const dataContents = document.getElementById('contract_template_contents');
+        const inputs = dataContents.getElementsByTagName('input');
+        const length = inputs.length;
+        for (let index = length - 1; index >= 0; index--) {
+            try {
+                inputs[index].parentNode.innerHTML = inputs[index].value;
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        // I really don't know about this one, TODO: Please check.
+        const uid = localStorage.getItem('uid');
+        const currentDate = new Date();
+        const refinedDate = currentDate.toISOString().slice(0, 10);
+        const url = site['uri']['public'] + "/parseAndSaveContractTemplate/";
+        const csrf_token = $("meta[name=csrf_token]").attr("content");
+        const params = {
+            csrf_token: encodeURIComponent(csrf_token),
+            parsedText: dataContents.innerHTML,
+            template_id: localStorage.getItem('contract_templates_list'),
+            dateOfPurchase: refinedDate,
+            unit_id: uid
+        };
+        $.ajax({
+            type: "post",
+            url: url,
+            data: params
+        }).done(function (data) {
+            if (data.length > 0) {
+
+            } else {
+                console.log("no data")
+            }
+
+            // Doing the hiding of the dialog.
+            $('.contract-modal-lg').modal("hide");
+        })
+            .fail(function (err) {
+                console.log("err", err);
+            });
+    }
+
+    function showContractModal(self, dropDownSource) {
+
+        initializeContractModal();
+        const serverURL = site['uri']['public'] + '/mssqlConfig/getPrice/?';
+        const csrf_token = $("meta[name=csrf_token]").attr("content");
+        const data = extractDataFromRow($(self).parent().parent()),
+            unitId = data.unit,
+            uid = data.id,
+            building = data.building,
+            neighborhood = data.neighborhood,
+            size = data.tabo_area,
+            floor = data.floor,
+            rawabiCode = data.rawabi_code;
+
+        localStorage.setItem('uid', JSON.stringify(data.id));
+
+        const req1 = $.ajax({
+            url: site['uri']['public'] + '/reservation/' + uid,
+            type: "get"
+        }).done(function (data) {
+            console.log(data);
+            var req2 = $.ajax({
+                url: site['uri']['public'] + '/neighborhoodData/' + neighborhood,
+                type: "get"
+            }).done(function (data2) {
+                $.ajax({
+                    type: 'GET',
+                    url: site['uri']['public'] + '/unit/data/?'
+                }).done(function (newData) {
+
+                    //Ajax request to get the additional costs
+                    $('#pricePart0').val(JSON.parse(data).total_price);
+                    $("#pricePart0").prop('disabled', true);
+
+                    data = JSON.parse(data);
+                    data2 = JSON.parse(data2);
+                    newData = JSON.parse(newData);
+
+
+                    // Create a new set of data
+                    for (var i = 0; i < newData.length; i++) {
+                        if (newData[i].id == uid)
+                            data3 = newData[i];
+                    }
+                    if ($('.contract-modal-lg').data('old-template')) {
+                        $(".contract-modal-lg").html($('.contract-modal-lg').data('old-template'))
+                    }
+                    console.log(data)
+                    const template = $(".contract-modal-lg").html().replace(new RegExp('&lt;', 'g'), '<').replace(new RegExp('&gt;', 'g'), '>');
+                    const oldTemplate = template;
+                    const htmlReciptTempl = _.template(template)({
+                        unitId: unitId,
+                        building: building,
+                        neighborhood: neighborhood,
+                        floor: floor,
+                        size: size,
+                        uuid: uid,
+                        purchaser1: data.customer_name,
+                        idNum1: data.customer_id,
+                        mobileNum1: data.mobile,
+                        homePhone1: data.phone_number,
+                        idPlace1: data.issued_by,
+                        priceTotal: data.total_price,
+                        haiArabicName: data2.haiArabicName,
+                        haiEnglishName: data2.haiEnglishName,
+                        haiArea: data2.haiArea,
+                        HAO_date: data2.HAO_date,
+                        HAO_num: data2.HAO_num,
+                        haiBuildingsNum: data2.haiBuildingsNum,
+                        estContractDate: data2.estContractDate,
+                        land: data2.land,
+                        unitDescription: "data3.unitDescription",
+                        country: data.country,
+                        city: data.city,
+                        region: data.region,
+                        street: data.street,
+                        work_phone: data.workphone,
+                        mailbox: data.mailbox,
+                        email: data.email_address,
+                        postalcode: data.postalcode
+
+
+                    });
+                    // save unit this to dialog to pass it to cancelReservation function
+                    $('.contract-modal-lg').data('old-template', oldTemplate);
+                    $('.contract-modal-lg').html(htmlReciptTempl).modal("show");
+                    // added by Moath
+                    $("#idType1").val(data.customer_type_of_id);
+                    $("#r_idType1").val(data.customer_type_of_id);
+                    // end of editing
+                    //$('.contract-modal-lg').modal("show");
+                    $('.datepicker').datetimepicker({
+                        viewMode: 'days',
+                        format: 'MM/DD/YYYY'
+
+                    });
+                    $('.contractsDate').each(function () {
+                        $(this).data("DateTimePicker").date(moment());
+                    });
+                    $("#payment").val(paymentIndex);
+                    $('.contract-modal-lg').data("Uid", uid);
+
+                    //Adding event for each handler -> in that case we can do this
+                    //Setting LocalStorage to make it publicly available
+                    // localStorage.setItem('total-price', JSON.stringify(data.total_price));
+                    localStorage.setItem('total-price', 1000);
+
+                    const totalPrice = Number(localStorage.setItem);
+
+                    // don't show complete purchase if from dropdown
+                    if (!dropDownSource) {
+                        checkToPurchase(uid);
+                    }
+
+                    //Showing the total Price to perform some calculations
+                    $('#priceTotal,#price3Total')
+                        .val(totalPrice)
+                        .attr('disabled', true);
+                }).fail(failureCallback);
+            }).fail(failureCallback);
+        }).fail(failureCallback);
+    }
+
+    function initializeContractModal() {
+        const target = $('#contractsForm');
+        target.closest('form').find("input[type=text],input[type=number],input[type=email], textarea").val("");
+        $("#contractDetails").removeClass("display-none");
+        $('#contracts').val("0");
+        paymentIndex = 1;
+        $("#paymentTable").find("tr:gt(1)").remove();
+        $(".must-be-hidden").addClass("display-none");
+        $("#pageNum").html("");
+        $("#prePage").addClass("display-none");
+        $("#openSelectedContract").attr("onclick", 'loadSelectedContract()');
+        $("#openSelectedContract").html(_translate('next'));
+        $('.rtl-direction').css({
+            'direction': 'rtl',
+            'max-height': '200px',
+            'min-height': '200px',
+            'overflow-y': 'auto'
+        });
+    }
+
+    function backPayments() {
+
+        const uid = $('.contract-modal-lg').data("Uid");
+        checkToPurchase(uid);
+        $('#paymentTable tbody tr:gt(0)').remove()
+
+        $("#backPayment").addClass("display-none");
+        $("#contract1Part9").addClass("display-none");
+        $("#finishingContent").addClass("display-none");
+        $("#saveParsedPayments").addClass("display-none");
+        $("#saveFinishingValue").addClass("display-none");
+        $("#buttons-container").removeClass("display-none");
+
+    }
+
+    function backContract() {
+
+        const uid = $('.contract-modal-lg').data("Uid");
+        checkToPurchase(uid);
+
+        $("#main_contract_container").addClass("display-none");
+        $("#backContract").addClass("display-none");
+        $("#choose-contract-id").addClass("display-none");
+        $("#buttons-container").removeClass("display-none");
+        $("#openSelectedContract").addClass("display-none");
+        $("#openSelectedContract1").addClass("display-none");
+        $("#saveParsedContract").addClass("display-none");
+    }
+
+    function showPayments() {
+
+
+        const unitId = $('.contract-modal-lg').data("Uid");
+
+        $.ajax({
+            url: site['uri']['public'] + '/unit/'+ unitId +'/price/total/',
+            type: "GET",
+        }).done(function (data) {
+            $('#r_totalPrice').val(data);
+        }).fail(function (err) {
+            $('#r_totalPrice').val('');
+        });
+
+
+        addOldPayments();
+
+        $("#backPayment").removeClass("display-none");
+        $("#choose-contract-id").addClass("display-none");
+        $("#contract1Part9").removeClass("display-none");
+        $("#buttons-container").addClass("display-none");
+        $("#openSelectedContract").addClass("display-none");
+
+        $("#openSelectedContract1").addClass("display-none");
+        $("#saveParsedPayments").removeClass("display-none");
+        $("#openSelectedContract").addClass("display-none");
+
+        $('.rtl-direction').css({
+            'direction': 'rtl',
+            'max-height': '200px',
+            'min-height': '200px',
+            'overflow-y': 'auto'
+        });
+        $('#payment').val('')
+    }
+
+    function showFinishingModal() {
+
+        setFinishingPrice();
+
+        $("#backPayment").removeClass("display-none");
+        $("#choose-contract-id").addClass("display-none");
+        $("#finishingContent").removeClass("display-none");
+        $("#buttons-container").addClass("display-none");
+        $("#openSelectedContract").addClass("display-none");
+
+        $("#openSelectedContract1").addClass("display-none");
+        $("#saveFinishingValue").removeClass("display-none");
+        $("#openSelectedContract").addClass("display-none");
+
+        $('.rtl-direction').css({
+            'direction': 'rtl',
+            'max-height': '200px',
+            'min-height': '200px',
+            'overflow-y': 'auto'
+        });
+
+    }
+
+    function checkToPurchase(id) {
+
+        // I really don't know about this one, TODO: Please check.
+        const unitId = id;
+        const url = site['uri']['public'] + "/unit/checkToPurchase/";
+        const csrf_token = $("meta[name=csrf_token]").attr("content");
+
+        const params = {
+            csrf_token: encodeURIComponent(csrf_token),
+            unitId: unitId
+        };
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: params
+        }).done(function (data) {
+
+            console.log(data);
+
+            if (data == 'success') {
+                $("#completePurchaseProcess").removeClass("display-none");
+            } else {
+                $("#completePurchaseProcess").addClass("display-none");
+            }
+
+        }).fail(function (err) {
+            console.log("err", err);
+        });
+    }
+
+    function showContractDetails() {
+
+        $("#contract_templates").removeClass("display-none begin");
+        $("#contract_templates_payment").removeClass("display-none begin");
+        $("#contract-lg-modal").removeClass("display-none");
+        $("#backContract").removeClass("display-none");
+        $("#choose-contract-id").removeClass("display-none");
+        $("#contract1Part9").addClass("display-none");
+        $("#buttons-container").addClass("display-none");
+        $('#contract_templates_list').val(0)
+        $('#include_payment').prop("checked", false)
+        $('.rtl-direction').css({
+            'direction': 'rtl',
+            'max-height': '200px',
+            'min-height': '200px',
+            'overflow-y': 'auto'
+        });
+    }
+
+    function completePurchaseProcess() {
+        const allPayments = collectPayments();
+        const contractDetails = colletContractDetails();
+        const contract_templates_list = $('#contract_templates_list');
+        var values = getValuesFromContract('.form-horizontal');
+        // I really don't know about this one, TODO: Please check.
+        const unitId = $('.contract-modal-lg').data("Uid");
+        const url = site['uri']['public'] + "/purchaseUnit/";
+        const csrf_token = $("meta[name=csrf_token]").attr("content");
+
+        const params = {
+            csrf_token: encodeURIComponent(csrf_token),
+            unitId: unitId
+        };
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: params,
+            beforeSend: function () {
+                $('.loader-modal-lg').modal('show');
+            }
+        }).done(function (data) {
+
+            var date = new Date();
+
+            var datestring = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+            saveHistory("", unitId, datestring, "", "Complete Purchase Unit");
+
+            setTimeout(function () {
+                $('.loader-modal-lg').modal('hide');
+                $('#contract-lg-modal').modal('hide');
+                $('#unitTable').DataTable().ajax.reload();
+            }, 2250)
+
+        }).fail(function (err) {
+            console.log("err", err);
+        });
+
+    }
+
+    function isNumeric(str) {
+        if (typeof str != "string") return false // we only process strings!
+        return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+            !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+    }
+
+    function getArabicDayFromDate(dateText) {
+        var arabicDays = [
+            "الأحد",
+            "الاثنين",
+            "الثلاثاء",
+            "الأربعاء",
+            "الخميس",
+            "الجمعة",
+            "السبت"
+        ];
+
+        var parts = dateText.split('-');
+        var year = parseInt(parts[0], 10);
+        var month = parseInt(parts[1], 10) - 1;
+        var day = parseInt(parts[2], 10);
+
+        var date = new Date(year, month, day);
+        var dayOfWeek = date.getDay();
+
+        return arabicDays[dayOfWeek];
+    }
+</script>
+
+
+<div id="choose-contract-id" class="display-none">
+    <div id="contract_templates">
+        <div class="form-group">
+            <div class="col-xs-8 col-xs-offset-2">
+                <select id="contract_templates_list" class="form-control contracts-select">
+                    <option value="0">{{ translate('select_contract') }}</option>
+                </select>
+            </div>
+            <br><br>
+        </div>
+    </div>
+    <div class="row form-group" id="contract_templates_payment">
+        <div class="col-xs-8 col-xs-offset-2">
+            <label>
+                Include Payment ?
+                <input type="checkbox" id="include_payment" name="include_payment">
+            </label>
+        </div>
+    </div>
+</div>
+
+{% include 'components/payment/payment_generator.twig' %}
+{% include 'components/payment/finishing.twig' %}
+
+<div class="modal-title" id="buttons-container">
+    <div class="row lead">
+        <div class="col-xs-offset-2 col-xs-9 ">
+            <div class="pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="showFinishingButtonId"
+                            onclick="showFinishingModal()">Finishing Value
+                    </button>
+                    <button class="btn btn-primary" id="showPaymentsButtonId"
+                            onclick="showPayments()">{{ translate('payments') }}
+                    </button>
+                    <button class="btn btn-primary" id="showContractsButtonId"
+                            onclick="showContractDetails()">{{ translate('contracts') }}
+                    </button>
+                    <button class="btn btn-primary display-none" id="completePurchaseProcess"
+                            onclick="completePurchaseProcess()">{{ translate('complete_purchase') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer" style="border: none">
+    <div class="pull-left">
+        <button class="btn btn-danger" data-dismiss="modal" id="cancelContractsModal">
+            {{ translate('exit') }}
+        </button>
+        <button class="display-none" id="openSelectedContract"
+                onclick="loadSelectedContract()">{{ translate('next') }}
+        </button>
+        <button class="display-none" id="backPayment"
+                onclick="backPayments()">{{ translate('go_back') }}
+        </button>
+        <button class="display-none" id="backContract"
+                onclick="backContract()">{{ translate('go_back') }}
+        </button>
+        <button class="display-none" id="openSelectedContract1"
+                onclick="colletContractDetails()">{{ translate('preview') }}
+        </button>
+        <button class="display-none" id="saveParsedContract"
+                onclick="saveParsedContract()">{{ translate('save_contract') }}
+        </button>
+        <button class="display-none" id="saveParsedPayments"
+                onclick="preSavePaymentsGenerated()">{{ translate('save_payment') }}
+        </button>
+        <button class="display-none" id="saveFinishingValue"
+                onclick="saveFinishingPrice()">save
+        </button>
+        <button class="display-none" id="completePurchaseProcessButton"
+                onclick="completePurchaseProcess()">{{ translate('save_all') }}
+        </button>
+        <button class="btn btn-default display-none" id="prePage">{{ translate('go_back') }}</button>
+    </div>
+    <div class="pull-right" id="pageNum"></div>
+</div>
+
+<div class="modal fade" id="contract-info-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Enter an Integer Value</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="integerInput" class="form-label">Number of Month (Rent Period):</label>
+                    <input type="number" class="form-control" id="number_od_month_rent_period" placeholder="Enter Number of Month ...">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="cancel-button">Cancel</button>
+                <button type="button" class="btn btn-primary" id="proceed-button">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>

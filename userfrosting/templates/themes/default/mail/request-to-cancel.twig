@@ -1,0 +1,40 @@
+{% block subject %}
+    <{{ unit.rawabi_code }}> Request to Cancel Reservation
+{% endblock %}
+
+{% block body %}
+<p>Greetings ,
+</p>
+<p>
+You are receiving this email because reservation was requested to be cancelled in {{"now"|date("Y-m-d") }}.
+</p>
+<p style="font-size:medium;">Cancellation Reason: <b>{{ requestToCancelReason }}</b></p>
+<!--
+<p>
+You are receiving this email because {{user.display_name}} has required to cancel reservation for {{unit.rawabi_code}} in Building NO. {{unit.building}} {{unit.unit}} floor NO.{{unit.floor}}.
+	{{recipient.title}}
+</p>-->
+
+{% if recipient.primary_group_id == 2 %}
+	<p>
+		You will need to either reject or accept the cancellation request. Please follow the link below to take your action.
+	</p>
+	<p>
+		<a href="{{site.uri.public}}/unit#Pending">{{site.uri.public}}/unit#Pending</a>
+	</p>
+{% endif %}
+<h3>Purchased apartment details:</h3>
+    <ul  style="font-size: medium;">
+      <li>Tapu Code :{{ unit.tapu_code }}</li>
+      <li>Neighborhood :{{ unit.neighborhood }}</li>
+      <li>Building :{{ unit.building_type }}</li>
+      <li>Net Area :{{ unit.size }} m</li>
+      <li>Tabo Area :{{ unit.tabo_area }} m</li>
+      <li>FloorNO :{{ unit.floor }}</li>
+      <li>Apartment description :{{ unit.description }}</li>
+    </ul>
+<h3>
+Regards,<br>
+The {{site.site_title}} Team
+</h3>
+{% endblock %}

@@ -1,0 +1,709 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "neighborhoods" %}
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+    "title"       : "Neighborhoods",
+    "description" : "Neighborhoods details and settings."
+    }) %}
+    {{ parent() }}
+    {# <link rel="stylesheet" type="text/css" href="css\discount.css" >
+     #}
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="settings-alerts"></div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                  <span class="fa-stack fa-lg">
+                      <i class="fa fa-building-o">&nbsp;{{ translate('NEIGHBORHOOD') }}</i>
+                  </span>
+                    <div class='pull-right users-btn-panel'>
+                        <button data-toggle="modal" id="createNeighborhoodButton" class="btn btn-success"><i
+                                    class="fa fa-plus-square"></i> {{ translate('add_new_neighborhood') }}
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control search" data-column="all" id="neighborhoods-search-field"
+                               placeholder="Search...">
+                        <span class="input-group-btn">
+                    <button class="btn btn-default neighborhoods-search-button" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    </span>
+                    </div>
+                    <table id="neighborhoodTable"
+                           class="tablesorter table table-bordered table-hover table-striped tablesorter-bootstrap dataTables"
+                           cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>{{ translate('neighborhood_english_name') }}</th>
+                                <th>{{ translate('neighborhood_arabic_name') }}</th>
+                                <th>{{ translate('neighborhood_area') }}</th>
+                                <th>{{ translate('number_of_buildings') }}</th>
+                                <th>{{ translate('land_number') }}</th>
+                                <th>{{ translate('hao_internal_number') }}</th>
+                                <th>{{ translate('hao_internal_date') }}</th>
+                                <th>{{ translate('hao_established_number') }}</th>
+                                <th>{{ translate('hao_established_date') }}</th>
+                                <th>{{ translate('actions') }}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <!-- end of panel-primary -->
+        </div>
+    </div>
+    <div class="modal fade" id="createNeighborhood" role="dialog" aria-labelledby="edit" aria-hidden="true"
+         data-style="rtl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('add_new_neighborhood') }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-10">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="haiEnglishName">{{ translate('neighborhood_english_name') }}*</label>
+                                <input class="form-control neighborhoodNameEn text-right" id="haiEnglishName"
+                                       type="text" required>
+                                <div class="name-alerts-en" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="haiArabicName">{{ translate('neighborhood_arabic_name') }}*</label>
+                                <input class="form-control neighborhoodNameAr text-right" id="haiArabicName" type="text"
+                                       required>
+                                <div class="name-alerts-ar" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="haiArea">{{ translate('neighborhood_area') }}</label>
+                                <input class="form-control neighborhoodArea text-right" id="haiArea" type="number">
+                                <div class="number-alerts-1" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="haiBuildingsNum">{{ translate('number_of_buildings') }}</label>
+                                <input class="form-control neighborhoodBuildings text-right" id="haiBuildingsNum"
+                                       type="number">
+                                <div class="number-alerts-2" style="color:red"></div>
+                            </div>
+                            <!--
+                            <div class="form-group">
+                                              <label for="land">Land</label>
+                                              <input class="form-control neighborhoodNameAr" id="e_haiArabicName" type="text" >
+                                              <div class="name-alerts-ar" style="color:red"></div>
+                                            </div>
+
+
+                            <div class="form-group">
+                                              <label for="estContrDate">Established Contract Date</label>
+                                              <div class='input-group date datepicker'>
+                                                <input type='text' class="form-control haoDate" id="HAO_date" />
+                                                  <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                  </span>
+                                                </div>
+                                            </div> -->
+
+                            <div class="form-group">
+                                <label for="land">{{ translate('land_number') }}</label>
+                                <input class="form-control land text-right" id="land" type="text">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="estContrNum">{{ translate('hao_internal_number') }}</label>
+                                <input class="form-control estContrNum text-right" id="estContrNum" type="text"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="estContrDate">{{ translate('hao_internal_date') }}</label>
+                                <div class='input-group date datepicker'>
+                                    <input type='text' class="form-control estContrDate text-right" id="estContrDate"/>
+                                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="estContrNum2">{{ translate('hao_established_number') }}</label>
+                                <input class="form-control estContrNum2 text-right" id="estContrNum2" type="text"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="estContrDate2">{{ translate('hao_established_date') }}</label>
+                                <div class='input-group date datepicker'>
+                                    <input type='text' class="form-control estContrDate2 text-right"
+                                           id="estContrDate2"/>
+                                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group display-none">
+                                <label for="HAO_num">{{ translate('HAO_Number') }}</label>
+                                <input class="form-control haoNum text-right" id="HAO_num" type="text">
+                            </div>
+                            <div class="form-group display-none">
+                                <label for="HAO_date">{{ translate('HAO_Date') }}</label>
+                                <div class='input-group date datepicker'>
+                                    <input type='text' class="form-control haoDate text-right" id="HAO_date"/>
+                                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer" data-style="text-left">
+                <button type="button" id="neighborhoodCreate" class="btn btn-primary">{{ translate('save') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    </form>
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true"
+         data-style="rtl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-left" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('edit_neighborhood') }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-10">
+                        <form class="form-horizontall" role="form">
+                            <div class="form-group">
+                                <label for="e_haiEnglishName">{{ translate('neighborhood_english_name') }}*</label>
+                                <input class="form-control neighborhoodNameEn text-right" id="e_haiEnglishName"
+                                       type="text"
+                                       required>
+                                <div class="name-alerts-en" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="e_haiArabicName">{{ translate('neighborhood_arabic_name') }}*</label>
+                                <input class="form-control neighborhoodNameAr text-right" id="e_haiArabicName"
+                                       type="text"
+                                       required>
+                                <div class="name-alerts-ar" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="e_haiArea">{{ translate('neighborhood_area') }}</label>
+                                <input class="form-control neighborhoodArea text-right" id="e_haiArea" type="number">
+                                <div class="number-alerts-1" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="e_haiBuildingsNum">{{ translate('number_of_buildings') }}</label>
+                                <input class="form-control neighborhoodBuildings text-right" id="e_haiBuildingsNum"
+                                       type="number">
+                                <div class="number-alerts-2" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="land">{{ translate('land_number') }}</label>
+                                <input class="form-control land text-right" id="land" type="text">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="estContrNum">{{ translate('hao_internal_number') }}</label>
+                                <input class="form-control estContrNum text-right" id="estContrNum" type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="estContrDate">{{ translate('hao_internal_date') }}</label>
+                                <div class='input-group date datepicker'>
+                                    <input type='text' class="form-control estContrDate text-right" id="estContrDate"/>
+                                    <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="estContrNum2">{{ translate('hao_established_date') }}</label>
+                                <input class="form-control estContrNum2 text-right" id="estContrNum2" type="text"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="estContrDate2">{{ translate('hao_established_date') }}</label>
+                                <div class='input-group date datepicker '>
+                                    <input type='text' class="form-control estContrDate2 text-right"
+                                           id="estContrDate2"/>
+                                    <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group display-none">
+                                <label for="e_HAO_num">{{ translate('HAO_Number') }}</label>
+                                <input class="form-control haoNum" id="e_HAO_num" type="text">
+                            </div>
+                            <div class="form-group display-none">
+                                <label for="e_HAO_date">{{ translate('HAO_Date') }}</label>
+                                <div class='input-group date datepicker'>
+                                    <input type='text' class="form-control haoDate" id="e_HAO_date"/>
+                                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer" data-style="text-left">
+                <button type="button" id="editNeighbordood" class="btn btn-warning">{{ translate('update') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true"
+         data-style="rtl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('delete_neighborhood') }}</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert">{{ translate('delete_neighborhood_msg') }}</div>
+
+            </div>
+            <div class="modal-footer" data-style="text-left">
+                <button type="button" class="btn btn-danger" id="deleteNeighborhood">{{ translate('yes') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+            </div>
+        </div>
+    </div>
+    {% include 'components/common/spinnerLoader.twig' %}
+{% endblock %}
+{% block page_scripts %}
+
+    <script>
+        $(document).ready(function () {
+
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            // config datatable
+            $('#neighborhoodTable').DataTable({
+                'ajax': {
+                    "type": "Get",
+                    "url": site['uri']['public'] + '/neighborhoods/all/',
+                    "dataSrc": function (json) {
+                        return json;
+
+                    }
+                },
+                "paging": false,
+                "ordering": true,
+                "info": false,
+                "searching": false,
+                "responsive": true,
+                columns: [
+                    {"data": "haiEnglishName"},
+                    {"data": "haiArabicName"},
+                    {"data": "haiArea"},
+                    {"data": "haiBuildingsNum"},
+                    {"data": "land"},
+                    {"data": "estContrNum"},
+                    {"data": "estContrDate"},
+                    {"data": "estContrNum2"},
+                    {"data": "estContrDate2"},
+                    {
+                        "data": null,
+                        "defaultContent": '<div class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">'+ _translate('actions') +'<span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li><a href="#"  id="deleteNeighborhood" data-title="Delete" data-target="#delete" data-placement="top" data-toggle="tooltip"><i class="fa fa-trash-o"></i> '+ _translate('delete_neighborhood') +'</a></li><li><a href="#" id="editNeighbordood" data-title="Edit" data-target="#edit"  data-toggle="tooltip" ><i class="fa fa-edit"></i> '+ _translate('edit_neighborhood') +'</a></li></ul></div>'
+                    }
+                ],
+                fnRowCallback: function (row, data, iDisplayIndex, iDisplayIndexFull) {
+                    // Set data-id=id on the row
+                    $(row).data('id', data.id);
+                }
+            });
+            //Search
+            $('.neighborhoods-search-button').on('click', function () {
+                var search = $('#neighborhoods-search-field').val().toLowerCase();
+                $('#neighborhoodTable').each(function () { // Search among possibly multiple tables
+                    // Hide all table rows
+                    $(this).find('tbody tr').hide();
+                    // Search through all td:s and if a match is found => display the tr that the td belongs to
+                    $(this).find('tbody td').filter(function () {
+                        return $(this).text().toLowerCase().indexOf(search) != -1; // case insensitive search
+                    }).parent().show();
+                    $(this).trigger('applyWidgets'); // for zebra
+                });
+            });
+
+            //Create Neighborhood button
+            $('#createNeighborhoodButton').on('click', function () {
+                $('#createNeighborhood').modal("show");
+                var target = $('.form-horizontal');
+                target.closest('form').find("input[type=text],input[type=number]").val("");
+                $('.datepicker').datetimepicker({
+                    format: 'MM/DD/YYYY'
+                });
+                $('.form-horizontal').find('input').each(function () {
+                    $(this).css("border-color", "#909090");
+                });
+                $(".name-alerts-en").html("");
+                $(".name-alerts-ar").html("");
+                $(".number-alerts-1").html("");
+                $(".number-alerts-2").html("");
+                $('#haiEnglishName').on({
+                    keyup: function () {
+                        checkExistNameEn($("#haiEnglishName").val(), null)
+                    },
+                    blur: function () {
+                        checkExistNameEn($("#haiEnglishName").val(), null)
+                    }
+                });
+                $('#haiArabicName').on({
+                    keyup: function () {
+                        checkExistNameAr($("#haiArabicName").val(), null)
+                    },
+                    blur: function () {
+                        checkExistNameAr($("#haiArabicName").val(), null)
+                    }
+                });
+            });
+            //Save Neighborhood
+            $('#createNeighborhood').on('click', '#neighborhoodCreate', function () {
+
+                var discountName, discountPercentage, discountPassword;
+                var modal = $(this).closest('.modal');
+                var values = getValuesFromForm('.form-horizontal');
+                console.log("ContrNum " + values.estContrNum);
+                if (modalValidityCheck(values, '.form-horizontal')) {
+                    //tamer
+                    var params = {
+                        haiEnglishName: values.haiEnglishName,
+                        haiArabicName: values.haiArabicName,
+                        haiArea: values.haiArea,
+                        haiBuildingsNum: values.haiBuildingsNum,
+                        land: values.land,
+                        estContrDate: formatDateToYYYYMMDD(values.estContrDate),
+                        estContrDate2: formatDateToYYYYMMDD(values.estContrDate2),
+                        HAO_num: values.HAO_num || '0',
+                        HAO_date: formatDateToYYYYMMDD(values.HAO_date) || '0000-00-00',
+                        estContrNum: values.estContrNum,
+                        estContrNum2: values.estContrNum2,
+                        csrf_token: encodeURIComponent(csrf_token)
+                    };
+                    var url = site['uri']['public'] + "/neighborhoods/";
+                    var req1 = $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: params,
+                        beforeSend: function () {
+                            $('.loader-modal-lg').modal('show')
+                        }
+                    }).done(function (data) {
+                        console.log(data);
+                        $('#createNeighborhood').modal("hide");
+                        $('.loader-modal-lg').modal('hide');
+                        $('#neighborhoodTable').DataTable().ajax.reload();
+                        $("#settings-alerts").html("<div class='alert alert-success'>New Neighborhood Has been Added</div>");
+
+                    })
+                        .fail(function (err) {
+                            $('.loader-modal-lg').modal('hide');
+                            $('#create').modal("hide");
+                            console.log("err", err);
+                            $("#settings-alerts").html("<div class='alert alert-danger'>Failed to Add New Neighborhood</div>");
+                        });
+                }
+            });
+
+            $('#neighborhoodTable').on('click', "#deleteNeighborhood,#editNeighbordood", function () {
+                var row = $(this).closest('tr');
+                var rowData = $('#neighborhoodTable').DataTable().row(row).data();
+                $('.form-horizontall').find('input').each(function () {
+                    $(this).css("border-color", "#909090");
+                });
+
+                if (rowData == null) {
+                    console.log("Row Data isNull: ");
+                    row = $(this).parent().closest('td').parent().prev();
+                    console.log("PressedRow: " + row.attr('class'));
+                    var rowData = $(this).parent().closest('td').parent().prev();
+                    rowData = $('#neighborhoodTable').DataTable().row(rowData).data();
+                    // console.log("Row Data isNull: "+trData.id);
+
+                }
+
+
+                //Tamer
+                $('.datepicker').datetimepicker({format: 'MM/DD/YYYY'});
+
+                $(".number-alerts-1").html("");
+                $(".number-alerts-2").html("");
+                $(".name-alerts-en").html("");
+                $(".name-alerts-ar").html("");
+                // show modal
+                $($(this).data('target')).modal('show');
+                // set id from row to modal data-id
+                $('.modal').data('id', rowData.id)
+                // set modal values from row data
+                $('.neighborhoodNameEn').val(rowData.haiEnglishName)
+                $('.neighborhoodNameAr').val(rowData.haiArabicName)
+                $('.neighborhoodArea').val(rowData.haiArea)
+                $('.neighborhoodBuildings').val(rowData.haiBuildingsNum)
+                $('.haoNum').val(rowData.HAO_num)
+                $('.haoDate').val(rowData.HAO_date)
+                //tamer
+                $('.estContrDate').val(rowData.estContrDate);
+                $('.estContrNum').val(rowData.estContrNum);
+                $('.estContrDate2').val(rowData.estContrDate2);
+                $('.estContrNum2').val(rowData.estContrNum2);
+
+                $('.land').val(rowData.land);
+
+
+                // onblur check updated neighborhood name
+                $('#e_haiEnglishName').on({
+                    keyup: function () {
+                        checkExistNameEn($("#e_haiEnglishName").val(), rowData.haiEnglishName)
+                    },
+                    blur: function () {
+                        checkExistNameEn($("#e_haiEnglishName").val(), rowData.haiEnglishName)
+                    },
+                });
+                $('#e_haiArabicName').on({
+                    keyup: function () {
+                        checkExistNameAr($("#e_haiArabicName").val(), rowData.haiArabicName)
+                    },
+                    blur: function () {
+                        checkExistNameAr($("#e_haiArabicName").val(), rowData.haiArabicName)
+                    },
+                });
+            });
+
+            $('#edit').on('click', '#editNeighbordood', function () {
+                var modal = $(this).closest('.modal');
+                var neighborhood_id = modal.data('id');
+                var values = getValuesFromForm(".form-horizontall");
+                if (modalValidityCheck(values, '.form-horizontall')) {
+                    //tamer
+
+                    /* --old--
+                    params={neighborhood_id:neighborhood_id,haiEnglishName:values.e_haiEnglishName,haiArabicName:values.e_haiArabicName,haiArea:values.e_haiArea,haiBuildingsNum:values.e_haiBuildingsNum,HAO_num:values.e_HAO_num,HAO_date:formatDateToYYYYMMDD(values.e_HAO_date),csrf_token:encodeURIComponent(csrf_token)};
+                    */
+
+                    /* --New--
+                     var params={haiEnglishName:values.haiEnglishName,haiArabicName:values.haiArabicName,haiArea:values.haiArea,haiBuildingsNum:values.haiBuildingsNum,land:values.land,estContrDate:formatDateToYYYYMMDD(values.estContrDate),HAO_num:values.HAO_num,HAO_date:formatDateToYYYYMMDD(values.HAO_date),csrf_token:encodeURIComponent(csrf_token)};
+                    */
+
+
+                    var params = {
+                        neighborhood_id: neighborhood_id,
+                        haiEnglishName: values.e_haiEnglishName,
+                        haiArabicName: values.e_haiArabicName,
+                        haiArea: values.e_haiArea,
+                        haiBuildingsNum: values.e_haiBuildingsNum,
+                        land: values.land,
+                        estContrDate: formatDateToYYYYMMDD(values.estContrDate),
+                        estContrDate2: formatDateToYYYYMMDD(values.estContrDate2),
+                        HAO_num: values.e_HAO_num || '0',
+                        HAO_date: formatDateToYYYYMMDD(values.e_HAO_date) || '0000-00-00',
+                        estContrNum: values.estContrNum,
+                        estContrNum2: values.estContrNum2,
+                        csrf_token: encodeURIComponent(csrf_token)
+                    };
+
+
+                    var url = site['uri']['public'] + "/neighborhoods/edit/";
+                    var req1 = $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: params,
+                        beforeSend: function () {
+                            $('.loader-modal-lg').modal('show')
+                        }
+                    }).done(function (data) {
+                        $('#edit').modal("hide");
+                        $('.loader-modal-lg').modal('hide');
+                        $('#neighborhoodTable').DataTable().ajax.reload();
+                        $("#settings-alerts").html("<div class='alert alert-success'> "+ _translate('edit_neighborhood_success') +"</div>");
+                    })
+                        .fail(function (err) {
+                            $('.loader-modal-lg').modal('hide');
+                            $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('edit_neighborhood_fail') +"</div>");
+                            console.log("err", err)
+                        });
+                }
+            });
+            $('#delete').on('click', '#deleteNeighborhood', function () {
+                var neighborhood_id = $(this).closest('.modal').data('id');
+                var params = {neighborhood_id: neighborhood_id, csrf_token: encodeURIComponent(csrf_token)};
+                var url = site['uri']['public'] + "/neighborhoods/?";
+                var req1 = $.ajax({
+                    type: "DELETE",
+                    url: url,
+                    data: params,
+                    beforeSend: function () {
+                        $('.loader-modal-lg').modal('show')
+                    }
+                }).done(function (data) {
+                    $('#delete').modal("hide");
+                    $('.loader-modal-lg').modal('hide');
+                    $('#neighborhoodTable').DataTable().ajax.reload();
+                    $("#settings-alerts").html("<div class='alert alert-success'>"+ _translate('delete_neighborhood_success') +"</div>");
+                })
+                    .fail(function (err) {
+                        $('.loader-modal-lg').modal('hide');
+                        console.log("err", err);
+                        $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('delete_neighborhood_fail') +"</div>");
+                    });
+            });
+
+            function checkExistNameEn(newName, oldName) {
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var params = {
+                    neighborhood_name_en: newName,
+                    old_name_en: oldName,
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+                var url = site['uri']['public'] + "/neighborhoods/checkNameEn/";
+                var req1 = $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    if ("TRUE" == data) {
+                        $(".name-alerts-en").html(_translate('name_exists'));
+                        $(".neighborhoodNameEn").css("border-color", "#FF4500");
+                    }
+                    else {
+                        $(".name-alerts-en").html("");
+                        $(".neighborhoodNameEn").css("border-color", "#909090");
+                    }
+
+                }).fail(function (err) {
+                    console.log("fail")
+                });
+            }
+
+            function checkExistNameAr(newName, oldName) {
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var params = {
+                    neighborhood_name_ar: newName,
+                    old_name_ar: oldName,
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+                var url = site['uri']['public'] + "/neighborhoods/checkNameAr/";
+                var req1 = $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    if ("TRUE" == data) {
+                        $(".name-alerts-ar").html(_translate('name_exists'));
+                        $(".neighborhoodNameAr").css("border-color", "#FF4500");
+                    }
+                    else {
+                        $(".name-alerts-ar").html("");
+                        $(".neighborhoodNameAr").css("border-color", "#909090");
+                    }
+
+                }).fail(function (err) {
+                    console.log("fail")
+                });
+            }
+
+            function modalValidityCheck(values, formSelector) {
+                var flag = true;
+                var target = $(formSelector);
+                // checks for empty fields when required flag is true
+                target.find('input').filter('[required]').each(function () {
+
+                    if (!$(this)[0].checkValidity()) {
+                        $(this).css("border-color", "red");
+                        flag = false;
+                    }
+                    else {
+                        $(this).css("border-color", "#909090");
+                        flag = true;
+                    }
+                });
+                if (values['haiBuildingsNum'] != "") {
+                    if (values['haiBuildingsNum'] <= 0) {
+                        $(".number-alerts-2").css("border-color", "red");
+                        $(".neighborhoodBuildings").css("border-color", "red");
+                        flag = false;
+                    }
+                    else {
+                        $(".number-alerts-2").html("");
+                        $(".neighborhoodBuildings").css("border-color", "#909090");
+                        flag = true;
+                    }
+                }
+
+                if (values['haiArea'] != "") {
+                    if (values['haiArea'] <= 0) {
+                        $(".number-alerts-1").html("Invalid Number!");
+                        $(".neighborhoodArea").css("border-color", "red");
+                        flag = false;
+                    }
+                    else {
+                        $(".number-alerts-1").html("");
+                        $(".neighborhoodArea").css("border-color", "#909090");
+                        flag = true;
+                    }
+                }
+                if ($(".name-alerts-en").html() != "") {
+                    flag = false;
+                }
+                if ($(".name-alerts-ar").html() != "") {
+                    flag = false;
+                }
+                return flag
+            }
+
+            function getValuesFromForm(formSelector) {
+                // get all the inputs into an array.
+                var inputs = $(formSelector + ' :input');
+                var values = {};
+                inputs.each(function () {
+                    values[$(this).attr('id')] = $(this).val();
+                });
+                return values;
+            }
+
+            function formatDateToYYYYMMDD(date) {
+                if (!date instanceof Date) {
+                    var dateWithoutTime = date.split(" ")[0];
+                    date = new Date(dateWithoutTime);
+                } else {
+                    date = new Date(date);
+                }
+                return moment(date).format("YYYY-MM-DD");
+            }
+
+            var rtlStyle = document.querySelectorAll('[data-style="rtl"]');
+            rtlStyle.forEach(function (element) {
+                element.style.direction = 'rtl';
+            });
+
+            var modalFooter = document.querySelectorAll('.modal-footer[data-style="text-left"]');
+            modalFooter.forEach(function (element) {
+                element.style.textAlign = 'left';
+            });
+        });//end of document.ready
+
+    </script>
+{% endblock %}
+

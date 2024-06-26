@@ -1,0 +1,182 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% block content %}
+
+{% endblock %}
+{% block page_scripts %}
+
+    <script>
+
+        function insertBefore(newNode, existingNode) {
+            existingNode.parentNode.insertBefore(newNode, existingNode);
+        }
+
+
+        function printDiv() {
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+
+            var coverPage = '';
+            if ('{{ cover }}') {
+                coverPage =   '<div>' +
+                    '   <img src ="{{site.uri.public}}/uploads/{{cover}}" width="100%" height="100%"/>' +
+                    '</div> ' +
+                    '<div class="pagebreak"></div>' ;
+            }
+
+
+            if ({{ template_id }}) {
+
+                let doc =
+                    ' <table class="report-container">\n' +
+                    coverPage +
+                    '<thead class="report-header">\n' +
+                    '        <tr>\n' +
+                    '            <th class="report-header-cell">\n' +
+                    '                <div class="header-info" >\n' +
+                    '                    {{ header | raw }}' +
+                    '                </div>\n' +
+                    '            </th>\n' +
+                    '        </tr>\n' +
+                    '    </thead>\n' +
+                    '\n' +
+                    '    <tfoot class="report-footer">\n' +
+                    '        <tr>\n' +
+                    '            <td class="report-footer-cell">\n' +
+                    '                <div class="footer-info" dir="ltr">' +
+                    '                                  {{ footer | raw }} ' +
+                    '</div>\n' +
+                    '            </td>\n' +
+                    '        </tr>\n' +
+                    '    </tfoot>\n' +
+                    '\n' +
+                    '    <tbody class="report-content">\n' +
+                    '        <tr>\n' +
+                    '            <td class="report-content-cell">\n' +
+                    '                <div class="main">\n' +
+                    '{{ data | raw }}'+
+                    '                </div>\n' +
+                    '            </td>\n' +
+                    '        </tr>\n' ;
+
+
+
+                $('body').append('<div id="doc" style="display: none">'+ doc +'</div>');
+
+
+                let pages = $('#doc')[0].querySelectorAll('.pagebreak');
+
+                let x = 0;
+                let Page = 288 + 278;
+                for (let i=0; i<pages.length; i++) {
+                    const newNode = document.createElement("p");
+                    newNode.className = "pageCount";
+                    // newNode.style.cssText = "text-align:left; position:absolute; top: calc((" + (i+1) + " * (297mm - 0.5px)) + "+ x +"px); left: 70px;";
+                    newNode.style.cssText = "text-align:left; position:absolute; top: calc((("+Page+"mm - 0.5px)) + "+ x +"px); left: 75px;";
+                    const textNode = document.createTextNode((i+1)+"" );
+                    newNode.appendChild(textNode);
+
+                    insertBefore(newNode, pages[i]);
+
+
+                    x = x + 30;
+                    Page += 280;
+                }
+
+                doc = $('#doc').html();
+
+                newWin.document.write('<html>' +
+                    '<head> <meta http-equiv="content-type" content="text/html;charset=UTF-8" />' +
+                    '<style>' +
+                    // '.underline {text-decoration: underline dashed #92d050;}'+
+                    'table.report-container {\n' +
+                    '            page-break-after: always; padding: 30px' +
+                    '        }\n' +
+                    '\n' +
+                    '        thead.report-header {\n' +
+                    '            display: table-header-group;\n' +
+                    '        }\n' +
+                    '\n' +
+                    '        tfoot.report-footer{\n' +
+                    '            display: table-footer-group;' +
+                    '        }' +
+
+                    '@media print{ ' +
+                    '* {font-size: 11pt; font-family: "Yakout Linotype Light" !important;' +
+                    // 'line-height: normal !important' +
+                    '}' +
+                    '.footer-info{padding-top: 20px; margin-bottom: -35px}' +
+                    // '.header-info{padding-bottom: -20px;}' +
+                    'ol[style="margin-top: 0in; margin-bottom: 6.9pt;"] {list-style: none;}' +
+                    '.pagebreak{page-break-before: always; } ' +
+                    '}' +
+                    '@page {\n' +
+                    '  size: A4;'+
+                    // '  margin: 25mm;\n' +
+                    '}' +
+                    '</style> </head>' +
+                    '<body dir="rtl" style="counter-reset: page;" onload="window.print()">' +
+                    doc +
+                    '    </tbody>\n' +
+                    '</table></body></html>');
+            } else {
+                var temp = document.createElement('div');
+                let htmlContent = '{{ data | raw }}';
+                temp.innerHTML = htmlContent;
+
+                let pageNums =  temp.querySelectorAll('.pagenum');
+                for(let i=0; i<pageNums.length; i++) {
+                    var org_html = pageNums[i].innerHTML;
+                    var new_html = "<div class='pagenum_div'>" + org_html + "</div>";
+                    pageNums[i].innerHTML = new_html;
+                }
+
+
+                newWin.document.write('<html><head> <meta http-equiv="content-type" content="text/html;charset=UTF-8" />' +
+                    '<style> ' +
+                    '#pledge2,#pledge1,#storagepage,#parkingpage{page-break-before: always;}' +
+                    '#firstpage{page-break-after: always;}' +
+                    '@media print{ ' +
+                    '.pagenum::after {counter-increment: page; content: counter(page);min-width: 80px;display: inline-block;text-align:center; border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif;color:#445760; }' +
+                    //'#btmpage{position: fixed;bottom: 0}' +
+                    '.pageBreak{page-break-before: always;}' +
+                    '' +
+                    '' +
+                    '' +
+                    '' +
+                    '.pagenum_div {page-break-after: always;  }' +
+                    // '#introduction {page-break-before: always;}' +
+                    // '#sell_description {page-break-before: always;}' +
+                    // '#constraint_style {page-break-before: always;}' +
+                    // '#Ownership_rights {page-break-before: always;}' +
+                    // '#public_rules {page-break-before: always;}' +
+                    // '#applied_law {page-break-before: always;}' +
+                    // '#annex1, #annex2, #annex3_ReadyHai, #annex3_NotReadyHai, #Payment_mechanism1, #Payment_mechanism2, #storagepage, #parkingpage {page-break-before: always;}' +
+                    // '#pledge1, #pledge2 {page-break-before: always;}' +
+                    'div.content{ margin-left: 25px; margin-right: 10px;} .hide-print {display: none;} ' +
+                    '.footer-space{margin-bottom: -80px;}'+
+                    ' div.header-space{margin-right: 5px;  position: relative;} ' +
+                    '@page{size: A4;' +
+                    'margin-right: 9mm; margin-left: 9mm;margin-top: 5mm;margin-bottom: 5mm;}' +
+                    'img{float: left;margin-left: 30px;}' +
+
+                    ' span.header-title{  position: absolute;bottom: 25;right: 0;}}' +
+                    '</style> </head><body style="counter-reset: page;" onload="window.print()">' + temp.innerHTML + '</body></html>');
+            }
+
+
+            newWin.document.close();
+        }
+
+        $(document).ready(function () {
+
+           window.location.href = site['uri']['public']+ '/unit';
+            printDiv();
+
+
+        });
+
+    </script>
+{% endblock %}

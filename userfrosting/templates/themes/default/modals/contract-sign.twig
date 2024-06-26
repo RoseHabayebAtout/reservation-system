@@ -1,0 +1,36 @@
+<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                        class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+            <h4 class="modal-title custom_align" id="Heading" style="font-size: 22px;"> {{ translate('sign_modal_title') }} </h4>
+        </div>
+        <div class="modal-body modal-height">
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-xs-2">
+                    <input style="margin-top:15px;" type="checkbox" id="isSigned">
+                </div>
+                <div class="col-xs-8">
+                    <p style='font-size: 15px; padding: 5px; display: inline-block;' class="alert">{{ translate('sign_modal_text') }}</p>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-12">
+                <h4>{{ translate('current_date') }}</h4>
+                <div class="form-group cform-group">
+                    <div class='input-group date datepicker'>
+                        <input type='text' class="form-control ltr" id="signDate"/>
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer1">
+                <button type="button" class="btn btn-danger" id="signContract" disabled="disabled">{{ translate('confirm') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>

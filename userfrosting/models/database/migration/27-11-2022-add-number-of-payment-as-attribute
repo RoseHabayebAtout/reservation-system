@@ -1,0 +1,1 @@
+INSERT INTO `contract_attributes` (`id`, `name`, `represent_name`, `type`, `data_type`) VALUES (NULL, 'number_of_payments', 'Number Of Payment', 'purchase_contract', 'text');

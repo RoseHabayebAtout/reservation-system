@@ -1,0 +1,797 @@
+
+<canvas id="drafts" class="drafts" width="1240" height="1754" style="display:none;"></canvas>
+<iframe id="draftsPage1" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/invoiceReceipt.css">
+    <div id="invoice" class="container" style=" position: relative;" >
+
+            <img src="/reservation-system/public/images/watermarked.png" height="1200" width="800" style="width:100%;margin-top: 200px;">
+
+
+        <div style="position: absolute;top: 2%;">
+            <div>
+                <p style="margin-top:0pt; margin-bottom:0pt; font-size:20pt">
+                    <span style="height:0pt; display:block; position:absolute; z-index:-65537"><img
+                                src="https://myfiles.space/12263_6293297b57798e03/1535466967_082822343691082822343691-1/1535466967_082822343691082822343691-1.001.png"
+                                width="800" height="800" alt="not found images"
+                                style="margin-top:63.4pt; margin-left:-30pt; position:absolute"></span><span
+                            style="font-family:Calibri">&#xa0;</span>
+                </p>
+            </div>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; line-height:108%; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">التاريخ: <%- receiptDate %></span>
+
+            <!--    <br> -->
+                <span
+                        style="font-family:'Yakout Linotype Light' ;float: left; color:#ff0000" dir="ltr"><span dir="ltr"></span>No R<%=RegistrationId %></span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:center; line-height:108%; font-size:28pt">
+                <strong><span
+                            style="font-family:'Yakout Linotype Light'; ">طلب حجز وحدة سكنية</span></strong><strong><span
+                            style="font-family:'Yakout Linotype Light'; ">&#xa0; </span></strong>
+            </p>
+            <p dir="rtl"
+               style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:115%; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;اسم مقدم الطلب الرباعي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- customerName %>&#xa0;&#xa0;
+                        </span>
+
+                   نوع وثيقة إثبات الشخصية
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- customer_type_of_id %>&#xa0;&#xa0;
+                        </span>
+                     رقم الوثيقة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- customer_id %>&#xa0;&#xa0;
+                        </span>
+                    مكان الإصدار
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- issued_by %>&#xa0;&#xa0;
+                        </span>
+
+                     </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;</span><span
+                        style="font-family:'Yakout Linotype Light'">العنوان: الدولة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- country1 %>&#xa0;&#xa0;
+                        </span>
+                     المدينة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- city1 %>&#xa0;&#xa0;
+                        </span>
+
+                     اسم المنطقة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- regionName1 %>&#xa0;&#xa0;
+                        </span>
+                   اسم الشارع
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- streetName1 %>&#xa0;&#xa0;
+                        </span>
+                     رقم صندوق البريد
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- mailBox1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">الرمز البريدي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- postalCode1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">هاتف المنزل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- homePhone1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'"> هاتف العمل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- workPhone1 %>&#xa0;&#xa0;
+                        </span>
+                     موبايل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- mobileNum1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span>
+                <span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">البريد الالكتروني
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- eMail1 %>&#xa0;&#xa0;
+                        </span>
+
+                    رقم الوحدة السكنية الهندسي المطلوب حجزها
+
+                    <span dir="ltr" style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- rawabicode %>&#xa0;&#xa0;
+                        </span>
+
+                     رقم الوحدة السكنية وفق سند التسجيل (الطابو)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- unit_num %>&#xa0;&#xa0;
+                        </span>
+                     رقم الطابق
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- floorNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم البناية
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- buildingNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم قطعة الأرض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- landNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم الحوض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- hawdNum %>&#xa0;&#xa0;
+                        </span>
+                    اسم الحوض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- hawdName %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">من أراضي مدينة روابي. إسم الحي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- haiName %>&#xa0;&#xa0;
+                        </span>
+                    </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">ثمن الوحدة السكنية (الشقة): (
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               <%- totalPricecommas %>
+                        </span>
+                    $)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- totalPriceArabic %>&#xa0;&#xa0;
+                        </span>
+                     دولار أمريكي، غير شامل للتشطيبات الاختيارية أو الإضافات والتعديلات على الوحدة السكنية. _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">تم دفع مبلغ وقدره (
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               <%- receiptPricecommas %>
+                        </span>
+                     $)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- receiptPriceArabic %>&#xa0;&#xa0;
+                        </span>
+                    </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">دولار أمريكي فقط لا غير، وذلك لتغطية رسوم ومصاريف طلب حجز الوحدة السكنية المذكورة أعلاه وهذا المبلغ لا يعتبر جزء من ثمن الوحدة السكنية المذكورة أعلاه، وعليه ستقوم الشركة بفتح ملف لمقدم الطلب وتجهيز المعاملات اللازمة والاتفاقيات وطلبات اذن الشراء_في حال حاجة مقدم الطلب لها_ لإتمام الملف الخاص بمقدم الطلب، كما ستتوقف الشركة عن عرض الوحدة السكنية للغير لمدة 15 يوم من تاريخ تقديم طلب الحجز. </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:22pt">
+                <strong><span style="font-family:'Yakout Linotype Light'; ">التزامات واقرارات مقدم الطلب</span></strong>
+            </p>
+            <ol type="1" style="margin:0pt">
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن له الحق الكامل والصلاحية القانونية التامة بإعطاء هذا الإقرار/التعهد وأنه يتحمل
+                    كامل المسؤولية القانونية والواقعية وكامل النفقات والمصاريف والخسارة/ الكسب الفائت مهما كان نوعه
+                    والتي قد تترتب نتيجة العمل/التصرف بموجب هذا الإقرار.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يلتزم مقدم الطلب بتوقيع اتفاقية تعهد بيع وشراء وحدة سكنية ودفع كامل المستحقات المالية وثمن الوحدة
+                    السكنية خلال 15 يوم من تاريخ توقيع طلب الحجز، وبعكس ذلك يعتبر مقدم الطلب غير راغب في المضي في
+                    إجراءات شراء الوحدة السكنية المذكورة، مما يعطي الحق للشركة&#xa0; ببيعها وحجزها لمن تشاء دون أي
+                    التزام من قبلها لمقدم الطلب المذكور أعلاه.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأنه لا يجوز إحالة أي من حقوقه بموجب طلب الحجز هذا إلى أي شخص، دون موافقة الشركة
+                    الخطية.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن رسوم الحجز المدفوعة والمذكورة أعلاه، لا تعتبر جزء من ثمن الوحدة السكنية المتفق
+                    عليه، كما أنها غير مستردة تحت أي ظرف من الظروف، وذلك كونها تعتبر تعويض للشركة عن العطل والضرر
+                    والخسارة وفوات الربح الذي لحقها نتيجة حجز الوحدة السكنية وعدم عرض الشقة للغير، وكتعويض عن فتح ملف
+                    خاص بمقدم الطلب وتجهيز المعاملات اللازمة لغايات استكمال عملية الشراء لمقدم الطلب.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن ما جاء في هذا الطلب يعتبر نهائياً وقطعياً، وأنه يتعهد ويلتزم بعدم الاعتراض على ما
+                    جاء في هذا الطلب والأمور المتعلقة به والناشئة عنه، وأنه يسقط حقه بالادعاء بيمين كذب الإقرار و/أو
+                    الدفع بعدم القبول و/أو الوفاء و/أو أي دفع شكلي أو موضوعي حول ما جاء في هذا الطلب والأمور المتعلقة به
+                    والناشئة عنه.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; margin-bottom:5.55pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأنه وقع هذا الطلب بدون ضغط أو إكراه وبإرادة حرة خالية من العيوب التزاماً منه بما جاء
+                    فيه.
+            </li>
+            </ol>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">بدون إجحاف بما ورد أعلاه، وحتى لو كان مقدم الطلب ملتزم بما ورد في البنود السابقة، يحق لشركة بيتي الرجوع عن حجزها للوحدة السكنية وعدم المضي بصفقة البيع لأي أسباب تراها ووفقاً لسلطتها التقديرية وحدها، على أن تقوم بإعادة رسوم ومصاريف الحجز المذكورة أعلاه فقط لمقدم الطلب، وفي هذه الحالة يقر مقدم الطلب بأن لا يحق له مطالبة الشركة بأية تعويضات و/</span><span
+                        style="font-family:'Yakout Linotype Light'">أو مطالبات مالية و/أو بدل أعطال و/أو بدل أضرار ، ويقر بأنه يبرئ ذمة شركة بيتي من أية تعويضات و/أو ديون و/أو مسؤوليات و/أو وعود و/أو أفعال و/أو إخفاقات و/أو أضرار و/أو أعطال و/أو أية مطالبة معلومة أو غير معلومة ل</span><span
+                        style="font-family:'Yakout Linotype Light'">ه</span><span
+                        style="font-family:'Yakout Linotype Light'"> و/أو أية مطالبات قضائية، إبراء عاماً شاملاً مانعاً من أي حق أو المطالبة بأية خسارة. </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">اسم مقدم الطلب الرباعي _ _ _ _ _ _ _ _ _ _ _ _ _</span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">توقيع الشركة</span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">توقيع مقدم الطلب _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</span>
+            </p>
+            <p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'" dir="rtl">نسخة مقدم الطلب</span>
+            </p>
+
+
+        </div>
+
+
+    </div>
+</iframe>
+
+<canvas id="drafts" class="drafts" width="1240" height="1754" style="display:none;"></canvas>
+<iframe id="draftsPage2" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/invoiceReceipt.css">
+    <div id="invoice" class="container" style=" position: relative;">
+
+        <img src="/reservation-system/public/images/watermarked.png" height="1200" width="800" style="width:100%;margin-top: 200px;">
+
+        <div style="position: absolute;top: 2%;">
+            <div>
+                <p style="margin-top:0pt; margin-bottom:0pt; font-size:20pt">
+                    <span style="height:0pt; display:block; position:absolute; z-index:-65537"><img
+                                src="https://myfiles.space/12263_6293297b57798e03/1535466967_082822343691082822343691-1/1535466967_082822343691082822343691-1.001.png"
+                                width="800" height="800" alt="not found images"
+                                style="margin-top:63.4pt; margin-left:-30pt; position:absolute"></span><span
+                            style="font-family:Calibri">&#xa0;</span>
+                </p>
+            </div>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; line-height:108%; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">التاريخ: <%- receiptDate %></span>
+
+                <!--    <br> -->
+                <span
+                        style="font-family:'Yakout Linotype Light' ;float: left; color:#ff0000" dir="ltr"><span dir="ltr"></span>No R<%=RegistrationId %></span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:center; line-height:108%; font-size:28pt">
+                <strong><span
+                            style="font-family:'Yakout Linotype Light'; ">طلب حجز وحدة سكنية</span></strong><strong><span
+                            style="font-family:'Yakout Linotype Light'; ">&#xa0; </span></strong>
+            </p>
+            <p dir="rtl"
+               style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:115%; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;اسم مقدم الطلب الرباعي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- customerName %>&#xa0;&#xa0;
+                        </span>
+
+                   نوع وثيقة إثبات الشخصية
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- customer_type_of_id %>&#xa0;&#xa0;
+                        </span>
+                     رقم الوثيقة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- customer_id %>&#xa0;&#xa0;
+                        </span>
+                    مكان الإصدار
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- issued_by %>&#xa0;&#xa0;
+                        </span>
+
+                     </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;</span><span
+                        style="font-family:'Yakout Linotype Light'">العنوان: الدولة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- country1 %>&#xa0;&#xa0;
+                        </span>
+                     المدينة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- city1 %>&#xa0;&#xa0;
+                        </span>
+
+                     اسم المنطقة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- regionName1 %>&#xa0;&#xa0;
+                        </span>
+                   اسم الشارع
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- streetName1 %>&#xa0;&#xa0;
+                        </span>
+                     رقم صندوق البريد
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- mailBox1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">الرمز البريدي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- postalCode1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">هاتف المنزل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- homePhone1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'"> هاتف العمل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- workPhone1 %>&#xa0;&#xa0;
+                        </span>
+                     موبايل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- mobileNum1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span>
+                <span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">البريد الالكتروني
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- eMail1 %>&#xa0;&#xa0;
+                        </span>
+
+                    رقم الوحدة السكنية الهندسي المطلوب حجزها
+
+                    <span dir="ltr" style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- rawabicode %>&#xa0;&#xa0;
+                        </span>
+
+                     رقم الوحدة السكنية وفق سند التسجيل (الطابو)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- unit_num %>&#xa0;&#xa0;
+                        </span>
+                     رقم الطابق
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- floorNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم البناية
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- buildingNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم قطعة الأرض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- landNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم الحوض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- hawdNum %>&#xa0;&#xa0;
+                        </span>
+                    اسم الحوض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- hawdName %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">من أراضي مدينة روابي. إسم الحي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- haiName %>&#xa0;&#xa0;
+                        </span>
+                    </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">ثمن الوحدة السكنية (الشقة): (
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               <%- totalPricecommas %>
+                        </span>
+                    $)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- totalPriceArabic %>&#xa0;&#xa0;
+                        </span>
+                     دولار أمريكي، غير شامل للتشطيبات الاختيارية أو الإضافات والتعديلات على الوحدة السكنية. _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">تم دفع مبلغ وقدره (
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               <%- receiptPricecommas %>
+                        </span>
+                     $)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- receiptPriceArabic %>&#xa0;&#xa0;
+                        </span>
+                    </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">دولار أمريكي فقط لا غير، وذلك لتغطية رسوم ومصاريف طلب حجز الوحدة السكنية المذكورة أعلاه وهذا المبلغ لا يعتبر جزء من ثمن الوحدة السكنية المذكورة أعلاه، وعليه ستقوم الشركة بفتح ملف لمقدم الطلب وتجهيز المعاملات اللازمة والاتفاقيات وطلبات اذن الشراء_في حال حاجة مقدم الطلب لها_ لإتمام الملف الخاص بمقدم الطلب، كما ستتوقف الشركة عن عرض الوحدة السكنية للغير لمدة 15 يوم من تاريخ تقديم طلب الحجز. </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:22pt">
+                <strong><span style="font-family:'Yakout Linotype Light'; ">التزامات واقرارات مقدم الطلب</span></strong>
+            </p>
+            <ol type="1" style="margin:0pt">
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن له الحق الكامل والصلاحية القانونية التامة بإعطاء هذا الإقرار/التعهد وأنه يتحمل
+                    كامل المسؤولية القانونية والواقعية وكامل النفقات والمصاريف والخسارة/ الكسب الفائت مهما كان نوعه
+                    والتي قد تترتب نتيجة العمل/التصرف بموجب هذا الإقرار.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يلتزم مقدم الطلب بتوقيع اتفاقية تعهد بيع وشراء وحدة سكنية ودفع كامل المستحقات المالية وثمن الوحدة
+                    السكنية خلال 15 يوم من تاريخ توقيع طلب الحجز، وبعكس ذلك يعتبر مقدم الطلب غير راغب في المضي في
+                    إجراءات شراء الوحدة السكنية المذكورة، مما يعطي الحق للشركة&#xa0; ببيعها وحجزها لمن تشاء دون أي
+                    التزام من قبلها لمقدم الطلب المذكور أعلاه.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأنه لا يجوز إحالة أي من حقوقه بموجب طلب الحجز هذا إلى أي شخص، دون موافقة الشركة
+                    الخطية.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن رسوم الحجز المدفوعة والمذكورة أعلاه، لا تعتبر جزء من ثمن الوحدة السكنية المتفق
+                    عليه، كما أنها غير مستردة تحت أي ظرف من الظروف، وذلك كونها تعتبر تعويض للشركة عن العطل والضرر
+                    والخسارة وفوات الربح الذي لحقها نتيجة حجز الوحدة السكنية وعدم عرض الشقة للغير، وكتعويض عن فتح ملف
+                    خاص بمقدم الطلب وتجهيز المعاملات اللازمة لغايات استكمال عملية الشراء لمقدم الطلب.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن ما جاء في هذا الطلب يعتبر نهائياً وقطعياً، وأنه يتعهد ويلتزم بعدم الاعتراض على ما
+                    جاء في هذا الطلب والأمور المتعلقة به والناشئة عنه، وأنه يسقط حقه بالادعاء بيمين كذب الإقرار و/أو
+                    الدفع بعدم القبول و/أو الوفاء و/أو أي دفع شكلي أو موضوعي حول ما جاء في هذا الطلب والأمور المتعلقة به
+                    والناشئة عنه.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; margin-bottom:5.55pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأنه وقع هذا الطلب بدون ضغط أو إكراه وبإرادة حرة خالية من العيوب التزاماً منه بما جاء
+                    فيه.
+                </li>
+            </ol>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">بدون إجحاف بما ورد أعلاه، وحتى لو كان مقدم الطلب ملتزم بما ورد في البنود السابقة، يحق لشركة بيتي الرجوع عن حجزها للوحدة السكنية وعدم المضي بصفقة البيع لأي أسباب تراها ووفقاً لسلطتها التقديرية وحدها، على أن تقوم بإعادة رسوم ومصاريف الحجز المذكورة أعلاه فقط لمقدم الطلب، وفي هذه الحالة يقر مقدم الطلب بأن لا يحق له مطالبة الشركة بأية تعويضات و/</span><span
+                        style="font-family:'Yakout Linotype Light'">أو مطالبات مالية و/أو بدل أعطال و/أو بدل أضرار ، ويقر بأنه يبرئ ذمة شركة بيتي من أية تعويضات و/أو ديون و/أو مسؤوليات و/أو وعود و/أو أفعال و/أو إخفاقات و/أو أضرار و/أو أعطال و/أو أية مطالبة معلومة أو غير معلومة ل</span><span
+                        style="font-family:'Yakout Linotype Light'">ه</span><span
+                        style="font-family:'Yakout Linotype Light'"> و/أو أية مطالبات قضائية، إبراء عاماً شاملاً مانعاً من أي حق أو المطالبة بأية خسارة. </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">اسم مقدم الطلب الرباعي _ _ _ _ _ _ _ _ _ _ _ _ _</span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">توقيع الشركة</span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">توقيع مقدم الطلب _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</span>
+            </p>
+            <p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'" dir="rtl">نسخة الدائرة المالية</span>
+            </p>
+
+
+        </div>
+    </div>
+</iframe>
+<canvas id="drafts" class="drafts" width="1240" height="1754" style="display:none;"></canvas>
+<iframe id="draftsPage3" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/invoiceReceipt.css">
+    <div id="invoice" class="container" style=" position: relative;">
+
+        <img src="/reservation-system/public/images/watermarked.png" height="1200" width="800" style="width:100%;margin-top: 200px;">
+
+        <div style="position: absolute;top: 2%;">
+            <div>
+                <p style="margin-top:0pt; margin-bottom:0pt; font-size:20pt">
+                    <span style="height:0pt; display:block; position:absolute; z-index:-65537"><img
+                                src="https://myfiles.space/12263_6293297b57798e03/1535466967_082822343691082822343691-1/1535466967_082822343691082822343691-1.001.png"
+                                width="800" height="800" alt="not found images"
+                                style="margin-top:63.4pt; margin-left:-30pt; position:absolute"></span><span
+                            style="font-family:Calibri">&#xa0;</span>
+                </p>
+            </div>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; line-height:108%; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">التاريخ: <%- receiptDate %></span>
+
+                <!--    <br> -->
+                <span
+                        style="font-family:'Yakout Linotype Light' ;float: left; color:#ff0000" dir="ltr"><span dir="ltr"></span>No R<%=RegistrationId %></span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:center; line-height:108%; font-size:28pt">
+                <strong><span
+                            style="font-family:'Yakout Linotype Light'; ">طلب حجز وحدة سكنية</span></strong><strong><span
+                            style="font-family:'Yakout Linotype Light'; ">&#xa0; </span></strong>
+            </p>
+            <p dir="rtl"
+               style="margin-top:0pt; margin-bottom:8pt; text-align:justify; line-height:115%; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;اسم مقدم الطلب الرباعي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- customerName %>&#xa0;&#xa0;
+                        </span>
+
+                   نوع وثيقة إثبات الشخصية
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- customer_type_of_id %>&#xa0;&#xa0;
+                        </span>
+                     رقم الوثيقة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- customer_id %>&#xa0;&#xa0;
+                        </span>
+                    مكان الإصدار
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- issued_by %>&#xa0;&#xa0;
+                        </span>
+
+                     </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;</span><span
+                        style="font-family:'Yakout Linotype Light'">العنوان: الدولة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- country1 %>&#xa0;&#xa0;
+                        </span>
+                     المدينة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- city1 %>&#xa0;&#xa0;
+                        </span>
+
+                     اسم المنطقة
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- regionName1 %>&#xa0;&#xa0;
+                        </span>
+                   اسم الشارع
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- streetName1 %>&#xa0;&#xa0;
+                        </span>
+                     رقم صندوق البريد
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                            &#xa0;&#xa0;   <%- mailBox1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">الرمز البريدي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- postalCode1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">هاتف المنزل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- homePhone1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'"> هاتف العمل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- workPhone1 %>&#xa0;&#xa0;
+                        </span>
+                     موبايل
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- mobileNum1 %>&#xa0;&#xa0;
+                        </span>
+
+                </span>
+                <span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">البريد الالكتروني
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- eMail1 %>&#xa0;&#xa0;
+                        </span>
+
+                    رقم الوحدة السكنية الهندسي المطلوب حجزها
+
+                    <span dir="ltr" style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- rawabicode %>&#xa0;&#xa0;
+                        </span>
+
+                     رقم الوحدة السكنية وفق سند التسجيل (الطابو)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- unit_num %>&#xa0;&#xa0;
+                        </span>
+                     رقم الطابق
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- floorNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم البناية
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- buildingNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم قطعة الأرض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- landNum %>&#xa0;&#xa0;
+                        </span>
+                     رقم الحوض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                             &#xa0;&#xa0;  <%- hawdNum %>&#xa0;&#xa0;
+                        </span>
+                    اسم الحوض
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- hawdName %>&#xa0;&#xa0;
+                        </span>
+
+                </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">من أراضي مدينة روابي. إسم الحي
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- haiName %>&#xa0;&#xa0;
+                        </span>
+                    </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">ثمن الوحدة السكنية (الشقة): (
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               <%- totalPricecommas %>
+                        </span>
+                    $)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                              &#xa0;&#xa0; <%- totalPriceArabic %>&#xa0;&#xa0;
+                        </span>
+                     دولار أمريكي، غير شامل للتشطيبات الاختيارية أو الإضافات والتعديلات على الوحدة السكنية. _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:21pt">
+                <span style="font-family:'Yakout Linotype Light'">تم دفع مبلغ وقدره (
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               <%- receiptPricecommas %>
+                        </span>
+                     $)
+
+                    <span style="border-bottom: 2px dashed black;line-height: 48px;">
+                               &#xa0;&#xa0;<%- receiptPriceArabic %>&#xa0;&#xa0;
+                        </span>
+                    </span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">دولار أمريكي فقط لا غير، وذلك لتغطية رسوم ومصاريف طلب حجز الوحدة السكنية المذكورة أعلاه وهذا المبلغ لا يعتبر جزء من ثمن الوحدة السكنية المذكورة أعلاه، وعليه ستقوم الشركة بفتح ملف لمقدم الطلب وتجهيز المعاملات اللازمة والاتفاقيات وطلبات اذن الشراء_في حال حاجة مقدم الطلب لها_ لإتمام الملف الخاص بمقدم الطلب، كما ستتوقف الشركة عن عرض الوحدة السكنية للغير لمدة 15 يوم من تاريخ تقديم طلب الحجز. </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:22pt">
+                <strong><span style="font-family:'Yakout Linotype Light'; ">التزامات واقرارات مقدم الطلب</span></strong>
+            </p>
+            <ol type="1" style="margin:0pt">
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن له الحق الكامل والصلاحية القانونية التامة بإعطاء هذا الإقرار/التعهد وأنه يتحمل
+                    كامل المسؤولية القانونية والواقعية وكامل النفقات والمصاريف والخسارة/ الكسب الفائت مهما كان نوعه
+                    والتي قد تترتب نتيجة العمل/التصرف بموجب هذا الإقرار.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يلتزم مقدم الطلب بتوقيع اتفاقية تعهد بيع وشراء وحدة سكنية ودفع كامل المستحقات المالية وثمن الوحدة
+                    السكنية خلال 15 يوم من تاريخ توقيع طلب الحجز، وبعكس ذلك يعتبر مقدم الطلب غير راغب في المضي في
+                    إجراءات شراء الوحدة السكنية المذكورة، مما يعطي الحق للشركة&#xa0; ببيعها وحجزها لمن تشاء دون أي
+                    التزام من قبلها لمقدم الطلب المذكور أعلاه.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأنه لا يجوز إحالة أي من حقوقه بموجب طلب الحجز هذا إلى أي شخص، دون موافقة الشركة
+                    الخطية.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن رسوم الحجز المدفوعة والمذكورة أعلاه، لا تعتبر جزء من ثمن الوحدة السكنية المتفق
+                    عليه، كما أنها غير مستردة تحت أي ظرف من الظروف، وذلك كونها تعتبر تعويض للشركة عن العطل والضرر
+                    والخسارة وفوات الربح الذي لحقها نتيجة حجز الوحدة السكنية وعدم عرض الشقة للغير، وكتعويض عن فتح ملف
+                    خاص بمقدم الطلب وتجهيز المعاملات اللازمة لغايات استكمال عملية الشراء لمقدم الطلب.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأن ما جاء في هذا الطلب يعتبر نهائياً وقطعياً، وأنه يتعهد ويلتزم بعدم الاعتراض على ما
+                    جاء في هذا الطلب والأمور المتعلقة به والناشئة عنه، وأنه يسقط حقه بالادعاء بيمين كذب الإقرار و/أو
+                    الدفع بعدم القبول و/أو الوفاء و/أو أي دفع شكلي أو موضوعي حول ما جاء في هذا الطلب والأمور المتعلقة به
+                    والناشئة عنه.
+                </li>
+                <li dir="rtl"
+                    style="margin-right:14.17pt; margin-bottom:5.55pt; text-align:justify; line-height:115%; padding-right:3.83pt; font-family:'Yakout Linotype Light'; font-size:20pt">
+                    يقر مقدم الطلب بأنه وقع هذا الطلب بدون ضغط أو إكراه وبإرادة حرة خالية من العيوب التزاماً منه بما جاء
+                    فيه.
+                </li>
+            </ol>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">بدون إجحاف بما ورد أعلاه، وحتى لو كان مقدم الطلب ملتزم بما ورد في البنود السابقة، يحق لشركة بيتي الرجوع عن حجزها للوحدة السكنية وعدم المضي بصفقة البيع لأي أسباب تراها ووفقاً لسلطتها التقديرية وحدها، على أن تقوم بإعادة رسوم ومصاريف الحجز المذكورة أعلاه فقط لمقدم الطلب، وفي هذه الحالة يقر مقدم الطلب بأن لا يحق له مطالبة الشركة بأية تعويضات و/</span><span
+                        style="font-family:'Yakout Linotype Light'">أو مطالبات مالية و/أو بدل أعطال و/أو بدل أضرار ، ويقر بأنه يبرئ ذمة شركة بيتي من أية تعويضات و/أو ديون و/أو مسؤوليات و/أو وعود و/أو أفعال و/أو إخفاقات و/أو أضرار و/أو أعطال و/أو أية مطالبة معلومة أو غير معلومة ل</span><span
+                        style="font-family:'Yakout Linotype Light'">ه</span><span
+                        style="font-family:'Yakout Linotype Light'"> و/أو أية مطالبات قضائية، إبراء عاماً شاملاً مانعاً من أي حق أو المطالبة بأية خسارة. </span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">اسم مقدم الطلب الرباعي _ _ _ _ _ _ _ _ _ _ _ _ _</span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">توقيع الشركة</span>
+            </p>
+            <p dir="rtl" style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">توقيع مقدم الطلب _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</span><span
+                        style="font-family:'Yakout Linotype Light'">&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0;&#xa0; </span><span
+                        style="font-family:'Yakout Linotype Light'">_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _</span>
+            </p>
+            <p style="margin-top:0pt; margin-bottom:8pt; text-align:justify; font-size:20pt">
+                <span style="font-family:'Yakout Linotype Light'" dir="rtl">نسخة دائرة التسويق</span>
+            </p>
+
+
+        </div>
+    </div>
+</iframe>

@@ -1,0 +1,26 @@
+{
+    "discount_name" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_USERNAME"
+            }
+        }
+    },
+    "discount_value" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_PASSWORD"
+            },
+            "numeric" : {
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        }
+    },
+    "discount_password" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_PASSWORD"
+            }
+        }
+    }
+}

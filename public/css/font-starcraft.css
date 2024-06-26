@@ -1,0 +1,50 @@
+[class^="sc-"], [class*=" sc-"] {
+	font-family: 'starcraft';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.sc-terran:before {
+	content: "\e609";
+}
+.sc-marine:before {
+	content: "\e600";
+}
+.sc-goliath:before {
+	content: "\e605";
+}
+.sc-siege-tank:before {
+	content: "\e604";
+}
+.sc-zerg:before {
+	content: "\e60a";
+}
+.sc-zergling:before {
+	content: "\e602";
+}
+.sc-hydralisk:before {
+	content: "\e603";
+}
+.sc-ultralisk:before {
+	content: "\e601";
+}
+.sc-protoss:before {
+	content: "\e60b";
+}
+.sc-zealot:before {
+	content: "\e606";
+}
+.sc-dragoon:before {
+	content: "\e607";
+}
+.sc-reaver:before {
+	content: "\e608";
+}

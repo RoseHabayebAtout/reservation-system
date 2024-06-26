@@ -1,0 +1,817 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "discount" %}
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+    "title"       : "Discounts",
+    "description" : "Discount details and settings."
+    }) %}
+    {{ parent() }}
+    {# <link rel="stylesheet" type="text/css" href="css\discount.css" >
+     #}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                <div id="settings-alerts">
+                    <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-sort-numeric-asc">&nbsp;{{ translate('DISCOUNT') }}</i>
+
+                    </span>
+                        <div class='pull-right users-btn-panel'>
+                            <button data-toggle="modal" id="createButton" class="btn btn-success"><i
+                                        class="fa fa-plus-square"></i> {{ translate('add_new_discount') }}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="input-group custom-search-form">
+                            <input type="text" class="form-control search" data-column="all" id="discounts-search-field"
+                                   placeholder="Search...">
+                            <span class="input-group-btn">
+                    <button class="btn btn-default discounts-search-button" type="button">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    </span>
+                        </div>
+
+                        <div>
+                            <h2>{{ translate('fixed_discounts') }} </h2>
+                        </div>
+                        <table id="discountTable"
+                               class="tablesorter table table-bordered table-hover table-striped tablesorter-bootstrap dataTables"
+                               cellspacing="0" width="100%"
+                        >
+                            <thead class="btn-primary">
+                            <tr>
+                                <th>{{ translate('discount_name') }}</th>
+                                <th>{{ translate('discount_value') }} </th>
+                                <th>{{ translate('password') }}</th>
+                                <th>{{ translate('discount_date') }}</th>
+                                <th>{{ translate('view_password') }}</th>
+                                <th>{{ translate('discount_description') }}</th>
+                                <th>{{ translate('action') }}</th>
+                            </tr>
+                            </thead>
+                        </table>
+
+                        <div>
+                            <h2>{{ translate('percentage_discounts') }} </h2>
+                        </div>
+
+                        <table id="discountTable2"
+                               class="tablesorter table table-bordered table-hover table-striped tablesorter-bootstrap dataTables"
+                               cellspacing="0" width="100%">
+                            <thead class="btn-primary">
+                            <tr>
+                                <th>{{ translate('discount_name') }}</th>
+                                <th>{{ translate('discount_percentage') }} %</th>
+                                <th>{{ translate('password') }}</th>
+                                <th>{{ translate('discount_date') }}</th>
+                                <th>{{ translate('view_password') }}</th>
+                                <th>{{ translate('discount_description') }}</th>
+                                <th>{{ translate('action') }}</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- end of panel -->
+        </div>
+        {# <div class="col-xs-1 col-md-1 col-md-offset-1"></div> #}
+    </div>
+    <div class="modal fade" id="create" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('create_new_discount') }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-10">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="name">{{ translate('discount_name') }} *</label>
+                                <input class="form-control discountName" id="name" type="text" required>
+                                <div class="name-alerts" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="type">{{ translate('discount_type') }} *</label>
+                                <!--
+                                                    <input class="form-control discountPercentage" id="percentage" type="number" required>
+
+                                -->
+                                <select class="form-control" id="type">
+                                    <option value="0">{{ translate('fixed_discounts') }}</option>
+                                    <option value="1">{{ translate('percentage_discounts') }}</option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="percentage">{{ translate('discount_value') }} *</label>
+                                <input class="form-control discountPercentage" id="percentage" type="number" required>
+                                <div class="percentage-alerts" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="discountDate">{{ translate('discount_date') }}</label>
+
+                                <div class='input-group date datepicker form-control' id='discountDate2'>
+                                    <input type='date' class="form-control " id="discountDate"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                <label for="password">{{ translate('password') }} *</label>
+                                <input class="form-control discountPassword" id="password" type="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="discountDescription1">{{ translate('discount_description') }} </label>
+                                <textarea
+                                        class="form-control discountDescription"
+                                        id="discountDescription1"
+                                        type="number"
+                                        required>
+                                </textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" id="discountCreate" class="btn btn-primary">{{ translate('create') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+            </div>
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('edit_discount') }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-10">
+                        <form class="form-horizontall" role="form">
+                            <div class="form-group">
+                                <label for="e_name">{{ translate('discount_name') }} *</label>
+                                <input class="form-control discountName" id="e_name" type="text" required="">
+                                <div class="name-alerts" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="e_percentage">{{ translate('discount_value') }} *</label>
+                                <input class="form-control discountPercentage" id="e_percentage" type="number"
+                                       required="">
+                                <div class="percentage-alerts" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="e_password">{{ translate('password') }} *</label>
+                                <input class="form-control discountPassword" id="e_password" type="password"
+                                       required="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="discountDescription">{{ translate('discount_description') }} </label>
+                                <textarea
+                                        class="form-control discountDescription"
+                                        id="discountDescription"
+                                        type="number"
+                                        required>
+                                </textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" id="editDiscount" class="btn btn-warning"> {{ translate('update') }} </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }} </button>
+
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('discount_delete_title') }}</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert">{{ translate('discount_delete_msg') }}</div>
+
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-danger" id="deleteDiscount">{{ translate('yes') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+            </div>
+        </div>
+    </div>
+    {% include 'components/common/spinnerLoader.twig' %}
+
+
+{% endblock %}
+{% block page_scripts %}
+    <script>
+        var flagg = 0;
+        $(document).ready(function () {
+
+            document.getElementById('discountDate').value = moment().format('YYYY-MM-DD');
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+
+            // config datatable
+            $('#discountTable').DataTable({
+                'ajax': {
+                    "type": "Get",
+                    "url": site['uri']['public'] + '/discount/all/',
+                    "dataSrc": function (json) {
+                        var j = 0;
+                        var json2 = [];
+                        for (var i = 0; i < json.length; i++)
+
+                            if (json[i].type == 0) {
+
+                                json2[j] = json[i];
+                                j++;
+
+                            }
+                        return json2;
+
+                    }
+                },
+                "bPaginate": true,
+                "paging": true,
+                "ordering": true,
+                "searching": false,
+                "responsive": true,
+                'sDom': 'rtip',
+                "info": false,
+                "pageLength": 5,
+                "lengthChange": false,
+                'columnDefs': [{
+                    'targets': 0,
+                    'searchable': true,
+                    'orderable': false,
+                    'className': 'dt-body-center'
+                }],
+                columns: [
+                    {"data": "name"},
+                    {
+                        "data": function (row, type, val, meta) {
+                            return addCommaToTheNumber(row.value);
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return Array(row.password.length + 1).join("*");
+                        }
+                    },
+                    {"data": "date"},
+
+                    {"data": null, "defaultContent": '<input type="checkbox" id="viewPass" value="">'},
+
+                    {"data": "description"},
+                    {
+                        "data": null,
+                        "defaultContent": '<div class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">'+ _translate('actions') +'<span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li><a href="#"  id="deleteDiscount" data-title="Delete" data-target="#delete" data-placement="top" data-toggle="tooltip"><i class="fa fa-trash-o"></i> '+ _translate('delete_discount') +'</a></li><li><a href="#" id="editDiscount" data-title="Edit" data-target="#edit"  data-toggle="tooltip" ><i class="fa fa-edit"></i> '+ _translate('edit_discount') +'</a></li></ul></div>'
+                    }
+
+                ],
+                fnRowCallback: function (row, data, iDisplayIndex, iDisplayIndexFull) {
+                    // Set data-id=id on the row
+                    $(row).data('id', data.id);
+
+                },
+                "fnDrawCallback": function (oSettings) {
+                    if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
+                        $(oSettings.nTableWrapper).find('.dataTables_paginate').hide();
+                    }
+                }
+            });
+
+
+            $('#discountTable2').DataTable({
+                'ajax': {
+                    "type": "Get",
+                    "url": site['uri']['public'] + '/discount/all/',
+                    "dataSrc": function (json) {
+                        var j = 0;
+                        var json2 = [];
+                        for (var i = 0; i < json.length; i++)
+
+                            if (json[i].type == 1) {
+
+                                json2[j] = json[i];
+                                j++;
+
+                            }
+                        return json2;
+
+                    }
+                },
+                "paging": true,
+                "ordering": true,
+                "info": false,
+                "searching": false,
+                "responsive": true,
+                "pageLength": 5,
+                "lengthChange": false,
+                columns: [
+                    {"data": "name"},
+                    {"data": "value"},
+                    {
+                        "data": function (row, type, val, meta) {
+                            return Array(row.password.length + 1).join("*");
+                        }
+                    },
+                    {"data": "date"},
+
+
+                    {"data": null, "defaultContent": '<input type="checkbox" id="viewPass" value="">'},
+                    {"data": "description"},
+                    {
+                        "data": null,
+                        "defaultContent": '<div class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">'+ _translate('actions') +'<span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li><a href="#"  id="deleteDiscount" data-title="Delete" data-target="#delete" data-placement="top" data-toggle="tooltip"><i class="fa fa-trash-o"></i> '+ _translate('delete_discount') +'</a></li><li><a href="#" id="editDiscount" data-title="Edit" data-target="#edit"  data-toggle="tooltip" ><i class="fa fa-edit"></i> '+ _translate('edit_discount') +'</a></li></ul></div>'
+                    }
+
+                ],
+                fnRowCallback: function (row, data, iDisplayIndex, iDisplayIndexFull) {
+                    // Set data-id=id on the row
+                    $(row).data('id', data.id);
+
+                },
+                "fnDrawCallback": function (oSettings) {
+                    if (oSettings._iDisplayLength > oSettings.fnRecordsDisplay()) {
+                        $(oSettings.nTableWrapper).find('.dataTables_paginate').hide();
+                    }
+                }
+            });
+            $('.discounts-search-button').on('click', function () {
+                var search = $('#discounts-search-field').val().toLowerCase();
+                $('#discountTable').each(function () { // Search among possibly multiple tables
+
+                    // Hide all table rows
+                    $(this).find('tbody tr').hide();
+
+                    // Search through all td:s and if a match is found => display the tr that the td belongs to
+                    $(this).find('tbody td').filter(function () {
+                        return $(this).text().toLowerCase().indexOf(search) != -1; // case insensitive search
+                    }).parent().show();
+
+                    $(this).trigger('applyWidgets'); // for zebra
+                });
+                $('#discountTable2').each(function () { // Search among possibly multiple tables
+
+                    // Hide all table rows
+                    $(this).find('tbody tr').hide();
+
+                    // Search through all td:s and if a match is found => display the tr that the td belongs to
+                    $(this).find('tbody td').filter(function () {
+                        return $(this).text().toLowerCase().indexOf(search) != -1; // case insensitive search
+                    }).parent().show();
+
+                    $(this).trigger('applyWidgets'); // for zebra
+                });
+            });
+
+            /*
+               add listener for edit and delete
+            */
+            $('#discountTable').on('click', "#deleteDiscount,#editDiscount", function () {
+                flagg = 0;
+                var row = $(this).closest('tr');
+
+                var rowData = $('#discountTable').DataTable().row(row).data();
+                if (rowData == null) {
+                    row = $(this).parent().closest('td').parent().prev();
+                    rowData = $('#discountTable').DataTable().row(row).data();
+
+                }
+                $('.form-horizontall').find('input').each(function () {
+                    $(this).css("border-color", "#909090");
+                });
+                $(".percentage-alerts").html("");
+                $(".name-alerts").html("");
+                // show modal
+                $($(this).data('target')).modal('show');
+                // set id from row to modal data-id
+                $('.modal').data('id', rowData.id);
+                // set modal values from row data
+                $('.discountName').val(rowData.name);
+                $('.discountPercentage').val(rowData.value);
+                $('.discountPassword').val(rowData.password);
+                $('.discountDescription').val(rowData.description);
+
+                // onblur check updated discount name
+                $('#e_name').on({
+                    keyup: function () {
+                        checkExistName($("#e_name").val(), rowData.name)
+                    },
+                    blur: function () {
+                        checkExistName($("#e_name").val(), rowData.name)
+                    }
+                });
+            });
+
+            $('#discountTable2').on('click', "#deleteDiscount,#editDiscount", function () {
+                flagg = 1;
+                var row = $(this).closest('tr');
+
+                var rowData = $('#discountTable2').DataTable().row(row).data();
+                if (rowData == null) {
+                    row = $(this).parent().closest('td').parent().prev();
+                    rowData = $('#discountTable2').DataTable().row(row).data();
+
+                }
+                $('.form-horizontall').find('input').each(function () {
+                    $(this).css("border-color", "#909090");
+                });
+                $(".percentage-alerts").html("");
+                $(".name-alerts").html("");
+                // show modal
+                $($(this).data('target')).modal('show');
+                // set id from row to modal data-id
+                $('.modal').data('id', rowData.id);
+                // set modal values from row data
+                $('.discountName').val(rowData.name);
+                $('.discountPercentage').val(rowData.value);
+                $('.discountPassword').val(rowData.password);
+
+                $('.discountDescription').val(rowData.description);
+
+//            // onblur check updated discount name
+                $('#e_name').on({
+                    keyup: function () {
+                        checkExistName($("#e_name").val(), rowData.name)
+                    },
+                    blur: function () {
+                        checkExistName($("#e_name").val(), rowData.name)
+                    }
+                });
+            });
+            /*clear create form*/
+            var type = 0;
+            $('#type').on('change', function () {
+
+                type = this.value;
+                flagg = type;
+            });
+            $('#createButton').on('click', function () {
+
+                $('#create').modal("show");
+                $('.discountName').val('');
+                $('.discountPercentage').val('');
+                $('.discountPassword').val('');
+                $('.discountDate').val('');
+                $('.discountDescription').val('');
+
+
+                $('.form-horizontal').find('input').each(function () {
+                    $(this).css("border-color", "#909090");
+                });
+                $(".percentage-alerts").html("");
+                $(".name-alerts").html("");
+
+                $('#name').on({
+                    keyup: function () {
+                        checkExistName($("#name").val(), null)
+                    },
+                    blur: function () {
+                        checkExistName($("#name").val(), null)
+                    }
+                });
+            });
+            /*
+             Added by Maysam to view password when checkbox is checked
+            */
+            // Handle click on checkbox
+            $('#discountTable tbody').on('click', 'input[type="checkbox"]', function (e) {
+                //get row
+                var row = $(this).closest('tr');
+                var rowData = $('#discountTable').DataTable().row(row).data();
+
+                // If checkbox
+                if (this.checked) {
+                    row.addClass('selected');
+                    //$('#discountTable').DataTable().cell(row,$("td:eq(2)")).data(rowData.password);
+                    $('#discountTable').find(row).find("td:eq(2)").text(rowData.password);
+                    //if checkbox is not checked
+                }
+                else {
+                    row.removeClass('selected');
+                    hiddenPassword = Array(rowData.password.length + 1).join("*");
+                    $('#discountTable').find(row).find("td:eq(2)").text(hiddenPassword);
+                }
+                // Prevent click event from propagating to parent
+                e.stopPropagation();
+            });
+
+            $('#discountTable2 tbody').on('click', 'input[type="checkbox"]', function (e) {
+                //get row
+                var row = $(this).closest('tr');
+                var rowData = $('#discountTable2').DataTable().row(row).data();
+
+                // If checkbox
+                if (this.checked) {
+                    row.addClass('selected');
+                    //$('#discountTable').DataTable().cell(row,$("td:eq(2)")).data(rowData.password);
+                    $('#discountTable2').find(row).find("td:eq(2)").text(rowData.password);
+                    //if checkbox is not checked
+                }
+                else {
+                    row.removeClass('selected');
+                    hiddenPassword = Array(rowData.password.length + 1).join("*");
+                    $('#discountTable2').find(row).find("td:eq(2)").text(hiddenPassword);
+                }
+                // Prevent click event from propagating to parent
+                e.stopPropagation();
+            });
+
+            /*
+               create new discount
+            */
+            $('#create').on('click', '#discountCreate', function () {
+
+                var discountName, discountPercentage, discountPassword, discountDescription, discount_date;
+                var modal = $(this).closest('.modal');
+                discountName = modal.find('.discountName').val();
+                discountPercentage = modal.find('.discountPercentage').val();
+                discountPassword = modal.find('.discountPassword').val().toString();
+                discountDescription = modal.find('.discountDescription').val();
+                discount_date = formatDateToYYYYMMDD(modal.find('#discountDate').val());
+
+                if (modalValidityCheck('.form-horizontal')) {
+
+                    var params = {
+                        discount_name: discountName,
+                        discount_value: discountPercentage,
+                        discount_password: discountPassword,
+                        discount_date: discount_date,
+                        discount_description: discountDescription,
+                        discount_type: type,
+                        csrf_token: encodeURIComponent(csrf_token)
+                    };
+                    var url = site['uri']['public'] + "/discount/";
+                    var req1 = $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: params,
+                        beforeSend: function () {
+                            $('.loader-modal-lg').modal('show')
+                        }
+                    }).done(function (data) {
+                        $('#create').modal("hide");
+                        $('.loader-modal-lg').modal('hide');
+                        $('#discountTable').DataTable().ajax.reload();
+                        $('#discountTable2').DataTable().ajax.reload();
+                        $("#settings-alerts").html("<div class='alert alert-success'>"+ _translate('discount_created_success') +"</div>");
+
+                    })
+                    .fail(function (err) {
+                        $('.loader-modal-lg').modal('hide');
+                        $('#create').modal("hide");
+                        console.log("err", err);
+                        $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('discount_created_fail') +"</div>");
+                    });
+                }
+            });
+            $('#delete').on('click', '#deleteDiscount', function () {
+                var discount_id = $(this).closest('.modal').data('id');
+                var params = {discount_id: discount_id, csrf_token: encodeURIComponent(csrf_token)};
+                var url = site['uri']['public'] + "/discount/";
+                var req1 = $.ajax({
+                    type: "DELETE",
+                    url: url,
+                    data: params,
+                    beforeSend: function () {
+                        $('.loader-modal-lg').modal('show')
+                    }
+                }).done(function (data) {
+                    $('#delete').modal("hide");
+                    $('.loader-modal-lg').modal('hide');
+                    $('#discountTable').DataTable().ajax.reload();
+                    $('#discountTable2').DataTable().ajax.reload();
+                    $("#settings-alerts").html("<div class='alert alert-success'>"+ _translate('discount_deleted_success') +"</div>");
+                })
+                    .fail(function (err) {
+                        $('.loader-modal-lg').modal('hide');
+                        console.log("err", err);
+                        $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('discount_deleted_fail') +"</div>");
+                    });
+            });
+            $('#edit').on('click', '#editDiscount', function () {
+                var modal = $(this).closest('.modal');
+                var discount_id = modal.data('id');
+                var discount_name, discount_percentage, discount_password, discount_date, discount_description;
+                discount_name = modal.find('.discountName').val();
+                discount_percentage = modal.find('.discountPercentage').val();
+                discount_password = modal.find('.discountPassword').val();
+                // discount_date=formatDateToYYYYMMDD(modal.find('#discountDate').val());
+                discount_description = modal.find('.discountDescription').val();
+                if (modalValidityCheck('.form-horizontall')) {
+                    var params = {
+                        discount_name: discount_name,
+                        discount_value: discount_percentage,
+                        discount_id: discount_id,
+                        discount_password: discount_password,
+                        discount_description: discount_description,
+                        csrf_token: encodeURIComponent(csrf_token)
+                    };
+                    var url = site['uri']['public'] + "/discount/edit/";
+                    var req1 = $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: params,
+                        beforeSend: function () {
+                            $('.loader-modal-lg').modal('show')
+                        }
+                    }).done(function (data) {
+                        $('#edit').modal("hide");
+                        $('.loader-modal-lg').modal('hide');
+                        $('#discountTable').DataTable().ajax.reload();
+                        $('#discountTable2').DataTable().ajax.reload();
+                        $("#settings-alerts").html("<div class='alert alert-success'> "+ _translate('discount_edited_success') +"</div>");
+                    })
+                        .fail(function (err) {
+                            $('.loader-modal-lg').modal('hide');
+                            $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('discount_edited_fail') +"</div>");
+                            console.log("err", err)
+                        });
+                }
+            });
+
+            //check forms validity
+            function modalValidityCheck(formSelector) {
+                var flag = true;
+                var target = $(formSelector);
+                var discount = getValuesFromForm(formSelector);
+                // checks for empty fields when required flag is true
+                target.find('input').filter('[required]').each(function () {
+
+                    if (!$(this)[0].checkValidity()) {
+                        $(this).css("border-color", "red");
+                        flag = false;
+                    }
+                    else {
+                        flag = true;
+                    }
+                });
+                // check percentage if it is numeric value that 0<percentage<100 a
+                if ($.isNumeric(discount[targetLabel.textContent.replace('*', '').split(" ").join("")])) {
+                    if (flagg == 1)
+
+                        if ((discount[targetLabel.textContent.replace('*', '').split(" ").join("")] < 0) || (discount[targetLabel.textContent.replace('*', '').split(" ").join("")] >= 100)) {
+                            $(".percentage-alerts").html("Invalid percentage value");
+                            $(".discountPercentage").css("border-color", "red");
+                            flag = false;
+                        }
+                        else {
+                            flag = true;
+                            $(".percentage-alerts").html("");
+                            $(".discountPercentage").css("border-color", "#909090");
+                        }
+
+                    if (flagg == 0)
+
+                        if ((discount[targetLabel.textContent.replace('*', '').split(" ").join("")] < 0)) {
+                            $(".percentage-alerts").html("Invalid value");
+                            $(".discountPercentage").css("border-color", "red");
+                            flag = false;
+                        }
+                        else {
+                            flag = true;
+                            $(".percentage-alerts").html("");
+                            $(".discountPercentage").css("border-color", "#909090");
+                        }
+                }
+                else {
+                    $(".percentage-alerts").html("Percentage must be numeric value");
+                    $(".discountPercentage").css("border-color", "red");
+                    flag = false;
+                }
+
+
+                if ($(".name-alerts").html() != "") {
+                    flag = false;
+                }
+                return flag
+            }
+
+            function getValuesFromForm(formSelector) {
+                // get all the inputs into an array.
+                var inputs = $(formSelector + ' :input');
+                var values = {};
+                var labelHtml = "";
+                inputs.each(function () {
+                    labelHtml = $("label[for='" + $(this).attr('id') + "']").html();
+                    if (!labelHtml) {
+                        return;
+                    }
+                    labelHtml = labelHtml.replace('*', '').split(" ").join("");
+                    values[labelHtml] = $(this).val();
+                });
+
+                return values
+            }
+
+            //function to check discount name if is is already exists in db
+            function checkExistName(newName, oldName) {
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var params = {discount_name: newName, old_name: oldName, csrf_token: encodeURIComponent(csrf_token)};
+                var url = site['uri']['public'] + "/discount/checkName/";
+                var req1 = $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    if ("TRUE" == data) {
+                        $(".name-alerts").html(_translate('name_exists'));
+                        $(".discountName").css("border-color", "#FF4500");
+
+                    }
+                    else {
+                        $(".name-alerts").html("");
+                        $(".discountName").css("border-color", "#909090");
+
+                    }
+
+                }).fail(function (err) {
+                    console.log("fail")
+                });
+            }
+        });
+
+        var $dateInputs = $('.datepicker input');
+        $dateInputs.addClass('rtl');
+
+
+        function addCommaToTheNumber(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function replaceAll(str, find, to) {
+            return str.replace(new RegExp(find, 'g'), to);
+        }
+
+        function removeCommaFromNumber(x) {
+            return parseFloat(replaceAll(x+"",',',''));
+        }
+
+        function formatDateToYYYYMMDD(date) {
+            /*
+             date has two form either string like 11/06/2016 11:38 AM or date  like 1478425080000.
+             this function format both
+             */
+            if (!date instanceof Date) {
+                var dateWithoutTime = date.split(" ")[0];
+                date = new Date(dateWithoutTime);
+            } else {
+                date = new Date(date);
+            }
+            return moment(date).format("YYYY-MM-DD");
+        }
+
+        var discountType = document.getElementById('type'),
+            targetLabel = document.querySelector('label[for="percentage"]')
+        ;
+
+        discountType.addEventListener('change', function(event){
+            var currentTarget = event.target,
+                selectedLabel = document.querySelector('select[id="type"] option[value="'+ currentTarget.value +'"')
+                    .textContent
+            ;
+            selectedLabel.indexOf('Fixed') !== -1
+                ? targetLabel.textContent =selectedLabel + " Value*"
+                : targetLabel.textContent =selectedLabel + " Value* (put number only without %)";
+        }, false);
+
+    </script>
+{% endblock %}
+

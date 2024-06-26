@@ -1,0 +1,190 @@
+<canvas class="canvasReceipt1" height="1700" width="1500" style="display:none;"></canvas>
+<iframe id="contract3Page1" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+<!--<div class="invoice-header">-->
+<div class="col-xs-2" style=" position: absolute;
+    right: 0px;">
+    <img src="/reservation-system/public/images/Rawabi_Logo.png"  height="130" width="130" style=" position: absolute;
+    right: 0px;" ><br><br>
+                </div>
+<!--    </div>-->
+    <div id="invoice" class="container">
+
+        <div class="col-xs-12" style="direction:rtl;height:1800px">
+            <div class="display-block" style="margin-bottom:50px;">
+
+                <label class="display-block" style="text-align: center;font-weight: bold ; margin-top:100px;">
+                    <h1><strong>كمبيالة</strong></h1>
+                </label>
+
+                <label class="display-block font-size-25">
+                    <span class="pull-right" style="margin-bottom:50px;margin-top:100px; color: red">
+                        <h2>الرقم المتسلسل:
+                            <%- serialNumber%>
+                        </h2>
+                    </span>
+                </label>
+
+            </div>
+            <form class="form-style-4" action="" method="post">
+
+                <table style="width:100%; border: 1px solid black ; border-collapse: collapse;padding: 2px;   text-align: center; margin-top:80px;font-size: 30px">
+
+                    <tr style=" border: 1px solid black;">
+                        <th style=" border: 1px solid black; text-align: center;">الرقم</th>
+                        <th style=" border: 1px solid black;text-align: center;">الاسم</th>
+                        <th style=" border: 1px solid black;text-align: center;">الصفة التعاقدية</th>
+                        <th style=" border: 1px solid black;text-align: center;">رقم الهوية</th>
+                        <th style=" border: 1px solid black;text-align: center;">العنوان</th>
+                        <th style=" border: 1px solid black;text-align: center;">رقم الهاتف و/أو الجوال</th>
+                        <th style=" border: 1px solid black;text-align: center;">التوقيع</th>
+
+                    </tr>
+                    <!-- Row1 -->
+                    <tr style=" border: 1px solid black">
+                        <td style=" border: 1px solid black">1</td>
+                        <td style=" border: 1px solid black ;">
+                            <%- renter1%>
+                        </td>
+                        <td style=" border: 1px solid black">مدين
+                        </td>
+                        <td style=" border: 1px solid black ">
+                            <%- r_idNum1%>
+                        </td>
+                        <td style=" border: 1px solid black">
+                            <%- r_city1%>
+                        </td>
+                        <td style=" border: 1px solid black">
+                            <%- r_mobileNum1%>
+                        </td>
+                        <td style=" border: 1px solid black"></td>
+                    </tr>
+                    <!-- Row2 -->
+                    <tr style=" border: 1px solid black">
+                        <td style=" border: 1px solid black">2</td>
+                        <td style=" border: 1px solid black">
+                            <%- sponsorName%>
+                        </td>
+                        <td style=" border: 1px solid black">كفيل</td>
+                        <td style=" border: 1px solid black">
+                            <%- sponsorIdNum%>
+                        </td>
+                        <td style=" border: 1px solid black">
+                            <%- sponsorAddress%>
+                        </td>
+                        <td style=" border: 1px solid black">
+                            <%- sponsorMobile%>
+                        </td>
+                        <td style=" border: 1px solid black ;width :200px;"></td>
+                    </tr>
+
+                </table>
+                <div class="display-block font-size-25 text-justify" style="margin-bottom:20px ; margin-top:40px;"> قيمة
+  الكمبيالة بالأرقام( <input type="text" value="<%- amount%>" style="width:120px; padding-right: 15px;"/>
+                    ) <input type="text" required value="<%- arabicAmount%>" style="width:500px; padding-right: 15px;"/>دولار أمريكي .
+                </div>
+
+
+                <div class="display-block font-size-25 text-justify" style="margin-bottom:20px ; margin-top:60px;">
+     تاريخ الإستحقاق <input type="text" required value="<%- currentMonth%>" style="width:80px;padding-right:15px;"/>
+                    /<input type="text" required value="<%- currentDay%>" style="width:80px;padding-right: 15px;"/>
+                    / <input type="text" required value="<%- currentYear%>" style="width:80px;padding-right: 15px;"/>
+
+                </div>
+
+                <div class="display-block font-size-25 text-justify" style="margin-bottom:20px">
+                    مكان الدفع : رام الله
+                </div>
+
+                <div class="display-block font-size-25 text-justify" style="margin-bottom:20px ; margin-top:20px;">
+                    أتعهد/ نتعهد أنا/نحن المذكورين أعلاه وبالتضامن والتكافل بأن ندفع لأمر شركة بيتي للاستثمار العقاري،
+المساهمة الخصوصية المحدودة ، مبــــلغ وقــدره (<input type="text" required value="<%- amount%>" style="width:120px;padding-right: 15px;"/>) <input type="text" required value="<%- arabicAmount%>" style="width:400px;padding-right: 15px;"/>
+ دولار أمريكي فقط لا غير ، وفي حال
+                    عدم دفع قيمة الكمبيالة في موعد الاستحقاق المذكور فإنني أدفع الفائدة بواقع 9% عن كل سنة ميلادية من
+                    تاريخ الاستحقاق وحتى السداد التام عن المبلغ المرقوم أعلاه ودفعة واحدة دون الحاجة إلى أي إنذار أو
+                    إخطار مسبق وإننا نسقط حقنا بطلب توجيه الاحتجاج لعدم الدفع في ميعاد الاستحقاق وما بعده سواء تجاه
+                    الدائن أو المظهر / المظهرين و/أو الكفيل وأية خيارات قانونية أخرى كما و نسقط حقنا بالدفع بإنكار
+                    التوقيع و/أو بالإدعاء بيمين كذب الإقرار و/أو الدفع بعدم القبول و/أو التقادم و/أوالوفاء و/أو أي دفع
+                    شكلي و/أو موضوعي حول ما جاء في هذه الكمبيالة /السند والأمور الناشئة عنه، ونتحمل كامل المصاريف
+                    والرسوم الاضافية للمحامين و/أو المحاكم و/أو دوائر التنفيذ لتحصيل قيمة الكمبيالة.
+                </div>
+                <div class="display-block font-size-25 text-justify" style="margin-bottom:60px ; margin-top:60px;"> تحريراً في روابي بتاريخ
+                    <input type="text" required value="<%- contract2Day%>" style="width:80px; padding-right:15px;"/>
+                    /<input type="text" required value="<%- contract2Month%>" style="width:80px;padding-right: 15px;"/>
+                    / <input type="text" required value="<%- contract2Year%>" style="width:80px;padding-right: 15px;"/>
+                </div>
+                <div class="col-xs-6 display-block font-size-25 text-justify " style="text-align: center">
+                    <div class="text-center">
+                        <div class="display-block font-size-25">اسم الكفيل :
+                            <input type="text" required value="<%- sponsorName%>" style="width:300px;padding-right: 15px;"/></div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <div class="display-block font-size-25">توقيع الكفيل :
+                            <input type="text" required value="" style="width:300px;padding-right: 15px;"/>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+                <div class="col-xs-6 font-size-25 " style="text-align: center">
+                    <div class="text-center">
+                        <div class="display-block font-size-25"> اسم المدين :
+                             <input type="text" required value="<%- renter1%>" style="width:300px;padding-right: 15px;"/></div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <div class="display-block font-size-25">توقيع المدين:
+                            <input type="text" required value="" style="width:300px;padding-right: 15px;"/>
+                        </div>
+                    </div>
+                    <br><br>
+                </div>
+                <div class="col-xs-6 font-size-25 pull-right">
+                    <div class="text-center">
+                        <span class="display-block font-size-25">شاهد</span>
+                    </div>
+
+<!--
+                    <div class="col-xs-6 font-size-25 " style="text-align: center">
+
+-->
+                    <div class="text-center">
+                        <div class="display-block font-size-25">الاسم الرباعي
+                            <input type="text" required value="" style="width:300px;padding-right: 15px;"/>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="display-block font-size-25">التوقيع
+                            <input type="text" required value="" style="width:350px; padding-right: 15px;"/></div>
+<!--                    </div>-->
+                </div>
+                     </div>
+
+                <div class="col-xs-6 font-size-25 pull-right">
+                    <div class="text-center">
+                        <span class="display-block font-size-25">شاهد</span>
+                    </div>
+
+<!--
+                    <div class="col-xs-6 font-size-25 " style="text-align: center">
+
+-->
+                    <div class="text-center">
+                        <div class="display-block font-size-25">الاسم الرباعي
+                            <input type="text" required value="" style="width:300px;padding-right: 15px;"/>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="display-block font-size-25">التوقيع
+                            <input type="text" required value="" style="width:350px;padding-right: 15px;"/></div>
+                    </div>
+                        </div>
+
+
+            </form>
+        </div>
+    </div>
+</iframe>

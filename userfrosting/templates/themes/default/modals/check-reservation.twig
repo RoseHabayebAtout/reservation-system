@@ -1,0 +1,19 @@
+<div class="modal fade already-reserved-modal-lg" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="row ">
+                <div class="col-xs-offset-2 col-xs-10 ">
+                    <h1>{{ translate('check_reservation_title') }}</h1>
+                    <p>{{ translate('check_reservation_message') }}</p>
+                </div>
+                <div class="row lead">
+                    <div class="col-xs-offset-2 col-xs-9 ">
+                        <div class="pull-right">
+                            <button class="btn btn-default" id="cancelReservationBtn" onclick="$('.already-reserved-modal-lg').modal('hide')">{{ translate('go_back') }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

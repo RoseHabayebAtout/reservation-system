@@ -1,0 +1,18 @@
+{% block subject %}
+    Pending Approved to cancel Reservation {{unit.id}}
+{% endblock %}
+
+{% block body %}
+<p>Greetings ,
+</p>
+<p>
+You are receiving this email because your request to cancel reservation for {{unit.id}} {{unit.building}} {{unit.unit}} {{unit.floor}} has been approved .
+</p>
+<p>
+<a href="{{site.uri.public}}/unit#Available">{{site.uri.public}}/unit#Available</a>
+</p>
+<p>
+With regards,<br>
+The {{site.site_title}} Team
+</p>
+{% endblock %}

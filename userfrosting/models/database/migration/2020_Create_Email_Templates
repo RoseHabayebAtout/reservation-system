@@ -1,0 +1,32 @@
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+// email template table 17/11/2020
+CREATE TABLE `emails_templates` (
+ `id` int(10) NOT NULL AUTO_INCREMENT,
+ `subject` varchar(255) NOT NULL,
+ `content` text NOT NULL,
+ `user_id` int(10) unsigned NOT NULL,
+ `status` varchar(255) NOT NULL,
+ `created_at` date NOT NULL,
+ `name` varchar(255) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `emailTemplate_FK` (`user_id`),
+ CONSTRAINT `emailTemplate_FK` FOREIGN KEY (`user_id`) REFERENCES `uf_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8
+
+
+
+INSERT INTO `emails_templates` (`id`, `subject`, `content`, `user_id`, `status`, `created_at`, `name`) VALUES
+(1, 'Reserve Unit', 'Unit Reserved Successfully', 1, 'ACTIVE', '2020-11-16', 'Reservation Unit Email'),
+(2, 'Cancel Unit Reservation', 'Unit Reservation Cancelled Successfully', 1, 'ACTIVE', '2020-11-16', 'Cancel Reservation Unit Email'),
+(3, 'Request To Cancel Reservation Unit', 'You will need to either reject or accept the cancellation request.', 1, 'ACTIVE', '2020-11-16', 'Request To Cancel Reservation Unit'),
+(4, 'Unit Cancellation Request Approved', 'You are receiving this email because your request to cancel reservation Approved ', 1, 'ACTIVE', '2020-11-16', 'Unit Cancellation Request Approved'),
+(5, 'Unit Cancellation Request Rejected', 'You are receiving this email because your request to cancel reservation Rejected ', 1, 'ACTIVE', '2020-11-16', 'Unit Cancellation Request Rejected'),
+(6, 'Unit Changed To Available', 'The Unit has been changed to available ', 1, 'ACTIVE', '2020-11-16', 'Change Unit To Available'),
+(7, 'Purchasing Unit', 'The Unit has been purchased', 1, 'ACTIVE', '2020-11-16', 'Purchasing Unit'),
+(8, 'Cancel storage reservation', '<p>cacellation storage reservation</p>', 1, 'ACTIVE', '2020-11-26', 'Reservation Storage Cancellation Email'),
+(9, 'Cancel parking reservation', '<p>cancellation parking reservation</p>', 1, 'ACTIVE', '2020-11-26', 'Reservation Parking Cancellation Email'),
+(10, 'parking reservation', '<p>parking Reservation</p>', 1, 'ACTIVE', '2020-11-23', 'Reservation Parking Email'),
+(11, 'storage reservation', '<p>storage Reservation</p>', 1, 'ACTIVE', '2020-11-26', 'Reservation Storage Email');
+
+////////////////////////////////////////////////////////////////////////////////////////////////

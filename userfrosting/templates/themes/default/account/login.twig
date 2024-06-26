@@ -1,0 +1,99 @@
+{% extends "layouts/layout-jumbotron.twig" %}
+{% set page_group = "loggedout" %}
+
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}
+    
+    {% set page = page | merge({
+        "title"       : "Login",
+        "description" : "Login to your UserFrosting account.",
+        "active_page" : "account/login"
+    }) %}    
+
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+<!-- <h1>Welcome to {{site.site_title}}!</h1> -->
+<!-- <p class="lead">Please sign in.</p> -->
+<!-- {% include 'components/common/alerts.twig' %} -->
+<!-- <form name="login" method="post" action="{{site.uri.public}}/account/login" class="form-horizontal">
+    <div class="row">
+      <div class="col-md-offset-3 col-md-6">
+            <div class="form-group">
+                <input type="text" class="form-control " name="user_name" autocomplete="off" value="" placeholder="{{ (site.email_login == 1) ? 'Username or Email' : 'Username' }}">
+            </div>
+      </div>
+      <div class="col-md-offset-3 col-md-6">
+        <div class="form-group">
+            <input type="password" class="form-control " name="password" autocomplete="off" value="" placeholder="Password">
+        </div>
+      </div>
+      <div class="col-md-offset-3 col-md-6">
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="rememberme"> Remember me
+                </label>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-success">
+            Login
+        </button>
+      </div>
+    </div>
+</form> -->
+ <div class="login-area full-height">
+        <div class="bg-image full-height">
+            <div class="login-signup full-height">
+                    <div class="tab-content full-height">
+                        <!-- <div id="login" class="tab-pane fade in active"> -->
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-8">
+                            <div class="login-inner">
+                                <div class="title">
+                                    <h1>Welcome to <span>{{site.site_title}}</span></h1>
+                                </div>
+                                <div class="login-form">
+                                    <form name="login" method="post" action="{{site.uri.public}}/account/login" class="form-horizontal">
+                                        <div class="form-details">
+                                            <label class="user">
+                                                <input type="text"  name="user_name" autocomplete="off" value="" placeholder="{{ (site.email_login == 1) ? 'Username or Email' : 'Username' }}">
+                                            </label>
+                                            <label class="pass">
+                                                <input type="password" name="password" autocomplete="off" value="" placeholder="Password">
+                                            </label>
+                                        </div>
+                                    <button type="submit" class="form-btn" onsubmit="">Log In <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                                    </form>
+                                    {% include 'components/jumbotron/jumbotron-links.twig' %}   
+                                </div>
+                            </div>
+                         </div> 
+                         <div class="col-xs-2"></div>  
+                        <!-- </div> -->
+                    </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+ 
+{% block page_scripts %}
+    <script>
+        $(document).ready(function() {           
+            // Process form 
+            ufFormSubmit(
+                $("form[name='login']"),
+                {{ validators | raw }},
+                $("#userfrosting-alerts"),
+                function(data, statusText, jqXHR) {
+                    // Forward to home page on success
+                    window.location.replace(site['uri']['public']);
+                }
+            );
+        });          
+    </script>
+{% endblock %}

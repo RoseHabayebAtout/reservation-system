@@ -1,0 +1,247 @@
+<div class="modal fade modal-spc-wl edit-contract-modal rtl" id="contract-modal-3" data-backdrop="static"
+     data-keyboard="true" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header flex-parent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title" id="myModalLabel">اتفاقية تعهد بيع وشراء وحدة سكنية البنك الاسلامي</h3>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <fieldset class="active">
+                        <div class="col-xs-12 col-md-12 pull-right">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cidProDate3">التاريخ</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <div class='input-group date datepicker'>
+                                        <input type='text' class="form-control" id="cidProDate3"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cpurchaser32">المفوض بالتوقيع</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <input type="text" id="cpurchaser32" value="محمد محمود عبدالله سحويل" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cpurchaser3">والسيد/ة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <input type="text" name="cpurchaser3" id="cpurchaser3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group" style="    margin-bottom: 90px;">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cmoreInfo3">الاضافات او التعديلات</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <textarea id="cmoreInfo3" class="form-control"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cappendix">عدد الملاحق</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <input type="number" id="cappendix" value="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-1 pull-right">
+                                    <label for="cduring3">خلال</label>
+                                </div>
+                                <div class="col-xs-12 col-md-11 width-88">
+                                    <input type="text" id="cduring3" value="" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    {#->>1<<-#}
+
+                    <fieldset>
+                        <h3 class="text-center special-green">سابعاً: الثمن</h3>
+                        <div class="form-inline">
+                            <div class="col-xs-12">
+                                <label>
+                                    يلتزم الفريق الثاني بشراء المبيع موضوع هذه الاتفاقية بمبلغ يشمل:
+
+                                </label>
+                                <ol class="contract-3-edit-price">
+
+
+                                    <div class="relative">
+                                        <li>
+                                            <label for="cprice3Total" class="label-sepc">
+                                                السعر النهائي ويشمل:
+                                            </label>
+                                            <div class="dIcon">
+                                                <input type="text" id="cprice3Total"
+                                                       class="form-control margin-1 width-100" data-currency="$"
+                                                       name="cprice3Total"
+                                                       readonly
+                                                >
+                                                <i class="fa fa-usd"></i>
+                                            </div>
+                                            <ul class="subItems">
+                                                <li>
+                                                    <label for="cprice3Part2" class="label-sepc">حصة الشقة في قطعة الأرض
+                                                        المقامة عليها العمارة والبالغ قدره</label>
+                                                    <div class="dIcon">
+                                                        <input type="text" id="cprice3Part2"
+                                                               class="form-control margin-1 width-100" data-currency="$"
+                                                               name="price3Part2"
+                                                               readonly
+                                                        >
+                                                        <i class="fa fa-usd"></i>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label for="cprice3Part1" class="label-sepc">
+                                                        ثمن إنشاء الشقة والأجزاء المشتركة في العمارة والبالغ قدره
+                                                    </label>
+                                                    <div class="dIcon">
+                                                        <input type="text" id="cprice3Part1"
+                                                               class="form-control margin-1 width-100" data-currency="$"
+                                                               name="cprice3Part1"
+                                                               readonly
+                                                        >
+                                                        <i class="fa fa-usd"></i>
+                                                    </div>
+                                                </li>
+
+                                            </ul>
+
+                                        </li>
+                                    </div>
+
+
+                                </ol>
+                            </div>
+                        </div>
+
+
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <h3 class="text-center special-green">ملحق رقم (3): سند إقرار وتعهد</h3> {# اسم المستخدم #}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="cpurchaser13">أنا الموقع امضائي </label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="cpurchaser13" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        {# رقم الهوية #}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="csystemUserIDNo3">رقم الهوية</label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="csystemUserIDNo3" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        {# المفوض بالتوقيع #}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="ccompanyName3">المفوض بالتوقيع عن شركة</label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="ccompanyName3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {# رقم تسجيل الشركة #}
+                        <div class="col-xs-12 ">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="ccompanyNum3">رقم تسجيل</label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="ccompanyNum3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        {# لدى #}
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="col-xs-12 col-md-2 pull-right">
+                                    <label for="ccompanyFor3">لدى</label>
+                                </div>
+                                <div class="col-xs-12 col-md-10 pull-right">
+                                    <input type="text" id="ccompanyFor3" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 specific-PM">
+                            <div class="form-group">
+
+                                <label>بأن التزم بالامتثال لجميع الأحكام المنصوص عليها في النظام الداخلي الخاص باتحاد
+                                    ملاك رقم<input type="text" id="cHAO_num3" value=""
+                                                   class="form-control margin-1 width-15" name="HAO_num3">الصادر عن كاتب
+                                    عدل محكمة بلدية رام الله بتاريخ<input type="text" id="cHAO_date3" value=""
+                                                                          class="form-control margin-1 width-15"
+                                                                          name="cHAO_date3">للوحدات السكنية في حي <input
+                                            type="text" value="" class="form-control margin-1 width-15" id="chaiName3">والبالغة
+                                    مساحته<input type="text" value="" class="form-control margin-1 width-15"
+                                                 id="chaiArea3">متراً مربعاً.</label>
+                            </div>
+                        </div>
+
+                        {#Addeing wrapper for buttons that created from script#}
+                        <div class="col-xs-12">
+                            <div class="group" role="group">
+
+                            </div>
+                        </div>
+                    </fieldset>
+                    {#->>5<<-#}
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

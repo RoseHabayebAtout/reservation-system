@@ -1,0 +1,770 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "addition" %}
+{# Set page properties (page.*) here. #}
+{% block page %}
+
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+    "title"       : "Additions",
+    "description" : "Addition details and settings."
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-xs-12 col-xs-12">
+            <div id="settings-alerts">
+                <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-sort-numeric-asc">&nbsp;{{ translate('additions') }}</i>
+
+                    </span>
+                    <div class='pull-right users-btn-panel'>
+                        <button data-toggle="modal" id="createButton" class="btn btn-success"><i
+                                    class="fa fa-plus-square"></i> {{ translate('add_new_addition') }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="input-group custom-search-form">
+                        <input type="text" class="form-control search" data-column="all" id="additions-search-field"
+                               placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default additions-search-button" type="button">
+                            <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+
+                    <div>
+                        <h2>{{ translate('fixed_additions') }} </h2>
+                    </div>
+
+                    <table id="additionTable"
+                           class="tablesorter table table-bordered table-hover table-striped tablesorter-bootstrap dataTables table display "
+                           cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>{{ translate('addition_name') }}</th>
+                                <th>{{ translate('addition_value') }} </th>
+                                <th>{{ translate('addition_date') }}</th>
+                                <th>{{ translate('addition_description') }}</th>
+                                <th>{{ translate('action') }}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <br>
+                    <br>
+
+                    <div>
+                        <h3>{{ translate('percentage_additions') }} </h3>
+                    </div>
+                    <div>
+
+                        <table id="additionTable2"
+                               class="tablesorter table table-bordered table-hover table-striped tablesorter-bootstrap dataTables"
+                               cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>{{ translate('addition_name') }}</th>
+                                    <th>{{ translate('addition_percentage') }} %</th>
+                                    <th>{{ translate('addition_date') }}</th>
+                                    <th>{{ translate('addition_description') }}</th>
+                                    <th>{{ translate('action') }}</th>
+
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- end of panel -->
+
+        </div>
+        {# <div class="col-xs-1 col-md-1 col-md-offset-1"></div> #}
+    </div>
+
+
+
+    <!-- for the form of additng new addition-->
+    <div class="modal fade" id="create" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('create_new_addition') }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-10">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="name">{{ translate('addition_name') }} *</label>
+                                <input class="form-control additionName" id="name" type="text" required>
+                                <div class="name-alerts" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="percentage">{{ translate('addition_value') }} *</label>
+                                <input class="form-control additionValue" id="percentage" type="number" required>
+                                <div class="percentage-alerts" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="type">{{ translate('addition_type') }} *</label>
+
+                                <select class="form-control" id="type">
+                                    <option value="0">{{ translate('fixed_additions') }}</option>
+                                    <option value="1">{{ translate('addition_percentage') }}</option>
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="additionDate">{{ translate('addition_date') }}</label>
+
+                                <div class='input-group form-control  ' id='additionDate2'>
+                                    <input type='date' class="form-control " id="additionDate"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="additionDescription">{{ translate('addition_description') }} </label>
+                                <textarea
+                                        class="form-control additionDescription"
+                                        id="additionDescription"
+                                        required>
+                                </textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" id="additionCreate" class="btn btn-primary">{{ translate('create') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('delete_addition') }} </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="alert">{{ translate('delete_addition_text') }}</div>
+
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-danger" id="deleteAddition">{{ translate('yes') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('edit_addition') }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-10">
+                        <form class="form-horizontall" role="form">
+                            <div class="form-group">
+                                <label for="e_name">{{ translate('addition_name') }} *</label>
+                                <input class="form-control additionName" id="e_name" type="text" required="">
+                                <div class="name-alerts" style="color:red"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="e_percentage">{{ translate('addition_value') }} *</label>
+                                <input class="form-control additionValue" id="e_percentage" type="number" required="">
+                                <div class="percentage-alerts" style="color:red"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="additionDescription">{{ translate('addition_description') }} </label>
+                                <textarea
+                                        class="form-control additionDescription"
+                                        id="additionDescription"
+                                        required>
+                                </textarea>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+            <div class="modal-footer ">
+                <button type="button" id="editAddition" class="btn btn-warning"> {{ translate('update') }}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+
+            </div>
+        </div>
+    </div>
+
+
+    {% include 'components/common/spinnerLoader.twig' %}
+
+
+{% endblock %}
+{% block page_scripts %}
+    <script>
+        var flagg = 0;
+        $(document).ready(function () {
+            document.getElementById('additionDate').value = moment().format('YYYY-MM-DD');
+
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+
+            $.fn.dataTableExt.oStdClasses.sPageButton = "colorPages";
+            $('#additionTable').DataTable({
+                'ajax': {
+                    "type": "Get",
+                    "url": site['uri']['public'] + '/addition/fixed/',
+                    "dataSrc": function (json) {
+                        var j = 0;
+                        var json2 = [];
+                        for (var i = 0; i < json.length; i++)
+                            if (json[i].addition_type == 0) {
+                                json2[j] = json[i];
+                                j++;
+                            }
+                        return json2;
+                    }
+                },
+                "bJQueryUI": false,
+                "paging": true,
+                "ordering": true,
+                "info": false,
+                "searching": false,
+                "responsive": true,
+                "pageLength": 5,
+                "lengthChange": false,
+                columns: [
+                    {"data": "addition_name"},
+                    {
+                        "data": function (row, type, val, meta) {
+                            return addCommaToTheNumber(row.addition_value);
+                        }
+                    },
+                    {"data": "addition_date"},
+                    {"data": "addition_description"},
+                    {
+                        "data": null,
+                        "defaultContent": '<div class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">'+ _translate('actions') +'<span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li><a href="#"  id="deleteAddition" data-title="Delete" data-target="#delete" data-placement="top" data-toggle="tooltip"><i class="fa fa-trash-o"></i>'+ _translate('delete_addition') +'</a></li><li><a href="#" id="editAddition" data-title="Edit" data-target="#edit"  data-toggle="tooltip" ><i class="fa fa-edit"></i> '+ _translate('edit_addition') +'</a></li></ul></div>'
+                    }
+                ],
+                columnDefs: [
+                    {
+                        "targets": 0,
+                        "responsivePriority": 2
+                    },
+
+
+                    {
+                        "targets": 2,
+                        "responsivePriority": 2
+                    },
+                    {
+                        "targets": 1,
+                        "responsivePriority": 2
+                    },
+
+                    {
+                        "targets": 3,
+                        "responsivePriority": 2
+                    },
+
+                    {
+                        "targets": 4,
+                        "responsivePriority": 2
+                    }
+                ],
+                fnRowCallback: function (row, data, iDisplayIndex, iDisplayIndexFull) {
+                    // Set data-id=id on the row
+                    $(row).data('id', data.id);
+
+                }
+            });
+            $('#additionTable2').DataTable({
+                'ajax': {
+                    "type": "Get",
+                    "url": site['uri']['public'] + '/addition/all/',
+                    "dataSrc": function (json) {
+                        var j = 0;
+                        var json2 = [];
+                        for (var i = 0; i < json.length; i++)
+
+                            if (json[i].addition_type == 1) {
+
+                                json2[j] = json[i];
+                                j++;
+
+                            }
+                        return json2;
+
+                    }
+                },
+                "paging": true,
+                "ordering": true,
+                "info": false,
+                "searching": false,
+                "responsive": true,
+                "pageLength": 5,
+                "lengthChange": false,
+                columns: [
+                    {"data": "addition_name"},
+                    {"data": "addition_value"},
+                    {"data": "addition_date"},
+                    {"data": "addition_description"},
+                    {
+                        "data": null,
+                        "defaultContent": '<div class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">'+ _translate('actions') +'<span class="caret"></span></button><ul class="dropdown-menu" role="menu"><li><a href="#"  id="deleteAddition" data-title="Delete" data-target="#delete" data-placement="top" data-toggle="tooltip"><i class="fa fa-trash-o"></i> '+ _translate('delete_addition') +'</a></li><li><a href="#" id="editAddition" data-title="Edit" data-target="#edit"  data-toggle="tooltip" ><i class="fa fa-edit"></i>  '+ _translate('edit_addition') +'</a></li></ul></div>'
+                    }
+
+                ],
+                columnDefs: [
+                    {
+                        "targets": 0,
+                        "responsivePriority": 2
+                    },
+
+                    {
+                        "targets": 2,
+                        "responsivePriority": 2
+                    },
+                    {
+                        "targets": 1,
+                        "responsivePriority": 2
+                    },
+
+                    {
+                        "targets": 3,
+                        "responsivePriority": 2
+                    },
+                    {
+                        "targets": 4,
+                        "responsivePriority": 2
+                    }
+                ],
+                fnRowCallback: function (row, data, iDisplayIndex, iDisplayIndexFull) {
+                    // Set data-id=id on the row
+                    $(row).data('id', data.id);
+
+                }
+            });
+
+
+            var type = 0;
+            $('#type').on('change', function () {
+
+                type = this.value;
+                flagg = type;
+            });
+            $('#createButton').on('click', function () {
+
+                $('#create').modal("show");
+                $('.additionName').val('');
+                $('.additionValue').val('');
+                $('.additionDate').val('');
+                $('.additionDescription').val('');
+                $('.form-horizontal').find('input').each(function () {
+                    $(this).css("border-color", "#909090");
+                });
+                $(".percentage-alerts").html("");
+                $(".name-alerts").html("");
+
+                $('#name').on({
+                    keyup: function () {
+                        checkExistName($("#name").val(), null)
+                    },
+                    blur: function () {
+                        checkExistName($("#name").val(), null)
+                    }
+                });
+            });
+
+            $('#create').on('click', '#additionCreate', function () {
+                var additionName, additionValue, additionDescription, additionDate;
+                var modal = $(this).closest('.modal');
+                additionName = modal.find('.additionName').val();
+
+                additionValue = modal.find('.additionValue').val();
+                addition_date = formatDateToYYYYMMDD(modal.find('#additionDate').val());
+                //     addition_date=formatDateToYYYYMMDD(modal.find('#additionDate').val());
+                additionDescription = modal.find('.additionDescription').val();
+                addition_Type = type;
+                // var reservation=getValuesFromForm('.form-horizontal');
+                if (modalValidityCheck('.form-horizontal')) {
+
+                    var params = {
+                        addition_name: additionName,
+                        addition_value: additionValue,
+                        addition_type: type,
+                        addition_description: additionDescription,
+                        addition_date: addition_date,
+                        csrf_token: encodeURIComponent(csrf_token)
+                    };
+                    var url = site['uri']['public'] + "/addition/";
+                    var req1 = $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: params,
+                        beforeSend: function () {
+                            $('.loader-modal-lg').modal('show')
+                        }
+                    }).done(function (data) {
+                        $('#create').modal("hide");
+                        $('.loader-modal-lg').modal('hide');
+
+                        $('#additionTable').DataTable().ajax.reload(null, false);
+                        $('#additionTable2').DataTable().ajax.reload(null, false);
+                        $("#settings-alerts").html("<div class='alert alert-success'>"+ _translate('addition_created_success') +"</div>");
+
+                    })
+                    .fail(function (err) {
+                        $('.loader-modal-lg').modal('hide');
+                        $('#create').modal("hide");
+                        console.log("err", err);
+                        $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('addition_created_fail') +"</div>");
+                    });
+                }
+            });
+        });
+
+
+        $('#edit').on('click', '#editAddition', function () {
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+
+            var modal = $(this).closest('.modal');
+            var addition_id = modal.data('id');
+            var addition_name, addition_value;
+            addition_name = modal.find('.additionName').val();
+            addition_value = modal.find('.additionValue').val();
+
+            addition_description = modal.find('.additionDescription').val();
+            if (modalValidityCheck('.form-horizontall')) {
+                var params = {
+                    addition_name: addition_name,
+                    addition_value: addition_value,
+                    addition_id: addition_id,
+                    addition_description: addition_description,
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+
+                var url = site['uri']['public'] + "/addition/edit/";
+                var req1 = $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: params,
+                    beforeSend: function () {
+                        $('.loader-modal-lg').modal('show')
+                    },
+                }).done(function (data) {
+                    $('#edit').modal("hide");
+                    $('.loader-modal-lg').modal('hide');
+                    $('#additionTable').DataTable().ajax.reload(null, false);
+                    $('#additionTable2').DataTable().ajax.reload(null, false);
+
+                    $("#settings-alerts").html("<div class='alert alert-success'> "+ _translate('addition_edited_success') +"</div>");
+                })
+                    .fail(function (err) {
+                        $('.loader-modal-lg').modal('hide');
+                        $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('addition_edited_fail') +"</div>");
+                        console.log("err", err)
+                    });
+            }
+        });
+
+
+        $('.additions-search-button').on('click', function () {
+            var search = $('#additions-search-field').val().toLowerCase();
+            $('#additionTable').each(function () { // Search among possibly multiple tables
+
+                // Hide all table rows
+                $(this).find('tbody tr').hide();
+
+                // Search through all td:s and if a match is found => display the tr that the td belongs to
+                $(this).find('tbody td').filter(function () {
+                    return $(this).text().toLowerCase().indexOf(search) != -1; // case insensitive search
+                }).parent().show();
+
+                $(this).trigger('applyWidgets'); // for zebra
+            });
+
+            $('#additionTable2').each(function () { // Search among possibly multiple tables
+
+                // Hide all table rows
+                $(this).find('tbody tr').hide();
+
+                // Search through all td:s and if a match is found => display the tr that the td belongs to
+                $(this).find('tbody td').filter(function () {
+                    return $(this).text().toLowerCase().indexOf(search) != -1; // case insensitive search
+                }).parent().show();
+
+                $(this).trigger('applyWidgets'); // for zebra
+            });
+        });
+
+
+        $('#delete').on('click', '#deleteAddition', function () {
+            var addition_id = $(this).closest('.modal').data('id');
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+
+            var params = {addition_id: addition_id, csrf_token: encodeURIComponent(csrf_token)};
+            var url = site['uri']['public'] + "/addition/";
+            var req1 = $.ajax({
+                type: "DELETE",
+                url: url,
+                data: params,
+                beforeSend: function () {
+                    $('.loader-modal-lg').modal('show')
+                }
+            }).done(function (data) {
+                $('#delete').modal("hide");
+                $('.loader-modal-lg').modal('hide');
+                $('#additionTable').DataTable().ajax.reload(null, false);
+                $('#additionTable2').DataTable().ajax.reload(null, false);
+                $("#settings-alerts").html("<div class='alert alert-success'> "+ _translate('addition_deleted_success') +"</div>");
+            })
+                .fail(function (err) {
+                    $('.loader-modal-lg').modal('hide');
+                    console.log("err", err);
+                    $("#settings-alerts").html("<div class='alert alert-danger'>"+ _translate('addition_deleted_fail') +"</div>");
+                });
+        });
+        /*
+            Add listener for edit and delete
+        */
+        $('#additionTable').on('click', "#deleteAddition,#editAddition", function () {
+            flagg = 0, type = 0;
+            var row = $(this).closest('tr');
+            var rowData = $('#additionTable').DataTable().row(row).data();
+            if (rowData == null) {
+                row = $(this).parent().closest('td').parent().prev();
+                rowData = $('#additionTable').DataTable().row(row).data();
+
+            }
+            $('.form-horizontall').find('input').each(function () {
+                $(this).css("border-color", "#909090");
+            });
+            $(".percentage-alerts").html("");
+            $(".name-alerts").html("");
+            // show modal
+            $($(this).data('target')).modal('show');
+            // set id from row to modal data-id
+            $('.modal').data('id', rowData.id);
+            // set modal values from row data
+            $('.additionName').val(rowData.addition_name);
+            $('.additionValue').val(rowData.addition_value);
+            $('.additionPercentage').val(rowData.addition_percentage);
+            $('.additionDescription').val(rowData.addition_description);
+
+            $('#e_name').on({
+
+                keyup: function () {
+                    checkExistName($("#e_name").val(), rowData.addition_name)
+                },
+                blur: function () {
+                    checkExistName($("#e_name").val(), rowData.addition_name)
+                }
+            });
+        });
+
+        $('#additionTable2').on('click', "#deleteAddition,#editAddition", function () {
+            flagg = 1, type = 1;
+            var row = $(this).closest('tr');
+
+            var rowData = $('#additionTable2').DataTable().row(row).data();
+            if (rowData == null) {
+                row = $(this).parent().closest('td').parent().prev();
+                rowData = $('#additionTable2').DataTable().row(row).data();
+
+            }
+            $('.form-horizontall').find('input').each(function () {
+                $(this).css("border-color", "#909090");
+            });
+            $(".percentage-alerts").html("");
+            $(".name-alerts").html("");
+            // show modal
+            $($(this).data('target')).modal('show');
+            // set id from row to modal data-id
+            $('.modal').data('id', rowData.id)
+            // set modal values from row data
+            $('.additionName').val(rowData.addition_name)
+            $('.additionValue').val(rowData.addition_value)
+            $('.additionPercentage').val(rowData.addition_percentage)
+            //$('.additionDate').val(rowData.addition_date)
+            $('.additionDescription').val(rowData.addition_description)
+
+            // onblur check updated discount name
+            $('#e_name').on({
+
+                keyup: function () {
+                    checkExistName($("#e_name").val(), rowData.addition_name)
+                },
+                blur: function () {
+                    checkExistName($("#e_name").val(), rowData.addition_name)
+                }
+            });
+        });
+
+        function checkExistName(newName, oldName) {
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var params = {addition_name: newName, old_name: oldName, csrf_token: encodeURIComponent(csrf_token)};
+            var url = site['uri']['public'] + "/addition/checkName/";
+            var req1 = $.ajax({
+                type: "POST",
+                url: url,
+                data: params
+            }).done(function (data) {
+                if ("TRUE" == data) {
+                    $(".name-alerts").html(_translate('name_exists'));
+                    $(".discountName").css("border-color", "#FF4500");
+
+                }
+                else {
+                    $(".name-alerts").html("");
+                    $(".discountName").css("border-color", "#909090");
+
+                }
+
+            }).fail(function (err) {
+                console.log("err", err)
+            });
+        }
+
+        function modalValidityCheck(formSelector) {
+            var flag = true;
+            var target = $(formSelector);
+            var addition = getValuesFromForm(formSelector);
+            // checks for empty fields when required flag is true
+            target.find('input').filter('[required]').each(function () {
+
+                if (!$(this)[0].checkValidity()) {
+                    $(this).css("border-color", "red");
+                    flag = false;
+                }
+                else {
+                    flag = true;
+                }
+            })
+            // check percentage if it is numeric value that 0<percentage<100 a
+            if (flagg == 1) {
+                if ($.isNumeric(addition['AdditionValue'])) {
+                    if ((addition['AdditionValue'] < 0) || (addition['AdditionValue'] >= 100)) {
+                        $(".percentage-alerts").html("Invalid percentage value");
+                        $(".additionValue").css("border-color", "red");
+                        flag = false;
+                    }
+                    else {
+                        flag = true;
+                        $(".percentage-alerts").html("");
+                        $(".additionValue").css("border-color", "#909090");
+                    }
+                }
+            }
+            else if (flagg == 0) {
+                if ($.isNumeric(addition['AdditionValue'])) {
+                    if ((addition['AdditionValue'] < 0)) {
+                        $(".percentage-alerts").html("Invalid number");
+                        $(".additionValue").css("border-color", "red");
+                        flag = false;
+
+                    }
+                    else {
+                        flag = true;
+                        $(".percentage-alerts").html("");
+                        $(".additionValue").css("border-color", "#909090");
+                    }
+                }
+            }
+
+            if ($(".name-alerts").html() != "") {
+                flag = false;
+            }
+            return flag;
+        }
+
+        function addCommaToTheNumber(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function replaceAll(str, find, to) {
+            return str.replace(new RegExp(find, 'g'), to);
+        }
+
+        function removeCommaFromNumber(x) {
+            return parseFloat(replaceAll(x+"",',',''));
+        }
+
+        function getValuesFromForm(formSelector) {
+            var inputs = $(formSelector + ' :input');
+            var values = {};
+            var labelHtml = "";
+            inputs.each(function () {
+                labelHtml = $("label[for='" + $(this).attr('id') + "']").html();
+                if (!labelHtml) {
+                    return;
+                }
+                labelHtml = labelHtml.replace('*', '').split(" ").join("");
+                values[labelHtml] = $(this).val();
+            });
+            return values
+        }
+        var $dateInputs = $('.datepicker input');
+        $dateInputs.addClass('rtl');
+
+        function formatDateToYYYYMMDD(date) {
+            if (!date instanceof Date) {
+                var dateWithoutTime = date.split(" ")[0];
+                date = new Date(dateWithoutTime);
+            } else {
+                date = new Date(date);
+            }
+            return moment(date).format("YYYY-MM-DD");
+        }
+
+        var additionType = document.getElementById('type'),
+            targetLabel = document.querySelector('label[for="percentage"]')
+        ;
+
+        additionType.addEventListener('change', function(event){
+            var currentTarget = event.target,
+                selectedLabel = document.querySelector('select[id="type"] option[value="'+ currentTarget.value +'"')
+                    .textContent
+            ;
+            selectedLabel.indexOf('Fixed') !== -1
+                ? targetLabel.textContent =selectedLabel + " Value*"
+                : targetLabel.textContent =selectedLabel + " Value* (put number only without %)";
+        }, false);
+
+    </script>
+{% endblock %}

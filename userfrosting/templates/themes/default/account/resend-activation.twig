@@ -1,0 +1,71 @@
+{% extends "layouts/layout-jumbotron.twig" %}
+{% set page_group = "loggedout" %}
+
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template, 
+    but BEFORE the page itself is rendered. #}
+    
+    {% set page = page | merge({
+        "title"       : "Resend Activation",
+        "description" : "Resend the activation email for your new UserFrosting account.",
+        "active_page" : ""      
+    }) %}    
+
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="row vertical-align-40-per">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-unlock-alt'></i> Account Activation</h3>
+                </div>
+                <div class='panel-body'>
+                    <p class="lead">Please enter your username and the email address you used to sign up, and your activation email will be resent.</p>
+                    {% include 'components/common/alerts.twig' %}
+                    <form class='form-horizontal' role='form' name='resend_activation' action='{{site.uri.public}}/account/resend-activation' method='post'>
+                        <div class="form-group">
+                            <label for="input_user_name" class="control-label col-xs-4 col-sm-2">Username</label>
+                            <div class="col-xs-8 col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-edit"></i></span>                    
+                                    <input id="input_user_name" type="text" class="form-control" placeholder="Username" name="user_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_email" class="control-label col-xs-4 col-sm-2">Email</label>
+                            <div class="col-xs-8 col-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-fw fa-envelope"></i></span>                    
+                                    <input id="input_email" type="text" class="form-control" placeholder="The email address you used to register" name="email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-success submit" value='Resend'>Resend Activation Email</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block page_scripts %} 
+    <script>
+        $(document).ready(function() {           
+            // Process form 
+            ufFormSubmit(
+                $("form[name='resend_activation']"),
+                {{ validators | raw }},
+                $("#userfrosting-alerts"),
+                function(data, statusText, jqXHR) {
+                    // Forward to home page on success
+                    window.location.replace(site['uri']['public']);
+                }
+            );
+        });       
+    </script>
+{% endblock %}

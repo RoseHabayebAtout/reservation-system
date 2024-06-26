@@ -1,0 +1,485 @@
+{% extends "layouts/layout-dashboard.twig" %}
+
+
+{% block content %}
+    <style>
+
+        .header, .header-space,
+        .footer, .footer-space {
+            height: 100px;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+        }
+
+        div.content {
+            margin-left: 30px;
+            margin-right: 15px;
+            display: none;
+        }
+
+    </style>
+    <!-- <button id="print">Print</button> -->
+
+
+    <div id="pr">
+        <div class="content " id="content">
+            <div class="pageBreak">
+                <div class="header-space row col-xs-12 " style="text-align: center">&nbsp;
+                    <p dir="RTL"
+                       style="margin: 0in 0in 0.0001pt -22.5pt; text-align: right; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span class="header-title"
+                                  style=" margin-top: 70px;font-size: 12.0pt; font-family: 'GE SS Two Light', serif; color: #44546a;opacity: 0.5;filter: alpha(opacity=50);">اتّفاقيّة تعهد بيع وشراء وحدة سكنية</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR"
+                                style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><strong><span
+                                    style="font-family: 'GE SS Two Bold', serif; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></strong><span
+                                dir="LTR" style="color: #44546a;">
+                                     <img
+                                             src="\reservation-system\public\images\new_rawabi_logo.png"
+                                             alt="تنزيل.png" width="56" height="56"
+                                             style="opacity: 0.5;filter: alpha(opacity=50);"/>
+                               </span></p>
+                    <p dir="RTL"
+                       style="margin: 0in 0in 0.0001pt -0.25in; text-align: justify; direction: rtl; unicode-bidi: embed; font-size: 11pt; font-family: Calibri, sans-serif;">
+                        <span style="font-family: 'Times New Roman', serif; color: #92d050;opacity: 0.5;filter: alpha(opacity=70);">___________________________________________________________________________________________________</span>
+                    </p>
+                    <p dir="LTR"
+                       style="text-align: justify; direction: rtl; unicode-bidi: embed; margin: 0in 0in 0.0001pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                        <span style="font-family: 'Times New Roman', serif; color: #44546a;">&nbsp;</span></p>
+
+
+                    <section style="display: block;">
+                        <p class="MsoNormal" dir="RTL"
+                           style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed;">
+                            <strong><span lang="AR-JO"
+                                          style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;">ملحق رقم (</span></strong><strong><span
+                                        dir="LTR"
+                                        style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;">6</span></strong><strong><span
+                                        lang="AR-JO"
+                                        style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #44546a;">)</span></strong>
+                        </p>
+                        <p class="MsoNormal" dir="RTL"
+                           style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed;">
+                            <span lang="AR-JO"
+                                  style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #92d050;">وصف المبيع</span>
+                            <span lang="AR-JO"
+                                  style="font-size: 15pt; font-family: Yakout Linotype Light, sans-serif; color: #92d050;">&nbsp;</span>
+                        </p>
+
+                        <p class="MsoListParagraphCxSpFirst" dir="RTL"
+                           style="margin: 0in 0.25in 8pt 0in; text-align: justify; text-indent: -0.25in; direction: rtl; unicode-bidi: embed;">
+                            <span dir="RTL" style="font-family: Yakout Linotype Light, sans-serif; color: #44546a;">
+ تعديل الإتفاقية الموقعة بتاريخ xxxxx بين كل من شركة بيتي للإستثمار العقاري المساهمة الخصوصية المحدودة (الفريق الأول) والسيد/ة: xxxxx (الفريق الثاني).                              </span>
+                        </p>
+
+                        <br/>
+                        <br/>
+
+                        <p class="MsoListParagraphCxSpFirst" dir="RTL"
+                           style="margin: 0in 0.25in 8pt 0in; text-align: justify; text-indent: -0.25in; direction: rtl; unicode-bidi: embed;">
+                            <span dir="RTL" style="font-family: Yakout Linotype Light, sans-serif; color: #44546a;">
+                             اﺗﻔﻖ اﻟﻔﺮﻳﻘﺎن ﺑﻤﻮﺟﺐ اﻟﻌﻘﺪ اﻟﻤﻮﻗﻊ ﺑﻴﻨﻬﻤﺎ ﺑﺘﺎرﻳﺦ xxxxx ﻋﲆ ﺗﻌﺪﻳﻞ وﺻﻒ اﻟﻤﺒﻴﻊ اﻟﻤﺒﻴﻦ في اﻟﺒﻨﺪ ﺛﺎﻟﺜﺎ من الاتفاقية, ليشمل المبيع مخزن رﻗﻢ xxxxx اﻟﻮاﻗﻊ في اﻟﻄﺎﺑﻖ رﻗﻢ xxxxx ﻣﻦ اﻟﺒﻨﺎء رﻗﻢ xxxxx اﻟﻤﻘﺎم ﻋﲆ ﻗﻄﻌﺔ اﻷرض رﻗﻢ xxxxx ﻣﻦ ﺣﻮض رﻗﻢ xxxxx ﻣﻦ ﻣﺪﻳﻨﺔ رواﺑﻲ. والبالغ مساحته xxxxx متراً مربعا, ووصفه xxxxx واﻟﺒﺎﻟﻎ ﺛﻤﻨﻪ  (xxxxx$) xxxxx دولار أﻣﺮﻳﻜﻲ ,
+                                 ليصبح ثمن الوحدة السكنية النهائي بعد إضافة المخزن (xxxxx)$
+                                xxxxx
+                                دولار أمريكي بدلاً من  (xxxxx)$ xxxxx
+                                على أن يقوم الفريق الثاني بتسديد ثمن المخزن للفريق الأول نقداً عند توقيع هذا التعديل على الاتفاقية. وفي جميع الأحوال لا يجوز للفريق الثاني إسترداد هذا المبلغ في حال عدل عن الشراء لأي سبب كان.
+
+
+                            </span>
+                        </p>
+
+
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+
+
+
+
+                        <p class="MsoListParagraphCxSpFirst" dir="RTL"
+                           style="margin: 0in 0.25in 8pt 0in; text-align: justify; text-indent: -0.25in; direction: rtl; unicode-bidi: embed;">
+                            <span dir="RTL" style="font-family: Yakout Linotype Light, sans-serif; color: #44546a;">
+                            وايذاناً من الفريقين على موافقتهما على كل ما ورد في هذا الملحق، فقد قاما بتوقيع نسختيهما دون ضغط أو إكراه من أحد, ودون أن يشوب ارادتهما أي عيب من عيوب الرضا أو الارادة, في مدينة روابي بتاريخ xxxxx من شهر xxxxx لعام xxxxx .
+                            </span>
+                        </p>
+
+
+                    </section>
+                    <br/>
+                    <br/>
+
+                    <section style="display: block;">
+                        <p dir="RTL"
+                           style="text-align: justify; line-height: normal; direction: rtl; unicode-bidi: embed; margin: 0in 0in 8pt; font-size: 11pt; font-family: Calibri, sans-serif;">
+                            <span dir="RTL" lang="AR-JO"
+                                  style="font-size: 11pt; line-height: 15.6933px; font-family: Yakout Linotype Light, sans-serif; color: #44546a;"><br/><br/><br/></span></span>
+                            <strong><span lang="AR-SA"
+                                          style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;الفريق الأول</span></strong><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>&nbsp;الفريق الثاني<br/><br/></strong></span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">شركة بيتي للاستثمار العقاري المساهمة الخصوصية المحدودة&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;الاسم الرباعي xxxxx<br/><br/></span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">التوقيع </span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">---------------------------------------- </span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;التوقيع </span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">----------------------------------------<br/></span><strong><span
+                                        lang="AR-SA"
+                                        style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;"><br/>شاهد</span></strong><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>شاهد<br/><br/></strong></span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">الاسم الرباعي </span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">----------------------------------- </span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #44546a;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;الاسم الرباعي </span><span
+                                    lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light,sans-serif; mso-fareast-font-family: Yakout Linotype Light; color: #92d050;">-----------------------------------<br/><br/></span><span
+                                    dir="RTL" lang="AR-SA"
+                                    style="color: #44546a; font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%;">التوقيع </span><span
+                                    dir="RTL" lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%; color: #92d050;">---------------------------------------- </span><span
+                                    dir="RTL" lang="AR-SA"
+                                    style="color: #44546a; font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;التوقيع </span><span
+                                    dir="RTL" lang="AR-SA"
+                                    style="font-family: Yakout Linotype Light, sans-serif; font-size: 11pt; line-height: 107%; color: #92d050;">----------------------------------------<br/><br/>
+
+                                    <br/>
+                                    <br/>
+                                <span class="pull-left"
+                                      style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">
+                                    <span style="font-size: 9.33333px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span>التوقيع
+                                </span>
+                                <span class="pull-left" style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <span class="pull-left"
+                                      style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">.......................................................................................................................................................</span><span
+                                        style="mso-spacerun: yes;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
+                                        style="color: #44546a; font-family: GE SS Two Light, serif; font-size: 9.33333px; text-align: start;">صفحة رقم</span><span
+                                        class="pagenum"
+                                        style="mso-spacerun: yes;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br/></span>
+                        </p>
+                    </section>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block page_scripts %}
+    <script src="{{ site.uri.js }}/printThis.js"></script>
+    <script src="{{ site.uri.js }}/NumToWord.js"></script>
+
+    <script>
+        getContent()
+
+
+        function printDiv() {
+            var divToPrint = document.getElementById('pr');
+            // $("#contract1form").submit();
+            //return ;
+
+            var newWin = window.open('', 'Print-Window');
+
+            newWin.document.open();
+
+
+            newWin.document.write(
+                '<html><head> <meta http-equiv="content-type" content="text/html;charset=UTF-8" />' +
+                '<style> ' +
+                '#content,#content2,#content3{page-break-before: always;}' +
+                '@media print{ ' +
+                //'#btmpage{position: fixed;bottom: 0}' +
+                '.pageBreak{page-break-before: always;}' +
+                '' +
+                '' +
+                '' +
+                '' +
+                '' +
+                '' +
+                'div.content{margin-left: 25px; margin-right: 10px;} .hide-print {display: none;} ' +
+                '@page{size: A4;margin-right: 9mm; margin-left: 9mm;margin-top: 5mm;margin-bottom: 5mm;}' +
+
+                '</style> </head><body style="counter-reset: page;" onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+            newWin.document.close();
+
+            setTimeout(function () {
+                newWin.close();
+            }, 10);
+
+        }
+
+        function getContent() {
+
+            var url = window.location.href;
+            var res = url.split("/");
+            var unitId = res[res.length - 3];
+            var storageId = res[res.length - 1];
+            console.log(unitId);
+            console.log(storageId);
+            var contractDate = "";
+            $('.loader-modal-lg').modal('show');
+
+
+            $.ajax({
+                url: site['uri']['public'] + '/reservation/' + unitId,
+                async: false
+            }).done(function (data) {
+
+                data = JSON.parse(data);
+
+                $.each(data, function (i, item) {
+                    if (item == null || item == "" || item == "NaN" || item == "NaN/NaN/NaN" || item == "0000-00-00") {
+                        data[i] = "لا يوجد";
+                    }
+                });
+
+                console.log(data)
+                if (data) {
+                    console.log("data1")
+                    console.log(data)
+
+                    var landNum = data.landNum;
+                    var hawdNum = "8";
+                    var customer_name = data.customer_name;
+                    var reservation_date = "";
+                    var day = "";
+                    var month = "";
+                    var year = "";
+                    var storageNum = "";
+                    var floor = "";
+                    var building = "";
+                    var totalPricecommas = "";
+                    var totalPriceArabic = "";
+                    var contractTotalPrice="";
+                    var contractTotalPriceArabic="";
+                    var tabu_description = "";
+                    var area = "";
+
+                    var id = storageId;
+                    var csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var url = site['uri']['public'] + "/getStorageInfo/";
+                    var params = {id: id, csrf_token: encodeURIComponent(csrf_token)};
+                    $.ajax({
+                        type: "get",
+                        url: url,
+                        data: params,
+                        async: false
+                    }).done(function (data) {
+                        if (data.length > 0) {
+                            data = JSON.parse(data);
+                            console.log("data2")
+
+                            console.log(data)
+                            totalPricecommas = data[0]['price'];
+                            totalPriceArabic = inWordsArabic(data[0]['price'], "$", "ar");
+                            storageNum = data[0]['storage_number'];
+                            floor = data[0]['floor'];
+                            building = data[0]['building'];
+                            tabu_description = data[0]['tabu_description'];
+                            area = data[0]['area'];
+                        }
+
+                        $.ajax({
+                            url: site['uri']['public'] + '/getInfo/' + unitId,
+                            type: "get",
+                            async: false
+                        }).done(function (data) {
+                            data = JSON.parse(data);
+                            var contract_type = "contract" + data.contract_type;
+
+                            $.ajax({
+                                url: site['uri']['public'] + '/' + contract_type + '/' + unitId,
+                                type: "get",
+                                async: false
+                            }).success(function (data) {
+                                data = JSON.parse(data);
+
+
+                                if (contract_type == "contract1" || contract_type == "contract3") {
+                                    contractDate = checkDate(data.contractDate);
+                                    if(contract_type == "contract1"){
+                                        contractTotalPrice = data.priceTotal;
+                                    }else{
+                                        contractTotalPrice = data.price;
+                                    }
+                                } else if (contract_type == "contract2") {
+                                    contractDate = checkDate(data.contract2Date);
+                                    contractTotalPrice = data.r_totalPrice;
+                                } else {
+                                    contractDate = "";
+                                }
+
+                                if(contractTotalPrice != ""){
+                                    contractTotalPriceArabic = inWordsArabic(contractTotalPrice, "$", "ar");
+                                }
+                                $.ajax({
+                                    url: site['uri']['public'] + '/getReservation/unit/' + unitId + '/parking/' + storageId,
+                                    type: "get",
+                                    async: false,
+                                    data: {
+                                        unitId: unitId,
+                                        parkingStorageId: storageId,
+                                        csrf_token: encodeURIComponent(csrf_token)
+                                    }
+                                }).success(function (data) {
+                                    data = JSON.parse(data);
+                                    var today = new Date();
+                                    var date = today.getFullYear()+'/'+(today.getMonth()+1)+'/'+today.getDate();
+                                    reservation_date = checkDate(date);
+                                    var d = new Date(reservation_date);
+                                    if (d != "Invalid Date") {
+                                        day = d.getDate();
+                                        month = d.getMonth() + 1;
+                                        year = d.getFullYear();
+                                    }
+
+
+                                });
+
+                            });
+
+                        });
+                    });
+
+
+                    var content = $("#content").html();
+                    while (content.indexOf("xxxxx") > 0) {
+
+                        content = content.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + contractDate + '</span>');
+                        content = content.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + customer_name + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + reservation_date + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + storageNum + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + floor + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + building + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + landNum + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + hawdNum + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + area + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + tabu_description + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + addCommas(totalPricecommas) + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + totalPriceArabic + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + addCommas((parseInt(totalPricecommas) + parseInt(contractTotalPrice)))  + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + inWordsArabic((parseInt(totalPricecommas) + parseInt(contractTotalPrice)) , "$", "ar") + '</span>')
+
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + contractTotalPrice + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 200px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + contractTotalPriceArabic + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + day + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + month + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 80px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + year + '</span>')
+                        content = content.replace("xxxxx", '<span style="min-width: 202px;display: inline-block;text-align:center;border-bottom: 1px #92d050 dashed;font-family: Yakout Linotype Light, sans-serif">' + customer_name + '</span>')
+
+                    }
+
+                    console.log("content ", content);
+
+
+                    $("#content").html(content);
+                    $("#content").show();
+
+
+                }
+
+            }).fail(function (err) {
+                //debugger;
+                $('.loader-modal-lg').modal('hide');
+
+            });
+
+
+            printDiv();
+
+
+        }
+
+
+        $(document).ready(function () {
+            window.location.href = site['uri']['public'] + '/unit';
+
+            $("#print").click(function () {
+                printDiv();
+            })
+        });
+
+        function checkDate(date) {
+            console.log('hi check date')
+            if (date == "0000-00-00") {
+                date = "";
+            } else if (date != "لا يوجد") {
+                date = formatDate(date);
+            }
+            return date;
+        }
+
+        function zeroPad(receiptRid) {
+            var places = 6;
+            var zero = places - receiptRid.toString().length + 1;
+            return Array(+(zero > 0 && zero)).join("0") + receiptRid;
+        }
+
+        function formatDate(date) {
+            var date = new Date(date),
+                month = '' + (date.getMonth() + 1),
+                day = '' + date.getDate(),
+                year = date.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('/');
+        }
+
+        function stringifyNumber(n) {
+            var special = ['صفر', 'الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة',
+                'السادسة', 'السابعة', 'الثامنة', 'التاسعة', 'العاشرة', 'الحادية عشر',
+                'الثانية عشر', 'الثالثة عشر', 'الرابعة عشر', 'الخامسة عشر', 'السادسة عشر', 'السابعة عشر', 'الثامنة عشر', 'التاسعة عشر'];
+            var deca = ['العشرون', 'الثلاثون', 'الأربعون', 'الخمسون', 'الستون',
+                'السبعون', 'الثمانون', 'التسعون'];
+            if ((n == 21) || (n == 31) || (n == 41) || (n == 51)) {
+                special[1] = "الحادية";
+            }
+            if (n < 20) {
+                return special[n];
+            }
+            if (n % 10 === 0) {
+                return deca[Math.floor(n / 10) - 2];
+            }
+            return (special[n % 10] + 'و' + deca[Math.floor(n / 10) - 2]);
+        }
+
+        function addCommas(price) {
+            price += '';
+            x = price.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+    </script>
+{% endblock %}

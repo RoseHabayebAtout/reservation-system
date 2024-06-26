@@ -1,0 +1,2604 @@
+<canvas class="canvasReceipt" height="1700" width="1500" style="display:none;"></canvas>
+<iframe id="contract0Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div class="container-fluid" styel="direction:rtl;">
+
+        <div class="display-block text-center" style="margin-top:50px;">
+            <img src='/reservation-system/public/images/contract1_cover1.png' width="1500px;"/>
+        </div>
+        <div class="display-block text-left" style="margin-bottom:100px;">
+            <img src='/reservation-system/public/images/contract1_cover2.png' width="1000px;"/>
+
+        </div>
+
+    </div>
+</iframe>
+<!-- end of page 1 -->
+<!-- Page 1-->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract1Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12" style="direction:rtl;height:1490px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <div for="field0" class="display-block">
+                        <br><br>
+                        <span class="font-size-25">أبرم هذا العقد في تاريخ </span>
+                        <input type="text" name="field0" required="true" value="<%- contractDate%>"
+                               class="font-small width-10 text-center"/>
+
+                    </div>
+                    <br><br>
+                    <span class="col-xs-12 display-block font-size-25">بين كل من:
+                  </span>
+                    <span class="col-xs-12 display-block font-size-25">شركة بيتي للاستثمار العقاري المساهمة الخصوصية المحدودة
+                  </span>
+                    <span class="col-xs-12 display-block font-size-25">المسجلة لدى مراقب الشركات في السلطة الوطنية الفلسطينية تحت الرقم <input
+                                type="text" value="<%- companyNum%>" class="width-20 text-center"/>
+                  </span>
+                    <span class="col-xs-12 display-block font-size-25">وعنوانها رام الله ويمثلها لغايات التوقيع على هذه الاتفاقية: <input
+                                type="text" name="field3" required="true" value="<%- systemUser%>"
+                                class="width-27 text-center"/>
+                  </span>
+                    <span class="col-xs-12 display-block font-size-25">(ويشار لها في هذه الاتفاقية ب "الفريق الأول" و/أو "المتعهد بالبيع")
+                  </span>
+                </div>
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <div class="display-block">
+                        <br>
+                        <span class="col-xs-12 pull-right font-size-25">و</span>
+                    </div>
+                    <br><br><br><br>
+                    <div class="display-block">
+                        <div class="display-block">
+                            <div class="col-xs-6">
+                                <span class="pull-right font-size-25">نوع وثيقة إثبات الشخصية</span>
+                                <input type="text" required="true" value="<%- idType1%>"
+                                       class="width-50 text-center pull-right"/>
+                            </div>
+                            <div class="col-xs-6">
+                                <span class="pull-right font-size-25">والسيد/ة:</span>
+                                <input type="text" required="true" value="<%- purchaser1%>"
+                                       class="width-50 text-center pull-right"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">تاريخ الإصدار</span>
+                            <input type="text" required="true" value="<%-idProDate1%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">تاريخ الانتهاء</span>
+                            <input type="text" required="true" value="<%-idExpDate1%>"
+                                   class="width-180 text-center pull-right "/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">رقم الوثيقة</span>
+                            <input type="text" required="true" value="<%- idNum1%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">مكان الإصدار</span>
+                            <input type="text" required="true" value="<%- idPlace1%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+                    </div>
+                    <br><br><br>
+                    <div class="display-block">
+                        <div class="col-xs-6"></div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">رقم التسجيل</span>
+                            <input type="text" required="true" value="<%- regNo1%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">المسجلة</span>
+                            <input type="text" required="true" value="<%- registered1%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+                    </div>
+                    <br><br><br><br><br>
+
+                    <div class="display-block">
+                        <span class="col-xs-12 pull-right font-size-25">وعنوانه/ـا</span>
+                    </div>
+                    <br><br>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">اسم المنطقة</span>
+                            <input type="text" required="true" value="<%- regionName1%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25"> اسم الشارع</span>
+                            <input type="text" required="true" value="<%- streetName1%>"
+                                   class="width-180 text-center pull-right "/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">الدولة</span>
+                            <input type="text" required="true" value="<%- country1%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">المدينة</span>
+                            <input type="text" required="true" value="<%- city1%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25"> الهاتف الخلوي</span>
+                            <input type="text" required="true" value="<%- mobileNum1%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">فاكس</span>
+                            <input type="text" required="true" value="<%- faxNum1%>"
+                                   class="width-180 text-center pull-right "/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">هاتف المنزل</span>
+                            <input type="text" required="true" value="<%- homePhone1%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">هاتف العمل</span>
+                            <input type="text" required="true" value="<%- workPhone1%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">صندوق البريد</span>
+                            <input type="text" required="true" value="<%- mailBox1%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">الرمز البريدي</span>
+                            <input type="text" required="true" value="<%- postalCode1%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">بريد إلكتروني</span>
+                            <input type="text" required="true" value="<%- eMail1%>" style="width:500px;"
+                                   class="text-center pull-right"/>
+
+                        </div>
+
+                    </div>
+                    <br><br><br><br><br>
+                    <div class="display-block">
+                        <span class="col-xs-12 pull-right font-size-25">و</span>
+                        <br><br><br><br>
+                    </div>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">نوع وثيقة إثبات الشخصية</span>
+                            <input type="text" required value="<%- idType2%>" class="width-50 text-center pull-right"
+                                   value=""/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">والسيد/ة:</span>
+                            <input type="text" required="true" value="<%-purchaser2%>"
+                                   class="width-50 text-center pull-right" value=""/>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">تاريخ الإصدار</span>
+                            <input type="text" required="true" value="<%-idProDate2%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">تاريخ الانتهاء</span>
+                            <input type="text" required="true" value="<%-idExpDate2%>"
+                                   class="width-180 text-center pull-right "/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">رقم الوثيقة</span>
+                            <input type="text" required="true" value="<%- idNum2%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">مكان الإصدار</span>
+                            <input type="text" required="true" value="<%- idPlace2%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="display-block">
+                        <div class="col-xs-6"></div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">رقم التسجيل</span>
+                            <input type="text" required="true" value="<%- regNo2%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">المسجلة</span>
+                            <input type="text" required="true" value="<%- registered2%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+                    </div>
+                    <br><br><br><br><br><br>
+
+                    <div class="display-block">
+                        <span class="col-xs-12 pull-right font-size-25">وعنوانه/ـا</span>
+                    </div>
+                    <br><br>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">اسم المنطقة</span>
+                            <input type="text" required="true" value="<%- regionName2%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25"> اسم الشارع</span>
+                            <input type="text" required="true" value="<%- streetName2%>"
+                                   class="width-180 text-center pull-right "/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">الدولة</span>
+                            <input type="text" required="true" value="<%- country2%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">المدينة</span>
+                            <input type="text" required="true" value="<%- city2%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+
+                    </div>
+                    <br>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25"> الهاتف الخلوي</span>
+                            <input type="text" required="true" value="<%- mobileNum2%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">فاكس</span>
+                            <input type="text" required="true" value="<%- faxNum2%>"
+                                   class="width-180 text-center pull-right "/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">هاتف المنزل</span>
+                            <input type="text" required="true" value="<%- homePhone2%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">هاتف العمل</span>
+                            <input type="text" required="true" value="<%- workPhone2%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="display-block">
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">صندوق البريد</span>
+                            <input type="text" required="true" value="<%- mailBox2%>"
+                                   class="width-180 text-center pull-right"/>
+                            <span class="pull-right font-size-25">الرمز البريدي</span>
+                            <input type="text" required="true" value="<%- postalCode2%>"
+                                   class="width-180 text-center pull-right"/>
+                        </div>
+                        <div class="col-xs-6">
+                            <span class="pull-right font-size-25">بريد إلكتروني</span>
+                            <input type="text" required="true" value="<%- eMail2%>" style="width:500px;"
+                                   class="text-center pull-right"/>
+                        </div>
+
+                    </div>
+                    <br><br><br>
+                    <div class="display-block" style="margin-top:50px;">
+                        <span class="pull-right font-size-25">(ويشار إليهـ/ــا/ـما في هذه الاتفاقية ب"الفريق الثاني" و/أو "المتعهد بالشراء")</span>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="1"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+
+</iframe>
+<!-- end of page 1 -->
+<!-- Page 2 -->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract2Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+
+    <div id="invoice" class="container">
+
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction: rtl;height:1500px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>المقدمة</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify">
+                حيث أن الفريق الأول هو شركة استثمار عقاري تقوم بإنشاء وتشييد مشروع ("مدينة روابي") بحيث يشمل أحياء يتكون كل منها من بنايات مقسمة إلى عدة وحدات سكنية؛
+                </span>
+                    <span class="display-block font-size-25 text-justify">
+                  وحيث أن الفريق الثاني يرغب بشراء وحدة سكنية في مدينة روابي من الفريق الأول، وأنه بعد اطّلاعه على الوحدة السكنية موضوع هذه الاتفاقية وموقعها وإطلالتها و/أو اطلاعه على مخططات البناء الخاصة بها، أبدى رغبته بشراء الوحدة السكنية (الشقة) رقم<input
+                                type="text" required="true" class="text-center" value="<%-unitNum %>"
+                                style="width:100px;"/> الواقعة في الطابق رقم<input type="text" class="text-center"
+                                                                                   value="<%-floorNum %>"
+                                                                                   style="width:100px;"/> البالغة مساحتها الإجمالية<input
+                                type="text" required="true" class="text-center" value="<%-unitArea %>"
+                                style="width:100px;"/>متراً مربعاً الكائنة في حي<input type="text" required="true"
+                                                                                       class="text-center"
+                                                                                       value="<%-haiName %>"
+                                                                                       style="width:100px;"/>ووصفها:<br>
+                        <!-- Edited By Ahmad Tome -->
+
+                    <div style="width:1070px;">
+                        <span style="padding-bottom: 10px;border-bottom: 1px dashed #71BF45;line-height: 48px;">
+                                <%-unitDesc %>
+                        </span>
+                    </div>
+
+                        <!--
+                        <input type="text" value="<%-unitDesc %>" style="width:1070px;"/>
+                        <input type="text"  style="width:1070px;"/>
+                      -->
+                    <br><br>
+                </span>
+                    <span class="display-block font-size-25 text-justify">
+                  المبينة مواصفاتها الإنشائية والفنية في ملحق المواصفات المرفق ملحق رقم (1) من البناية رقم <input
+                                type="text" class="text-center" value="<%-buildingNum %>" style="width:100px;"/> المقامة على قطعة الأرض رقم <input
+                                type="text" required="true" class="text-center" value="<%-landNum%>"
+                                style="width:100px;"/>من حوض <input type="text" class="text-center" required="true"
+                                                                    value="<%-hawdName %>"
+                                                                    style="width:400px;"/> رقم<input type="text"
+                                                                                                     required="true"
+                                                                                                     class="text-center"
+                                                                                                     value="<%-hawdNum %>"
+                                                                                                     style="width:100px;"/> من أراضي بلدة روابي قضاء رام الله؛
+                </span>
+                    <span class="display-block font-size-25 text-justify">
+                  وحيث أن الفريق الأول هو المالك والمتصرف بالأرض المقامة أو التي ستقام عليها الوحدة السكنية موضوع هذه الإتفاقية، ووافق على بيع الفريق الثاني الوحدة السكنية الموصوفة أعلاه وفقاً لأحكام وشروط هذه الاتفاقية، وأية تعديلات تلحق بها؛<br>
+                  فقد ارتبط ايجاب الفريق الثاني بقبول الفريق الأول وفقاً لأحكام وشروط وأسس هذه الاتفاقية والآتي ذكرها:
+                </span>
+                </div>
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>أولاً: التعريفات والمقدمة</h2></span>
+                    </label>
+                    <div class="cell-lg-1 font-size-25 text-justify">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يكون للمصطلحات والعبارات المستخدمة في هذه الإتفاقية
+                        المعاني المشار إليها أدناه، ما لم يدل السياق على خلاف ذلك:
+                    </div>
+                    <div class="cell-lg-1 font-size-25 text-justify"> أ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">"الوحدة السكنية" أو "المبيع" تعني الوحدة السكنية
+                        موضوع هذه الإتفاقية والموصوفة في مقدمة هذه الاتفاقية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ب.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">"البناية" أو "المبنى" يقصد به المبنى رقم <input
+                                type="text" class="text-center" value="<%-buildingNum%>" style="width:80px;"/> الكائن في
+                        حي <input type="text" class="text-center" class="text-center" value="<%-haiName%>"
+                                  style="width:80px;"/> من مدينة روابي والواقع فيه المبيع.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ج.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">"الحي" يقصد به حي <input type="text"
+                                                                                              class="text-center"
+                                                                                              required="true"
+                                                                                              value="<%-haiName%>"
+                                                                                              style="width:80px;"/> من
+                        مدينة روابي، والذي يحتوي على <input type="text" class="text-center" value="<%-buildingsNum%>"
+                                                            style="width:80px;"/> مبنى والتي من ضمنها المبنى المبين في
+                        الفقرة (ب) أعلاه.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">د.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">"اتحاد الملاك" المقصود به اتحاد الملاك المنشأ بموجب
+                        عقد تأسيس الاتحاد الموثق لدى كاتب عدل رام الله والمنظم وفق أحكام النظام الداخلي الخاص به والمرفق
+                        في هذه الاتفاقية ملحق رقم (2)، وذلك بالاستناد للمادة (19) من القانون رقم (1) لسنة 1996 بشأن
+                        تمليك الطبقات والشقق والمحلات وتعديلاته.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ه.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">"الأجزاء المشتركة": تشمل الأرض المقام عليها المبيع،
+                        هيكل البناء، وأجزاؤه وملحقاته غير المعدة للاستعمال الخاص بأحد الملاك، وتشمل بوجه خاص ما نص عليه
+                        القانون رقم (1) لسنة 1996 بشأن تمليك الطبقات والشقق والمحلات وتعديلاته، وما نص عليه في النظام
+                        الداخلي لاتحاد الملاك الملحق رقم (2) وهذه الاتفاقية وتعديلاتها.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">تعتبر مقدمة هذه الإتفاقية وكافة ملحقاتها جزء لا
+                        يتجزأ منها وتقرأ معها كوحدة واحدة. يوجد <input type="text" class="text-center"
+                                                                       value="<%-annexes%>" style="width:80px;"/> ملاحق
+                        لهذه الإتفاقية: ملحق (1) المواصفات الإنشائية والفنية للمبيع، ملحق (2) النظام الداخلي لاتحاد
+                        الملاك وعقد التأسيس، ملحق (3) تعهد واقرار، ملحق (4) آلية دفع ثمن المبيع، ملحق (5) ملحق الاضافات
+                        أو التعديلات على المبيع.
+                    </div>
+                </div>
+                <div class="row display-block">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>ثانياً: مدة الاتفاقية</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify">تبدأ هذه الاتفاقية اعتبارا من تاريخ توقيعها من قبل الفريقين، وتنتهي بتنفيذ أطرافها كافة الالتزامات المترتبة بموجبها عليهم.
+                </span>
+                </div>
+            </form>
+        </div>
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="2"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</iframe>
+<!-- end of page 2-->
+<!-- Page 3 -->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract3Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;margin-bottom:300;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-top:40px;margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>ثالثاً: وصف المبيع</h2></span>
+                    </label>
+                    <div class="cell-lg-1 font-size-25 text-justify">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">الوحدة السكنية الموصوفة في مقدمة هذه الاتفاقية
+                        وحصتها في الأجزاء المشتركة.
+                    </div>
+                    <div class="cell-lg-1 font-size-25 text-justify">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">حق ملكية واستعمال الأجزاء والمرافق المشتركة في
+                        البناية وفي الحي الكائن فيه في الحدود والكيفية التي حددها قانون رقم (1) لسنة 1996 بشأن تمليك
+                        الطبقات والشقق والمحلات وتعديلاته، والأنظمة والتعليمات والقرارات الصادرة بموجبه وأية تعديلات
+                        تطرأ عليها، وأيضا وفقا للنظام الداخلي لاتحاد الملاك المرفق في هذه الاتفاقية ملحق رقم (2) وأية
+                        تعديلات تطرا عليه.
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>رابعاً: اقرارات وتعهدات الفريق الأول</h2></span>
+                    </label>
+                    <div class="cell-lg-1 font-size-25 text-justify">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">سيقوم الفريق الأول بانشاء وتشييد وتشطيب المبيع
+                        موضوع هذه الاتفاقية وفقاً للمواصفات الإنشائية والفنية المفصّلة في ملحق المواصفات المرفق ملحق رقم
+                        (1)؛ على أنه إذا اضطّر الفريق الأول إلى تغيير المواصفات المبينة في ملحق رقم (1) بسبب عدم توافرها
+                        من المصدر، يلتزم بتوفير مواصفات بنفس الجودة والكمية ولا يكون للفريق الثاني في هذه الحالة الحق في
+                        فسخ الاتفاقية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يكون التاريخ المتوقع والموعد المقدر للانتهاء من
+                        بناء المبيع و/أو تشييده و/أو تشطيبه، لتسليمه للفريق الثاني <input type="text"
+                                                                                          value="<%-releaseDate%>"
+                                                                                          class="text-center"
+                                                                                          style="width:150px;"/> ما لم
+                        يحول دون ذلك أي مانع أو سبب من الموانع والأسباب الخارجة عن إرادة الفريق الأول كالقوة القاهرة أو
+                        الحروب أو الكوارث الطبيعية أو بفعل السلطات الحاكمة أو لأسباب تجارية أو غيرها من الأسباب الكفيلة
+                        بمنع الفريق الأول من تنفيذ ذلك. إلا أنه يجوز للفريق الأول تمديد موعد التسليم لفترة أو لفترات
+                        أخرى إضافية إن تطلب الأمر ذلك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">3.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يعمل الفريق الأول على إيصال كافة شبكات الخدمات
+                        الأساسية من ماء وكهرباء وغاز وهاتف وانترنت وصرف صحي إلى البناية التي يقع فيها المبيع، ووفقاً
+                        للبنية التحتية المتوفرة واللازمة لذلك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">4.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يلتزم الفريق الأول بفتح الصفقة العقارية والتوقيع
+                        على طلب البيع لصالح الفريق الثاني فقط بعد دفع الثمن المتفق عليه أو ورود كتاب تعهد والتزام من
+                        الجهة المقرضة بتحويل وتسييل قيمة الدفعة المتبقية من ثمن المبيع المتفق عليه لحساب الفريق الأول،
+                        في حال رغب الفريق الثاني بالاقتراض لغايات دفع المبلغ المتبقي من الثمن.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">5.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يلتزم الفريق الأول بتسليم المبيع للفريق الثاني
+                        وتمكينه من استعماله والتصرف فيه تصرف المالك بملكه بعد إتمام إجراءات التنازل الرسمي وإفراغ المبيع
+                        باسم الفريق الثاني وبعد قبض كامل ثمن المبيع.
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom:40px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>خامساً: إقرارات وتعهدات والتزامات الفريق الثاني</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify"><label><b>1. يقر الفريق الثاني ويتعهد ويلتزم بما يلي:</b></label>
+                </span>
+                    <div class="cell-lg-1 font-size-25 text-justify">أ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يقر بأنه اطلع على الوحدة السكنية موضوع هذه
+                        الإتفاقية و/أو اطلع على مخططات البناء وعلى المواصفات الفنية والانشائية الخاصة بها والمبينة في
+                        الملحق رقم (1) ويقر بأنه على علم ودراية تامة بموقع الوحدة السكنية في مدينة روابي وإطلاتها من
+                        جميع الجهات في وضعها الحالي وفي الوضع الذي ستكون عليه في المستقبل، وأنه قام بمعاينتهم معاينة
+                        تامة نافية لأي غموض أو جهالة، ووافق على شرائها وفقاً لذلك وأن توقيعه على هذه الاتفاقية يعد
+                        قبولاً لها ويفيد اطّلاعه عليها وتفهم محتواها.
+                    </div>
+                    <div class="cell-lg-1 font-size-25 text-justify">ب.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بكافة القوانين والأنظمة السارية في فلسطين والتي
+                        تحكم وتنظم المبيع وما يلحق به من أجزاء ومرافق مشتركة غير المعدة للاستعمال الخاص بأحد الملاك، إذ
+                        يتعهد في إشغاله واستعماله للمبيع بالإلتزام بجميع الأحكام المنصوص عليها في قانون تمليك الطبقات
+                        والشقق والمحلات الفلسطيني رقم (1) لسنة 1996 وأية تعديلات قد تطرأ عليه وكذلك بالإيفاء بكافة
+                        الالتزامات المالية والعينية المنصوص عليها في تلك القوانين والأنظمة والملاحق المرفقة بهذه
+                        الإتفاقية.
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="3"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+</iframe>
+<!-- end of page 3-->
+<!-- Page 4-->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract4Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction: rtl;height:1500px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <div class="cell-lg-1 font-size-25 text-justify">ج.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بتوثيق اتفاق تكوين اتحاد الملاك وفقا للملحق رقم (2)
+                        أمام كاتب العدل عند نقل ملكية الوحدة السكنية، في حال طلب الفريق الأول ذلك، وبالتوقيع مع باقي
+                        اصحاب الوحدات السكنية الأخرى في المباني الكائنة في الحي على النظام الداخلي الخاص بإتحاد الملاك،
+                        بحيث يخول هذا الاتحاد بإدارة المباني الكائنة في الحي وكذلك إدارة الحي لغاية ضمان حسن الإنتفاع
+                        بالأجزاء والمرافق المشتركة الخاصة بكل مبنى من المباني الكائنة في الحي، وأيضا بالاجزاء والمرافق
+                        المشتركة التابعة في الحي وفيما يخدم مصلحة جميع أصحاب الوحدات السكنية في تلك المباني كما يتحمل
+                        الفريق الثاني كافة الرسوم والمصاريف المترتبة على ذلك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">د.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بتطبيق جميع الأحكام المنصوص عليها في النظام الداخلي
+                        الخاص باتحاد الملاك ملحق رقم (2) وأية تعديلات تطرأ عليه، كما يتعهد بالإيفاء بكافة الالتزامات
+                        المالية والعينية الناشئة عن عضويته في اتحاد الملاك وكذلك المترتبة عن أية إتفاق/إتفاقيات يبرمها
+                        اتحاد الملاك مع الغير، وعليه فقد قام الفريق الثاني بتوقيع تعهد وإقرار للإلتزام بذلك على النحو
+                        المفصل في ملحق رقم (3) المرفق في هذه الاتفاقية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ه.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بتسديد ثمن المبيع وفقا لما هو موضح في البند
+                        (سابعاً) أدناه، وبعكس ذلك يصار إلى تطبيق الشروط الجزائية الواردة بهذه الإتفاقية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">و.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بتوصيل وتركيب عدادات الماء والكهرباء والغاز وخدمة
+                        الهاتف و التلفاز للمبيع على نفقته وحسابه الخاص.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ز.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بعدم استعمال أو السماح باستعمال المبيع أو الطابق
+                        الموجود فيه المبيع لغير السكن، أو بما يخالف القوانين والأنظمة المرعية والآداب العامة.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ح.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بالحصول على الموافقات اللازمة والأذونات المطلوبة من
+                        قبل سلطة الأراضي والجهات الرسمية المختصة لغايات تملكه المبيع موضوع هذه ا لاتفاقية إن تطلب الأمر
+                        ذلك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ط.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يلتزم الفريق الثاني بفتح صفقة عقارية لدى دائرة
+                        الأراضي المختصة وذلك خلال مدة أقصاها (15) يوم من قيام الفريق الأول بإبلاغه بأن الوحدة السكنية
+                        جاهزة للاستلام وعند تسديد كامل ثمن الشقة، أما في حال عدم قيام الفريق الثاني بفتح صفقة خلال تلك
+                        المدة، فيحق للفريق الأول حينها إلغاء الاتفاقية وفرض غرامة عطل وضرر على الفريق الثاني تقدر بـ
+                        (<input type="text" class="text-center" value="<%-damageFine%>" style="width:150px;"/>)<input
+                                class="font-small" type="text" value="<%-damageFineWords%>" style="width:300px;"/> دولار
+                        أمريكي.
+                    </div>
+                    <br><br><br>
+                    <span class="display-block font-size-25 text-justify"><label><b>2. يلتزم الفريق الثاني ويتعهد في حال رغب بالحصول على قرض لتسديد جزء من ثمن المبيع، بما يأتي:</b></label></span>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">أ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بتجديد تعهد والتزام الجهة المقرضة النهائي بموافقتها
+                        على تمويل قرض الشراء عبر دفع المبلغ المتبقي من ثمن المبيع كما هو مبين في البند السابع كلما تطلب
+                        الأمر ذلك، كما يلتزم بالمحافظة على صلاحية هذا التعهد حتى سداد كامل الثمن.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ب.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بتقديم كتاب تعهد والتزام من الجهة المقرضة بتحويل
+                        وتسييل قيمة الدفعة المتبقية من الثمن المتفق عليه لحساب الفريق الأول قبل فتح معاملة عقارية لتسجيل
+                        المبيع باسمه.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ج.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بعدم معارضته على إلغاء الإجراءات المتخذة في الصفقة
+                        العقارية موضوع المبيع لدى دائرة تسجيل الأراضي المختصة وذلك في حال عدم التزامه بسداد باقي الثمن
+                        أو امتناع الجهة المقرضة عن ذلك، ويلتزم باتخاذ كافة الإجراءات الإدارية والقانونية اللازمة لذلك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">د.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يرهن المبيع لصالح الجهة المقرضة ودفع الرسوم
+                        والمصاريف المتعلقة بذلك.
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom:40px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>سادساً: القيود على المظهر الخارجي</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify">يقر الفريق الثاني أنه يعلم علماً تاماً بأن المبيع موضوع هذه الاتفاقية هو جزء لا يتجزأ من مدينة روابي، وعليه وحفاظا على المظهر العام لمدينة روابي والبناية التي يقع فيها المبيع والحي الكائن فيه، فقد اتفق الفريقان على الأحكام والشروط الآتية، والتي هي واجبة النفاذ والتطبيق على المبيع، حتى بعد انتقال ملكيته للفريق الثاني. ويصرح الفريق الثاني بأنه ملتزم بما يأتي:
+                    </span>
+                    <div class="cell-lg-1 font-size-25 text-justify">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">عدم إجراء أي تعديلات أو تغيرات مهما كانت الواجهات
+                        الخارجية والأمامية للمبيع أو أي من المنافع والخدمات المشتركة في البناية الواحدة أو بجميع
+                        البنايات داخل الحي، بدون أخذ الموافقات والتراخيص اللازمة وفقاً لأحكام النظام الداخلي لاتحاد
+                        الملاك المرفق (ملحق رقم 2).
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">تكون كافة الواجهات والشرفات والمظلات والألمنيوم
+                        والحمايات والشبابيك والجدران الخارجية وأية أشياء ظاهرة خارجيا في المبيع متطابقة في اللون والشكل
+                        والتصميم مع كافة الشقق الأخرى في البناية ومع المقاييس والمواصفات والأحكام المحددة لمدينة روابي
+                        من قبل الفريق الأول.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">3.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify"> عدم إقامة أو تثبيت سواء بشكل مؤقت أو دائم معدات أو
+                        أجهزة البث والاستقبال مهما كانت أو لافتات أو لوحات على المبيع.
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="4"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</iframe>
+<!-- end of page 4-->
+<!-- Page 5 -->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract5Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-bottom:10px;">
+                    <label class="display-block" style="margin-bottom:10px;">
+                        <span style="color:#71BF45;"><h2>سابعاً: الثمن</h2></span>
+                    </label>
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يلتزم الفريق الثاني بشراء المبيع موضوع هذه
+                        الإتفاقية بمبلغ اجمالي وقدره (<input type="text" value="<%-priceTotal%>" class="text-center"
+                                                             style="width:100px;"/>)<input type="text"
+                                                                                           value="<%-priceTotalWords%>"
+                                                                                           class="font-small"
+                                                                                           style="width:320px;"/> دولار
+                        أمريكي فقط، بحيث يشمل حصة الشقة في قطعة الأرض المقامة عليها العمارة والبالغ قدره (<input
+                                type="text" class="text-center" value="<%-pricePart2%>" style="width:100px;"/>)<input
+                                type="text" class="font-small" value="<%-pricePart2Words%>" style="width:300px;"/>دولار
+                        أمريكي، وثمن إنشاء الشقة والأجزاء المشتركة في العمارة والبالغ قدره (<input type="text"
+                                                                                                   value="<%-pricePart1%>"
+                                                                                                   class="text-center"
+                                                                                                   style="width:100px;"/>)<input
+                                type="text" class="font-small" value="<%-pricePart1Words%>" style="width:300px;"/> دولار
+                        أمريكي، ووافق الفريق الأول على البيع بهذا الثمن.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يلتزم الفريق الثاني بسداد ثمن المبيع المبين أعلاه
+                        للفريق الأول وفقا للآلية المفصلة بملحق رقم (4).
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom:10px;">
+                    <label class="display-block" style="margin-bottom:10px;">
+                        <span style="color:#71BF45;"><h2>ثامناً: الإضافات والتعديلات على المبيع</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify">يجوز للفريق الثاني طلب إجراء أية تعديلات أو تغيرات أو إضافات على المبيع و/أو على المواصفات الإنشائية والفنية الخاصة بالمبيع و/أو إضافة أية اعمال أو ديكورات أو مواصفات جديدة عن ما هو موضح في الملحق رقم (1)، على أن تكون تلك التعديلات أو التغيرات أو الإضافات من ضمن الخيارات المتوفرة لدى الفريق الأول والتي يطرحها أو قد يطرحها على الفريق الثاني وفي حال كان ذلك ممكنا، ووافق الفريق الأول على إجرائه يتم الاتفاق بين الفريقين على التكلفة التقديرية لهذه الإضافات أو التعديلات، وتعتبر جزء من الثمن، وتوثق بموجب إتفاق خطي لاحق يبرم بين الفريقين حسب الملحق رقم (5)، وتعتبر جزء لا يتجزأ من هذه الاتفاقية.</span>
+                </div>
+                <div class="row display-block" style="margin-bottom:10px;">
+                    <label class="display-block" style="margin-bottom:10px;">
+                        <span style="color:#71BF45;"><h2>تاسعاً: الاختلاف في المواصفات</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify">في حال ظهور أي اختلاف جوهري بين المواصفات الفنية المبينة في هذه الإتفاقية وملاحقاتها وواقع المبيع، للفريق الثاني مراجعة الفريق الأول بشأنها ومطالبته بمعالجة الاختلاف، وذلك خلال شهر واحد من تاريخ استلام الفريق الثاني للمبيع؛ ويسقط حق الفريق الثاني بذلك بعد إنقضاء المدة المذكورة (مدة الشهر الواحد)، والتي بانقضائها يعتبر الفريق الثاني موافقا على المبيع ومقرا بتطابق مواصفاته مع المواصفات الفنية المبينة في هذه الاتفاقية وملحقاتها و/أو مقراً بقبوله لأي اختلاف بينهما.</span>
+                </div>
+                <div class="row display-block" style="margin-bottom:10px;">
+                    <label class="display-block" style="margin-bottom:10px;">
+                        <span style="color:#71BF45;"><h2>عاشراً: تسجيل المبيع وحقوق الملكية</h2></span>
+                    </label>
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يقوم الفريق الأول بالتنازل والفراغ عن المبيع للفريق
+                        الثاني بعد اتمام تشييده وتشطيبه وفقاً للمواصفات المبينة في هذه الاتفاقية وملاحقها، وإتمام إفراز
+                        قطعة الأرض المقامة أو التي ستقام عليها البناية وإفراز المبيع وفقا لإجراءات إفراز الشقق والطوابق،
+                        وقيام الفريق الثاني بتسديد كامل ثمن المبيع وتنفيذ جميع إلتزاماته المبينة في هذه الاتفاقية
+                        وملحقاتها و/أو أي تعديل خطي لاحق عليها.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يتحمل الفريق الثاني كافة الرسوم والمصاريف اللازمة
+                        لغايات نقل ملكية المبيع وتسجيله باسمه لدى الموقع الرسمي وفقا لأحكام القانون الساري، ويكون الفريق
+                        الثاني مسؤولاً عن ضريبة الأملاك وضرائب البلدية المتعلقة بالمبيع ابتداء ًمن تاريخ توقيع هذه
+                        الاتفاقية، كما ويلتزم الفريق الثاني بتزويد الفريق الأول ببراءة ذمة صادرة عن المالية والبلدية
+                        وأية وثائق أخرى لازمة لغايات التنازل وعلى نفقته الخاصة. ولإزالة أي غموض، يتحمل الفريق الثاني
+                        كافة رسوم تسجيل المبيع ونقل ملكيته لصالحه لدى الموقع الرسمي بغض النظر عن أي ارتفاع أو انخفاض في
+                        رسوم التسجيل في المستقبل، وبصرف النظر عما ينص عليه القانون حول توزيع الرسوم بين البائع والمشتري.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">3.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بعد قيام الفريق الثاني بدفع كامل ثمن المبيع وتسجيله
+                        باسمه، يصبح الفريق الثاني مالكاً للمبيع موضوع هذه الاتفاقية على وجه الاستقلال، ومالكاً على وجه
+                        الشيوع ما يخص الوحدة السكنية من حصص في الأجزاء المشتركة في البناية وفي الحي.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">4.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">لا يحق للفريق الثاني الانتفاع و/أو استغلال و/أو
+                        استلام و/أو التصرف بالمبيع على أي وجه أو أي جزء منه بأي شكل من أشكال التصرف قبل سداد كامل ثمن
+                        المبيع واكتمال تسجيله باسمه في الموقع الرسمي.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">5.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">من المفهوم للفريق الثاني أن رقم قطعة الأرض ورقم
+                        الحوض ورقم الوحدة السكنية قد يتغير عند التسجيل وذلك نتيجة لمعاملة الإفراز واجراءات دائرة تسجيل
+                        الأراضي.
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="5"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</iframe>
+<!-- end of page 5-->
+<!-- Page 6-->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract6Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>حادي عشر: الإحالة</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify">لا يحق للفريق الثاني إحالة أي من حقوقه و/أو التزاماته المبينة في هذه الاتفاقية لأي طرف آخر ما لم يحصل على الموافقة  الخطية الصريحة المسبقة من الفريق الأول. ويحق للفريق الأول إحالة أي من حقوقه و/أو التزاماته المبينة في هذه الاتفاقية لأي طرف آخر بإرادته المنفردة.
+                    </span>
+                </div>
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>ثاني عشر: التخلف والإخلال</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify">من المتفق عليه بين الفريقين بأنه وفي حال اخلال الفريق الثاني بأي من التزاماته المقررة بموجب هذه الإتفاقية و/أو تخلفه عن سداد أية دفعة أو قسط من دفعات أو أقساط المبيع لمدة تزيد عن <input
+                                type="text" class="text-center" value="<%-delayPeriod%>" style="width:100px;"/> من تاريخ استحقاقها، فمن حق الفريق الأول فسخ هذه الإتفاقية واعتبار نفسه في حل من التزاماته بموجبها وذلك دون الحاجة الى اشعار و/أو انذار الفريق الثاني، مع حق الفريق الأول بالاحتفاظ بالدفعة الأولى (العربون) التي دفعها الفريق الثاني له، والمطالبة بأية مبالغ أخرى كتعويض عن العطل و/أو الضرر و/أو الخسارة و/أو فوات الربح و/أو المصاريف التي تكبدها من أي نوع وتحملها بهذا الخصوص و/أو الزام الفريق الثاني بدفع مبلغ (<input
+                                type="text" value="<%-penaltyClause%>" class="text-center"
+                                style="width:100px;"/> )<input type="text" value="<%-penaltyClauseWords%>"
+                                                               class="font-small" style="width:300px;"/>دولار أمريكي فقط كشرط جزائي، ويعتبر توقيع الفريق الثاني على هذه الاتفاقية اقراراً منه بذلك.</span>
+                </div>
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>ثالث عشر: أحكام عامة</h2></span>
+                    </label>
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">تكون هذه الاتفاقية بكافة أحكامها وشروطها وملحقاتها
+                        وأي تعديل قد يجري عليها ملزمة للفريقين ولخلفهما العام والخاص.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">في حالة تعذر تنفيذ و/أو إهمال أي نص أو شرط أو حكم
+                        وارد في هذه الاتفاقية و/أو ملحقاتها و/أو أي تعديل قد يطرأ عليها لتعارضه مع القوانين السارية، فإن
+                        ذلك النص أو الشرط أو الحكم يعتبر لاغياً بالقدر الذي يتعارض به مع أحكام القوانين السارية وفي حدود
+                        التعارض فقط دون التأثير في نصوص الاتفاقية الأخرى. كما يتم تفسير البند المتعارض مع حكم القانون
+                        الساري بما لا يتجاوز الغرض الذي وضع من أجله ودون المساس بروح هذه الاتفاقية و/أو ملحقاتها و/أو أي
+                        تعديل قد يطرأ عليها و/أو للقيمة القانونية لباقي نصوص وشروط وأحكام الاتفاقية و/أو ملحقاتها و/أو
+                        أي تعديل قد يطرأ عليها.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">3.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">مع مراعاة ما ورد في أحكام وبنود هذه الاتفاقية فإنه
+                        يحق للفريق الأول بصفته مطور لمشروع مدينة روابي تعديل المخطط الهندسي والتنظيمي للمدينة في أي وقت
+                        من الأوقات، سواء إقامة أبنية و/أو وحدات سكنية و/أو إنشاءات جديدة و/أو مراكز تجارية و/أو تغير
+                        أماكن الأبنية التي ستقام بالمستقبل -على عكس ما هو وارد في المخطط الحالي للمدينة والذي تم معاينته
+                        من قبل الفريق الثاني- وفي حال ألحق هذا التعديل بالفريق الثاني ضرر جسيم لا يمكن تداركه فإنه يحق
+                        له الحصول على تعويض يناسب قيمة الضرر وفق ما يقرره أهل الخبرة.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">4.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">إن العلاقة بين الفريق الأول والفريق الثاني بموجب
+                        أحكام هذه الاتفاقية هي علاقة تعهد ببيع وشراء وحدة سكنية فقط لا غير، وعليه لا يحق للفريق الثاني
+                        الإحتجاج بعدم جهوزية مدينة روابي، لعدم دفع الإلتزامات المترتبة عليه بموجب هذه الإتفاقية و/أو أي
+                        تعديل يطرأ عليها، كما لا يحق للفريق الثاني مطالبة الفريق الأول بإقامة وتوفير الخدمات و/أو
+                        المراكز التعليمية، و/أو الصحية، و/أو التجارية، و/أو الترفيهية، و/أو الإجتماعية، و/أو الثقافية،
+                        و/أو الدينية، و/أو النوادي الرياضية، و/أو تأمين المواصلات العامة والخاصة، وغيرها من المرافق
+                        والخدمات العامة التي لا شأن للفريق الأول بتوفيرها وإقامتها كونها تقدم وتوفر من قبل الدولة
+                        والحكومة والشركات الخاصة ذات الإختصاص، ويعتبر توقيع الفريق الثاني على هذه الإتفاقية إقراراً منه
+                        بذلك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">5.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">أي تغيير أو تعديل على هذه الاتفاقية يجب أن يكون
+                        خطيا وموقعا من الفريقين ويصدر بشكل ملحق لهذه الاتفاقية، على أن يعتبر جزءاً لا يتجزأ من الاتفاقية
+                        ويقرأ معها كوحدة واحدة.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">6.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">إن عناوين البنود في هذه الاتفاقية وضعت لغايات تسهيل
+                        قراءتها، ولا يجوز الاعتماد عليها لغايات تفسير أحكامها.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">7.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يقر الفريقان باعتماد عناوينهم المبينة في مقدمة هذه
+                        الاتفاقية كمكان إقامة مختار، وذلك لغايات تبليغ الإخطارات والمراسلات والإشعارات بينهما. ويجوز
+                        إثبات حدوث التبليغات والإخطارات والمراسلات بكافة طرق الإثبات. ويلتزم كل فريق بإبلاغ الفريق الآخر
+                        عن أي تغيير لعنوانه خلال مدة لا تزيد عن أسبوع من تاريخ حدوث التغيير ولا يعتد بالعنوان الجديد إلا
+                        بعد تبليغ الفريق المعني إشعار تغيير العنوان المذكور.
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="6"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</iframe>
+<!-- end of page 6-->
+<!-- Page 7 -->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract7Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>رابع عشر: القانون المطبق وحل النزاعات</h2></span>
+                    </label>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;"> 1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">تخضع هذه الاتفاقية لأحكام القانون الفلسطيني المطبق
+                        في الضفة الغربية فقط، وتلزم أية محكمة أو جهة تنظر في أي نزاع ناشئ عنها و/أو متعلق بها بتطبيق
+                        أحكام القانون الفلسطيني.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">مع مراعاة ما ورد في البند (1) أعلاه، يكون الاختصاص
+                        المكاني المتفق عليه سلفاً بين الفريقين للمحاكم النظامية العاملة في مدينة رام الله دون سواها،
+                        وذلك للنظر في أي نزاع أو خلاف يتعلق بتفسير و/أو تنفيذ أي بند من بنود هذه الاتفاقية، أو مجملها.
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom:25px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>خامس عشر: النسخ والبنود والصفحات</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify" style="margin-bottom:20px;"> تم تحرير هذه الاتفاقية من مقدّمة وخمسة عشر بنداً (بما فيها هذا البند) على سبعة صفحات، بالإضافة إلى<input
+                                type="text" class="text-center" value="<%-annexes%>" style="width:80px;"/> ملاحق المذكورة، وعلى نسختين اثنتين تعتبر كل منهما نسخة أصلية ويحتفظ كل فريق بنسخة واحدة منها،   وذلك عقب توقيعهما من قبل الفريقين حسب الاصول.
+                    </span>
+                    <span class="display-block font-size-25 text-justify" style="margin-top:15px;margin-bottom:50px;">وإيذاناً من الفريقين على موافقتهما على كل ما ورد في هذه الاتفاقية وملحقاتها، فقد قاما بتوقيع نسختيهما دون ضغط أو إكراه من أحد، ودون أن يشوب ارادتهما أي عيب من عيوب الرضا أو الارادة، في مدينة روابي بتاريخ<input
+                                type="text" value="<%-contractDay%>" class="text-center"
+                                style="width:100px;"/>من شهر <input type="text" class="text-center"
+                                                                    value="<%-contractMonth%>" style="width:80px;"/>لعام<input
+                                type="text" class="text-center" value="<%-contractYear%>" style="width:80px;"/>.
+                    </span>
+                </div>
+                <div class="row display-block" style="margin-bottom: 50px;">
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">الفريق الثاني
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value="<%-purchaser%>"
+                                                                                     style="width:600px; font-size: 20px"/>
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:600px;"/>
+                      </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">الفريق الأول
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">شركة بيتي للاستثمار العقاري المساهمة الخصوصية المحدودة
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:500px;"/>
+                      </span>
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom: 50px;">
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">شاهد
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:600px; font-size: 20px"/>
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:600px;"/>
+                      </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">شاهد
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:550px; font-size: 20px"/>
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:550px;"/>
+                      </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="7"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+</iframe>
+<!-- end of page 7-->
+
+<!-- Page 7a -->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract7aTemplate" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-bottom:20px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>رابع عشر: القانون المطبق وحل النزاعات</h2></span>
+                    </label>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;"> 1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">تخضع هذه الاتفاقية لأحكام القانون الفلسطيني المطبق
+                        في الضفة الغربية فقط، وتلزم أية محكمة أو جهة تنظر في أي نزاع ناشئ عنها و/أو متعلق بها بتطبيق
+                        أحكام القانون الفلسطيني.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">مع مراعاة ما ورد في البند (1) أعلاه، يكون الاختصاص
+                        المكاني المتفق عليه سلفاً بين الفريقين للمحاكم النظامية العاملة في مدينة رام الله دون سواها،
+                        وذلك للنظر في أي نزاع أو خلاف يتعلق بتفسير و/أو تنفيذ أي بند من بنود هذه الاتفاقية، أو مجملها.
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom:25px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>خامس عشر: هذه الإتفاقية</h2></span>
+                    </label>
+
+                    <span class="display-block font-size-25 text-justify" style="margin-top:15px;margin-bottom:50px;">تعتبر هذه الإتفاقية هي الإتفاقية السارية بين الفريقين والتي تحكم طبيعة العلاقة بينهم، بحيث تلغي الإتفاقية الموقعة سابقاً فيما بين الفريقين بتاريخ<input
+                                type="text" value="<%-safqaDay%>" class="text-center"
+                                style="width:100px;"/>من شهر <input type="text" class="text-center"
+                                                                    value="<%-safqaMonth%>"
+                                                                    style="width:80px;"/>لعام<input type="text"
+                                                                                                    class="text-center"
+                                                                                                    value="<%-safqaYear%>"
+                                                                                                    style="width:80px;"/>.
+                    (الإتفاقية القديمة) فور سريان هذه الإتفاقية، وتحل هذه الإتفاقية محل الإتفاقية القديمة وتنسخ كافة أحكامها
+وبنودها وملحقاتها.
+                    </span>
+                </div>
+                <div class="row display-block" style="margin-bottom:25px;">
+                    <label class="display-block" style="margin-bottom:30px;">
+                        <span style="color:#71BF45;"><h2>سادس عشر: النسخ والبنود والصفحات</h2></span>
+                    </label>
+                    <span class="display-block font-size-25 text-justify" style="margin-bottom:20px;"> تم تحرير هذه الاتفاقية من مقدّمة وخمسة عشر بنداً (بما فيها هذا البند) على سبعة صفحات، بالإضافة إلى<input
+                                type="text" class="text-center" value="<%-annexes%>" style="width:80px;"/> ملاحق المذكورة، وعلى نسختين اثنتين تعتبر كل منهما نسخة أصلية ويحتفظ كل فريق بنسخة واحدة منها،   وذلك عقب توقيعهما من قبل الفريقين حسب الاصول.
+                    </span>
+                    <span class="display-block font-size-25 text-justify" style="margin-top:15px;margin-bottom:50px;">وإيذاناً من الفريقين على موافقتهما على كل ما ورد في هذه الاتفاقية وملحقاتها، فقد قاما بتوقيع نسختيهما دون ضغط أو إكراه من أحد، ودون أن يشوب ارادتهما أي عيب من عيوب الرضا أو الارادة، في مدينة روابي بتاريخ<input
+                                type="text" value="<%-contractDay%>" class="text-center"
+                                style="width:100px;"/>من شهر <input type="text" class="text-center"
+                                                                    value="<%-contractMonth%>" style="width:80px;"/>لعام<input
+                                type="text" class="text-center" value="<%-contractYear%>" style="width:80px;"/>.
+                    </span>
+                </div>
+                <div class="row display-block" style="margin-bottom: 50px;">
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">الفريق الثاني
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value="<%-purchaser%>"
+                                                                                     style="width:400px; font-size: 20px;"/>
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                      </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">الفريق الأول
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">شركة بيتي للاستثمار العقاري المساهمة الخصوصية المحدودة
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                      </span>
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom: 50px;">
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">شاهد
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                      </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">شاهد
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                      </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="7"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+</iframe>
+<!-- end of page 7a-->
+
+<!-- Page 8-->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract8Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="direction:rtl;height:1500px;">
+            <div class="col-xs-12">
+                <div class="row display-block">
+                    <span><h2>ملحق رقم (1)</h2></span>
+                </div>
+                <div class="row display-block" style="margin-top:50px;margin-bottom:50px;">
+                    <span style="color:#71BF45;"><h2>المواصفات الفنية للتشطيبات في شقق روابي</h2></span>
+                </div>
+
+                <div class="row display-block" style="margin-top:50px;">
+                    <span class="display-block font-size-25" style="margin-bottom:50px;">سيراعى تصميم الوحدات السكنية بنماذجها المختلفة كافة عناصر الامن والسلامة الإنشائية في الهيكل الخرساني وذلك ضمن المعايير التالية:</span>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">صممت البنايات وفق نظام إنشائي متطور.</div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">تلبيس جدران البنايات الخارجية بالحجر.</div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">3.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">استخدام مواد متطورة للعزل الحراري في البناء لترشيد
+                        استهلاك الطاقة.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">4.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">بلاط الأرضيات من البورسلان، وبلاط الحمامات من
+                        السيراميك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">5.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">الأدوات الصحية وبطاريات المغاسل المركبة في حمامات
+                        الوحدات السكنية حديثة وعصرية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">6.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">النوافذ والأبواب والترسات الجانبية مصنوعة من الزجاج
+                        المزدوج (Double-glaze) المحاط بالألمنيوم، وجميع النوافذ مزودة بأباجورات.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">7.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">الباب الرئيسي للوحدة السكنية متعدد الأقفال
+                        ومتين(Security Door).
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">8.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">مفاتيح الكهرباء المركبة داخل الوحدات السكنية حديثة
+                        وعصرية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">9.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">جميع المباني مزودة بمصاعد كهربائية حديثة تراعي
+                        السلامة العامة والأمان.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">10.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">جميع المباني مزودة بالمرايا الشمسية على الأسطح
+                        لتسخين المياه.
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="8"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</iframe>
+<!-- end of page 8-->
+<!-- Page 9-->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract9Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block">
+                    <span><h2>ملحق رقم (2)</h2></span>
+                </div>
+                <div class="display-block" style="margin-top:50px;">
+                    <span class="display-block font-size-25">القسم الأول: النظام الداخلي لاتحاد ملاك الوحدات السكنية في أحياء بلدة روابي.</span>
+                    <span class="display-block font-size-25">القسم الثاني: عقد تأسيس اتحاد ملاك الوحدات السكنية في حي <input
+                                type="text" class="text-center" value="<%-haiName%>"
+                                style="width:100px;"/>/قطعة أرض <input type="text" class="text-center"
+                                                                       value="<%-landNum%>" style="width:100px;"/> حوض رقم <input
+                                type="text" value="<%-hawdNum%>" class="text-center" style="width:180px;"/> من أراضي بلدة روابي.</span>
+                </div>
+            </form>
+        </div>
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="9"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+</iframe>
+<!-- end of page 9-->
+<!-- Page 10-->
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract10Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;">
+            <div class="row">
+                <span><h2>ملحق رقم (3)</h2></span>
+            </div>
+            <div class="row" style="margin-bottom:30px;">
+                <span style="color:#71BF45;"><h2 style="margin-top:0;">سند إقرار وتعهد</h2></span>
+            </div>
+            <div class="row display-block" style="margin-bottom:10px;">
+                <form class="form-style-4" action="" method="post">
+                    <span class="font-size-25 text-justify">أنا الموقع امضائي <input type="text" value="<%- purchaser%>"
+                                                                                     class="text-center"
+                                                                                     style="width:600px; font-size: 20px"/> حامل /ة هوية و/أو جواز سفر رقم <input
+                                type="text" class="text-center" value="<%- idNum%>"
+                                style="width:500px; font-size: 20px;"/> (بصفتي المفوض بالتوقيع عن شركة <input
+                                type="text" class="text-center" value="<%-companyName%>" style="width:100px;"/>رقم تسجيل <input
+                                type="text" class="text-center" value="" style="width:150px;"/>لدى <input type="text"
+                                                                                                          value="<%-companyFor%>"
+                                                                                                          class="text-center"
+                                                                                                          style="width:100px;"/> ) مالك/ة الوحدة السكنية رقم<input
+                                type="text" class="text-center" value="<%-unitNum%>" style="width:100px;"/> الواقعة في الطابق رقم <input
+                                type="text" class="text-center" value="<%-floorNum%>" style="width:100px;"/> البالغة مساحتها <input
+                                type="text" value="<%-unitArea%>" class="text-center" style="width:100px;"/> متراً مربعاً من البناية رقم <input
+                                type="text" class="text-center" value="<%-buildingNum%>" style="width:100px;"/>الكائنة في حي <input
+                                type="text" value="<%-haiName%>" class="text-center" style="width:100px;"/> في بلدة روابي ("الوحدة السكنية")، أتعهد وأقر وأنا بكامل الصفات المعتبرة شرعاً وقانوناً بما يلي:</span>
+                </form>
+            </div>
+            <div class="row display-block">
+                <form class="form-style-4" method="post">
+                    <div class="cell-lg-1 font-size-25 text-justify">أ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:4px;">بأن لي الحق الكامل
+                        والصلاحية القانونية التامة بإعطاء هذا الإقرار/التعهد وأني أتحمل كامل المسؤولية القانونية
+                        والواقعية وكامل النفقات والمصاريف والخسارة/ الكسب الفائت مهما كان نوعه والتي قد تترتب نتيجة
+                        العمل/التصرف بموجب هذا التعهد وإن ما ورد في مقدمة هذا السند يعتبر جزءاً لا يتجزأ منه ويقرأ معه
+                        كبند من بنوده.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ب.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:4px;">بأن التزم بالامتثال
+                        لجميع الأحكام المنصوص عليها في النظام الداخلي الخاص باتحاد ملاك رقم<input type="text"
+                                                                                                  class="text-center"
+                                                                                                  value="<%-ownersUnionNum%>"
+                                                                                                  style="width:100px;"/>الصادر
+                        عن كاتب عدل محكمة بلدية رام الله بتاريخ<input type="text" class="text-center font-small"
+                                                                      value="<%-ownersUnionProDate%>"
+                                                                      style="width:100px;"/>للوحدات السكنية في حي <input
+                                type="text" value="<%- haiName%>" class="text-center" style="width:100px;"/>والبالغة
+                        مساحته <input type="text" class="text-center" value="<%-haiArea%>" style="width:100px;"/> متراً
+                        مربعاً(”اتحاد الملاك“) وعقد التأسيس الخاص باتحاد الملاك رقم <input type="text"
+                                                                                           class="text-center"
+                                                                                           value="<%-ownersUnionNum%>"
+                                                                                           style="width:100px;"/> الصادر
+                        عن كاتب عدل محكمة بلدية رام الله بتاريخ <input type="text" class="text-center font-small"
+                                                                       value="<%-ownersUnionProDate%>"
+                                                                       style="width:100px;"/> والمرفق بهذا الإقرار/
+                        التعهد وأية تعديلات تطرا عليه، علماً بأنني اطلعت على أحكام عقد التأسيس والنظام الداخلي لاتحاد
+                        الملاك اطلاعاً كافياً وتم إفهامي بما ورد فيهما.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ج.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:4px;">بأن ألتزم بإيفاء كافة
+                        الالتزامات المالية التي يفرضها اتحاد الملاك على الوحدة السكنية المبيَنة أعلاه ودفعها لاتحاد
+                        الملاك خلال الفترة المحدّدة من قبله و/أو من قبل مجلس ادارته، من اشتراكات دورية واشتراكات خاصة
+                        بالتحسينات الكبيرة على الأجزاء المشتركة في العقار أو المتعلقة بسداد العجز في ميزانية اتحاد
+                        الملاك لسداد النفقات التشغيلية. كما ألتزم بدفع أية نفقات ومصاريف مشتركة أخرى يفرضها اتحاد الملاك
+                        على مالكي الوحدات السكنية لإدارة الأجزاء المشتركة في العقار وصيانتها وتصليحها والمحافظة عليها.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">د.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:4px;">أقر بأنني على علم تام
+                        بأن رسوم الاشتراك السنوي المفروضة من قبل اتحاد الملاك لادارة الأجزاء المشتركة في العقار
+                        والمحافظة عليها ، تدفع مقدما عن كل سنة، وعليه فإنني أتعهد بتحرير شيك/شيكات عدد <input
+                                type="text" class="text-center" value="<%-checksNum%>" style="width:100px;"/> بقيمة رسوم
+                        الاشتراك الشهري وبمواعيد استحقاقها وذلك عند استلامي للوحدة السكنية، وفي حال كانت الرسوم غير مقرة
+                        بعد فإنني أتعهد بتحرير شيك/شيكات خالية من القيمة وفي هذه الحالة أخول لجنة اتحاد الملاك بتعبئة
+                        تلك القيمة بعد اقرار الرسوم السنوية، ومن المفهوم لدي بأنه لا يحق لي استلام الوحدة السكنية دون
+                        تحرير الشيكات المذكورة وتقديمها لصالح لجنة اتحاد الملاك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">هـ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="">في حال عدم التزامي بدفع الاشتراكات
+                        والنفقات والمصاريف المبيّنة أعلاه خلال الفترة المحددّة من قبل اتحاد الملاك و/أو من قبل مجلس
+                        إدارته، يحق لاتحاد الملاك اتخاذ الاجراءات التي يراها مناسبة من أجل تحصيل تلك الاشتراكات والنفقات
+                        والمصاريف باعتبارها دين مستحق في ذمتي/ ذمة الشركة، لاتحاد الملاك. وأقر بأنني على علم تام بأنه لا
+                        يحق لي الحصول على أية خدمة مقدمة في مدينة روابي و/أو الانتفاع بالخدمات المقدمة للوحدة السكنية
+                        والأجزاء المشتركة الخاصة بها والحي الواقع فيه الوحدة السكنية دون الحصول على براءة ذمة صادرة عن
+                        لجنة اتحاد الملاك تفيد بتسديد كامل الالتزامات المالية المترتبة بذمتي له.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ز.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:4px;">بأن ألتزم بتوقيع أي شخص،
+                        ستنتقل اليه ملكية الوحدة السكنية، على مثل هذا الاقرار/التعهد وذلك قبل استكمال نقل ملكية الوحدة
+                        السكنية له، كما أتعهد ألتزم بتزويد اتحاد الملاك بالنسخة الأصلية عن التعهد الموقع من قبل ذلك
+                        الشخص (المالك المستقبلي) ليتم الاحتفاظ به في سجلات الاتحاد.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ح.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:4px;">إنني أقر بأن ما جاء في
+                        هذا السند يعتبر نهائياً وقطعياً وغير قابل للرجوع أو الإلغاء، وأنني أتعهد وألتزم بعدم الاعتراض
+                        على ما جاء في هذا السند والأمور المتعلقة به والناشئة عنه، وإنني أسقط حقي بالإدعاء بيمين كذب
+                        الإقرار و/أو الدفع بعدم القبول و/أو الوفاء و/أو أي دفع شكلي أو موضوعي حول ما جاء في هذا السند
+                        والأمور المتعلقة به والناشئة عنه.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ط.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:15px;"> إنني أوقع هذا السند
+                        بدون ضغط أو إكراه وبإرادة حرة خالية من العيوب التزاماً مني بما جاء فيه.
+                    </div>
+
+                </form>
+            </div>
+            <div class="row display-block" style="margin-bottom:15px;">
+                <form class="form-style-4" method="post">
+                    <div class="col-xs-6">
+                    <span class="display-block font-size-25">الموقع<input type="text" value="" style="width:400px;"/>
+                    </span>
+                        <label class="display-block font-size-25">
+                            <span>شاهد</span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                    <div class="col-xs-6">
+                    <span class="display-block font-size-25">تحريراً في<input type="text" class="text-center"
+                                                                              value="<%-contractDate %>"
+                                                                              style="width:400px;"/>
+                    </span>
+                        <label class="display-block font-size-25">
+                            <span>شاهد</span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="10"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</iframe>
+<!-- end of page 10-->
+
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract14Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="130"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;">
+            <div class="row">
+                <span><h2>ملحق رقم (3)</h2></span>
+            </div>
+            <div class="row" style="margin-bottom:20px;">
+                <span style="color:#71BF45;"><h2 style="margin-top:0;">سند إقرار وتعهد</h2></span>
+            </div>
+            <div class="row display-block" style="margin-bottom:40px;">
+                <form class="form-style-4" action="" method="post">
+                    <span class="font-size-25 text-justify" style="margin-bottom:10px;">أنا الموقع امضائي <input
+                                type="text" value="<%- purchaser%>" class="text-center"
+                                style="width:600px;font-size: 20px;"/> حامل /ة هوية و/أو جواز سفر رقم <input type="text"
+                                                                                                             class="text-center"
+                                                                                                             value="<%- idNum%>"
+                                                                                                             style="width:500px;font-size: 20px;"/> (بصفتي المفوض بالتوقيع عن شركة <input
+                                type="text" class="text-center" value="<%- companyName%>" style="width:100px;"/>رقم تسجيل <input
+                                type="text" class="text-center" value="" style="width:150px;"/>لدى <input type="text"
+                                                                                                          value="<%-companyFor%>"
+                                                                                                          class="text-center"
+                                                                                                          style="width:100px;"/> ) مالك/ة الوحدة السكنية رقم<input
+                                type="text" class="text-center" value="<%-unitNum%>" style="width:100px;"/> الواقعة في الطابق رقم <input
+                                type="text" class="text-center" value="<%-floorNum%>" style="width:100px;"/> البالغة مساحتها <input
+                                type="text" value="<%-unitArea%>" class="text-center" style="width:100px;"/> متراً مربعاً من البناية رقم <input
+                                type="text" class="text-center" value="<%-buildingNum%>" style="width:100px;"/>الكائنة في حي <input
+                                type="text" value="<%-haiName%>" class="text-center" style="width:100px;"/> في بلدة روابي ("الوحدة السكنية")، أتعهد وأقر وأنا بكامل الصفات المعتبرة شرعاً وقانوناً بما يلي:</span>
+                </form>
+            </div>
+            <div class="row display-block" style="margin-bottom:15px;">
+                <form class="form-style-4" method="post">
+                    <div class="cell-lg-1 font-size-25 text-justify">أ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن لي الحق الكامل
+                        والصلاحية القانونية التامة بإعطاء هذا الإقرار/التعهد وأني أتحمل كامل المسؤولية القانونية
+                        والواقعية وكامل النفقات والمصاريف والخسارة/ الكسب الفائت مهما كان نوعه والتي قد تترتب نتيجة
+                        العمل/التصرف بموجب هذا التعهد وإن ما ورد في مقدمة هذا السند يعتبر جزءاً لا يتجزأ منه ويقرأ معه
+                        كبند من بنوده.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ب.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن التزم بالامتثال
+                        لجميع الأحكام المنصوص عليها في النظام الداخلي الخاص باتحاد ملاك رقم<input type="text"
+                                                                                                  class="text-center"
+                                                                                                  value="<%-estContrNum%>"
+                                                                                                  style="width:100px;"/>الصادر
+                        عن كاتب عدل محكمة بلدية رام الله بتاريخ<input type="text" class="text-center font-small"
+                                                                      value="<%-estContrDate%>" style="width:100px;"/>للوحدات
+                        السكنية في حي <input type="text" value="<%- haiName%>" class="text-center"
+                                             style="width:100px;"/>والبالغة مساحته <input type="text"
+                                                                                          class="text-center"
+                                                                                          value="<%-haiArea%>"
+                                                                                          style="width:100px;"/> متراً
+                        مربعاً(”اتحاد الملاك“) وعقد التأسيس الخاص باتحاد الملاك رقم <input type="text"
+                                                                                           class="text-center"
+                                                                                           value="<%-estContrNum2%>"
+                                                                                           style="width:100px;"/> الصادر
+                        عن كاتب عدل محكمة بلدية رام الله بتاريخ <input type="text" class="text-center font-small"
+                                                                       value="<%-estContrDate2%>" style="width:100px;"/>
+                        والمرفق بهذا الإقرار/ التعهد وأية تعديلات تطرا عليه، علماً بأنني اطلعت على أحكام عقد التأسيس
+                        والنظام الداخلي لاتحاد الملاك اطلاعاً كافياً وتم إفهامي بما ورد فيهما.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ج.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن ألتزم بإيفاء كافة
+                        الالتزامات المالية التي يفرضها اتحاد الملاك على الوحدة السكنية المبيَنة أعلاه ودفعها لاتحاد
+                        الملاك خلال الفترة المحدّدة من قبله و/أو من قبل مجلس ادارته، من اشتراكات دورية واشتراكات خاصة
+                        بالتحسينات الكبيرة على الأجزاء المشتركة في العقار أو المتعلقة بسداد العجز في ميزانية اتحاد
+                        الملاك لسداد النفقات التشغيلية. كما ألتزم بدفع أية نفقات ومصاريف مشتركة أخرى يفرضها اتحاد الملاك
+                        على مالكي الوحدات السكنية لإدارة الأجزاء المشتركة في العقار وصيانتها وتصليحها والمحافظة عليها.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">د.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">أقر بأنني على علم تام
+                        بأن رسوم الاشتراك السنوي المفروضة من قبل اتحاد الملاك لادارة الأجزاء المشتركة في العقار
+                        والمحافظة عليها ، تدفع مقدما عن كل سنة، وعليه فإنني أتعهد بتحرير شيك/شيكات عدد <input
+                                type="text" class="text-center" value="<%-checksNum%>" style="width:100px;"/> بقيمة رسوم
+                        الاشتراك الشهري وبمواعيد استحقاقها وذلك عند استلامي للوحدة السكنية، وفي حال كانت الرسوم غير مقرة
+                        بعد فإنني أتعهد بتحرير شيك/شيكات خالية من القيمة وفي هذه الحالة أخول لجنة اتحاد الملاك بتعبئة
+                        تلك القيمة بعد اقرار الرسوم السنوية، ومن المفهوم لدي بأنه لا يحق لي استلام الوحدة السكنية دون
+                        تحرير الشيكات المذكورة وتقديمها لصالح لجنة اتحاد الملاك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ه.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">في حال عدم التزامي بدفع
+                        الاشتراكات والنفقات والمصاريف المبيّنة أعلاه خلال الفترة المحددّة من قبل اتحاد الملاك و/أو من
+                        قبل مجلس إدارته، يحق لاتحاد الملاك اتخاذ الاجراءات التي يراها مناسبة من أجل تحصيل تلك الاشتراكات
+                        والنفقات والمصاريف باعتبارها دين مستحق في ذمتي/ ذمة الشركة، لاتحاد الملاك. وأقر بأنني على علم
+                        تام بأنه لا يحق لي الحصول على أية خدمة مقدمة في مدينة روابي و/أو الانتفاع بالخدمات المقدمة
+                        للوحدة السكنية والأجزاء المشتركة الخاصة بها والحي الواقع فيه الوحدة السكنية دون الحصول على براءة
+                        ذمة صادرة عن لجنة اتحاد الملاك تفيد بتسديد كامل الالتزامات المالية المترتبة بذمتي له.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ز.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن ألتزم بتوقيع أي شخص،
+                        ستنتقل اليه ملكية الوحدة السكنية، على مثل هذا الاقرار/التعهد وذلك قبل استكمال نقل ملكية الوحدة
+                        السكنية له، كما أتعهد ألتزم بتزويد اتحاد الملاك بالنسخة الأصلية عن التعهد الموقع من قبل ذلك
+                        الشخص (المالك المستقبلي) ليتم الاحتفاظ به في سجلات الاتحاد.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ح.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">إنني أقر بأن ما جاء في
+                        هذا السند يعتبر نهائياً وقطعياً وغير قابل للرجوع أو الإلغاء، وأنني أتعهد وألتزم بعدم الاعتراض
+                        على ما جاء في هذا السند والأمور المتعلقة به والناشئة عنه، وإنني أسقط حقي بالإدعاء بيمين كذب
+                        الإقرار و/أو الدفع بعدم القبول و/أو الوفاء و/أو أي دفع شكلي أو موضوعي حول ما جاء في هذا السند
+                        والأمور المتعلقة به والناشئة عنه.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ط.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:15px;"> إنني أوقع هذا السند
+                        بدون ضغط أو إكراه وبإرادة حرة خالية من العيوب التزاماً مني بما جاء فيه.
+                    </div>
+                </form>
+            </div>
+            <div class="row display-block" style="margin-top: -20px;">
+                <form class="form-style-4" method="post">
+                    <div class="col-xs-6">
+                    <span class="display-block font-size-25">الموقع<input type="text" value="" style="width:400px;"/>
+                    </span>
+                        <label class="display-block font-size-25">
+                            <span>شاهد</span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px; font-size: 20px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                    <div class="col-xs-6">
+                    <span class="display-block font-size-25">تحريراً في<input type="text" class="text-center"
+                                                                              value="<%-contractDate %>"
+                                                                              style="width:400px;"/>
+                    </span>
+                        <label class="display-block font-size-25">
+                            <span>شاهد</span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;font-size: 20px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row pagenation" style="bottom: 0">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <!--<span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>-->
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="10"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</iframe>
+<!-- end of page 10-->
+<!-- Page 11-->
+<canvas id="can" class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract11Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <div class="row display-block">
+                <span><h2>ملحق رقم (4)</h2></span>
+            </div>
+            <div class="row" style="margin-top:20px;margin-bottom:10px;">
+                <span style="color:#71BF45;"><h2>آلية دفع ثمن المبيع</h2></span>
+            </div>
+            <div class="row display-block" style="margin-bottom:10px;">
+                <form class="form-style-4" action="" method="post">
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">1.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:10px;"> يلتزم الفريق الثاني
+                        بسداد ثمن المبيع المحدد في الاتفاقية في البند السابع فقرة (1) والبالغ (<input type="text"
+                                                                                                      class="text-center"
+                                                                                                      required="true"
+                                                                                                      value="<%- priceTotal%>"
+                                                                                                      style="width:100px;"/>
+                        )<input type="text" required="true" class="text-center font-small" value="<%- priceTotalWords%>"
+                                style="width:300px;"/> دولار أمريكي فقط للفريق الأول وفقاً للآلية الآتية:
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:10px;">أ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:10px;">يدفع الفريق الثاني
+                        الدفعة الأولى (العربون) نقداً للفريق الأول عند توقيع هذه الاتفاقية والبالغ قدرها (<input
+                                type="text" value="<%- arabon%>" style="width:100px;"/>) <input type="text"
+                                                                                                required="true"
+                                                                                                value="<%- arabonWords%>"
+                                                                                                class="text-center font-small"
+                                                                                                style="width:300px;"/>
+                        دولار أمريكي فقط، وفي جميع الأحوال لا يجوز للفريق الثاني استرداد هذه المبالغ في حال عدل عن
+                        الشراء لأي سبب كان و/أو في حال فسخ الاتفاقية من قبل الفريق الأول وفقاً للبند الثاني عشر الوارد
+                        في الاتفاقية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ب.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">يدفع الفريق الثاني للفريق الأول المبلغ المتبقي من
+                        الثمن، خلال <input type="text" required="true" value="<%- remainingAmountDelay%>"
+                                           class="text-center" style="width:100px;"/> من تاريخ توقيع الاتفاقية ووفقاً
+                        للآلية الواردة أدناه، وفي جميع الأحوال لا يجوز للفريق الثاني استرداد هذه المبالغ في حال عدل عن
+                        الشراء لأي سبب كان و/أو في حال فسخ الاتفاقية من قبل الفريق الأول وفقاً للبند الثاني عشر الوارد
+                        في الاتفاقية.
+                    </div>
+
+
+                    <div style="margin-top:15px;">
+                        <%=txt2%>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="11"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</iframe>
+
+<canvas id="can" class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract19Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="130"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <div class="row display-block">
+                <form class="form-style-4" action="" method="post">
+
+                    <div style="margin-top:20px;">
+                        <%=txt3%>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="12"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</iframe>
+<canvas id="can" class="canvasReceipt" height="1700" width="1500" style="display:none;"></canvas>
+<iframe id="contract21Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="130"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <div class="row display-block">
+                <form class="form-style-4" action="" method="post">
+                    <div style="margin-top:20px;">
+                        <%=txt4%>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="13"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</iframe>
+
+
+<!-- Page 12-->
+<canvas class="canvasReceipt" height="1700" width="1500" style="display:none;"></canvas>
+<iframe id="contract12Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="130"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <div class="row display-block">
+                <form class="form-style-4" action="" method="post">
+                    <div style="margin-bottom:10px;">
+                        <%=txt5%>
+                    </div>
+                </form>
+            </div>
+            <div class="row display-block" style="margin-bottom:20px;">
+                <form class="form-style-4" action="" method="post">
+
+                    <div style="margin-top:15px;">
+                        <%=txta%>
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify"> يلتزم الفريق الثاني بتحرير شيكات و/أو كمبيالات
+                        بقيمة كل دفعة من الدفعات المذكورة اعلاه، ويحق للفريق الأول التنفيذ عليهم عند موعد استحقاق قيمة
+                        أي دفعة من الدفعات المذكورة أعلاه. كما ويلتزم بتزويد الفريق الأول بموافقة بنكية وكتاب تعهد
+                        والتزام من قبل البنك أو الجهة المقرضة وذلك في حال رغب بالحصول على قرض لسداد المبلغ المتبقي من
+                        ثمن الوحدة السكنية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">3.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">من المفهوم للفريق الثاني أنه في حال اخلاله بدفع أي
+                        من الدفعات وفقاً للآلية المذكورة أعلاه وبتاريخ استحقاقها المذكور و/أو في حال عدم وجود رصيد في
+                        حسابه البنكي يكفي لسداد قيمة كل دفعة، فإنه يحق للفريق الأول التنفيذ على الشيكات و/أو الكمبيلات
+                        التي بحوزته اضافة الى المطالبة بأية رسوم و/أو مصاريف و/أو نفقات و/أو اتعاب محاماة يتكبدها الفريق
+                        الأول في سبيل تحصيل حقوقه المالية من الفريق الثاني والمطالبة بالفائدة القانونية المستحقة على هذه
+                        المبالغ بحدها الاقصى (9%) اعتباراً من تاريخ الاستحقاق وحتى السداد التام، ودون الإجحاف بحق الفريق
+                        الأول بتطبيق الشروط الجزائية الواردة في هذه الاتفاقية و/أو بموجب القانون، خاصة أحكام البند
+                        الثاني عشر من هذه الاتفاقية. ويعتبر توقيع الفريق الثاني على هذا الملحق اقراراً منه بذلك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">4.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify"> من المتفق عليه بين الفريقين أنه يجوز للفريق الثاني
+                        أن يزيد في قيمة الدفعات المذكورة اعلاه كما أنه يجوز للفريق الثاني وفي أي وقت من الأوقات أن يعجل
+                        في تسديد كافة دفعاته المتبقية نقدا، على أن لا يتم الشروع في اجراءات فتح الصفقة العقارية لصالح
+                        الفريق الثاني لدى دائرة تسجيل الأراضي المختصة الا في حال كان المبيع جاهزا للتسليم من قبل الفريق
+                        الاول وشريطة تسديد الثمن كاملا خلال المدة المذكورة أعلاه.
+                    </div>
+
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">5.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">إن كافة المبالغ المبينة في هذا الملحق وفي هذه
+                        الاتفاقية بشكل عام، غير شاملة لأية رسوم و/أو ضرائب مقررة حالياً أو مستقبلاً.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">6.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify"> في حال سماح الفريق الأول للفريق الثاني بالسكن في
+                        الوحدة السكنية خلال مدة سداد الثمن المذكورة أعلاه، وذلك عند اتمام تشييدها وتجهيزها للسكن، يتم
+                        تطبيق الأحكام والشروط الخاصة التالية:
+                    </div>
+                    <div class="row">
+                        <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">أ.</div>
+                        <div class="cell-lg-2 font-size-25 text-justify"> يلتزم الفريق الثاني بأن يولي الوحدة السكنية
+                            العناية الواجبة، والمحافظة عليها في ذات الحالة التي استلمها بها بحيث يستخدمها استخدامات
+                            الشاغل العادية (للسكن فقط)، وفي حال تسبب أي ضرر و/أو خراب للوحدة السكنية يكون مسؤول مسؤولية
+                            مطلقة عن اصلاح هذا الضرر، دون الاجحاف بحق الفريق الأول بطلب التعويض نتيجة لهذا الضرر.
+                        </div>
+
+                        <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">ب.</div>
+                        <div class="cell-lg-2 font-size-25 text-justify"> يتعهد الفريق الثاني أثناء فترة سكنه بالوحدة
+                            السكنية بتسديد أقساط المياه والكهرباء والغاز وبدل الخدمات.
+                        </div>
+
+                        <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">ج.</div>
+                        <div class="cell-lg-2 font-size-25 text-justify"> يلتزم الفريق الثاني عند السكن بالتوقيع على
+                            كمبيالة و/أو شيك خالي من تاريخ الاستحقاق وخالي من قيمة المبلغ وذلك كضمان لاستيفاء الفريق
+                            الأول للأقساط المستحقة على الفريق الثاني في حال امتنع عن تسديد أي قسط من الأقساط المذكورة في
+                            الفقرة (ب) الواردة أعلاه وكضمان لاعادة الوحدة السكنية بالحالة التي كانت عليها في حال تم فسخ
+                            و/أو انهاء الاتفاقية، ويفوض الفريق الثاني الفريق الأول بتعبئة هذه القيمة المستحقة واضافة أي
+                            رسوم و/أو مصاريف و/أو نفقات و/أو أتعاب محاماة يتكبدها الفريق الأول في سبيل تحصيل حقوقه
+                            المالية من الفريق الثاني إضافة للفائدة القانونية المستحقة على هذه المبالغ بحدها الاقصى (9%)
+                            اعتباراً من تاريخ الاستحقاق وحتى السداد التام، وإن توقيع الفريق الثاني على هذه الاتفاقية
+                            وملحقاتها يعتبر سند تفويض للفريق الأول بتعبئة قيمة الشيك و/أو كمبيالة الضمان الإضافية وتاريخ
+                            استحقاقها، ويسقط الفريق الثاني حقه بالدفع ببطلان صحة هذا الاجراء و/أو الشرط أمام المحاكم على
+                            اختلاف أنواعها ودرجاتها وأمام أية جهة أخرى كانت ويسقط حقه أيضاً بالاعتراض اللاحق على أي من
+                            البيانات التي فوق الفريق الاول بتعبئة خانتها وأي دفوع أخرى.
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="<%-pageNum1 %>"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</iframe>
+<!-- end of page 12 -->
+
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract15Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="170"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <div class="row display-block" style="margin-bottom:20px;">
+                <form class="form-style-4" action="" method="post">
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">2.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify"> يلتزم الفريق الثاني بتحرير شيكات و/أو كمبيالات
+                        بقيمة كل دفعة من الدفعات المذكورة اعلاه، ويحق للفريق الأول التنفيذ عليهم عند موعد استحقاق قيمة
+                        أي دفعة من الدفعات المذكورة أعلاه. كما ويلتزم بتزويد الفريق الأول بموافقة بنكية وكتاب تعهد
+                        والتزام من قبل البنك أو الجهة المقرضة وذلك في حال رغب بالحصول على قرض لسداد المبلغ المتبقي من
+                        ثمن الوحدة السكنية.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">3.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify"> من المفهوم للفريق الثاني أنه في حال اخلاله بدفع أي
+                        من الدفعات وفقاً للآلية المذكورة أعلاه وبتاريخ استحقاقها المذكور و/أو في حال عدم وجود رصيد في
+                        حسابه البنكي يكفي لسداد قيمة كل دفعة، فإنه يحق للفريق الأول التنفيذ على الشيكات و/أو الكمبيلات
+                        التي بحوزته اضافة الى المطالبة بأية رسوم و/أو مصاريف و/أو نفقات و/أو اتعاب محاماة يتكبدها الفريق
+                        الأول في سبيل تحصيل حقوقه المالية من الفريق الثاني والمطالبة بالفائدة القانونية المستحقة على هذه
+                        المبالغ بحدها الاقصى (9%) اعتباراً من تاريخ الاستحقاق وحتى السداد التام، ودون الإجحاف بحق الفريق
+                        الأول بتطبيق الشروط الجزائية الواردة في هذه الاتفاقية و/أو بموجب القانون، خاصة أحكام البند
+                        الثاني عشر من هذه الاتفاقية. ويعتبر توقيع الفريق الثاني على هذا الملحق اقراراً منه بذلك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">4.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">من المتفق عليه بين الفريقين أنه يجوز للفريق الثاني
+                        أن يزيد في قيمة الدفعات المذكورة اعلاه كما أنه يجوز للفريق الثاني وفي أي وقت من الأوقات أن يعجل
+                        في تسديد كافة دفعاته المتبقية نقدا، على أن لا يتم الشروع في اجراءات فتح الصفقة العقارية لصالح
+                        الفريق الثاني لدى دائرة تسجيل الأراضي المختصة الا في حال كان المبيع جاهزاً للتسليم من قبل الفريق
+                        الاول وشريطة تسديد الثمن كاملاً خلال المدة المذكورة أعلاه.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify" style="margin-bottom:30px;">5.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify">إن كافة المبالغ المبينة في هذا الملحق وفي هذه
+                        الاتفاقية بشكل عام، غير شاملة لأية رسوم و/أو ضرائب مقررة حالياً أو مستقبلاً.
+                    </div>
+
+                    <div class="row display-block" style="margin-top:50px;margin-bottom: 50px;">
+                        <div class="col-xs-12">
+                      <span class="display-block font-size-25">تحريراً في<input type="text" class="text-center"
+                                                                                value="<%- contractDate%>"
+                                                                                style="width:150px;"/>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>
+                        <span class="display-block font-size-25">الفريق الثاني
+                          </span>
+                            </label>
+                            <span class="display-block font-size-25">الاسم الرباعي<input type="text"
+                                                                                         value="<%-purchaser%>"
+                                                                                         style="width:600px; font-size: 20px;"/>
+                      </span>
+                            <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                                   style="width:600px;"/>
+                      </span>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>
+                        <span class="display-block font-size-25">الفريق الأول
+                          </span>
+                            </label>
+                            <span class="display-block font-size-25">شركة بيتي للاستثمار العقاري المساهمة الخصوصية المحدودة
+                      </span>
+                            <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                                   style="width:400px;"/>
+                      </span>
+                        </div>
+                    </div>
+                    <div class="row display-block" style="margin-bottom: 50px;">
+                        <div class="col-xs-6">
+                            <label>
+                      <span class="display-block font-size-25">شاهد
+                        </span>
+                            </label>
+                            <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                         style="width:400px;"/>
+                    </span>
+                            <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                                   style="width:400px;"/>
+                    </span>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>
+                      <span class="display-block font-size-25">شاهد
+                        </span>
+                            </label>
+                            <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                         style="width:400px;"/>
+                    </span>
+                            <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                                   style="width:400px;"/>
+                    </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="row pagenation">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="<%-pageNum1 %>"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</iframe>
+
+<!-- Page 13-->
+<!-- Contract 1 -->
+<canvas class="canvasReceipt" height="1700" width="1500" style="display:none;"></canvas>
+<iframe id="contract13Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="row">
+            <div class="invoice-header">
+                <div class="col-xs-2">
+                    <img src="/reservation-system/public/images/Rawabi_Logo.png" height="130" width="130"><br><br>
+                </div>
+                <div class="col-xs-4">
+                </div>
+                <div class="col-xs-6">
+                    <div class="ge-ss-font" style="position: absolute;right:5%">
+                        <h3><br><br><br>اتفاقية تعهد بيع وشراء وحدة سكنية</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12" style="direction:rtl;height:1500px;">
+            <form class="form-style-4" action="" method="post">
+                <div class="row display-block" style="margin-bottom:50px;">
+
+                    <div class="cell-lg-1 font-size-25 text-justify">د.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify"> في حال تم فسخ و/أو انهاء الاتفاقية لأي سبب من
+                        الأسباب الواردة فيها، فإن الدفعات التي دفعها الفريق الثاني للفريق الأول طيلة فترة اشغاله للوحدة
+                        السكنية تعتبر كبدل إستغلال و/أو إنتفاع للوحدة السكنية ولا تكون مستردة بطبيعة الحال وتحت أي ظرف
+                        من الظروف، ويلتزم الفريق الثاني بإعادة الوحدة السكنية خالية من الشواغل والشاغلين وبالحالة التي
+                        استلمها بها، وذلك خلال أسبوع كحد أقصى من طلب الفريق الأول ذلك، وفي حال عدم إعادة الفريق الثاني
+                        للوحدة السكنية وتسليمها خالية من الشواغل والشاغلين وبالحالة التي استلمها فإنه والحالة تلك يلتزم
+                        بتسديد مبلغ وقدره (<input type="text" class="text-center" value="<%- penefitCompensation%>"
+                                                  style="width:100px;"/>)<input type="text"
+                                                                                value="<%- penefitCompensationWords %>"
+                                                                                style="width:300px;"/> دولار أمريكي وذلك
+                        بدل إستغلال و/أو إنتفاع عن كل شهر يقضيه في الوحدة السكنية وحتى تاريخ تسليم الوحدة السكنية للفريق
+                        الأول، إضافة الى المطالبة بأية تعويضات عن أي ضرر أو خراب أو عطل للوحدة السكنية، ودون الاجحاف بحق
+                        الفريق الأول بالمطالبة بالشروط الجزائية الواردة في الاتفاقية خاصة أحكام البند الثاني عشر الوارد
+                        في الاتفاقية.
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom: 50px;">
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">الفريق الثاني
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text"
+                                                                                     value="<%- purchaser %>"
+                                                                                     style="width:400px; font-size: 20px;"/>
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                      </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>
+                        <span class="display-block font-size-25">الفريق الأول
+                          </span>
+                        </label>
+                        <span class="display-block font-size-25">شركة بيتي للاستثمار العقاري المساهمة الخصوصية المحدودة
+                      </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                      </span>
+                    </div>
+                </div>
+                <div class="row display-block" style="margin-bottom: 50px;">
+                    <div class="col-xs-6">
+                        <label>
+                      <span class="display-block font-size-25">شاهد
+                        </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                    <div class="col-xs-6">
+                        <label>
+                      <span class="display-block font-size-25">شاهد
+                        </span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+
+
+        <div class="row pagenation" style="margin-bottom: 30px;">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+                        <span>التوقيع</span>
+                        <input type="text" class="width-27 text-center"/>
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="<%-pageNum2 %>"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+</iframe>
+<!-- end of page 13-->
+
+
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract16Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="col-xs-12" style="direction:rtl;">
+            <div class="row" style="margin-top:80px;margin-bottom:50px;">
+                <span class="text-center" style="color:#71BF45;"><h2>سند إقرار وتعهد</h2></span>
+            </div>
+            <div class="row display-block" style="margin-bottom:40px;">
+                <form class="form-style-4" action="" method="post">
+                    <span class="font-size-25 text-justify">أنا الموقع امضائي <input type="text" value="<%- purchaser%>"
+                                                                                     class="text-center"
+                                                                                     style="width:600px;font-size: 20px;"/> حامل /ة هوية و/أو جواز سفر رقم <input
+                                type="text" class="text-center" value="<%- idNum%>"
+                                style="width:500px;font-size: 20px;"/> (بصفتي المفوض بالتوقيع عن شركة <input type="text"
+                                                                                                             class="text-center"
+                                                                                                             value="<%-companyName%>"
+                                                                                                             style="width:100px;"/>رقم تسجيل <input
+                                type="text" class="text-center" value="" style="width:150px;"/>لدى <input type="text"
+                                                                                                          value="<%-companyFor%>"
+                                                                                                          class="text-center"
+                                                                                                          style="width:100px;"/> ) مالك/ة الوحدة السكنية رقم<input
+                                type="text" class="text-center" value="<%-unitNum%>" style="width:100px;"/> الواقعة في الطابق رقم <input
+                                type="text" class="text-center" value="<%-floorNum%>" style="width:100px;"/> البالغة مساحتها <input
+                                type="text" value="<%-unitArea%>" class="text-center" style="width:100px;"/> متراً مربعاً من البناية رقم <input
+                                type="text" class="text-center" value="<%-buildingNum%>" style="width:100px;"/>الكائنة في حي <input
+                                type="text" value="<%-haiName%>" class="text-center" style="width:100px;"/> في بلدة روابي ("الوحدة السكنية")، أتعهد وأقر وأنا بكامل الصفات المعتبرة شرعاً وقانوناً بما يلي:</span>
+                </form>
+            </div>
+            <div class="row display-block" style="margin-bottom:50px;">
+                <form class="form-style-4" method="post">
+                    <div class="cell-lg-1 font-size-25 text-justify">أ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن لي الحق الكامل
+                        والصلاحية القانونية التامة بإعطاء هذا الإقرار/التعهد وأني أتحمل كامل المسؤولية القانونية
+                        والواقعية وكامل النفقات والمصاريف والخسارة/ الكسب الفائت مهما كان نوعه والتي قد تترتب نتيجة
+                        العمل/التصرف بموجب هذا التعهد وإن ما ورد في مقدمة هذا السند يعتبر جزءاً لا يتجزأ منه ويقرأ معه
+                        كبند من بنوده.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ب.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن التزم بالامتثال
+                        لجميع الأحكام المنصوص عليها في النظام الداخلي الخاص باتحاد ملاك الوحدات السكنية في حي <input
+                                type="text" value="<%- haiName%>" class="text-center" style="width:100px;"/>والبالغة
+                        مساحته <input type="text" class="text-center" value="<%-haiArea%>" style="width:100px;"/> متراً
+                        مربعاً (”اتحاد الملاك“)والمرفق بهذا الإقرار/ التعهد وأية تعديلات تطرأ عليه، علماً بأنني اطلعت
+                        على أحكام عقد التأسيس والنظام الداخلي لاتحاد الملاك اطلاعاً كافياً وتم إفهامي بما ورد فيهما.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ج.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن ألتزم بإيفاء كافة
+                        الالتزامات المالية التي يفرضها اتحاد الملاك على الوحدة السكنية المبيَنة أعلاه ودفعها لاتحاد
+                        الملاك خلال الفترة المحدّدة من قبله و/أو من قبل مجلس ادارته، من اشتراكات دورية واشتراكات خاصة
+                        بالتحسينات الكبيرة على الأجزاء المشتركة في العقار أو المتعلقة بسداد العجز في ميزانية اتحاد
+                        الملاك لسداد النفقات التشغيلية. كما ألتزم بدفع أية نفقات ومصاريف مشتركة أخرى يفرضها اتحاد الملاك
+                        على مالكي الوحدات السكنية لإدارة الأجزاء المشتركة في العقار وصيانتها وتصليحها والمحافظة عليها.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">د.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">أقر بأنني على علم تام
+                        بأن رسوم الاشتراك السنوي المفروضة من قبل اتحاد الملاك لادارة الأجزاء المشتركة في العقار
+                        والمحافظة عليها ، تدفع مقدما عن كل سنة، وعليه فإنني أتعهد بتحرير شيك/شيكات عدد <input
+                                type="text" class="text-center" value="<%-checksNum%>" style="width:100px;"/> بقيمة رسوم
+                        الاشتراك الشهري وبمواعيد استحقاقها وذلك عند استلامي للوحدة السكنية، وفي حال كانت الرسوم غير مقرة
+                        بعد فإنني أتعهد بتحرير شيك/شيكات خالية من القيمة وفي هذه الحالة أخول لجنة اتحاد الملاك بتعبئة
+                        تلك القيمة بعد اقرار الرسوم السنوية، ومن المفهوم لدي بأنه لا يحق لي استلام الوحدة السكنية دون
+                        تحرير الشيكات المذكورة وتقديمها لصالح لجنة اتحاد الملاك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ه.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">في حال عدم التزامي بدفع
+                        الاشتراكات والنفقات والمصاريف المبيّنة أعلاه خلال الفترة المحددّة من قبل اتحاد الملاك و/أو من
+                        قبل مجلس إدارته، يحق لاتحاد الملاك اتخاذ الاجراءات التي يراها مناسبة من أجل تحصيل تلك الاشتراكات
+                        والنفقات والمصاريف باعتبارها دين مستحق في ذمتي/ ذمة الشركة، لاتحاد الملاك. وأقر بأنني على علم
+                        تام بأنه لا يحق لي الحصول على أية خدمة مقدمة في مدينة روابي و/أو الانتفاع بالخدمات المقدمة
+                        للوحدة السكنية والأجزاء المشتركة الخاصة بها والحي الواقع فيه الوحدة السكنية دون الحصول على براءة
+                        ذمة صادرة عن لجنة اتحاد الملاك تفيد بتسديد كامل الالتزامات المالية المترتبة بذمتي له.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ز.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن ألتزم بتوقيع أي شخص،
+                        ستنتقل اليه ملكية الوحدة السكنية، على مثل هذا الاقرار/التعهد وذلك قبل استكمال نقل ملكية الوحدة
+                        السكنية له، كما أتعهد ألتزم بتزويد اتحاد الملاك بالنسخة الأصلية عن التعهد الموقع من قبل ذلك
+                        الشخص (المالك المستقبلي) ليتم الاحتفاظ به في سجلات الاتحاد.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ح.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">إنني أقر بأن ما جاء في
+                        هذا السند يعتبر نهائياً وقطعياً وغير قابل للرجوع أو الإلغاء، وأنني أتعهد وألتزم بعدم الاعتراض
+                        على ما جاء في هذا السند والأمور المتعلقة به والناشئة عنه، وإنني أسقط حقي بالإدعاء بيمين كذب
+                        الإقرار و/أو الدفع بعدم القبول و/أو الوفاء و/أو أي دفع شكلي أو موضوعي حول ما جاء في هذا السند
+                        والأمور المتعلقة به والناشئة عنه.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ط.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:15px;"> إنني أوقع هذا السند
+                        بدون ضغط أو إكراه وبإرادة حرة خالية من العيوب التزاماً مني بما جاء فيه.
+                    </div>
+
+                </form>
+            </div>
+            <div class="row display-block" style="margin-bottom:400px;">
+                <form class="form-style-4" method="post">
+                    <div class="col-xs-6">
+                    <span class="display-block font-size-25">الموقع<input type="text" value="" style="width:400px;"/>
+                    </span>
+                        <label class="display-block font-size-25">
+                            <span>شاهد</span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                    <div class="col-xs-6">
+                    <span class="display-block font-size-25">تحريراً في<input type="text" class="text-center"
+                                                                              value="<%-contractDate %>"
+                                                                              style="width:400px;"/>
+                    </span>
+                        <label class="display-block font-size-25">
+                            <span>شاهد</span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                </form>
+            </div>
+
+
+        </div>
+        <div class="row pagenation" dir="ltr" style="margin-bottom: 300px;float: left">
+            <div class="col-xs-12">
+                <form class="form-style-4" method="post">
+                    <h4 class="display-block text-left">
+
+                        <span>صفحة رقم</span>
+                        <input type="text" class="width-180 text-center" value="14"/>
+                    </h4>
+                </form>
+            </div>
+        </div>
+</iframe>
+
+
+<canvas class="canvasReceipt" height="1754" width="1500" style="display:none;"></canvas>
+<iframe id="contract17Template" style="display:none;">
+    <link rel="stylesheet" href="./css/bootstrap-3.3.2.css">
+    <link rel="stylesheet" href="./css/contract.css">
+    <div id="invoice" class="container">
+        <div class="col-xs-12" style="direction:rtl;">
+            <div class="row" style="margin-top:80px;margin-bottom:50px;">
+                <span class="text-center" style="color:#71BF45;"><h2>سند إقرار وتعهد</h2></span>
+            </div>
+            <div class="row display-block" style="margin-bottom:40px;">
+                <form class="form-style-4" action="" method="post">
+                    <span class="font-size-25 text-justify" style="margin-bottom:10px;">أنا الموقع امضائي <input
+                                type="text" value="<%- purchaser%>" class="text-center"
+                                style="width:600px;font-size: 20px;"/> حامل /ة هوية و/أو جواز سفر رقم <input type="text"
+                                                                                                             class="text-center"
+                                                                                                             value="<%- idNum%>"
+                                                                                                             style="width:500px;font-size: 20px;"/> (بصفتي المفوض بالتوقيع عن شركة <input
+                                type="text" class="text-center" value="<%- companyName%>" style="width:100px;"/>رقم تسجيل <input
+                                type="text" class="text-center" value="" style="width:150px;"/>لدى <input type="text"
+                                                                                                          value="<%-companyFor%>"
+                                                                                                          class="text-center"
+                                                                                                          style="width:100px;"/> ) مالك/ة الوحدة السكنية رقم<input
+                                type="text" class="text-center" value="<%-unitNum%>" style="width:100px;"/> الواقعة في الطابق رقم <input
+                                type="text" class="text-center" value="<%-floorNum%>" style="width:100px;"/> البالغة مساحتها <input
+                                type="text" value="<%-unitArea%>" class="text-center" style="width:100px;"/> متراً مربعاً من البناية رقم <input
+                                type="text" class="text-center" value="<%-buildingNum%>" style="width:100px;"/>الكائنة في حي <input
+                                type="text" value="<%-haiName%>" class="text-center" style="width:100px;"/> في بلدة روابي ("الوحدة السكنية")، أتعهد وأقر وأنا بكامل الصفات المعتبرة شرعاً وقانوناً بما يلي:</span>
+                </form>
+            </div>
+            <div class="row display-block" style="margin-bottom:50px;">
+                <form class="form-style-4" method="post">
+                    <div class="cell-lg-1 font-size-25 text-justify">أ.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن لي الحق الكامل
+                        والصلاحية القانونية التامة بإعطاء هذا الإقرار/التعهد وأني أتحمل كامل المسؤولية القانونية
+                        والواقعية وكامل النفقات والمصاريف والخسارة/ الكسب الفائت مهما كان نوعه والتي قد تترتب نتيجة
+                        العمل/التصرف بموجب هذا التعهد وإن ما ورد في مقدمة هذا السند يعتبر جزءاً لا يتجزأ منه ويقرأ معه
+                        كبند من بنوده.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ب.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن التزم بالامتثال
+                        لجميع الأحكام المنصوص عليها في النظام الداخلي الخاص باتحاد ملاك رقم<input type="text"
+                                                                                                  class="text-center"
+                                                                                                  value="<%-ownersUnionNum%>"
+                                                                                                  style="width:100px;"/>الصادر
+                        عن كاتب عدل محكمة بلدية رام الله بتاريخ<input type="text" class="text-center font-small"
+                                                                      value="<%-ownersUnionProDate%>"
+                                                                      style="width:100px;"/>للوحدات السكنية في حي <input
+                                type="text" value="<%- haiName%>" class="text-center" style="width:100px;"/>والبالغة
+                        مساحته <input type="text" class="text-center" value="<%-haiArea%>" style="width:100px;"/> متراً
+                        مربعاً(”اتحاد الملاك“) وعقد التأسيس الخاص باتحاد الملاك رقم <input type="text"
+                                                                                           class="text-center"
+                                                                                           value="<%-ownersUnionNum%>"
+                                                                                           style="width:100px;"/> الصادر
+                        عن كاتب عدل محكمة بلدية رام الله بتاريخ <input type="text" class="text-center font-small"
+                                                                       value="<%-ownersUnionProDate%>"
+                                                                       style="width:100px;"/> والمرفق بهذا الإقرار/
+                        التعهد وأية تعديلات تطرا عليه، علماً بأنني اطلعت على أحكام عقد التأسيس والنظام الداخلي لاتحاد
+                        الملاك اطلاعاً كافياً وتم إفهامي بما ورد فيهما.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ج.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن ألتزم بإيفاء كافة
+                        الالتزامات المالية التي يفرضها اتحاد الملاك على الوحدة السكنية المبيَنة أعلاه ودفعها لاتحاد
+                        الملاك خلال الفترة المحدّدة من قبله و/أو من قبل مجلس ادارته، من اشتراكات دورية واشتراكات خاصة
+                        بالتحسينات الكبيرة على الأجزاء المشتركة في العقار أو المتعلقة بسداد العجز في ميزانية اتحاد
+                        الملاك لسداد النفقات التشغيلية. كما ألتزم بدفع أية نفقات ومصاريف مشتركة أخرى يفرضها اتحاد الملاك
+                        على مالكي الوحدات السكنية لإدارة الأجزاء المشتركة في العقار وصيانتها وتصليحها والمحافظة عليها.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">د.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">أقر بأنني على علم تام
+                        بأن رسوم الاشتراك السنوي المفروضة من قبل اتحاد الملاك لادارة الأجزاء المشتركة في العقار
+                        والمحافظة عليها ، تدفع مقدما عن كل سنة، وعليه فإنني أتعهد بتحرير شيك/شيكات عدد <input
+                                type="text" class="text-center" value="<%-checksNum%>" style="width:100px;"/> بقيمة رسوم
+                        الاشتراك الشهري وبمواعيد استحقاقها وذلك عند استلامي للوحدة السكنية، وفي حال كانت الرسوم غير مقرة
+                        بعد فإنني أتعهد بتحرير شيك/شيكات خالية من القيمة وفي هذه الحالة أخول لجنة اتحاد الملاك بتعبئة
+                        تلك القيمة بعد اقرار الرسوم السنوية، ومن المفهوم لدي بأنه لا يحق لي استلام الوحدة السكنية دون
+                        تحرير الشيكات المذكورة وتقديمها لصالح لجنة اتحاد الملاك.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ه.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">في حال عدم التزامي بدفع
+                        الاشتراكات والنفقات والمصاريف المبيّنة أعلاه خلال الفترة المحددّة من قبل اتحاد الملاك و/أو من
+                        قبل مجلس إدارته، يحق لاتحاد الملاك اتخاذ الاجراءات التي يراها مناسبة من أجل تحصيل تلك الاشتراكات
+                        والنفقات والمصاريف باعتبارها دين مستحق في ذمتي/ ذمة الشركة، لاتحاد الملاك. وأقر بأنني على علم
+                        تام بأنه لا يحق لي الحصول على أية خدمة مقدمة في مدينة روابي و/أو الانتفاع بالخدمات المقدمة
+                        للوحدة السكنية والأجزاء المشتركة الخاصة بها والحي الواقع فيه الوحدة السكنية دون الحصول على براءة
+                        ذمة صادرة عن لجنة اتحاد الملاك تفيد بتسديد كامل الالتزامات المالية المترتبة بذمتي له.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ز.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">بأن ألتزم بتوقيع أي شخص،
+                        ستنتقل اليه ملكية الوحدة السكنية، على مثل هذا الاقرار/التعهد وذلك قبل استكمال نقل ملكية الوحدة
+                        السكنية له، كما أتعهد ألتزم بتزويد اتحاد الملاك بالنسخة الأصلية عن التعهد الموقع من قبل ذلك
+                        الشخص (المالك المستقبلي) ليتم الاحتفاظ به في سجلات الاتحاد.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ح.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:8px;">إنني أقر بأن ما جاء في
+                        هذا السند يعتبر نهائياً وقطعياً وغير قابل للرجوع أو الإلغاء، وأنني أتعهد وألتزم بعدم الاعتراض
+                        على ما جاء في هذا السند والأمور المتعلقة به والناشئة عنه، وإنني أسقط حقي بالإدعاء بيمين كذب
+                        الإقرار و/أو الدفع بعدم القبول و/أو الوفاء و/أو أي دفع شكلي أو موضوعي حول ما جاء في هذا السند
+                        والأمور المتعلقة به والناشئة عنه.
+                    </div>
+
+                    <div class="cell-lg-1 font-size-25 text-justify">ط.</div>
+                    <div class="cell-lg-2 font-size-25 text-justify" style="margin-bottom:15px;"> إنني أوقع هذا السند
+                        بدون ضغط أو إكراه وبإرادة حرة خالية من العيوب التزاماً مني بما جاء فيه.
+                    </div>
+
+                </form>
+            </div>
+            <div class="row display-block" style="margin-bottom:400px;">
+                <form class="form-style-4" method="post">
+                    <div class="col-xs-6">
+                    <span class="display-block font-size-25">الموقع<input type="text" value="" style="width:400px;"/>
+                    </span>
+                        <label class="display-block font-size-25">
+                            <span>شاهد</span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                    <div class="col-xs-6">
+                    <span class="display-block font-size-25">تحريراً في<input type="text" class="text-center"
+                                                                              value="<%-contractDate %>"
+                                                                              style="width:400px;"/>
+                    </span>
+                        <label class="display-block font-size-25">
+                            <span>شاهد</span>
+                        </label>
+                        <span class="display-block font-size-25">الاسم الرباعي<input type="text" value=""
+                                                                                     style="width:400px;"/>
+                    </span>
+                        <span class="display-block font-size-25">التوقيع<input type="text" value=""
+                                                                               style="width:400px;"/>
+                    </span>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</iframe>
+

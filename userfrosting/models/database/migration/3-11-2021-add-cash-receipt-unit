@@ -1,0 +1,23 @@
+CREATE TABLE `reservation_system`.`units_cash_receipts` ( `id` INT(10) NOT NULL AUTO_INCREMENT , `unit_id` INT(10) NOT NULL , `receiptDate` TEXT NOT NULL , `signature` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ALTER TABLE `units_cash_receipts` ADD CONSTRAINT `unit_id_FK_units` FOREIGN KEY (`unit_id`) REFERENCES `uf_unit`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+CREATE TABLE `reservation_system`.`units_cash_receipts_prices` ( `id` INT(10) NOT NULL AUTO_INCREMENT , `units_cash_receipts_id` INT(10) NOT NULL , `description` LONGTEXT NOT NULL , `payment_way` VARCHAR(255) NOT NULL , `total` DOUBLE NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+ALTER TABLE `units_cash_receipts_prices` ADD CONSTRAINT `units_cash_receipts_prices_FK_units` FOREIGN KEY (`units_cash_receipts_id`) REFERENCES `units_cash_receipts`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+INSERT INTO `uf_configuration` (`id`, `plugin`, `name`, `value`, `description`) VALUES (NULL, 'userFrosting', 'CashReceiptEmailList', '', 'this is the email list of cash receipt');
+
+
+INSERT INTO `emails_templates` (`id`, `subject`, `content`, `user_id`, `status`, `created_at`, `name`) VALUES (NULL, 'Cash Receipt Email', 'any text', '1', 'ACTIVE', '2020-11-16', 'Cash Receipt Email')
+
+
+ALTER TABLE `units_cash_receipts` ADD `user_id` INT(10) UNSIGNED NULL AFTER `signature`;
+
+ALTER TABLE `units_cash_receipts` ADD CONSTRAINT `user_id_FK_users` FOREIGN KEY (`user_id`) REFERENCES `uf_user`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+INSERT INTO `permissions` (`id`, `code`, `name`, `status`, `created_at`) VALUES (NULL, 'uri_cash_receipts', 'Cash Receipts', 'ACTIVE', '2021-11-10')

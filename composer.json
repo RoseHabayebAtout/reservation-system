@@ -1,0 +1,8 @@
+{
+    "require": {
+        "php": "7.2.5",
+        "mpdf/mpdf": "8.0.10",
+        "langleyfoxall/math_eval": "^2.0",
+      "ext-dom": "*"
+    }
+}

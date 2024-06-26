@@ -1,0 +1,61 @@
+{
+    "check_date" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_PASSWORD"
+            },
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+     "check_no" : {
+        "validators" : {
+            "numeric" : {
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+     "check_amount" : {
+        "validators" : {
+            "numeric" : {
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+     "check_bank" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    },
+    "check_currency" : {
+        "validators" : {
+            "length" : {
+                "min" : 1,
+                "max" : 50,
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        },
+        "sanitizers" : {
+            "raw" : {}
+        }    
+    }
+}

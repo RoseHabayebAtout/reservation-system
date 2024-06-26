@@ -1,0 +1,8 @@
+CREATE TABLE `permissions` (
+`id` int(10) NOT NULL AUTO_INCREMENT,
+`code` varchar(255) NOT NULL,
+`name` varchar(255) NOT NULL,
+`status` varchar(255) NOT NULL,
+`created_at` date NOT NULL,
+PRIMARY KEY (`id`),
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8

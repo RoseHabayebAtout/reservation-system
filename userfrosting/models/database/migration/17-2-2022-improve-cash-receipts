@@ -1,0 +1,7 @@
+ALTER TABLE `units_cash_receipts` ADD `related_to` INT(10) NULL AFTER `user_id`, ADD `note` TEXT NOT NULL AFTER `related_to`;
+
+ALTER TABLE `units_cash_receipts` ADD CONSTRAINT `related_to_FK_cash_id` FOREIGN KEY (`related_to`) REFERENCES `units_cash_receipts`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+CREATE TABLE `reservation_system`.`units_cash_receipts_files` ( `id` INT(10) NOT NULL AUTO_INCREMENT , `units_cash_receipts_id` INT(10) NOT NULL , `file_name` VARCHAR(255) NOT NULL , `upload_path` TEXT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `units_cash_receipts_files` ADD CONSTRAINT `units_cash_receipts_id_FK_units` FOREIGN KEY (`units_cash_receipts_id`) REFERENCES `units_cash_receipts`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;

@@ -1,0 +1,1256 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% block page %}
+    {% set page = page | merge({
+        "title"       : "Cash Receipts",
+        "description" : "Cashing Receipts for Units"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <style>
+        #create, #view {
+            width: 50% !important;
+        }
+
+        .paginate_button {
+            margin: 5px;
+        }
+
+        #cashReceiptTable_paginate {
+            cursor: pointer;
+        }
+
+        @media print {
+
+            #view {
+                width: 100% !important;
+            }
+
+            #company_info_view {
+                margin-top: -340px;
+            }
+
+            .hideAtPrint {
+                display: none;
+            }
+
+            .no-border {
+                border: none;
+            }
+
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-xs-12 col-xs-12">
+            <div id="settings-alerts">
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-money">&nbsp;{{ translate('cash_receipts') }}</i>
+
+                    </span>
+                    <div class='pull-right users-btn-panel'>
+                        <button data-toggle="modal" id="createButton" class="btn btn-success"><i
+                                    class="fa fa-plus-square"></i> {{ translate('add_new_cash_receipts') }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+
+                    <br>
+                    <br>
+
+                    <table id="cashReceiptTable"
+                           class="tablesorter table table-bordered table-hover table-striped tablesorter-bootstrap dataTables table display "
+                           cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ translate('company_code') }} </th>
+                            <th>{{ translate('building_type') }}</th>
+                            <th>{{ translate('customer_name') }}</th>
+                            <th>{{ translate('subtotal') }}</th>
+                            <th>{{ translate('created_by') }}</th>
+                            <th>{{ translate('receipt_date') }}</th>
+                            <th>Additional Note</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody id="bodyOfWholeTable">
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="create" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('add_new_cash_receipts') }}</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        Cash Receipts
+
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="">Apartment:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="unit_select">
+                                    <option disabled selected> Choose apartment</option>
+                                    {% for unit in units %}
+                                        <option value="{{ unit.id }}">{{ unit.rawabi_code }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="">related cash:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="related_cash_select">
+                                    <option disabled selected value="0"> Choose cash receipt</option>
+                                    {% for cash in unitsCashReceipt %}
+                                        <option value="{{ cash.id }}">{{ cash.id }} - {{ cash.receiptDate }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6 pull-right">
+                        <img width="150" src="{{ site.uri.public }}/uploads/{{ site.site_logo }}" height="150"/>
+                        <br/>
+                        <br/>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="">Date:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="date" id="receiptDate">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="">Receipt No.:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" disabled>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2> FROM </h2>
+                        <div id="fromContent">
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-6">
+                        <h2> COMPANY </h2>
+                        <h5>{{ site.site_company_name }}</h5>
+                        <h5>{{ site.site_title }}</h5>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Sales price</h2>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <button class="btn btn-primary" id="addRow"> Add row</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <table class="table table-responsive">
+                        <thead>
+                        <th>Description</th>
+                        <th>Payment type</th>
+                        <th>Total</th>
+                        </thead>
+                        <tbody id="table">
+
+                        <tr>
+                            <td>
+                                <input class="form-control description" type="text">
+                            </td>
+                            <td>
+                                <select class="form-control payment-way">
+                                    <option>Cash</option>
+                                    <option>Transfer</option>
+                                    <option>Cheque</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input class="form-control total" type="text" value="">
+                            </td>
+                            <td>
+                                <select class="currency-select">
+                                    <option value="$">$</option>
+                                    <option value="Nis">Nis</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button onclick="$(this).parent().parent().remove()" class="btn btn-danger delete">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input class="form-control description" type="text">
+                            </td>
+                            <td>
+                                <select class="form-control payment-way">
+                                    <option>Cash</option>
+                                    <option>Transfer</option>
+                                    <option>Cheque</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input class="form-control total" type="text" value="">
+                            </td>
+                            <td>
+                                <select class="currency-select">
+                                    <option value="$">$</option>
+                                    <option value="Nis">Nis</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button onclick="$(this).parent().parent().remove()" class="btn btn-danger delete">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+
+                        <tr id="subtotal-section">
+                            <td>
+                            </td>
+                            <td>
+                                SubTotal
+                            </td>
+                            <td>
+                                <input class="form-control" id="subtotal" type="text" value="" readonly>
+                            </td>
+                            <td>
+                                <span class="form-control" id="currency">$</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="row" style="margin: -4px;">
+                    <h2>Note: </h2>
+
+                    <textarea rows="5" class="form-control" id="note"></textarea>
+                </div>
+
+                <div class="row" style="margin: -4px;">
+                    <h2>Additional Note: </h2>
+
+                    <textarea rows="5" class="form-control" id="additional_note"></textarea>
+                </div>
+
+                <div class="row" style=" margin: 9px;">
+                    <div class="col-sm-4">
+                        <label for="images">Upload Files</label>
+                        <input type="file"
+                               name="images[]"
+                               multiple
+                               id="images" class=" custom-file-input"
+                               accept="image/*">
+                    </div>
+
+                </div>
+
+
+                <div class="row" style="margin-right: 40px; margin: 10px;">
+                    <h3>Signature & Stamp</h3>
+                    <div class="col-sm-3">
+                        <input class="form-control no-border" type="text" id="signature">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+                <button type="button" id="addCashReceipt"
+                        class="btn btn-primary">{{ translate('save_receipt') }}</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="view" role="dialog" aria-labelledby="edit" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                <h4 class="modal-title custom_align" id="Heading">{{ translate('view_cash_receipts') }}</h4>
+            </div>
+            <div class="modal-body" id="modal-body-view">
+                <div class="row">
+                    <div class="col-sm-6">
+                        Cash Receipts
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="row form-group" id="related_to_div" style="display: none">
+                            <div class="col-sm-3">
+                                <label class="">Related To:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="related_to" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6 pull-right">
+                        <img width="150" src="{{ site.uri.public }}/uploads/{{ site.site_logo }}" height="150"/>
+                        <br/>
+                        <br/>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="">Date:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="receiptDate_view" readonly>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-3">
+                                <label class="">Receipt No.:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="text" id="autoIncrement" readonly>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row" id="company_info_view">
+                    <div class="col-sm-6">
+                        <h2> FROM </h2>
+                        <div id="fromContent_view">
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-6">
+                        <h2> COMPANY </h2>
+                        <h5>{{ site.site_company_name }}</h5>
+                        <h5>{{ site.site_title }}</h5>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Sales price</h2>
+                    </div>
+                </div>
+
+                <div class="row" style="margin: 10px;">
+                    <table class="table table-responsive">
+                        <thead>
+                        <th>Description</th>
+                        <th>Payment type</th>
+                        <th>Total</th>
+                        </thead>
+                        <tbody id="table_view">
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div class="row" style="margin: 10px;">
+                    <table class="table table-responsive">
+                        <thead>
+                        <th>file</th>
+                        <th>Action</th>
+                        </thead>
+                        <tbody id="table_files">
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="row" style="margin-right: 40px; margin: 10px;">
+                    <h2>Note: </h2>
+                    <div class="col-sm-12">
+                        <textarea rows="5" class="form-control" id="note_view" readonly></textarea>
+                    </div>
+
+                </div>
+
+                <div class="row" style="margin-right: 40px; margin: 10px;">
+                    <h2>Additional Note: </h2>
+                    <div class="col-sm-10">
+                        <textarea rows="5" class="form-control" id="additional_note_view"></textarea>
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-primary" id="updateCashNote">Update Additional Note</button>
+                    </div>
+                </div>
+
+                <div class="row" style="margin: 10px;">
+                    <h3>Signature & Stamp</h3>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="text" id="signature_view" readonly>
+                    </div>
+                </div>
+
+                <div class="row form-group" id="related_to_button_div" style="display: none; margin-top: 15px;">
+                    <div class="col-sm-3">
+                        <label class="">This cash receipt is related to (<a id="cashReceiptId"> </a>)</label>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer ">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ translate('cancel') }}</button>
+                <button type="button" id="print"
+                        class="btn btn-primary">{{ translate('print') }}</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block page_scripts %}
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="{{ site.uri.public }}/js/printThis.js" type="text/javascript"></script>
+    <script>
+
+        $(document).ready(function () {
+            var rentedTable = $('#cashReceiptTable').DataTable({
+                "responsive": true,
+                pageLength: 10,
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
+                'ajax': {
+                    "type": "Get",
+                    "url": site['uri']['public'] + "/units/cashReceipt/search",
+                    "data": {
+                        searchableText: $('#search').val()
+                    },
+                    "dataSrc": function (json) {
+                        return json['data'];
+                    }
+                },
+                "columns": [
+                    {
+                        "data": function (row, type, val, meta) {
+                            return row.id;
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return row.unit.rawabi_code;
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return row.unit.building_type;
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            // var customer_name = '';
+                            // if (row.unit.reservations_rel.length) {
+                            //     customer_name = row.unit.reservations_rel[0].customer_name;
+                            // }
+
+                            return row.customer_name;
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            var sum = 0;
+                            for (var j = 0; j < row.cash_receipt_pricing.length; j++) {
+                                sum += parseFloat(row.cash_receipt_pricing[j].total)
+                            }
+
+                            return addCommas(sum);
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+
+                            var user_did_action = '';
+                            if (row.user) {
+                                user_did_action = row.user.display_name;
+                            }
+
+                            return user_did_action;
+
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return row.receiptDate;
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return row.additional_note;
+                        }
+                    },
+                    {
+                        "data": function (row, type, val, meta) {
+                            return '<td><i style="cursor: pointer" class="ShowMe" data-id="' + row.id + '"><span class="fa fa-eye"></span></i></td>';
+                        }
+                    },
+
+                ],
+                "searching": true,
+            });
+
+
+            // Search();
+            $('#createButton').on('click', function () {
+                $('#create').modal("show");
+            });
+
+            $('#addRow').on('click', function () {
+
+                var currency = $('#currency').text();
+                var selecetedDollar = currency == '$' ? 'selected' : '';
+                var selecetedNis = currency == 'Nis' ? 'selected' : '';
+
+                $('#subtotal-section').before('<tr>\n' +
+                    '                                <td>\n' +
+                    '                                    <input class="form-control description" type="text" >\n' +
+                    '                                </td>\n' +
+                    '                                <td>\n' +
+                    '                                    <select class="form-control payment-way">\n' +
+                    '                                        <option>Cash</option>\n' +
+                    '                                        <option>Transfer</option>\n' +
+                    '                                        <option>Cheque</option>\n' +
+                    '                                    </select>\n' +
+                    '                                </td>\n' +
+                    '                                <td>\n' +
+                    '                                    <input class="form-control total" type="text" value="0.0">\n' +
+                    '                                </td>\n' +
+                    ' <td>' +
+                    '<select class="currency-select">' +
+                    '<option '+ selecetedDollar +' value="$" >$</option>' +
+                    '<option '+ selecetedNis +' value="Nis">Nis</option>' +
+                    '</select>' +
+                    ' </td>' +
+                    '<td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger delete">Delete</button></td>' +
+                    '                            </tr>');
+            });
+
+            $('#unit_select').on('change', function () {
+                var id = $(this).val();
+                const csrf_token = $("meta[name=csrf_token]").attr("content");
+                const url = site['uri']['public'] + "/unit/" + id;
+                const params = {
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+
+                    data = JSON.parse(data)
+                    if (data) {
+                        $('#fromContent').empty();
+                        if (data.customer_name) $('#fromContent').append('<h5 id="customer_name">' + data.customer_name + '</h5>');
+                        if (data.region) $('#fromContent').append('<h5 id="region">' + data.region + '</h5>');
+                        if (data.phone_number) $('#fromContent').append('<h5 id="phone_number">' + data.phone_number + '</h5>');
+                        if (data.email_address) $('#fromContent').append('<h5 id="email_address">' + data.email_address + '</h5>');
+                        if (data.customer_id) $('#fromContent').append('<h5 id="customer_id">' + data.customer_id + '</h5>');
+                        if (data.rawabi_code) $('#fromContent').append('<h5 id="rawabi_code">' + data.rawabi_code + '</h5>');
+
+
+                        if (data.currency) {
+                            $('.currency-select').val(data.currency)
+                            $('#currency').text(data.currency)
+                        }
+
+                    }
+                }).fail(function (err) {
+                    console.log("err", err);
+                });
+
+            });
+
+            $(document).on('keyup', '.total', function (){
+                var val = replaceAll($(this).val(),',','');
+                $(this).val(addCommas(val));
+            });
+
+            $(document).on('keyup click', '.delete, .total', function () {
+                var ele = $('.total');
+                var subtotal = 0;
+                for (var i = 0; i < ele.length; i++) {
+                    let val = replaceAll(ele[i].value, ',', '');
+                    subtotal += (parseFloat(val) || 0);
+                }
+
+                $('#subtotal').val(addCommas(subtotal))
+            });
+
+
+
+
+            $(document).on('click', '.ShowMe', function () {
+                var id = $(this).attr('data-id');
+                $('#print').attr('data-id', id);
+
+
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var url = site['uri']['public'] + "/units/cashReceipt/" + id;
+                var params = {
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    data = JSON.parse(data);
+                    //$('#unit_view').val(data.unit.rawabi_code)
+                    $('#receiptDate_view').val(data.receiptDate)
+                    $('#autoIncrement').val(data.id)
+                    $('#signature_view').val(data.signature)
+                    $('#note_view').val(data.note)
+                    $('#additional_note_view').val(data.additional_note)
+
+
+                    if (data.related_to) {
+                        $('#related_to').val(data.related_to.id + '  -  ' + data.related_to.receiptDate);
+                        $('#related_to_div').show();
+
+                        $('#cashReceiptId').text(data.related_to.id)
+                        $('#related_to_button_div').show()
+
+                    } else {
+                        $('#related_to_div').hide();
+                        $('#related_to_button_div').hide()
+
+                    }
+
+
+                    $('#fromContent_view').empty();
+
+                    if (data.customer_name) $('#fromContent_view').append('<h5>' + data.customer_name + '</h5>');
+                    if (data.region) $('#fromContent_view').append('<h5>' + data.region + '</h5>');
+                    if (data.phone_number) $('#fromContent_view').append('<h5>' + data.phone_number + '</h5>');
+                    if (data.email_address) $('#fromContent_view').append('<h5>' + data.email_address + '</h5>');
+                    if (data.customer_id) $('#fromContent_view').append('<h5>' + data.customer_id + '</h5>');
+
+                    if (data.unit.rawabi_code) $('#fromContent_view').append('<h5>' + data.unit.rawabi_code + '</h5>');
+
+
+                    $('#table_view').empty();
+                    var subtotal = 0;
+                    for (var i = 0; i < data.cash_receipt_pricing.length; i++) {
+                        subtotal += parseFloat(data.cash_receipt_pricing[i].total);
+                        var currency = data.cash_receipt_pricing[i].currency || "";
+
+
+                        $('#table_view').append('<tr>\n' +
+                            '                                <td>\n' +
+                            '                                    <input class="form-control description" type="text" readonly value="' + data.cash_receipt_pricing[i].description + '">\n' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '                                    <input class="form-control " type="text" readonly value="' + data.cash_receipt_pricing[i].payment_way + '">\n' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '                                    <input class="form-control " type="text" readonly value="' + addCommas(data.cash_receipt_pricing[i].total) + '">\n' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '                                    <input class="form-control " type="text" readonly value="' + currency + '">\n' +
+                            '                                </td>\n' +
+                            '                            </tr>');
+                    }
+
+                    var currencyForSubTotal = data.cash_receipt_pricing[0].currency || "";
+                    $('#table_view').append('' +
+                        '                            <td>\n' +
+                        '                            </td>\n' +
+                        '                            <td>\n' +
+                        '                                SubTotal\n' +
+                        '                            </td>\n' +
+                        '                            <td>\n' +
+                        '                                <input class="form-control" id="subtotal_view" type="text" readonly value="' + addCommas(subtotal) + '"/>\n' +
+                        '                            </td>\n' +
+                        '                            <td>\n' +
+                        '                                <input class="form-control" id="currency_view" type="text" readonly value="' + currencyForSubTotal + '"/>\n' +
+                        '                            </td>\n' +
+                        ' ');
+
+
+                    $('#table_files').empty();
+
+                    for (var i = 0; i < data.cash_receipt_files.length; i++) {
+
+                        var path2Splitted = (data.cash_receipt_files[i].upload_path).split('.');
+                        var fileExt = path2Splitted[path2Splitted.length - 1];
+                        var path = '/{{ project_name }}/public/' + data.cash_receipt_files[i].upload_path + '';
+
+                        if (fileExt == "pdf") {
+                            $('#table_files').append('<tr>\n' +
+                                '                                <td>\n' +
+                                '                                    <img style="width:auto; height:180px;" src="/{{ project_name }}/public/images/pdf.png">\n' +
+                                '                                </td>\n' +
+                                '                                <td>\n' +
+                                '                                    <a style="margin:5px;" href="' + path + '" download>download</a>' +
+                                '                                    <button class="btn btn-primary print">print</button>' +
+                                '                                </td>\n' +
+                                '                            </tr>');
+                        } else {
+                            $('#table_files').append('<tr>\n' +
+                                '                                <td>\n' +
+                                '                                    <img style="width:auto; height:180px;" src="' + path + '">\n' +
+                                '                                </td>\n' +
+                                '                                <td>\n' +
+                                '                                    <a style="margin:5px;" href="' + path + '" download>download</a>' +
+                                '                                    <button class="btn btn-primary print">print</button>' +
+                                '                                </td>\n' +
+                                '                            </tr>');
+                        }
+                    }
+
+
+                    $('#view').modal('show');
+                }).fail(function (err) {
+                    alert(_translate('error'))
+                    console.log("err", err);
+                });
+
+            });
+
+            $('#cashReceiptId').on('click', function () {
+                var id = parseInt($(this).text());
+                $('#print').attr('data-id', id);
+
+
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var url = site['uri']['public'] + "/units/cashReceipt/" + id;
+                var params = {
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    data = JSON.parse(data);
+                    //$('#unit_view').val(data.unit.rawabi_code)
+                    $('#receiptDate_view').val(data.receiptDate)
+                    $('#autoIncrement').val(data.id)
+                    $('#signature_view').val(data.signature)
+                    $('#note_view').val(data.note)
+
+
+                    if (data.related_to) {
+                        $('#related_to').val(data.related_to.id + '  -  ' + data.related_to.receiptDate);
+                        $('#related_to_div').show();
+
+                        $('#cashReceiptId').text(data.related_to.id)
+                        $('#related_to_button_div').show()
+
+                    } else {
+                        $('#related_to_div').hide();
+                        $('#related_to_button_div').hide()
+
+                    }
+
+
+                    $('#fromContent_view').empty();
+
+                    if (data.unit.reservations_rel.length > 0) {
+                        var reservation = data.unit.reservations_rel[0];
+                        if (reservation.customer_name) $('#fromContent_view').append('<h5>' + reservation.customer_name + '</h5>');
+                        if (reservation.region) $('#fromContent_view').append('<h5>' + reservation.region + '</h5>');
+                        if (reservation.phone_number) $('#fromContent_view').append('<h5>' + reservation.phone_number + '</h5>');
+                        if (reservation.email_address) $('#fromContent_view').append('<h5>' + reservation.email_address + '</h5>');
+                        if (reservation.customer_id) $('#fromContent_view').append('<h5>' + reservation.customer_id + '</h5>');
+                    }
+                    if (data.unit.rawabi_code) $('#fromContent_view').append('<h5>' + data.unit.rawabi_code + '</h5>');
+
+
+                    $('#table_view').empty();
+                    var subtotal = 0;
+                    for (var i = 0; i < data.cash_receipt_pricing.length; i++) {
+                        subtotal += parseFloat(data.cash_receipt_pricing[i].total);
+                        $('#table_view').append('<tr>\n' +
+                            '                                <td>\n' +
+                            '                                    <input class="form-control description" type="text" readonly value="' + data.cash_receipt_pricing[i].description + '">\n' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '                                    <input class="form-control " type="text" readonly value="' + data.cash_receipt_pricing[i].payment_way + '">\n' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '                                    <input class="form-control " type="text" readonly value="' + addCommas(data.cash_receipt_pricing[i].total) + '">\n' +
+                            '                                </td>\n' +
+                            '                            </tr>');
+                    }
+
+
+                    $('#table_view').append('' +
+                        '                            <td>\n' +
+                        '                            </td>\n' +
+                        '                            <td>\n' +
+                        '                                SubTotal\n' +
+                        '                            </td>\n' +
+                        '                            <td>\n' +
+                        '                                <input class="form-control" id="subtotal_view" type="text" readonly value="' + addCommas(subtotal) + '"/>\n' +
+                        '                            </td>\n' +
+                        ' ');
+
+
+                    $('#table_files').empty();
+
+                    for (var i = 0; i < data.cash_receipt_files.length; i++) {
+
+                        var path2Splitted = (data.cash_receipt_files[i].upload_path).split('.');
+                        var fileExt = path2Splitted[path2Splitted.length - 1];
+                        var path = '/{{ project_name }}/public/' + data.cash_receipt_files[i].upload_path + '';
+
+                        if (fileExt == "pdf") {
+                            $('#table_files').append('<tr>\n' +
+                                '                                <td>\n' +
+                                '                                    <img style="width:auto; height:180px;" src="/{{ project_name }}/public/images/pdf.png">\n' +
+                                '                                </td>\n' +
+                                '                                <td>\n' +
+                                '                                    <a href="' + path + '" download>download</a>' +
+                                '                                    <button class="btn btn-primary print">print</button>' +
+                                '                                </td>\n' +
+                                '                            </tr>');
+                        } else {
+                            $('#table_files').append('<tr>\n' +
+                                '                                <td>\n' +
+                                '                                    <img style="width:auto; height:180px;" src="' + path + '">\n' +
+                                '                                </td>\n' +
+                                '                                <td>\n' +
+                                '                                    <a href="' + path + '" download>download</a>' +
+                                '                                    <button class="btn btn-primary print">print</button>' +
+                                '                                </td>\n' +
+                                '                            </tr>');
+                        }
+                    }
+
+
+                    //  $('#view').modal('show');
+                }).fail(function (err) {
+                    alert(_translate('error'))
+                    console.log("err", err);
+                });
+
+            });
+
+            $('#addCashReceipt').on('click', function () {
+                var unit_id = $('#unit_select').val();
+                var receiptDate = $('#receiptDate').val();
+                var signature = $('#signature').val() ?? "";
+                var customer_name = $('#customer_name').text() ?? "";
+                var region = $('#region').text() ?? "";
+                var phone_number = $('#phone_number').text() ?? "";
+                var email_address = $('#email_address').text() ?? "";
+                var customer_id = $('#customer_id').text() ?? "";
+
+
+                var related_cash_select = $('#related_cash_select').val();
+                var note = $('#note').val() ?? "";
+                var additional_note = $('#additional_note').val() ?? "";
+                var files = document.getElementById('images').files;
+
+
+                if (!unit_id) {
+                    alert('Please select the unit');
+                    return false;
+                }
+
+                if (!receiptDate) {
+                    alert('Please select the date');
+                    return false;
+                }
+
+                var table = $('#table>tr');
+
+                if (table.length <= 1) {
+                    alert('You should select at least one sales price');
+                    return false;
+                }
+
+                var prices = [];
+
+                for (var i = 0; i < table.length - 1; i++) {
+                    prices.push({
+                        description: ((table[i]).getElementsByClassName('description')[0]).value || '',
+                        payment_way: ((table[i]).getElementsByClassName('payment-way')[0]).value || '',
+                        total: replaceAll(((table[i]).getElementsByClassName('total')[0]).value || '', ',', ''),
+                        currency: ((table[i]).getElementsByClassName('currency-select')[0]).value || '',
+                    })
+                }
+
+
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var url = site['uri']['public'] + "/unit/" + unit_id + "/cashReceipt/";
+                var params = {
+                    unit_id: unit_id,
+                    receiptDate: receiptDate,
+                    signature: signature,
+                    prices: prices,
+                    customer_name: customer_name,
+                    region: region,
+                    phone_number: phone_number,
+                    email_address: email_address,
+                    customer_id: customer_id,
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+
+                var data = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    data.append("images[]", files[i]);
+                }
+                data.append("unit_id", unit_id);
+                data.append("receiptDate", receiptDate);
+                data.append("signature", signature);
+                data.append("prices", JSON.stringify(prices));
+                data.append("related_cash_select", related_cash_select);
+                data.append("note", note);
+                data.append("additional_note", additional_note);
+                data.append("customer_name", customer_name);
+                data.append("region", region);
+                data.append("phone_number", phone_number);
+                data.append("email_address", email_address);
+                data.append("customer_id", customer_id);
+                data.append("csrf_token", encodeURIComponent(csrf_token));
+
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    data: data,
+                    contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                    processData: false, // NEEDED, DON'T OMIT THIS
+                }).done(function (data) {
+                    if (data == "There is no reservation for this unit") {
+                        alert('The Cash Receipt Added Successfully, but will not send email because the unit does not have reservation');
+                    } else {
+                        alert('The Cash Receipt Added Successfully');
+                    }
+
+                    rentedTable.ajax.reload();
+                    $('#create').modal("hide");
+
+                }).fail(function (err) {
+                    alert(_translate('error'))
+                    console.log("err", err);
+                });
+            });
+
+            $('#print').on('click', function () {
+
+                var id = $(this).attr('data-id');
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var url = site['uri']['public'] + "/units/cashReceipt/" + id;
+                var params = {
+                    csrf_token: encodeURIComponent(csrf_token)
+                };
+                $.ajax({
+                    type: "get",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    data = JSON.parse(data);
+
+                    var details = '';
+                    var subtotal = 0;
+                    for (var i = 0; i < data.cash_receipt_pricing.length; i++) {
+                        subtotal += parseFloat(data.cash_receipt_pricing[i].total);
+                        var currency = data.cash_receipt_pricing[i].currency || "";
+
+                        details += '<tr>\n' +
+                            '                                <td>\n' +
+                            '                                    ' +
+                            '<span>' + data.cash_receipt_pricing[i].description + '</span>' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '<span>' + data.cash_receipt_pricing[i].payment_way + '</span>' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '<span>' + addCommas(data.cash_receipt_pricing[i].total) + '</span>' +
+                            '                                </td>\n' +
+                            '                                <td>\n' +
+                            '<span>' + currency + '</span>' +
+                            '                                </td>\n' +
+                            '                            </tr>';
+
+                    }
+                    var currencyForSubTotal = data.cash_receipt_pricing[0].currency || "";
+
+                    details += '                            <td>\n' +
+                        '                            </td>\n' +
+                        '                            <td>\n' +
+                        '                                SubTotal\n' +
+                        '                            </td>\n' +
+                        '                            <td>\n' +
+                        '                                <span>' + addCommas(subtotal) + '</span>' +
+                        '                            </td>\n' +
+                        '                            <td>\n' +
+                        '                                <span>' + currencyForSubTotal + '</span>' +
+                        '                            </td>\n' +
+                        ' ';
+
+                    var from = '';
+                    if (data.unit.reservations_rel.length > 0) {
+                        var reservation = data.unit.reservations_rel[0];
+                        if (reservation.customer_name) from += '<h5>' + reservation.customer_name + '</h5>';
+                        if (reservation.region) from += '<h5>' + reservation.region + '</h5>';
+                        if (reservation.phone_number) from += '<h5>' + reservation.phone_number + '</h5>';
+                        if (reservation.email_address) from += '<h5>' + reservation.email_address + '</h5>';
+                        if (reservation.customer_id) from += '<h5>' + reservation.customer_id + '</h5>';
+                    }
+
+                    if (data.related_to) {
+                        var related_to = '<div class="row" dir="ltr"><h3>This cash receipt is related to: (' + data.related_to.id + ')</h3></div> <br/><br/>';
+                    } else {
+                        var related_to = '';
+                    }
+
+
+                    var newWin = window.open('', '');
+                    newWin.document.open();
+                    newWin.document.write(
+                        '<html >' +
+                        '<meta charset="utf-8">' +
+                        '<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">' +
+                        '' +
+                        '<style>' +
+                        '    body{' +
+                        '        margin: 25px !important;' +
+                        '         font-family:sans-serif;' +
+
+                        '    }' +
+                        '' +
+                        '@media print {' +
+                        'body {-webkit-print-color-adjust: exact;}' +
+                        '}' +
+                        '    @media print {' +
+                        '.pageBreak{page-break-before: always;}' +
+
+                        '        thead {' +
+                        '             -webkit-print-color-adjust: exact; }' +
+                        +
+                            '' +
+                        '        table{' +
+                        '            margin-top: 50px;' +
+                        '        }' +
+                        'p {' +
+                        'font-size: 35px !important;font-weight: 900' +
+                        '}' +
+                        'tr, td, th {' +
+                        'font-size:22px; border:1px lightgray solid; text-align:center;' +
+
+                        '}' +
+                        '    }' +
+                        '</style>' +
+                        '<body dir="rtl" style="counter-reset: page;" onload="window.print()">' +
+
+                        '<div class="row">' +
+                        '<div class="col-sm-3" style="text-align:center">' +
+                        '<img src="{{ site.uri.public }}/uploads/{{ site.site_logo }}" style="width:260px; height:auto;"/>' +
+                        '<br/>' +
+                        '<br/>' +
+                        '<h4 style="margin-right:55px;">' + data.receiptDate + '</h4>' +
+                        '<br/>' +
+                        '<h4 style="margin-right:65px;">' + data.id + '</h4>' +
+                        '</div>' +
+                        '<div class="col-sm-9" style="margin-top:70px">' +
+                        '<span style="color: gray; font-size: 35px;">Cash Receipt</span>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '<div class="row" id="">\n' +
+                        '                    <div class="col-sm-6">\n' +
+                        '                        <h2> COMPANY </h2>\n' +
+                        '                        <h5>{{ site.site_company_name }}</h5>\n' +
+                        '                        <h5>{{ site.site_title }}</h5>\n' +
+                        '\n' +
+                        '\n' +
+                        '                    </div>\n' +
+                        '                    <div class="col-sm-6">\n' +
+                        '                        <h2> FROM </h2>\n' +
+                        from +
+                        '\n' +
+                        '                    </div>\n' +
+                        '                </div>' +
+                        '<br/>' +
+                        '<br/>' +
+
+                        '<div class="row" dir="ltr"><h3>Apartment Number: ' + data.unit.rawabi_code + '</h3></div>' +
+
+                        '<br/>' +
+                        '<br/>' +
+
+                        '<div class="row" dir="ltr"><h3>Sales Price:</h3></div>' +
+
+                        '  <div class="row" dir="ltr">\n' +
+                        '                    <table style="width:100%; ">\n' +
+                        '                        <thead style=" color:white; background-color:red;">\n' +
+                        '                        <th>Description</th>\n' +
+                        '                        <th>Payment type</th>\n' +
+                        '                        <th>Total</th>\n' +
+                        '                        <th>Currency</th>\n' +
+                        '                        </thead>\n' +
+                        '                        <tbody">\n' +
+                        '\n' +
+                        details +
+                        '\n' +
+                        '                        </tbody>\n' +
+                        '                    </table>\n' +
+                        '                </div>' +
+
+                        '<br/>' +
+                        '<br/>' +
+
+                        related_to +
+
+                        '<div class="row" dir="ltr"><h3>Note :</h3></div> <div class="row" dir="ltr"><h3>' + data.note + '</h3></div> <br/><br/>' +
+                        '<div class="row" dir="ltr"><h3>Signature & Stamp: ' + data.signature + '</h3></div>' +
+                        '<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"> </' + "script>" +
+
+                        '</body>' +
+                        '</html>'
+                    );
+                    newWin.document.close();
+
+                }).fail(function (err) {
+                    alert(_translate('error'))
+                    console.log("err", err);
+                });
+            });
+
+            $(document).on('click', '.print', function (e) {
+                var path = (e.target.parentElement).querySelector('a').href;
+                var win = window.open('about:blank', "_new");
+                win.document.open();
+
+                var path2Splitted = (path).split('.');
+                var fileExt = path2Splitted[path2Splitted.length - 1];
+
+                if (fileExt == "pdf") {
+                    var ele = '<embed type="application/pdf" src="' + path + '" id="pdfDocument" width="100%" height="100%" />';
+                } else {
+                    var ele = '<img src="' + path + '"/>';
+                }
+
+                win.document.write([
+                    '<html>',
+                    '   <head><style>@media print {img{max-width: 100%; height: auto}}</style>',
+                    '   </head>',
+                    '   <body onload="window.print()" onafterprint="window.close()">',
+                    ele,
+                    '   </body>',
+                    '</html>'
+                ].join(''));
+                win.document.close();
+            });
+
+
+            $('#updateCashNote').on('click', function () {
+                var id = $('#print').attr('data-id');
+                var csrf_token = $("meta[name=csrf_token]").attr("content");
+                var additional_note = $('#additional_note_view').val();
+                var url = site['uri']['public'] + "/units/cashReceipt/" + id + "/updateNote";
+                var params = {
+                    csrf_token: encodeURIComponent(csrf_token),
+                    additional_note: additional_note,
+                };
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    data: params
+                }).done(function (data) {
+                    alert('Note Updated Successfully')
+                }).fail(function (err) {
+                    alert(_translate('error'))
+                    console.log("err", err);
+                });
+            });
+
+            $(document).on('change', '.currency-select', function () {
+
+                var val = $(this).val();
+                $('.currency-select').val(val);
+                $('#currency').text(val);
+            });
+        });
+
+        function addCommas(price) {
+            price += '';
+            x = price.split('.');
+            x1 = x[0];
+            x2 = x.length > 1 ? '.' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+            }
+            return x1 + x2;
+        }
+
+        function replaceAll(allString, replaceMatch, replaceWith){
+            let index = allString.indexOf(replaceMatch);
+            while(index != -1) {
+                let newClassName = allString.substring(0, index);
+                newClassName += replaceWith;
+                newClassName += allString.substring(index + replaceMatch.length, allString.length);
+                allString = newClassName;
+                index = allString.indexOf(replaceMatch);
+            }
+
+            return allString;
+        }
+
+    </script>
+{% endblock %}

@@ -1,0 +1,32 @@
+<style>
+    * {
+        font-size: 12pt !important;
+    }
+</style>
+
+<div class="modal fade contract-modal-lg" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel" id="contract-lg-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                    <fieldset>
+                        <div id="main_contract_container" class="display-none">
+                            <form class="parent__scroallable">
+                                <div id="contract_template_contents">{{ translate('loading_template') }}</div>
+                            </form>
+
+                            <div dir="rtl" id="contract_save_success" class="alert alert-success display-none" role="alert">
+                                {{ translate('contract_saved') }}
+                            </div>
+
+                            <div dir="rtl" id="contract_save_error" class="alert alert-danger display-none" role="alert">
+                                {{ translate('contract_unsaved') }}
+                            </div>
+
+                        </div>
+                    </fieldset>
+            </div><!-- /.modal-body -->
+            {% include 'components/reservation/contract_type_template.twig' %}
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.contract-modal-lg -->

@@ -1,0 +1,19 @@
+{
+    "addition_name" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_USERNAME"
+            }
+        }
+    },
+    "addition_value" : {
+        "validators" : {
+            "required" : {
+                "message" : "ACCOUNT_SPECIFY_PASSWORD"
+            },
+            "numeric" : {
+                "message" : "ACCOUNT_PASS_CHAR_LIMIT"
+            }
+        }
+    }   
+}

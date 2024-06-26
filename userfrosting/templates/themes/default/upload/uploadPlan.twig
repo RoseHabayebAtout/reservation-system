@@ -1,0 +1,475 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "upload" %}
+
+{% block page %}
+    {% set page = page | merge({
+        "title"       : "Upload Plan",
+        "description" : "A way to upload Plans and show them in the current system"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="settings-alerts"></div>
+            <div class="panel panel-primary">
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-upload'></i> {{ translate('upload_plans') }}</h3>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div id="success" class="hidden alert"></div>
+                    <div id="error" class="hidden alert" style="background-color: red"></div>
+                    <div class="col-xs-8">
+                        {# Form that handle the whole process #}
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <label for="neighbrhoodList"> {{ translate('filter_by') }}: </label>
+                                <select class="filter-option" id="neighbrhoodList">
+                                    <option value="25" selected disabled>{{ translate('choose_neighborhood') }}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-xs-6">
+                                {#                                <label for="StorageParkingList"> {{ translate('storage_or_parking') }} : </label>#}
+                                <label for="StorageParkingList"> {{ translate('Type') }} : </label>
+                                <select class="filter-option" id="StorageParkingList">
+                                    <option value="25" selected disabled>{{ translate('please_choose') }} </option>
+                                    <option value="Storages">{{ translate('storage') }} </option>
+                                    <option value="Parkings">{{ translate('parking') }} </option>
+                                    <option value="Units">{{ translate('Unit') }} </option>
+                                </select>
+                            </div>
+
+                            <!-- <form method="post" enctype="multipart/form-data"  action="" class="form" target="_SELF">
+                {# we used multiple to handle multiple files uploading process #}
+                <div class="form-group">
+                    <label for="images">Select Images to upload</label>
+                    <input type="file"
+                           name="images[]"
+                           id="images" class="form-control custom-file-input"
+                    accept="image/*">
+                    <div class="content row" id="content"></div>
+                </div>
+             </form> -->
+                        </div>
+                        {# Div to show current upload status #}
+                        <div id="response" hidden="true"></div>
+                        {# List to show uploaded files  #}
+                        <ul id="image-list" class="images-container">
+                            {# Items for this list will appended dynamically from script #}
+                        </ul>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <label class="form-group col-xs-offset-3"> <span
+                                                class="selected_title_changed"></span> {{ translate('company_code') }}
+                                    </label>
+                                </div>
+                                <div class="col-xs-6">
+                                    <label class="form-group col-xs-offset-5">  {{ translate('selected_units') }} <span
+                                                class="selected_title_changed"></span></label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-3 col-xs-offset-1">
+                                    <select id="rightValues" size="8" multiple
+                                            class="form-group select-option"> </select>
+                                </div>
+
+                                <div class="col-xs-3 top-margin col-xs-offset-1">
+                                    <div class="row">
+                                        <input type="button" id="btnLeft" value="&gt;&gt;"
+                                               class="btn btn-default uploadBtn"/>
+                                        <input type="button" id="btnRight" value="&lt;&lt;"
+                                               class="btn btn-default uploadBtn"/>
+                                    </div>
+                                    <!--  <div class="row">
+                                      <button onclick="upload()"  class="btn btn-upload"> Upload </button>
+                                      </div> -->
+                                </div>
+                                <div class="col-xs-3">
+                                    <select id="leftValues" size="8" multiple class="form-group select-option"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-xs-offset-1">
+                            <input type="text" id="txtRight" class="form-group" hidden="true"/>
+                            <!-- <button onclick="upload()"  class="btn btn-success btn-width"> upload </button> !-->
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+
+                                <form method="post" enctype="multipart/form-data" action="" class="form" target="_SELF">
+                                    {# we used multiple to handle multiple files uploading process #}
+                                    <div class="form-group">
+                                        <label for="images">{{ translate('select_images_to_upload') }}</label>
+                                        <input type="file"
+                                               name="images[]"
+                                               multiple
+                                               id="images" class="form-control custom-file-input"
+                                               accept="image/*">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-xs-6">
+                                <button onclick="upload()"
+                                        class="btn btn-upload col-xs-offset-4"> {{ translate('upload') }}</button>
+                            </div>
+
+                            <div class="content row" id="content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade hint-modal-lg" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <h1>{{ translate('hint') }}!</h1>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <h4> {{ translate('select_file_error') }}
+                        </h4>
+                    </div>
+                </div>
+                <div class="row lead">
+                    <div class="col-xs-offset-2 col-xs-9 ">
+                        <div class="pull-right">
+                            <button class="btn  btn-danger" id="cancelReservationBtn" onclick="hideHintModal()">OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- spinner loader  loader-modal-lg modal -->
+    {% include 'components/common/spinnerLoader.twig' %}
+{% endblock %}
+
+{# This block allows you to create page-specific Javascript in a child template #}
+{% block page_scripts %}
+    <script>
+        $(document).ready(function () {
+            getneighborhoodFilterOptions();
+            $("#neighbrhoodList").change(function () {
+                getNeighbrhoodCode();
+            });
+            $('input[type=file]').change(function () {
+                var val = $(this).val().toLowerCase();
+                var regex = new RegExp("(.*?)\.(JPEG|JPG|PNG|jpg|png|GIF|gif|jpeg)$");
+                if (!(regex.test(val))) {
+                    $(this).val('');
+                    $('.hint-modal-lg').modal("show");
+                    $('#upload').attr('disabled', true);
+                } else {
+                    $('.hint-modal-lg').modal("hide");
+                    $('#upload').attr('disabled', false);
+                }
+
+            });
+        });
+        $("#btnLeft").click(function () {
+            var selectedItem = $("#rightValues option:selected");
+            $("#leftValues").append(selectedItem);
+        });
+        $("#btnRight").click(function () {
+            var selectedItem = $("#leftValues option:selected");
+            // $("#rightValues").append(selectedItem);
+            $("#rightValues").append(selectedItem);
+            //$('#rightValues').find('select option:eq(0)').prop('selected', true);
+        });
+        $("#rightValues").change(function () {
+            var selectedItem = $("#rightValues option:selected");
+            $("#txtRight").val(selectedItem.text());
+        });
+
+        function upload() {
+            (function ($) {
+                var csrf_token = $("meta[name=csrf_token]").attr("content"),
+                    url = site['uri']['public'] + "/uploadPlan/up/",
+                    input = document.getElementById("images"),
+                    formdata = false,
+                    message = "",
+                    text = "",
+                    nameOfFile = {},
+                    lsObject = {}
+                ;
+
+                // Getting number of images to be uploaded
+                var $imagesNumber = 1;
+                // Getting File itself
+                var $fileInput = $('input[type="file"][name="images\\[\\]"]');
+                // Input used to style files
+                var $containerText = $('div[id="content"]');
+
+                // Add error status
+                var $error = $('#error');
+                // Add success status
+                var $success = $('#success');
+                if (window.FormData) {
+                    formdata = new FormData();
+                    //  document.getElementById("btn").style.display = "none";
+                }
+                if (input.addEventListener) {
+                    //input.addEventListener("", function () {
+                    var i = 0,
+                        len = input.files.length,
+                        reader,
+                        file
+                    ;
+                    var actualLength = 10;
+                    if (len > actualLength) {
+                        //Check if it is either empty or he exceed allowed number
+                        if (actualLength === 0 || actualLength === "") {
+                            message = _translate('field_empty');
+                            $imagesNumber.parents('.form-group').addClass('has-error');
+                        } else {
+                            message = 'Please, be strict to ' + actualLength + ' images you want to upload';// _translate('strict_number_of_images');
+                        }
+                        $error.removeClass('hidden').text(message);
+                    } else {
+                        $error.addClass('hidden');
+                        if (len === 0) {
+                            alert(_translate('image_empty'));
+                        } else {
+                            for (; i < len; i++) {
+                                // var add = Date.now() + '.png';
+                                file = input.files[i];
+                                // file.name = "add";
+                                // nameOfFile['name' + i] = add;
+                                // if ((file.size / (1024 * 1024)) > 3) {
+                                //     $error
+                                //         .removeClass('hidden')
+                                //         .addClass('alert-danger')
+                                //         .text(_translate('max_3_mb'));
+                                //     return;
+                                // }
+                                {#lsObject = {#}
+                                {#    'name': add,#}
+                                {#    'size': file.size,#}
+                                {#    'path': '/{{ project_name }}/public/uploads/' + add#}
+                                {#};#}
+                                // localStorage.setItem('image' + i, JSON.stringify(lsObject));
+                                if (!!file.type.match(/image.*/)) {
+                                    if (window.FileReader) {
+                                        reader = new FileReader();
+                                        reader.readAsDataURL(file);
+                                    }
+                                    if (formdata) {
+                                        formdata.append("images[]", file);
+                                        formdata.append("csrf_token", encodeURIComponent(csrf_token));
+                                        formdata.append('length', len);
+                                        // formdata.append('newname', add);
+                                        formdata.append('id', $('#leftValues').val());
+                                        formdata.append('type', $('#StorageParkingList').val());
+                                    }//if formdata
+                                } // file.type
+                            } //for
+
+                            if (formdata) {
+                                var request = $.ajax({
+                                    url: url,
+                                    type: "POST",
+                                    data: formdata,
+                                    processData: false,
+                                    contentType: false,
+                                    success: function (res) {
+                                        document.getElementById("response").innerHTML = res;
+                                    }
+                                }).done(function (data) {
+
+                                    data = JSON.parse(data);
+
+                                    data.forEach(function (item) {
+                                            showUploadedItem(item);
+                                    });
+
+                                    // for (var item in data) {
+                                    //     // text += "<div class='col-xs-3'>" +
+                                    //     //     "<span class='tag'>" + data.file_name + "</span>" +
+                                    //     //     "</div>";
+                                    // }
+                                    // console.log('nameOfFile', nameOfFile, url)
+                                    //
+                                    // for (var item in localStorage) {
+                                    //     var cItem = item.toString();
+                                    //     var subString = 'image';
+                                    //
+                                    //     // Check if that item contains /image/
+                                    //     if (cItem.indexOf(subString) !== -1) {
+                                    //
+                                    //         localStorage.removeItem('' + item);
+                                    //     }
+                                    // }
+                                    // $.when(request).done(function () {
+                                    //     $success
+                                    //         .addClass('alert-success')
+                                    //         .removeClass('hidden')
+                                    //         .text(_translate('file_uploaded_successfully'));
+                                    //     $('#images').replaceWith($('#images').val('').clone(true));
+                                    //
+                                    // });
+
+                                });
+                            }
+                        }
+                    }
+                }
+            }(jQuery));
+        }
+
+        //To Be added for the cancel
+        //<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>  for cancel button
+        var count = 0;
+
+        // Takes items from local Storage and show them in the view
+        function showUploadedItem(source) {
+            // source is an object {}
+            count++;
+            var list = document.getElementById("image-list"),
+                li = document.createElement("li"),
+                img = document.createElement("img"),
+                spanName = document.createElement('span'),
+                spanSize = document.createElement('span'),
+                magnifySpan = document.createElement('span'),
+                wrapDiv = document.createElement('div'),
+                spanWrapDiv = document.createElement('div'),
+                cancelDiv = document.createElement('div'),
+                buttonRemove = document.createElement('button'),
+                spanIcon = document.createElement('span'),
+                icon = document.createElement('i')
+            ;
+
+            img.src = source.upload_path;
+            wrapDiv.className = 'col-xs-2 no-padding';
+            cancelDiv.className = 'col-xs-2';
+            buttonRemove.className = 'close';
+            spanIcon.className = 'glyphicon glyphicon-remove col-xs-offset-10';
+            spanIcon.setAttribute('id', 'spanIcon');
+            buttonRemove.setAttribute('type', 'button');
+            buttonRemove.setAttribute('id', 'list' + (count + 1));
+            spanWrapDiv.className = 'col-xs-8 flex-parent-preview';
+            spanName.className = 'attachedSpan';
+            spanSize.className = 'attachedSpan';
+            magnifySpan.className = 'magnify';
+            icon.className = 'fa fa-search';
+            spanName.textContent = 'Name: ' + source.file_name;
+            spanSize.textContent = 'Size: ' + Number(source.file_size) / (1024 * 1024);
+
+            wrapDiv.appendChild(img);
+            wrapDiv.appendChild(magnifySpan);
+            li.appendChild(wrapDiv);
+            spanWrapDiv.appendChild(spanName);
+            spanWrapDiv.appendChild(spanSize);
+            li.appendChild(spanWrapDiv);
+
+            cancelDiv.appendChild(buttonRemove);
+            cancelDiv.appendChild(spanIcon);
+            li.appendChild(cancelDiv);
+            $('li').attr('id', 'list' + (count));
+            // Append them to parent (ul with id=image-list);
+            list.appendChild(li);
+        }
+
+        // Make that button reload the whole page
+        $('#main').on('click', 'button[id="refresh"]', function (e) {
+            window.location.reload(true);
+        });
+
+        $("#image-list").on("click", "li span", function () {
+            var projIndex = $(this).index();
+            $(this).parent().parent().css("display", "none"); // hide the current listItem
+        });
+
+        function hideHintModal() {
+            $('.hint-modal-lg').modal("hide");
+            $('#upload').attr('disabled', false);
+        }
+
+        function getneighborhoodFilterOptions() {
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var params = {csrf_token: encodeURIComponent(csrf_token)};
+            var url = site['uri']['public'] + "/charts/get-neighborhoods/";
+            var req1 = $.ajax({
+                type: "GET",
+                url: url,
+                data: params
+
+            }).done(function (data) {
+                data = JSON.parse(data);
+                for (var propertyName in data) {
+                    $("#neighbrhoodList").append(new Option(propertyName, propertyName));
+                }
+            }).fail(function (err) {
+                console.log("err", err)
+            });
+        }
+
+        function getNeighbrhoodCode() {
+            $("#rightValues").empty();
+            $("#leftValues").empty();
+            var neighborhood = $('#neighbrhoodList').val();
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var url = site['uri']['public'] + '/uploadPlan/getFromNeighbrhood/';
+            var type = $('#StorageParkingList').val();
+            if (type == 25 || type == "25" || type == null) {
+                alert('you should choose parking or storage');
+                $('#neighbrhoodList').prop('selectedIndex', 0);
+                return false;
+            }
+            var params = {neighborhood: neighborhood, type: type, csrf_token: encodeURIComponent(csrf_token)};
+            // Append page CSRF token
+            var req1 = $.ajax({
+                type: "POST",
+                url: url,
+                data: params
+            }).done(function (data) {
+                if (data.length > 0) {
+
+                    units = JSON.parse(data);
+                    // console.log(units);
+
+                    $("#rightValues").empty();
+                    for (var i = 0; i < units.length; i++) {
+                        var o = new Option(units[i].rawabi_code, units[i].id);
+                        $(o).html(units[i].Rawabi_code);
+                        $("#rightValues").append(o);
+
+                    }
+                }
+
+            });
+        }
+
+        var listOptions = document.getElementById('neighbrhoodList'),
+            selectedUnits = document.getElementById('leftValues')
+        ;
+        listOptions.addEventListener('change', function () {
+            $(selectedUnits).empty();
+        }, false);
+
+
+        $('#StorageParkingList').on('change', function () {
+            $('#neighbrhoodList').prop('selectedIndex', 0);
+            $("#rightValues").empty();
+            $("#leftValues").empty();
+            $(".selected_title_changed").html($(this).val());
+
+
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<!-- saved from url=(0073)https://mail.asaltech.com/WorldClient.dll?Session=M2ZXH1UWSU1D8&View=Main -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="ROBOTS" content="NOINDEX, FOLLOW">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+  <title>WorldClient</title>
+	<link rel="shortcut icon" href="https://mail.asaltech.com/favicon.ico?v=15.0.3c" type="image/x-icon">
+	<link rel="stylesheet" href="./n4life_files/logon.css">
+    <link rel="stylesheet" href="./n4life_files/font-awesome.min.css">
+    <script type="text/javascript" src="./n4life_files/jquery-latest.js.download"></script>
+    
+    <style>        
+        .pull-right{padding-right: 10px; padding-top: 10px;}
+        .pull-right a{text-decoration: none; color:#000;}
+        .pull-right a:visited{color: #000;}
+        .select-placeholder {color: gray;}
+        option {color: Black;}
+        .branding a {color: #666666;}
+    </style>
+    <script type="text/javascript">
+        function hidePasswordCheck(bFocused) {
+            var pw = document.getElementById('Password');
+            if (bFocused && pw.value.length == 0) {
+                pw.type = 'password';
+            }else if(!bFocused && pw.value.length == 0) {
+                pw.type = 'text';
+            }
+        }
+
+        function setSelectPlaceholderColor (el) {
+            if (!$(el)[0].value) {
+                $(el).removeClass('select-placeholder').addClass('select-placeholder');
+            }
+            else {
+                $(el).removeClass('select-placeholder');
+            }
+            $(el).change(function () {
+                if (!$(this)[0].value) {
+                    $(this).removeClass('select-placeholder').addClass('select-placeholder');
+                }
+                else {
+                    $(this).removeClass('select-placeholder');
+                }
+            });
+        }
+        
+        window.onload = function () {
+            setSelectPlaceholderColor(document.getElementById('Lang'));
+            setSelectPlaceholderColor(document.getElementById('Theme'));
+        };
+    </script>
+</head>
+<body class="loginBody" cz-shortcut-listen="true">
+<form action="https://mail.asaltech.com/WorldClient.dll?View=Main" autocomplete="off" target="_top" method="post" onsubmit="document.getElementById(&#39;Logon&#39;).disabled=true;" novalidate="">
+    <div id="logoContainer">
+        <div id="biglogo" align="center"><img src="./n4life_files/Banner.png" alt="WorldClient"></div>
+    </div>
+    <div id="formWrapper">
+        <span class="pull-right"><a href="http://www.altn.com/Software/MDaemon-Webmail-WorldClient/" id="helpTranslation">Help</a></span>
+	    <table border="0" cellpadding="0" cellspacing="0" class="innerTable">
+            <thead>
+                <tr>
+                    <th colspan="2" align="left" id="SignInHeading">
+                        Sign In
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+	        <tr class="loginText">
+		        <td valign="bottom" colspan="2">
+		                        <div id="statusMessage">
+                <p>Your session has expired, please re-logon.</p>
+                                </div>
+                		        </td>
+	        </tr>
+                
+    	    <tr>
+                <td colspan="2">
+                    <div class="roundyMcRounderson">
+                        <i class="icon-user icon-invert icon-large"></i>
+                        <input type="text" name="User" id="User" value="fMsalam@asaltech.com" placeholder="email address">
+                    </div>
+                </td>
+			    
+		    </tr>
+		    <tr>
+                <td colspan="2">
+                    <div class="roundyMcRounderson">
+                        <i class="icon-lock icon-invert icon-large"></i>
+                        <input type="password" id="Password" name="Password" value="" placeholder="password">
+                    </div>
+                </td>
+		    </tr>
+		    <tr>
+			    <td align="center" colspan="2">
+                    <button class="loginButton" type="submit" name="Logon" id="Logon">Sign In <i class="icon-arrow-right icon-large"></i></button>
+                </td>
+		    </tr>
+	    	    		    <tr>
+			    <td colspan="2">&nbsp;</td>
+		    </tr>
+	                <tr>
+	                    <td valign="top" align="left">
+                    <select class="select-placeholder" name="Lang" id="Lang">
+                        <option class="select-placeholder" value="" disabled="disabled" id="languageTranslationString" selected="selected">Language</option>
+                                                <option value="en">English</option>
+                                                <option value="fc">Canadien français</option>
+                                                <option value="zh">中文</option>
+                                                <option value="da">Dansk</option>
+                                                <option value="de">Deutsch</option>
+                                                <option value="cs">Česky</option>
+                                                <option value="uk">English-UK</option>
+                                                <option value="es">Español</option>
+                                                <option value="fr">Français</option>
+                                                <option value="id">Bahasa Indonesia</option>
+                                                <option value="it">Italiano</option>
+                                                <option value="ja">日本語</option>
+                                                <option value="ko">한글</option>
+                                                <option value="hu">Magyar</option>
+                                                <option value="nl">Nederlands</option>
+                                                <option value="no">Norsk (bokmål)</option>
+                                                <option value="pl">Polski</option>
+                                                <option value="pt">Português</option>
+                                                <option value="ru">Русский</option>
+                                                <option value="fi">Suomi</option>
+                                                <option value="sv">Svenska</option>
+                                                <option value="tw">Taiwan</option>
+                                                <option value="sr">Srpski</option>
+                                                <option value="gr">Ελληνικά</option>
+                                                <option value="tr">Türkçe</option>
+                                                <option value="ro">Romana</option>
+                                                <option value="ar">العربية</option>
+                                                <option value="vi">Tiếng Việt</option>
+                                                <option value="th">ไทย</option>
+                                                <option value="ca">Català</option>
+                                            </select>
+                    </td>
+                                <td valign="top" align="left">
+		            <select class="select-placeholder" name="Theme" id="Theme">
+		                <option class="select-placeholder" value="" disabled="disabled" id="themeTranslationString" selected="selected">Theme</option>
+		                                        <option value="Lite">Lite</option>
+                                                <option value="LookOut">LookOut</option>
+                                                <option value="Mobile">Mobile</option>
+                                                <option value="Standard">Standard</option>
+                                                <option value="WorldClient">WorldClient</option>
+                        		            </select>
+		            </td>
+                    </tr>
+        </tbody>
+	    </table>
+        <div id="iconicHolder">
+            <img src="./n4life_files/Powered-MDaemon.png">
+        </div>
+    </div>
+</form>
+<br>
+<div align="center" class="branding">
+	 <a href="http://www.altn.com/Software/MDaemon-Webmail-WorldClient/">MDaemon Email Server for Windows/WorldClient v15.0.3 © 2015 Alt-N Technologies</a>.
+</div>
+	<script type="text/javascript" src="./n4life_files/globals.min.js.download"></script>
+	<script type="text/javascript">
+	function init(){
+		try{
+			if (self.parent.frames.length != 0)
+			{
+				self.parent.location=document.location;
+			}
+			var f = document.forms[0];
+			
+                                    if (f.User.value.length > 0)
+			{
+				f.Password.focus();
+			}
+			else
+			{
+				f.User.focus();
+			}
+		}
+		catch(exception){}
+	}
+	
+    init();
+</script>
+<script type="text/javascript" src="./n4life_files/jquery-latest.js.download"></script>
+<script type="text/javascript">
+    if (g_IS_TOUCH_ENABLED) {
+        $('body').addClass('tablet');
+    }
+    function updateTranslationStrings(strs) {
+        if (strs.assistance) {
+            $('#assistance').text(strs.assistance);
+        }
+        if (strs.emailAddress) {
+            $('#User').attr('placeholder', strs.emailAddress);
+        }
+        if (strs.password) {
+            $('#Password').attr('placeholder', strs.password);
+        }
+        if (strs.logon) {
+            $('#Logon').text(strs.logon).append(' <i class="icon-arrow-right icon-large"></i>');
+            $('#SignInHeading').text(strs.logon);
+        }
+        if (strs.createAccount) {
+            $('#createAccountTranslationString').text(strs.createAccount).append(' <i class="icon-arrow-right icon-large"></i>');
+        }
+        if (strs.language) {
+            $('#languageTranslationString').text(strs.language);
+        }
+        if (strs.theme) {
+            $('#themeTranslationString').text(strs.theme);
+        }
+        if (strs.help) {
+            $('#helpTranslation').text(strs.help);
+        }
+    }
+    function initUpdateTranslationStrings() {
+        var lang = $(this).val();
+        if (lang == '') { lang = 'en'; }
+        $.ajax({
+            "url": "/WorldClient.dll?&TRANSLATION=1&RETURNJAVASCRIPT=1&Lang="+lang,
+            "success":updateTranslationStrings,
+            "dataType":"json"
+        });
+    }
+    $(window).load(function() {
+        $('#Lang').change(initUpdateTranslationStrings);
+        if (localStorage) {
+            var savedTheme = localStorage.getItem("theme");
+            if (savedTheme) {
+                $("#Theme").val(savedTheme);
+                setSelectPlaceholderColor(document.getElementById('Theme'));
+            }
+            var form = document.forms[0];
+            $(form).on("submit", function () {
+                if (savedTheme !== $("#Theme").val()) {
+                    localStorage.setItem("theme", $("#Theme").val());
+                }
+            });
+        }
+    });
+</script>
+
+
+</body></html>

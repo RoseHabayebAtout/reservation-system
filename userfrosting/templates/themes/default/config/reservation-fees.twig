@@ -1,0 +1,155 @@
+{% block subject %}
+    {{ site.site_title }} - {{ translate('reservation_fees') }}
+    {% set page_group = "user" %}
+{% endblock %}
+
+{% extends "layouts/layout-dashboard.twig" %}
+
+{# Set page properties (page.*) here. #}
+{% block page %}
+    {# By putting this in a special block, we ensure that it will be set AFTER the default values are set in the parent template,
+    but BEFORE the page itself is rendered. #}
+    {% set page = page | merge({
+        "title"       : "Reservation Fees",
+        "description" : "Reservation Fees"
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-university'></i> {{ translate('reservation_fees') }}</h3>
+                </div>
+                <div class='panel-body'>
+                    <div id="settings-alerts">
+                        <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="input_server"
+                               class="col-xs-12 col-sm-3 col-lg-2  control-label">{{ translate('collected_fees') }}
+                            $ </label>
+                        <div class="col-xs-12 col-sm-9 col-lg-11 margin-bottom-15px" style="display: flex">
+                            <input type='text' id="collected_fees" class="form-control"
+                                   name="userfrosting[collected_fees]" value="{{ site.collected_fees }}" style="
+    margin-right: 16px;
+">
+                            <button class="btn btn-primary text-center"
+                                    id="reservation_fees">{{ translate('save') }}</button>
+                        </div>
+                    </div>
+
+                    <label>{{ translate('for_example') }} :- 500,400,800</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    <h3 class='panel-title'><i class='fa fa-university'></i> {{ 'Max Number Of Months' }}</h3>
+                </div>
+                <div class='panel-body'>
+                    <div id="settings-alerts-maxNumber">
+                        <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+                    </div>
+                    <div class="row form-group">
+                        <label for="input_server"
+                               class="col-xs-12 col-sm-3 col-lg-2  control-label">{{ 'Max Number Of Months' }}</label>
+                        <div class="col-xs-12 col-sm-9 col-lg-11 margin-bottom-15px" style="display: flex">
+                            <input type='text' id="max_number_of_months" class="form-control"
+                                   name="userfrosting[max_number_of_months]" value="{{ site.max_number_of_months }}"
+                                   style="
+    margin-right: 16px;
+">
+                            <button class="btn btn-primary text-center"
+                                    id="max_number_of_months_btn">{{ translate('save') }}</button>
+                        </div>
+                    </div>
+                    <div class="row" style="
+    padding: 0 18px;
+">
+
+                    <label>{{ translate('for_example') }} :- 100</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block page_scripts %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var timer;
+            // Autosave text fields
+            $("#reservation_fees").click(function () {
+                clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                $("#settings-alerts").html("<div class='alert alert-warning'>" + _translate('saving') + "</div>");
+                timer = setTimeout(function () { // assign timer a new timeout
+                    var csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var collected_fees = $('#collected_fees').val();
+
+                    if ((collected_fees == "")) {
+                        $("#settings-alerts").html("<div class='alert alert-danger'>" + _translate('all_field_required') + "</div>");
+                    } else {
+                        var params = {
+                            collected_fees: collected_fees,
+                            csrf_token: encodeURIComponent(csrf_token)
+                        };
+
+                        var url = site['uri']['public'] + "/reservation_fees/";
+                        // Append page CSRF token
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: params,
+
+                        }).done(function (data) {
+                            $("#settings-alerts").html("<div class='alert alert-success'>" + _translate('all_setting_saved') + "</div>");
+                        })
+                            .fail(function (err) {
+                                $("#settings-alerts").html("<div class='alert alert-danger'>" + _translate('setting_unsaved') + "</div>");
+                            });
+                    }
+                }, 700);
+            });
+            $("#max_number_of_months_btn").click(function () {
+                clearTimeout(timer); // Clear the timer so we don't end up with dupes.
+                $("#settings-alerts-maxNumber").html("<div class='alert alert-warning'>" + _translate('saving') + "</div>");
+                timer = setTimeout(function () { // assign timer a new timeout
+                    var csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var max_number_of_months = $('#max_number_of_months').val();
+
+                    if ((max_number_of_months == "")) {
+                        $("#settings-alerts-maxNumber").html("<div class='alert alert-danger'>" + _translate('all_field_required') + "</div>");
+                    } else {
+                        var params = {
+                            max_number_of_months: max_number_of_months,
+                            csrf_token: encodeURIComponent(csrf_token)
+                        };
+
+                        var url = site['uri']['public'] + "/reservation_fees/";
+                        // Append page CSRF token
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: params,
+
+                        }).done(function (data) {
+                            $("#settings-alerts-maxNumber").html("<div class='alert alert-success'>" + _translate('all_setting_saved') + "</div>");
+                        })
+                            .fail(function (err) {
+                                $("#settings-alerts-maxNumber").html("<div class='alert alert-danger'>" + _translate('setting_unsaved') + "</div>");
+                            });
+                    }
+                }, 700);
+            });
+        });
+    </script>
+{% endblock %}
