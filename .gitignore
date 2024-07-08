@@ -38,6 +38,4 @@
 # *.ipr
 userfrosting/config-userfrosting.php
 userfrosting/config-userfrosting-example.php
-node_modules
-vendor
-userfrosting/vendor
+
