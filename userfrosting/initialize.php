@@ -193,6 +193,8 @@ $table_units_cash_receipts_prices = new \UserFrosting\DatabaseTable('units_cash_
     "payment_way",
     "total",
     "currency",
+    "chequeNumber",
+    "bank"
 ]);
 
 $table_units_cash_receipts_files = new \UserFrosting\DatabaseTable('units_cash_receipts_files', [

@@ -210,7 +210,10 @@
                                 </select>
                             </td>
                             <td>
-                                <input class="form-control total" type="text" value="">
+                                <input class="form-control total" type="text" value="" placeholder="Total">
+
+                                <input class="form-control chequeNumber hidden" type="text" value="" placeholder="Cheque Number">
+                                <input class="form-control bank hidden" type="text" value="" placeholder="Bank Name">
                             </td>
                             <td>
                                 <select class="currency-select">
@@ -236,7 +239,11 @@
                                 </select>
                             </td>
                             <td>
-                                <input class="form-control total" type="text" value="">
+                                <input class="form-control total" type="text" placeholder="Total" value="">
+
+                                  <input class="form-control chequeNumber hidden" type="text" value="" placeholder="Cheque Number">
+                                <input class="form-control bank hidden" type="text" value="" placeholder="Bank Name">
+                            
                             </td>
                             <td>
                                 <select class="currency-select">
@@ -573,7 +580,10 @@
                     '                                    </select>\n' +
                     '                                </td>\n' +
                     '                                <td>\n' +
-                    '                                    <input class="form-control total" type="text" value="0.0">\n' +
+                    '                                    <input class="form-control total" type="text" placeholder="Total" value="0.0">\n' +
+                      `<input class="form-control chequeNumber hidden" type="text" value="" placeholder="Cheque Number">
+                        <input class="form-control bank hidden" type="text" value="" placeholder="Bank Name">`+
+                            
                     '                                </td>\n' +
                     ' <td>' +
                     '<select class="currency-select">' +
@@ -583,6 +593,25 @@
                     ' </td>' +
                     '<td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger delete">Delete</button></td>' +
                     '                            </tr>');
+            });
+
+            $(document).on('change', '.payment-way', function() {
+                var value = $(this).val();
+                console.log(value);
+
+                const parent = $(this).parent().parent();
+
+                if(value === 'Transfer'){
+                    parent.find('.bank').removeClass('hidden');
+                    parent.find('.chequeNumber').addClass('hidden');
+                }else if(value === 'Cheque'){
+                    parent.find('.bank').removeClass('hidden');
+                    parent.find('.chequeNumber').removeClass('hidden');
+                }else{
+                    parent.find('.bank').addClass('hidden');
+                    parent.find('.chequeNumber').addClass('hidden');
+                }
+
             });
 
             $('#unit_select').on('change', function () {
@@ -705,6 +734,8 @@
                             '                                </td>\n' +
                             '                                <td>\n' +
                             '                                    <input class="form-control " type="text" readonly value="' + addCommas(data.cash_receipt_pricing[i].total) + '">\n' +
+                            (data.cash_receipt_pricing[i].chequeNumber ? `<div> Cheque #${data.cash_receipt_pricing[i].chequeNumber}</div>\n` : '')+
+                            (data.cash_receipt_pricing[i].bank ? `<div>Bank: ${data.cash_receipt_pricing[i].bank}</div>\n` : '')+
                             '                                </td>\n' +
                             '                                <td>\n' +
                             '                                    <input class="form-control " type="text" readonly value="' + currency + '">\n' +
@@ -930,6 +961,8 @@
                         payment_way: ((table[i]).getElementsByClassName('payment-way')[0]).value || '',
                         total: replaceAll(((table[i]).getElementsByClassName('total')[0]).value || '', ',', ''),
                         currency: ((table[i]).getElementsByClassName('currency-select')[0]).value || '',
+                        chequeNumber: ((table[i]).getElementsByClassName('chequeNumber')[0]).value || '',
+                        bank: ((table[i]).getElementsByClassName('bank')[0]).value || '',
                     })
                 }
 
@@ -1020,6 +1053,8 @@
                             '                                </td>\n' +
                             '                                <td>\n' +
                             '<span>' + addCommas(data.cash_receipt_pricing[i].total) + '</span>' +
+                            (data.cash_receipt_pricing[i].chequeNumber?'<span> - Cheque #' + data.cash_receipt_pricing[i].chequeNumber + ' </span>':'' )+
+                            (data.cash_receipt_pricing[i].bank?'<span> (Bank: ' + data.cash_receipt_pricing[i].bank + ')</span>':'' )+
                             '                                </td>\n' +
                             '                                <td>\n' +
                             '<span>' + currency + '</span>' +

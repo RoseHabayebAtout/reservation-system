@@ -1113,6 +1113,8 @@ check primary_group flag if 1 is user if 2 is admin
                 'payment_way' => $price['payment_way'],
                 'total' => $price['total'],
                 'currency' => $price['currency'],
+                'chequeNumber' => $price['chequeNumber'],
+                'bank' => $price['bank'],
             ];
         }
 
