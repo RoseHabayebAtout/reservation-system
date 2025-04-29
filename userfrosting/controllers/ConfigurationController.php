@@ -168,12 +168,17 @@ class ConfigurationController extends \UserFrosting\BaseController
 
     public function getCurrencies()
     {
+
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+
+
+
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
         mysqli_set_charset($conn, "utf8");
+
 
         $query = "SELECT * FROM `currencies`";
         $result = $conn->query($query);
