@@ -1,0 +1,296 @@
+{% extends "layouts/layout-dashboard.twig" %}
+{% set page_group = "uploadunits" %}
+
+{% block page %}
+    {% set page = page | merge({
+        "title"       : "Upload Extra Parking",
+        "description" : "upload extra parking from a csv file "
+    }) %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="settings-alerts">
+                <!-- <div class='alert alert-success'>All settings have been saved</div> -->
+                <div class="alert alert-danger hide" role="alert">
+                    {{ translate('upload_issue_msg') }}
+                </div>
+                <div class="alert alert-success hide" role="alert"></div>
+            </div>
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-upload" style="width:300px">&nbsp;{{ translate('Upload_Extra_Parking') }}</i>
+                    </span>
+                </div>
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <h4> {{ translate('download_parking_template') }} </h4>
+                        <a href="\{{ project_name }}\public\ExtraParking.xlsx" style="color:blue; font-size:20px;">
+                            upload_extra_parking.xlsx
+                        </a>
+
+                        <form action="\{{ project_name }}\userfrosting\templates\themes\default\config\insertExtraparking.php"
+                              method="post" enctype="multipart/form-data">
+                            <h4 class="form-group">{{ translate('upload_parking_template') }}</h4>
+                            <input type="file" name="userfile" id="userfile1" accept=".xlsx"
+                                   style="
+                                 position: relative;
+                                 margin-bottom: 10px;
+                                 margin-top: 15px;
+                               }"
+                            >
+                            <input type="hidden" name="neighborhoodNames" id="neighborhoodNames">
+                            <input type="button" value="submit" name="upload" id="upload" class="btn btn-default">
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <span class="fa-stack fa-lg">
+                        <i class="fa fa-upload" style="width:300px">&nbsp;{{ translate('update_extra_parking') }}</i>
+                    </span>
+                </div>
+
+                <div class="panel-body">
+                    <div class="form-group">
+                        <h4> {{ translate('download_parking_template_edit') }} </h4>
+                        <a href="\{{ project_name }}\public\ExtraParking.xlsx" style="color:blue; font-size:20px;">
+                            upload_extra_parking.xlsx
+                        </a>
+
+                        <form action="\{{ project_name }}\userfrosting\templates\themes\default\config\UpdateExtraparking.php"
+                              method="post" enctype="multipart/form-data">
+                            <h4 class="form-group">{{ translate('upload_edited_parking_template') }}</h4>
+                            <input type="file" name="userfile1" id="userfile1" accept=".xlsx"
+                                   style="
+                                 position: relative;
+                                 margin-bottom: 10px;
+                                 margin-top: 15px;
+                               }"
+                            >
+                            <input type="button" value="submit" name="upload" id="upload" class="btn btn-default">
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade hint-modal-lg" data-backdrop="static" data-keyboard="true" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <h1>{{ translate('hint') }}!</h1>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="col-xs-offset-1 col-xs-10 ">
+                        <h4>{{ translate('extension_error_msg') }} [.xlsx].
+                        </h4>
+                    </div>
+                </div>
+                <div class="row lead">
+                    <div class="col-xs-offset-2 col-xs-9 ">
+                        <div class="pull-right">
+                            <button class="btn  btn-danger" id="cancelReservationBtn" onclick="hideHintModal()">OK
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% include 'components/common/spinnerLoader.twig' %}
+{% endblock %}
+{% block page_scripts %}
+    <script>
+        $(document).ready(function () {
+
+            var queryParams = location.search.substring(1),
+                urlWithoutPrams = window.location.href.split("?")[0],
+                successParameter = queryParams.split('&')[0],
+                message = queryParams.split('&')[1];
+
+            var queryMessage = message ? message.split('=')[1].replace(/%20/gi, ' ') : '',
+                errorMessage = queryMessage.replace(/%3Cbr%3E/gi, '<br>- ')
+                    +'<div class="row">' +
+                    '<div class="col-xs-12">' +
+                    '<br><a href="{{site.uri.public}}/neighborhoods" class="btn btn-default">'+ _translate('add_neighborhood') +'</a>' +
+                    '</div>' +
+                    '</div>'
+            ;
+
+            $(".alert").addClass("hide");
+
+            if ( successParameter === "success=1") {
+                $(".alert-success").removeClass('hide').text(queryMessage);
+            }
+            else if (successParameter === "error=1") {
+                $(".alert-danger").removeClass('hide').html(errorMessage);
+            }
+
+            window.history.replaceState(null, '', urlWithoutPrams);
+
+            $("input[type='button']").on("click", function (e) {
+                if ($(this).parent().find("input[type='file']").val() == "") {
+                    $('.hint-modal-lg').modal("show");
+                }
+                else {
+                    $(this).closest("form").submit();
+                }
+            });
+
+            $('input[type=file]').change(function () {
+                validate($(this));
+            });
+        });
+
+        function validate(self) {
+            var val = $('input[type=file]').val().toLowerCase(),
+                regex = new RegExp("(.*?)\.(xlsx)$");
+
+            if (self) {
+                val = self.val().toLowerCase();
+            }
+
+            if (!(regex.test(val))) {
+                $(this).val('');
+                $('.hint-modal-lg').modal("show");
+                $('#upload').attr('disabled', true);
+            }
+            else {
+                $('.hint-modal-lg').modal("hide");
+                $('#upload').attr('disabled', false);
+            }
+        }
+
+        /*function EditUnit() {
+
+            console.log("insideEdit");
+            var csrf_token = $("meta[name=csrf_token]").attr("content");
+            var url = site['uri']['public'] + "/unit/editUnits/";
+            // Declare used variables
+            var file = document.getElementById('userfile1').files[0];
+            console.log("window" + file);
+            var input = document.getElementById("userfile1"),
+                formdata = false,
+                message = "",
+                text = "",
+                nameOfFile = {},
+                lsObject = {};
+
+            if (window.FormData) {
+                console.log("window");
+                formdata = new FormData();
+                file = input.files[0];
+                console.log(file.name + file);
+            }
+            if (input.addEventListener) {
+                var i = 0,
+                    len = input.files.length,
+                    reader,
+                    file;
+                console.log("listner");
+
+                if (len == 0)
+                    alert("please choose exel file ");
+                else {
+                    for (; i < len; i++) {
+
+                        file = input.files[i];
+                        console.log(file.name + "aaa");
+                        file.name = "add";
+                        nameOfFile['name' + i] = add;
+
+                        if (!!file.type.match(/xlsx.*!/)) {
+                            if (window.FileReader) {
+                                reader = new FileReader();
+                                reader.readAsDataURL(file);
+                            }
+                            if (formdata) {
+                                formdata.append("userfile1", file);
+                                formdata.append("csrf_token", encodeURIComponent(csrf_token));
+                                formdata.append('length', len);
+                            }//if formdata
+                        } // file.type
+                    }
+
+
+                    if (formdata) {
+                        var request = $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: formdata,
+                            processData: false,
+                            contentType: false,
+
+                        }).done(function (img_id) {
+
+                            console.log("Edit Done");
+
+                        });
+
+                    }
+
+                }
+
+
+            }
+
+        }*/
+
+        function hideHintModal() {
+            $('.hint-modal-lg').modal("hide");
+            $('#upload').attr('disabled', false);
+        }
+
+        var csrf_token = document.querySelector('meta[name="csrf_token"]').getAttribute('content'),
+            url = site['uri']['public'] + "/neighborhoods/all/",
+            requestParams = {csrf_token: encodeURIComponent(csrf_token)};
+
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: requestParams,
+            success: function (response) {
+                var jsonData = JSON.parse(response),
+                    targetedInput = document.getElementById('neighborhoodNames'),
+                    neighborhoodNames = [];
+
+                jsonData.forEach(function(item){
+                    neighborhoodNames.push(item['haiEnglishName']);
+                });
+
+                targetedInput.value = neighborhoodNames;
+            },
+            fail: function (error) {
+                console.log('This error has occurred', error);
+            }
+        });
+
+    </script>
+{% endblock %}

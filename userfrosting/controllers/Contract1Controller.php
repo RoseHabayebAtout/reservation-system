@@ -1982,6 +1982,11 @@ class Contract1Controller extends \UserFrosting\BaseController
                             if ($parking) {
                                 $total_price = (float)$total_price + (float)$parking->price;
                             }
+                        } else  if ($item->type == "extra-parking") {
+                            $parking = Parking::where('id', $item->parking_storage_id)->first();
+                            if ($parking) {
+                                $total_price = (float)$total_price + (float)$parking->price;
+                            }
                         } else if ($item->type == "storage") {
                             $storage = Storage::where('id', $item->parking_storage_id)->first();
                             if ($storage) {

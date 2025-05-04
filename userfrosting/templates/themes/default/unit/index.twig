@@ -250,6 +250,7 @@
                         <select id="ParkingStorageSelect" class="form-control ParkingStorageSelect">
                             <option disabled selected value="0">{{ translate('select_item') }}</option>
                             <option value="parking">{{ translate('parking') }}</option>
+                            <option value="extra-parking">{{ translate('extra_parking') }}</option>
                             <option value="storage">{{ translate('storage') }}</option>
 
                         </select>
@@ -959,6 +960,35 @@
                     } else {
                         alert('Please Select Parking');
                     }
+                } else if (selection == "extra-parking") {
+                    var selectedParking = $('#ParkingSelect').val();
+
+             
+                    if (selectedParking) {
+                        var parkingPrice = $('#final_price_parking').val() || 0;
+                        var parkingCurrency = $('#parkingCurrency').text();
+                        $('#_totalPrice').val(parkingPrice);
+
+                        $.ajax({
+                            type: "get",
+                            url: site['uri']['public'] + "/parkingStorage/payments/" + selectedParking,
+                            data: {
+                                target: "parking",
+                            }
+                        }).done(function (data) {
+                            data = JSON.parse(data);
+
+                            data.forEach(function ($payment, index) {
+                                var rowToAdd = '<tr><td><input type="text" id="_payment' + $payment['id'] + '" dir="auto" class="form-control" readonly="" value="' + (parseInt(index) + 1) + '"></td><td><input type="text" id="_paymentAmount' + $payment['id'] + '" dir="auto" class="form-control" value="' + addCommaToTheNumber($payment['amount']) + '"></td><td><input type="text" id="_paymentDate' + $payment['id'] + '" class="form-control" value="' + $payment['payment_date'] + '"></td><td><button onclick="$(this).parent().parent().remove()" class="btn btn-danger">Delete</button></td></tr>';
+                                $("#_paymentTable").append(rowToAdd);
+                            });
+
+                            $('#payment-content').modal('show');
+                        })
+
+                    } else {
+                        alert('Please Select Extra Parking');
+                    }
                 } else if (selection == "storage") {
                     var selectedStorage = $('#StorageSelect').val();
 
@@ -1068,13 +1098,60 @@
                         });
 
 
-                } else {
+                } else if ($(this).val() == "parking") {
                     $('#parking-content').show();
                     $('#storage-content').hide();
 
 
                     var csrf_token = $("meta[name=csrf_token]").attr("content");
                     var url = site['uri']['public'] + "/getParkings/";
+                    var params = {
+                        building: building,
+                        neighborhood: neighborhood,
+                        csrf_token: encodeURIComponent(csrf_token)
+                    };
+                    $.ajax({
+                        type: "get",
+                        url: url,
+                        data: params
+                    }).done(function (data) {
+                        if (data.length > 0) {
+                            data = JSON.parse(data);
+                            console.log(data)
+
+                            $('#ParkingSelect').empty();
+                            $('#ParkingSelect').append('<option disabled selected value="0">' + _translate('select_parking') + '</option>');
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i]["available"] == "0" || data[i]["available"] == 0) {
+                                    $('#ParkingSelect').append('<option value="' + data[i]["id"] + '">' + data[i]["rawabi_code"] + '</option>"');
+                                } else {
+                                    $('#ParkingSelect').append('<option style="background-color: #c39b9b;"  value="' + data[i]["id"] + '">' + data[i]["rawabi_code"] + '</option>"');
+                                }
+                            }
+
+
+                        } else {
+                            $('#ParkingSelect').empty();
+                            $('#ParkingSelect').append('<option disabled selected value="0">' + _translate('select_parking') + '</option>');
+
+                            console.log("no data")
+
+                        }
+                    })
+                        .fail(function (err) {
+                            alert(_translate('error'))
+                            console.log("err", err);
+                        });
+
+
+                }
+                else if ($(this).val() == "extra-parking") {
+                    $('#parking-content').show();
+                    $('#storage-content').hide();
+
+
+                    var csrf_token = $("meta[name=csrf_token]").attr("content");
+                    var url = site['uri']['public'] + "/getExtraParkings/";
                     var params = {
                         building: building,
                         neighborhood: neighborhood,
@@ -1256,6 +1333,13 @@
                     var id = $(this).val();
                     var csrf_token = $("meta[name=csrf_token]").attr("content");
                     var url = site['uri']['public'] + "/getParkingInfo/";
+
+                    var selection = $('#ParkingStorageSelect').val();
+
+                    if(selection == 'extra-parking'){
+                        url = site['uri']['public'] + "/getExtraParkingInfo/";
+                    }
+
                     var params = {id: id, csrf_token: encodeURIComponent(csrf_token)};
                     $.ajax({
                         type: "get",
@@ -1393,12 +1477,26 @@
 
 
                     } else {
+
+                        //adawoud
+
+                        $('#ParkingStorageSelect').val()
+
+                        var selection = $('#ParkingStorageSelect').val();
+
+                        var parkingType = "parking"; 
+
+                        if (selection == "extra-parking") 
+                        {
+                            parkingType = "extra-parking";
+                        }
+
                         var csrf_token = $("meta[name=csrf_token]").attr("content");
                         var url = site['uri']['public'] + "/parkingStorageReservation/";
                         var params = {
                             id: id,
                             uid: current_selected_row.id,
-                            type: "parking",
+                            type: parkingType,
                             rawabi_code: rawabi_code,
                             currency_exchange_parking: $('#currency_exchange_parking').val(),
                             csrf_token: encodeURIComponent(csrf_token)
@@ -8670,6 +8768,11 @@
                     var selection = $('#ParkingStorageSelect').val();
 
                     if (selection == "parking") {
+                        var selectedParking = $('#ParkingSelect').val();
+                        target = "parking";
+                        target_id = selectedParking;
+
+                    } else if (selection == "extra-parking") {
                         var selectedParking = $('#ParkingSelect').val();
                         target = "parking";
                         target_id = selectedParking;
