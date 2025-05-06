@@ -49,9 +49,9 @@ if ($_FILES['userfile1']['size'] > 0) {
         'tabo code', 'UnitDescription','tabo_area', 'parking Number', 'storage Number'];
     $result = array_diff($titles, $right_title);
 
-print_r($titles);
+/*print_r($titles);
 print_r($right_title);
-print_r($result);
+print_r($result); */
 
    // return ;
     if (!empty($result)) {
@@ -109,7 +109,7 @@ print_r($result);
         header("Location: " . $back_url . "?error=1&message=".str_replace('$$',"<br>", "There is an issue with the parking Number and storage Number, Please review them "));
         exit();
     }
-
+    Lana  (06/0/1)
 
 
 
