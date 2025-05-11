@@ -1,5 +1,8 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 /**
  * UserFrosting initialization file.  Handles setup for database, site settings, JS/CSS includes, etc.
@@ -193,6 +196,8 @@ $table_units_cash_receipts_prices = new \UserFrosting\DatabaseTable('units_cash_
     "payment_way",
     "total",
     "currency",
+    "chequeNumber",
+    "bank"
 ]);
 
 $table_units_cash_receipts_files = new \UserFrosting\DatabaseTable('units_cash_receipts_files', [

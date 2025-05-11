@@ -8,4 +8,4 @@ class CashReceiptPricing extends UFModel {
 
     protected static $_table_id = "units_cash_receipts_prices";
 
-}
+} 

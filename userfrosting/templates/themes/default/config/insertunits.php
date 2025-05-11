@@ -11,6 +11,9 @@ if ($back_url == "") {
     $back_url = "http://$_SERVER[HTTP_HOST]/$urlInPieces[1]/public/uploadunits/";
 }
 $back_url = strtok($back_url, '?');
+
+$validationErrors = "";
+
 if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
     //read the file contents
     $fileName = $_FILES['userfile']['name'];
@@ -47,7 +50,8 @@ if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
         $worksheet->getCell('K1')->getValue(),
         $worksheet->getCell('L1')->getValue(),
         $worksheet->getCell('M1')->getValue(),
-        $worksheet->getCell('N1')->getValue()
+        $worksheet->getCell('N1')->getValue(),
+        $worksheet->getCell('O1')->getValue()
     ];
     //$worksheet->getCell('I1')->getValue()
 
@@ -58,7 +62,7 @@ if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
     // Edited By AHmad Tome (convert column name from photo Description to description)
 
     $right_title = ['Building', 'unit', 'floor', 'Neighborhood', 'Net Area', 'Tabo Area', 'Apartment code',
-        'Building Code', 'description', 'price', 'tabo code', 'UnitDescription', 'parking Number', 'storage Number'];
+        'Building Code', 'description', 'price', 'tabo code', 'UnitDescription', 'parking Number','extra parking Number', 'storage Number'];
 
     $result = array_diff($titles, $right_title);
 //print_r($titles);
@@ -112,28 +116,56 @@ if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
     // validate parking Number and storage number
         for ($row = 2; $row <= $lastRow; $row++) {
             $parking_number = $worksheet->getCell('M' . $row)->getValue();
-            $storage_number = $worksheet->getCell('N' . $row)->getValue();
+            $extra_parking_number = $worksheet->getCell('N' . $row)->getValue();
+            $storage_number = $worksheet->getCell('O' . $row)->getValue();
             if ($parking_number != "") {
-                $sql_query = "SELECT * FROM `parking` WHERE `parking_number` = ".$parking_number ;
+                $sql_query = "SELECT * FROM `parking` WHERE `parking_number` = '".$parking_number."'" ;
                 $result = mysqli_query($conn, $sql_query);
                 if (!$result || $result->num_rows == 0) {
                     $parkingStorageFlag = 0;
+                    $validationErrors = $validationErrors . "* The parking in row " . $row . " is not found in the system, please upload them first!";
+
                     break;
                 }
 
-                $sql_query = "SELECT * FROM `unit` WHERE `parking_number` = ".$parking_number ;
+                $sql_query = "SELECT * FROM `unit` WHERE `parking_number` = '".$parking_number."'" ;
                 $result = mysqli_query($conn, $sql_query);
                 if ($result && $result->num_rows > 0) {
                     $parkingStorageFlag = 0;
+                    $validationErrors = $validationErrors . "* The parking in row " . $row . " is already used in other unit";
+
+                    break;
+                }
+            }
+
+            if ($extra_parking_number != "") {
+                $sql_query = "SELECT * FROM `extra_parking` WHERE `parking_number` = '".$extra_parking_number."'" ;
+                $result = mysqli_query($conn, $sql_query);
+                if (!$result || $result->num_rows == 0) {
+                    $parkingStorageFlag = 0;
+                    $validationErrors = $validationErrors . "* The extra parking in row " . $row . " is not found in the system, please upload them first!";
+
+                    break;
+                }
+
+                $sql_query = "SELECT * FROM `uf_unit` WHERE `extra_parking_number` = '".$extra_parking_number."'" ;
+                $result = mysqli_query($conn, $sql_query);
+                if ($result && $result->num_rows > 0) {
+                    $parkingStorageFlag = 0;
+                    
+                    $validationErrors = $validationErrors . "* The extra parking in row " . $row . " is already used in other unit";
                     break;
                 }
             }
 
             if ($storage_number != "") {
+
                 $sql_query = "SELECT * FROM `storages` WHERE `storage_number` ".$storage_number ;
                 $result = mysqli_query($conn, $sql_query);
                 if (!$result || $result->num_rows == 0) {
                     $parkingStorageFlag = 0;
+                    $validationErrors = $validationErrors . "* The storage " . $row . " is not found in the system, please upload them first!";
+
                     break;
                 }
 
@@ -141,13 +173,24 @@ if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
                 $result = mysqli_query($conn, $sql_query);
                 if ($result && $result->num_rows > 0) {
                     $parkingStorageFlag = 0;
+                    $validationErrors = $validationErrors . "* The storage in row " . $row . " is already used in other unit";
+
                     break;
                 }
             }
         }
 
+        error_log("+++++++++++++++++++++++++++++++++++++++++++++" . $validationErrors . "+-+");
+
+        if($validationErrors != ""){
+        error_log("-------------------------" . $validationErrors);
+
+            header("Location: " . $back_url . "?error=1&message=".str_replace('$$',"<br>", "Fix these errors please:<br> " . $validationErrors));
+            exit();
+        }
+
         if ($parkingStorageFlag == 0) {
-            header("Location: " . $back_url . "?error=1&message=".str_replace('$$',"<br>", "There is an issue with the parking Number and storage Number, Please review them "));
+            header("Location: " . $back_url . "?error=1&message=".str_replace('$$',"<br>", "There is an issue with the parking/extra parking Number and storage Number, Please review them "));
             exit();
         }
 
@@ -189,6 +232,7 @@ if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
         */
 
         $parkingIds = array() ;
+        $extraParkingIds = array() ;
         $storageIds = [] ;
         if(! in_array($neighborhood,$neighborhoodNames) ){
            if ($neighborhood == "") {
@@ -213,10 +257,12 @@ if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
             $x11 = $worksheet->getCell('L' . $row)->getValue();
             $x12 = $worksheet->getCell('M' . $row)->getValue();
             $x13 = $worksheet->getCell('N' . $row)->getValue();
+            $x14 = $worksheet->getCell('O' . $row)->getValue();
 
 
             array_push($parkingIds, $x12);
-            array_push($storageIds, $x13);
+            array_push($extraParkingIds, $x13);
+            array_push($storageIds, $x14);
             /* $sql_query ="INSERT INTO `uf_unit`(
                            `building`,`unit`,`floor`,`neighborhood`,`size`,`rawabi_code`,`building_type`,`unitDescription`,
                            `price`,`available`,`tapu_code`,`description`,`tabo_area`)
@@ -224,8 +270,8 @@ if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
              */
             $sql_query = "INSERT INTO `uf_unit`(
                       `building`,`unit`,`floor`,`neighborhood`,`size`,`rawabi_code`,`building_type`,`unitDescription`,
-                      `price`,`available`,`tapu_code`,`description`,`tabo_area`,`parking_number`,`storage_number`)
-                    VALUES ('$x0', '$x1','$x2','$neighborhood','$x4','$x6', '$x7','$x8','$x9','1','$x10','$x11','$x5','$x12','$x13')";
+                      `price`,`available`,`tapu_code`,`description`,`tabo_area`,`parking_number`,`extra_parking_number`,`storage_number`)
+                    VALUES ('$x0', '$x1','$x2','$neighborhood','$x4','$x6', '$x7','$x8','$x9','1','$x10','$x11','$x5','$x12','$x13','$x14')";
 
 
 //            echo $sql_query;
@@ -238,13 +284,22 @@ if (isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0) {
 
     }
 
-    $str = "";
-    for ($i=0 ; $i < count($parkingIds) - 1; $i++) {
-        $str = $str."$parkingIds[$i],";
-    }
-    $str = $str.$parkingIds[count($parkingIds) - 1];
-    $sql_query = "UPDATE `parking` SET `available`= 1 WHERE `parking_number` in (". $str.")";
+    // update parking
+    $str = implode("','", $parkingIds);
+    if (!empty($str)) {
+        $str = "'" . $str . "'";
+    }$sql_query = "UPDATE `parking` SET `available`= 1 WHERE `parking_number` in (". $str.")";
     mysqli_query($conn, $sql_query);
+
+
+    // update extra parking
+    $str = implode("','", $extraParkingIds);
+    if (!empty($str)) {
+        $str = "'" . $str . "'";
+    }
+    $sql_query = "UPDATE `extra_parking` SET `available`= 1 WHERE `parking_number` in (" . $str . ")";
+    mysqli_query($conn, $sql_query);
+
 
 
     $str = "";

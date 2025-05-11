@@ -1648,6 +1648,15 @@ $app->get('/uploadParking/?', function () use ($app) {
     }
     $app->render('config/uploadParking.twig');
 });
+
+$app->get('/uploadExtraParking/?', function () use ($app) {
+
+    if (!$app->user->checkAccess('uri_upload')) {
+        $app->notFound();
+    }
+    $app->render('config/uploadExtraParking.twig');
+});
+
 ///** ended by Ayat Salman **//
 //Added By Noora
 /*******Route For RentedUnits*************/
@@ -1697,6 +1706,15 @@ $app->get('/getParkingInfo/?', function () use ($app) {
     return $controller->getParkingInfo();
 });
 
+$app->get('/getExtraParkingInfo/?', function () use ($app) {
+
+    if (!$app->user->checkAccess('uri_unit')) {
+        $app->notFound();
+    }
+    $controller = new UF\UnitController($app);
+    return $controller->getExtraParkingInfo();
+});
+
 $app->get('/getParkings/?', function () use ($app) {
 
     if (!$app->user->checkAccess('uri_unit')) {
@@ -1705,6 +1723,16 @@ $app->get('/getParkings/?', function () use ($app) {
     //$app->render('rented/rented-units.twig', []);
     $controller = new UF\UnitController($app);
     return $controller->getParkings();
+});
+
+$app->get('/getExtraParkings/?', function () use ($app) {
+
+    if (!$app->user->checkAccess('uri_unit')) {
+        $app->notFound();
+    }
+    //$app->render('rented/rented-units.twig', []);
+    $controller = new UF\UnitController($app);
+    return $controller->getExtraParkings();
 });
 
 $app->get('/unit/getAvailableUnits/?', function () use ($app) {
@@ -1830,6 +1858,18 @@ $app->post('/parkingStorageReservation/?', function () use ($app) {
             $emailController->notifyingEmail($reservedUnit, $unit, $reservationUser, 'Reservation Parking Email', $emailList, [], $info);
 
             // $templateParams = array('type' => 'Parking','rawabi_code' => $post['rawabi_code'] ,'user' => $user,'info' => $info[0] ,'reservedUnit' => $reservedUnit );
+        } else  if ($post['type'] == "extra-parking") {
+                //adawoud
+                $info = $controller->getExtraParkingInfo()[0];
+    
+                $info['reservation_date'] = $controller->getReservationDate($post['uid'], "parking", $info["id"]);
+    
+                $contractController->parkingContent($reservedUnit, $info, $unit, $post['uid']);
+                // send email
+                $emailController->notifyingEmail($reservedUnit, $unit, $reservationUser, 'Reservation Parking Email', $emailList, [], $info);
+    
+                // $templateParams = array('type' => 'Parking','rawabi_code' => $post['rawabi_code'] ,'user' => $user,'info' => $info[0] ,'reservedUnit' => $reservedUnit );
+            
         } else {
 
             $info = $controller->getStorageInfo()[0];

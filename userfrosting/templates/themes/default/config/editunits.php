@@ -12,6 +12,9 @@ $back_url = strtok($back_url, '?');
 $success_message = "Updating units have been completed successfully!";
 $error_message = "Error occurred during updating process, please check provided data";
 
+$parkingIds = array() ;
+$extraParkingIds = array() ;
+
 if ($_FILES['userfile1']['size'] > 0) {
 
     //read the file contents
@@ -37,8 +40,9 @@ if ($_FILES['userfile1']['size'] > 0) {
         $worksheet->getCell('G1')->getValue(), // tabo code
         $worksheet->getCell('H1')->getValue(),  // UnitDescription
         $worksheet->getCell('I1')->getValue(),  // UnitDescription
-        $worksheet->getCell('J1')->getValue(),
-        $worksheet->getCell('K1')->getValue(),
+        $worksheet->getCell('J1')->getValue(), // parking
+        $worksheet->getCell('K1')->getValue(), // extra parking
+        $worksheet->getCell('L1')->getValue(), // storage
     ];
 
     //$right_title = ['Neighborhood', 'Gross Area', 'Apartment code', 'Building Code', 'Photo Description', 'price',
@@ -46,12 +50,12 @@ if ($_FILES['userfile1']['size'] > 0) {
 
     // Edited By AHmad Tome (convert column name from photo Description to description)
     $right_title = ['Neighborhood', 'Net Area', 'Apartment code', 'Building Code', 'description', 'price',
-        'tabo code', 'UnitDescription','tabo_area', 'parking Number', 'storage Number'];
+        'tabo code', 'UnitDescription','tabo_area', 'parking Number','extra parking Number', 'storage Number'];
     $result = array_diff($titles, $right_title);
 
-print_r($titles);
+/*print_r($titles);
 print_r($right_title);
-print_r($result);
+print_r($result); */
 
    // return ;
     if (!empty($result)) {
@@ -79,19 +83,44 @@ print_r($result);
 
 
     mysqli_set_charset($conn, "utf8");
+    error_log("\n *************************** \n");
 
     $parkingStorageFlag = 1;
     // validate parking Number and storage number
     for ($row = 2; $row <= $lastRow; $row++) {
         $parking_number = $worksheet->getCell('J' . $row)->getValue();
-        $storage_number = $worksheet->getCell('K' . $row)->getValue();
+        $extra_parking_number = $worksheet->getCell('K' . $row)->getValue();
+        $storage_number = $worksheet->getCell('L' . $row)->getValue();
+        
+
         if ($parking_number != "") {
+            array_push($parkingIds, $parking_number);
+
             $sql_query = "SELECT * FROM `parking` WHERE `parking_number` = ".$parking_number ;
             $result = mysqli_query($conn, $sql_query);
             if (!$result || $result->num_rows == 0) {
                 $parkingStorageFlag = 0;
                 break;
             }
+
+        }
+
+        if ($extra_parking_number != "") {
+
+            array_push($extraParkingIds, $extra_parking_number);
+
+            $sql_query = "SELECT * FROM `extra_parking` WHERE `parking_number` = '".$extra_parking_number."'" ;
+            
+            error_log("\n query:\n ".$sql_query);
+            
+            $result = mysqli_query($conn, $sql_query);
+            if (!$result || $result->num_rows == 0) {
+                $parkingStorageFlag = 0;
+                break;
+            }
+
+
+         
 
         }
 
@@ -106,10 +135,9 @@ print_r($result);
     }
 
     if ($parkingStorageFlag == 0) {
-        header("Location: " . $back_url . "?error=1&message=".str_replace('$$',"<br>", "There is an issue with the parking Number and storage Number, Please review them "));
+        header("Location: " . $back_url . "?error=1&message=".str_replace('$$',"<br>", "There is an issue with the parking Number, extra parking and storage Number, Please review them "));
         exit();
     }
-
 
 
 
@@ -128,14 +156,15 @@ print_r($result);
         $unit_description    = $worksheet->getCell('H' . $row)->getValue();
         $tabo_area           = $worksheet->getCell('I' . $row)->getValue();
         $parking_number           = $worksheet->getCell('J' . $row)->getValue();
-        $storage_number           = $worksheet->getCell('K' . $row)->getValue();
+        $extra_parking_number           = $worksheet->getCell('K' . $row)->getValue();
+        $storage_number           = $worksheet->getCell('L' . $row)->getValue();
 
        // echo $neighborhood.' and rawabi cpde is '.$rawabi_code.'<br/>';
 
         $sql_query = "UPDATE `uf_unit` SET 
                       `size`='$size', `building_type`='$buliding_type', `description`='$description',
                       `price`='$price', `tapu_code`='$tapu_code', `unitDescription`='$unit_description' , `tabo_area`='$tabo_area',
-                      `parking_number` = '$parking_number', `storage_number` = '$storage_number'
+                      `parking_number` = '$parking_number',`extra_parking_number` = '$extra_parking_number', `storage_number` = '$storage_number'
                       WHERE `rawabi_code`='$rawabi_code' 
                       AND `neighborhood`='$neighborhood'";
 
@@ -145,6 +174,23 @@ print_r($result);
 
 
     }
+
+
+    // update parking
+    $str = implode("','", $parkingIds);
+    if (!empty($str)) {
+        $str = "'" . $str . "'";
+    }$sql_query = "UPDATE `parking` SET `available`= 1 WHERE `parking_number` in (". $str.")";
+    mysqli_query($conn, $sql_query);
+
+
+    // update extra parking
+    $str = implode("','", $extraParkingIds);
+    if (!empty($str)) {
+        $str = "'" . $str . "'";
+    }
+    $sql_query = "UPDATE `extra_parking` SET `available`= 1 WHERE `parking_number` in (" . $str . ")";
+    mysqli_query($conn, $sql_query);
 
     $conn->close();
 

@@ -128,7 +128,6 @@ check primary_group flag if 1 is user if 2 is admin
 
     public function getUnitDataSales()
     {
-
         // Fetch all Units
         $unit = Unit::get();
         for ($i = 0; $i < count($unit); $i++) {
@@ -174,7 +173,7 @@ check primary_group flag if 1 is user if 2 is admin
 
         $db_connection_string = $this->_app->environment()["db_connection"];
 
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -279,7 +278,7 @@ check primary_group flag if 1 is user if 2 is admin
             $unit_id_info = Unit::find($unit[$i]["id"]);
 
             $db_connection_string = $this->_app->environment()["db_connection"];
-            $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+            $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
@@ -438,7 +437,7 @@ check primary_group flag if 1 is user if 2 is admin
         if (isset($_REQUEST['dashboard']) && $_REQUEST['dashboard'] == true) {
             $db_connection_string = $this->_app->environment()["db_connection"];
 
-            $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+            $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
             if (!$conn) {
                 die("Connection failed: " . mysqli_connect_error());
             }
@@ -582,7 +581,7 @@ check primary_group flag if 1 is user if 2 is admin
         $neighborhood = $post['neighborhood'];
         $db_connection_string = $this->_app->environment()["db_connection"];
 
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
 // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -738,7 +737,7 @@ check primary_group flag if 1 is user if 2 is admin
         $building = $get['building'];
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -771,7 +770,7 @@ check primary_group flag if 1 is user if 2 is admin
 
         $db_connection_string = $this->_app->environment()["db_connection"];
 
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -793,6 +792,38 @@ check primary_group flag if 1 is user if 2 is admin
             return [];
         }
     }
+    public function getExtraParkings()
+    {
+
+        $get = $this->_app->request->get();
+        $neighborhood = $get['neighborhood'];
+        $building = $get['building'];
+
+        $db_connection_string = $this->_app->environment()["db_connection"];
+
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        mysqli_set_charset($conn, "utf8");
+
+        $query = "SELECT * FROM `extra_parking` WHERE `neighporhood` = '" . $neighborhood . "' and `building` = '". $building ."' ORDER By `rawabi_code`";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            $parkings = [];
+            while ($row = $result->fetch_assoc()) {
+                array_push($parkings, ["rawabi_code" => $row["rawabi_code"], "parking_number" => $row["parking_number"],
+                    "price" => $row["price"], "available" => $row["available"], "building" => $row["building"],
+                    "description" => $row["description"], "floor" => $row["floor"], "id" => $row["id"]
+                ]);
+            }
+            $parkings = json_decode(json_encode($parkings), true);
+            echo json_encode($parkings);
+        } else {
+            return [];
+        }
+    }
+
 
 
     function getStorageInfo()
@@ -805,7 +836,7 @@ check primary_group flag if 1 is user if 2 is admin
 
         $db_connection_string = $this->_app->environment()["db_connection"];
 
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -853,7 +884,7 @@ check primary_group flag if 1 is user if 2 is admin
         }
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -893,10 +924,62 @@ check primary_group flag if 1 is user if 2 is admin
         }
     }
 
+    function getExtraParkingInfo()
+    {
+
+        if ($this->_app->request->isGet()) {
+            $get = $this->_app->request->get();
+        } else {
+            $get = $this->_app->request->post();
+
+        }
+
+        $db_connection_string = $this->_app->environment()["db_connection"];
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        mysqli_set_charset($conn, "utf8");
+
+        $query = " SELECT * FROM `extra_parking` WHERE `id` = " . $get['id'];
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            $parking = [];
+            $row = $result->fetch_assoc();
+            array_push($parking, ["rawabi_code" => $row["rawabi_code"], "parking_number" => $row["parking_number"], "neighporhood" => $row["neighporhood"],
+                "price" => $row["price"], "available" => $row["available"], "building" => $row["building"],
+                "description" => $row["description"], "floor" => $row["floor"], "id" => $row["id"]
+            ]);
+
+            //adawoud
+            $query2 = " SELECT * FROM `parking_plans` WHERE `parking_id` =  " . $get['id'];
+            $result2 = $conn->query($query2);
+            if ($result2->num_rows > 0) {
+                $imgArray = array();
+                while ($row = $result2->fetch_assoc()) {
+                    array_push($imgArray, ["id" => $row['id'], "filename" => $row['filename'], "filesize" => $row['filesize'], "filepath" => $row['filepath']]);
+                }
+                array_push($parking, $imgArray);
+            }
+
+
+            $parking = json_decode(json_encode($parking), true);
+            echo json_encode($parking);
+            mysqli_close($conn);
+
+            return $parking;
+        } else {
+            mysqli_close($conn);
+
+            return "[]";
+        }
+    }
+
+
     function getReservationDate($uid, $type, $id)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -917,12 +1000,13 @@ check primary_group flag if 1 is user if 2 is admin
     {
         $post = $this->_app->request->post();
 
+        $parking_storage_reservation_type = $post["type"];
 
-        parking_storage_reservation::where('parking_storage_id', $post['id'])->where('type', $post['type'])->delete();
+        parking_storage_reservation::where('parking_storage_id', $post['id'])->where('type', $parking_storage_reservation_type)->delete();
 
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -935,6 +1019,8 @@ check primary_group flag if 1 is user if 2 is admin
 
         if ($post['type'] == "parking") {
             $query2 = "UPDATE `parking` SET `available`='1' WHERE `id`= " . $post['id'];
+        } else if ($post['type'] == "extra-parking") {
+            $query2 = "UPDATE `extra_parking` SET `available`='1' WHERE `id`= " . $post['id'];
         } else {
             $query2 = "UPDATE `storages` SET `available`='1' WHERE `id`= " . $post['id'];
         }
@@ -947,7 +1033,7 @@ check primary_group flag if 1 is user if 2 is admin
     {
         $post = $this->_app->request->post();
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -973,7 +1059,7 @@ check primary_group flag if 1 is user if 2 is admin
         parking_storage_reservation::where('parking_storage_id', $post['id'])->where('type', $post['type'])->delete();
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -1014,7 +1100,7 @@ check primary_group flag if 1 is user if 2 is admin
         $post = $this->_app->request->get();
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -1047,7 +1133,7 @@ check primary_group flag if 1 is user if 2 is admin
         $post = $this->_app->request->get();
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -1113,6 +1199,8 @@ check primary_group flag if 1 is user if 2 is admin
                 'payment_way' => $price['payment_way'],
                 'total' => $price['total'],
                 'currency' => $price['currency'],
+                'chequeNumber' => $price['chequeNumber'],
+                'bank' => $price['bank'],
             ];
         }
 
@@ -1183,7 +1271,7 @@ check primary_group flag if 1 is user if 2 is admin
         $post = $this->_app->request->get();
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect("localhost", "root", "", $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
