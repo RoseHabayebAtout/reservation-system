@@ -165,8 +165,10 @@ class DiscountController extends \UserFrosting\BaseController {
                 if ($discount['type'] == 0) {
                     $price = $price - $discount['value'];
                 } else {
-                    $discountVal = $discount['value'] / 100;
-                    $price = $price - ($price * $discountVal);
+                    $finalDiscountRate = ($discount['value'] / (100 + $discount['value']));
+
+                    //$discountVal = $discount['value'] / 100;
+                    $price =  $price - ( $finalDiscountRate * $price );
                 }
 
             }
