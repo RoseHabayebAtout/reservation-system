@@ -59,7 +59,7 @@ print_r($result); */
 
    // return ;
     if (!empty($result)) {
-        header("Location: " . $back_url . "?error=1");
+        header("Location: " . $back_url . "?error=1&message=please check file columns, they must follows the columns in the sample file");
         exit();
     }
 
