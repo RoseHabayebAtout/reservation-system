@@ -1,6 +1,6 @@
 'db' => [
     'driver' => 'mysql',
-    'host' => 'localhost', // docker: db, this matches the container name
+    'host' => 'db', // docker: db, this matches the container name , production: localhost
     'database' => 'userfrosting',
     'username' => 'uf_user',
     'password' => 'uf_pass',
