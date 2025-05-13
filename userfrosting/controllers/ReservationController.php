@@ -305,7 +305,8 @@ class ReservationController extends \UserFrosting\BaseController
             $new_reason->save();
         }
 
-        Unit::payments1Delete($unitId);
+        $unit->payments1Delete($unitId);
+
         $unit->available = 1;
         $unit->save();
 
