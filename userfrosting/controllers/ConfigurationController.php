@@ -173,7 +173,7 @@ class ConfigurationController extends \UserFrosting\BaseController
 
 
 
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }

@@ -66,7 +66,7 @@ class ReservationController extends \UserFrosting\BaseController
             "postalcode" => $post['postalcode'],
             "workphone" => $post['workphone'],
             "email_address" => $post['email'],
-            "directInstallmentAdded" => $post["directInstallmentAdded"],
+            "directInstallmentAdded" => !empty($post['directInstallmentAdded']) ? 1 : 0,
             "PaymentMethod_select"=>$post["PaymentMethod_select"],
             "currency"=>$post["currency"],
             "exchange_rate"=>$post["exchange_rate"],
@@ -101,7 +101,7 @@ class ReservationController extends \UserFrosting\BaseController
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
 
 // Check connection
         if (!$conn) {
@@ -156,7 +156,7 @@ class ReservationController extends \UserFrosting\BaseController
 // Create connection
 //$conn = mysqli_connect($servername, $username, $password);
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
 // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -204,7 +204,7 @@ class ReservationController extends \UserFrosting\BaseController
     public function GetCurrencyOfUnit($id)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -480,7 +480,7 @@ class ReservationController extends \UserFrosting\BaseController
     public function getReceiptTemplate(){
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -515,7 +515,7 @@ class ReservationController extends \UserFrosting\BaseController
 
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -537,7 +537,7 @@ class ReservationController extends \UserFrosting\BaseController
     public function getcontenthtml(){
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
