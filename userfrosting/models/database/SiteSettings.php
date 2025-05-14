@@ -100,7 +100,10 @@ class SiteSettings extends UFModel {
      */
     public function isConsistent(){
 
-        $table_exists = count(static::queryBuilder()->select("SHOW TABLES LIKE '{$this->table}'")) > 0;
+
+        $tables = static::queryBuilder()->select("SHOW TABLES LIKE '{$this->table}'");
+
+        $table_exists = $tables->count() > 0;
 
         if (!$table_exists){
             return false;

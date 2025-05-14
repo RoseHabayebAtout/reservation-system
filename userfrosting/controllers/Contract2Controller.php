@@ -240,7 +240,7 @@ class Contract2Controller extends \UserFrosting\BaseController {
     public function getcontract2Template(){
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -275,7 +275,7 @@ class Contract2Controller extends \UserFrosting\BaseController {
 
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -297,7 +297,7 @@ class Contract2Controller extends \UserFrosting\BaseController {
     public function getcontenthtml(){
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());

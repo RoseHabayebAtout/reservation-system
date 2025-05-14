@@ -153,7 +153,7 @@ function replace_config($host, $port, $auth, $secure, $user, $pass, $username, $
       $serverport = (($environment["SERVER_PORT"] == 443) or ($environment["SERVER_PORT"] == 80)) ? "" : ":" . $environment["SERVER_PORT"];
       $uri_public_root = $environment["slim.url_scheme"] . "://" . $environment["SERVER_NAME"] . $serverport . $environment["SCRIPT_NAME"];
        if ($environment["db_connection"] == null) {
-        $environment["db_connection"] = "reservation_system";
+        $environment["db_connection"] = "reservations_system";
       }
       /********* DEVELOPMENT SETTINGS *********/
       $app->configureMode("dev", function () use ($app, $public_path, $uri_public_root) {

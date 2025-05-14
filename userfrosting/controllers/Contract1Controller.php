@@ -364,7 +364,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -394,7 +394,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -428,7 +428,7 @@ class Contract1Controller extends \UserFrosting\BaseController
 
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -710,7 +710,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     public function getContract1Attributes()
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -743,7 +743,7 @@ class Contract1Controller extends \UserFrosting\BaseController
         $arr = "'" . implode("', '", $contract_type) . "'";
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -782,7 +782,7 @@ class Contract1Controller extends \UserFrosting\BaseController
 
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -842,7 +842,7 @@ class Contract1Controller extends \UserFrosting\BaseController
         $create = isset($this->_app->request->get()['create']) ? $this->_app->request->get()['create'] : false;
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -896,7 +896,7 @@ class Contract1Controller extends \UserFrosting\BaseController
 
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -933,7 +933,7 @@ class Contract1Controller extends \UserFrosting\BaseController
 
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -954,7 +954,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -990,7 +990,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -1022,7 +1022,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -1059,7 +1059,7 @@ class Contract1Controller extends \UserFrosting\BaseController
 
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -1412,7 +1412,7 @@ class Contract1Controller extends \UserFrosting\BaseController
 
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -1450,7 +1450,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
 
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -1526,7 +1526,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         // Create connection
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         // Check connection
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -1577,7 +1577,7 @@ class Contract1Controller extends \UserFrosting\BaseController
 
         $db_connection_string = $this->_app->environment()["db_connection"];
 
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -1661,7 +1661,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     function getReservationContent($unit_id)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -1687,7 +1687,7 @@ class Contract1Controller extends \UserFrosting\BaseController
 
 
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -1872,7 +1872,7 @@ class Contract1Controller extends \UserFrosting\BaseController
         $neighborhood = Neighborhoods::where('haiEnglishName', $unit->neighborhood)->first();
 
 
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -2287,7 +2287,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     public function calculateParkingStoragePrice($parkingStorageId, $price, $type)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -2307,7 +2307,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     public function getStorageContent($unit_id)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -2329,7 +2329,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     public function getParkingContent($unit_id)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -2739,7 +2739,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     public function getContractCount($type)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -2854,7 +2854,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     public function getParkingInformationforUnit($unitId)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -2892,7 +2892,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     public function getStorageInformationforUnit($unitId)
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -2948,7 +2948,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
 
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -3047,7 +3047,7 @@ class Contract1Controller extends \UserFrosting\BaseController
     {
         $db_connection_string = $this->_app->environment()["db_connection"];
 
-        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["rootpass"], $db_connection_string, "3306");
+        $conn = mysqli_connect($this->_app->environment()["db_host"], "root", $this->_app->environment()["db_pass"], $db_connection_string, "3306");
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
